@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-26 Fri 00:11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI for TNFSH: 從入門到入土</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Yung Chin, Yen" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">AI for TNFSH: 從入門到入土</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7ea02d9">1. 人工智慧簡介</a>
+<ul>
+<li><a href="#org8cfb64f">1.1. Chat robot</a></li>
+</ul>
+</li>
+<li><a href="#org180e333">2. 背景知識</a></li>
+<li><a href="#org3ee56ab">3. 監督式學習</a>
+<ul>
+<li><a href="#org5cef513">3.1. 最短距離分類器</a></li>
+<li><a href="#org550d58c">3.2. KNN實作</a></li>
+</ul>
+</li>
+<li><a href="#orgf9ed8c0">4. 非監督式學習</a></li>
+<li><a href="#orgd877d86">5. 增強式學翨</a></li>
+<li><a href="#org4e64c31">6. 深度學習</a></li>
+<li><a href="#org3e8fcd6">7. Hello world</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7ea02d9" class="outline-2">
+<h2 id="org7ea02d9"><span class="section-number-2">1</span> 人工智慧簡介</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8cfb64f" class="outline-3">
+<h3 id="org8cfb64f"><span class="section-number-3">1.1</span> Chat robot</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org20a0a5f" class="outline-4">
+<h4 id="org20a0a5f"><span class="section-number-4">1.1.1</span> ELIZA</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/ELIZA#cite_note-turing-1">What is it</a><br /></li>
+<li><a href="https://web.njit.edu/~ronkowit/eliza.html">web-based version</a><br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org447d47c" class="outline-4">
+<h4 id="org447d47c"><span class="section-number-4">1.1.2</span> ALICE</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity">About ALICE</a><br /></li>
+<li><a href="http://www.mfellmann.net/content/alice.html">web-based version</a><br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org18797c1" class="outline-4">
+<h4 id="org18797c1"><span class="section-number-4">1.1.3</span> Mitsuku</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/Mitsuku">About Mitsuku</a><br /></li>
+<li><a href="https://chat.kuki.ai/">Try it</a><br /></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org180e333" class="outline-2">
+<h2 id="org180e333"><span class="section-number-2">2</span> 背景知識</h2>
+</div>
+<div id="outline-container-org3ee56ab" class="outline-2">
+<h2 id="org3ee56ab"><span class="section-number-2">3</span> 監督式學習</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org5cef513" class="outline-3">
+<h3 id="org5cef513"><span class="section-number-3">3.1</span> 最短距離分類器</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> math
+<span class="linenr"> 2: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">from statistics import mean</span>
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">importing reduce()</span>
+<span class="linenr"> 7: </span><span style="color: #51afef;">from</span> functools <span style="color: #51afef;">import</span> <span style="color: #c678dd;">reduce</span>
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">Average</span>(lst):
+<span class="linenr">10: </span>    <span style="color: #dcaeea;">avgx</span> = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">11: </span>    <span style="color: #dcaeea;">avgy</span> = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">12: </span>    <span style="color: #51afef;">for</span> (x, y) <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">lst</span>:
+<span class="linenr">13: </span>        avgx += x
+<span class="linenr">14: </span>        <span style="color: #dcaeea;">avgy</span> += y
+<span class="linenr">15: </span>    <span style="color: #51afef;">return</span> avgx/<span style="color: #c678dd;">len</span>(lst), avgy/<span style="color: #c678dd;">len</span>(lst)
+<span class="linenr">16: </span>
+<span class="linenr">17: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">ed</span>(lst, x, y):
+<span class="linenr">18: </span>    <span style="color: #dcaeea;">dist</span> = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">19: </span>    <span style="color: #51afef;">for</span> (lx, ly) <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">lst</span>:
+<span class="linenr">20: </span>        dist += (x - lx)*(x - lx) + (y - ly)*(y - ly)
+<span class="linenr">21: </span>    <span style="color: #51afef;">return</span> math.sqrt(dist)
+<span class="linenr">22: </span>
+<span class="linenr">23: </span><span style="color: #dcaeea;">groupA</span> = [[<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">8</span>] ,[<span style="color: #da8548; font-weight: bold;">5.8</span>,<span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">5</span>] ,[<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">4</span>] ,[<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">5</span>]]
+<span class="linenr">24: </span><span style="color: #dcaeea;">groupB</span> = [[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>] ,[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">2</span>] ,[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">4</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">4</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">3</span>] ,[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">2</span>]]
+<span class="linenr">25: </span>
+<span class="linenr">26: </span><span style="color: #dcaeea;">tarx</span> = <span style="color: #da8548; font-weight: bold;">5</span>
+<span class="linenr">27: </span><span style="color: #dcaeea;">tary</span> = <span style="color: #da8548; font-weight: bold;">5</span>
+<span class="linenr">28: </span>
+<span class="linenr">29: </span><span style="color: #dcaeea;">centerX</span>, <span style="color: #dcaeea;">centerY</span> = Average(groupA)
+<span class="linenr">30: </span><span style="color: #dcaeea;">sdA</span> = (tarx - centerX)*(tarx - centerX)
+<span class="linenr">31: </span><span style="color: #dcaeea;">centerX</span>, <span style="color: #dcaeea;">centerY</span> = Average(groupB)
+<span class="linenr">32: </span><span style="color: #dcaeea;">sdB</span> = (tarx - centerX)*(tarx - centerX)
+<span class="linenr">33: </span>
+<span class="linenr">34: </span><span style="color: #51afef;">if</span> sdA &lt; sdB:
+<span class="linenr">35: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"A"</span>)
+<span class="linenr">36: </span><span style="color: #51afef;">else</span>:
+<span class="linenr">37: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"B"</span>)
+<span class="linenr">38: </span>
+<span class="linenr">39: </span><span style="color: #51afef;">print</span>(ed(groupA, tarx, tary))
+<span class="linenr">40: </span><span style="color: #51afef;">print</span>(ed(groupB, tarx, tary))
+<span class="linenr">41: </span>
+<span class="linenr">42: </span>
+</pre>
+</div>
+
+<pre class="example">
+B
+7.851114570556208
+6.708203932499369
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org550d58c" class="outline-3">
+<h3 id="org550d58c"><span class="section-number-3">3.2</span> KNN實作</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+K-NearestNeighbor分類算法是機器學習裡監督類學習中最簡單的方法之一,由Cover和Hart在1968年提出。kNN算法的核心思想是如果一個樣本在特徵空間中的k個最相鄰的樣本中的大多數屬於某一個類別，則該樣本也屬於這個類別，並具有這個類別上樣本的特性。<br />
+</p>
+
+<p>
+KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不會從「訓練數據集」中學習出「判別函數」(discriminative function)，它的作法是把「訓練數據集」記憶起來。其步驟如下：<br />
+</p>
+<ol class="org-ol">
+<li>選定 k 的值和一個「距離度量」(distance metric)。<br /></li>
+<li>找出 k 個想要分類的、最相近的鄰近樣本。<br /></li>
+<li>以多數決的方式指定類別標籤。<br /></li>
+</ol>
+</div>
+
+<div id="outline-container-org0313b5d" class="outline-4">
+<h4 id="org0313b5d"><span class="section-number-4">3.2.1</span> 鳶尾花分類問題</h4>
+<div class="outline-text-4" id="text-3-2-1">
+</div>
+<div id="outline-container-org3055a14" class="outline-5">
+<h5 id="org3055a14"><span class="section-number-5">3.2.1.1</span> DataSet</h5>
+<div class="outline-text-5" id="text-3-2-1-1">
+<p>
+收集了3種鳶尾花的四個特徵，分別是花萼(sepal)長寬、花瓣(petal)長寬度，以及對應的鳶尾花種類。<br />
+</p>
+
+<div id="org5d91e19" class="figure">
+<p><img src="images/iris-1.png" alt="iris-1.png" width="400" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>鳶尾花的花萼與花瓣</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org49177de" class="outline-5">
+<h5 id="org49177de"><span class="section-number-5">3.2.1.2</span> Mission</h5>
+<div class="outline-text-5" id="text-3-2-1-2">
+<p>
+輸入花萼和花瓣數據後，推測所屬的鳶尾花類型。<br />
+</p>
+
+<div id="orgc1ce185" class="figure">
+<p><img src="images/iris-2.png" alt="iris-2.png" width="600" /><br />
+</p>
+<p><span class="figure-number">Figure 2: </span>三種鳶尾花</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d6c3cc" class="outline-4">
+<h4 id="org2d6c3cc"><span class="section-number-4">3.2.2</span> 實作</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ol class="org-ol">
+<li><p>
+讀取資料集<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">from</span> sklearn <span style="color: #51afef;">import</span> datasets
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35712;&#20837;&#36039;&#26009;</span>
+<span class="linenr">4: </span><span style="color: #dcaeea;">iris</span> = datasets.load_iris()
+<span class="linenr">5: </span><span style="color: #51afef;">print</span>(iris.DESCR)
+</pre>
+</div></li>
+
+<li><p>
+取出特徵與標籤<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">x</span> = iris.data
+<span class="linenr">2: </span><span style="color: #dcaeea;">y</span> = iris.target
+<span class="linenr">3: </span><span style="color: #51afef;">print</span>(x[:<span style="color: #da8548; font-weight: bold;">5</span>])
+<span class="linenr">4: </span><span style="color: #51afef;">print</span>(y[:<span style="color: #da8548; font-weight: bold;">5</span>])
+</pre>
+</div></li>
+<li><p>
+資料觀察<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> pandas <span style="color: #51afef;">as</span> pd
+<span class="linenr"> 3: </span><span style="color: #51afef;">import</span> seaborn <span style="color: #51afef;">as</span> sns
+<span class="linenr"> 4: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#25226;nupmy ndarray&#36681;&#28858;pandas dataFrame,&#21152;&#19978;columns title</span>
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">npx</span> = pd.DataFrame(x, columns=[<span style="color: #98be65;">'fac1'</span>,<span style="color: #98be65;">'fac2'</span>,<span style="color: #98be65;">'fac3'</span>,<span style="color: #98be65;">'fac4'</span>])
+<span class="linenr"> 6: </span><span style="color: #dcaeea;">npy</span> = pd.DataFrame(y.astype(<span style="color: #c678dd;">int</span>), columns=[<span style="color: #98be65;">'category'</span>])
+<span class="linenr"> 7: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#21512;&#20341;</span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">dataPD</span> = pd.concat([npx, npy], axis=<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr"> 9: </span><span style="color: #51afef;">print</span>(dataPD)
+<span class="linenr">10: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#30059;&#22294;</span>
+<span class="linenr">11: </span>sns.lmplot(<span style="color: #98be65;">'fac1'</span>, <span style="color: #98be65;">'fac2'</span>, data=dataPD, hue=<span style="color: #98be65;">'category'</span>, fit_reg=<span style="color: #a9a1e1;">False</span>)
+<span class="linenr">12: </span>plt.show()
+</pre>
+</div></li>
+
+<li><p>
+分割資料集<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">from</span> sklearn.model_selection <span style="color: #51afef;">import</span> train_test_split
+<span class="linenr">2: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21123;&#20998;&#36039;&#26009;&#38598;</span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">x_train</span>, <span style="color: #dcaeea;">x_test</span>, <span style="color: #dcaeea;">y_train</span>, <span style="color: #dcaeea;">y_test</span> = train_test_split(iris.data, iris.target, random_state=<span style="color: #da8548; font-weight: bold;">6</span>)
+</pre>
+</div>
+<ul class="org-ul">
+<li>train_test_split()<br />
+所接受的變數其實非常單純，基本上為 3 項：『原始的資料』、『Seed』、『比例』<br />
+<ol class="org-ol">
+<li>原始的資料：就如同上方的 data 一般，是我們打算切成 Training data 以及 Test data 的原始資料<br /></li>
+<li>Seed： 亂數種子，可以固定我們切割資料的結果<br /></li>
+<li>比例：可以設定 train_size 或 test_size，只要設定一邊即可，範圍在 [0-1] 之間<br /></li>
+</ol></li>
+<li><p>
+scikit-learn.org: sklearn.model_selection.train_test_split<br />
+</p>
+
+<p>
+Split arrays or matrices into random train and test subsets<br />
+</p>
+
+<p>
+Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) and application to input data into a single call for splitting (and optionally subsampling) data in a oneliner.<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span> sklearn.model_selection.train_test_split(*arrays, test_size=<span style="color: #a9a1e1;">None</span>, train_size=<span style="color: #a9a1e1;">None</span>, random_state=<span style="color: #a9a1e1;">None</span>, shuffle=<span style="color: #a9a1e1;">True</span>, stratify=<span style="color: #a9a1e1;">None</span>)[source]
+</pre>
+</div>
+<ul class="org-ul">
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">online docs</a><br /></li>
+</ul></li>
+</ul></li>
+
+<li><p>
+資料標準化<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;&#36039;&#26009;&#27161;&#28310;&#21270;: &#21033;&#29992;preprocessing&#27169;&#32068;&#35041;&#30340;StandardScaler&#39006;&#21029;</span>
+<span class="linenr">2: </span><span style="color: #51afef;">from</span> sklearn.preprocessing <span style="color: #51afef;">import</span> StandardScaler
+<span class="linenr">3: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21033;&#29992;fit&#26041;&#27861;&#65292;&#23565;X_train&#20013;&#27599;&#20491;&#29305;&#24501;&#20540;&#20272;&#24179;&#22343;&#25976;&#21644;&#27161;&#28310;&#24046;</span>
+<span class="linenr">4: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#28982;&#24460;&#23565;&#27599;&#20491;&#29305;&#24501;&#20540;&#36914;&#34892;&#27161;&#28310;&#21270;(train&#21644;test&#37117;&#35201;&#20570;)</span>
+<span class="linenr">5: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29305;&#24501;&#24037;&#31243;&#65306;&#27161;&#28310;&#21270;</span>
+<span class="linenr">6: </span>transfer = StandardScaler()
+<span class="linenr">7: </span><span style="color: #dcaeea;">x_train</span> = transfer.fit_transform(x_train)
+<span class="linenr">8: </span><span style="color: #dcaeea;">x_test</span> = transfer.fit_transform(x_test)
+</pre>
+</div></li>
+
+<li><p>
+分類<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.neighbors <span style="color: #51afef;">import</span> KNeighborsClassifier
+<span class="linenr"> 2: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">KNN &#20998;&#39006;&#22120;</span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">estimator</span> = KNeighborsClassifier(n_neighbors=<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr"> 4: </span>estimator.fit(x_train, y_train)
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27169;&#22411;&#35413;&#20272;</span>
+<span class="linenr"> 7: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#19968;&#65306;&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;</span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">y_predict</span> = estimator.predict(x_test)
+<span class="linenr"> 9: </span><span style="color: #51afef;">print</span>(<span style="color: #98be65;">'y_predict&#65306;\n'</span>, y_predict)
+<span class="linenr">10: </span><span style="color: #51afef;">print</span>(<span style="color: #98be65;">'&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;:\n'</span>, y_test == y_predict)
+<span class="linenr">11: </span>
+<span class="linenr">12: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#20108;&#65306;&#35336;&#31639;&#28310;&#30906;&#29575;</span>
+<span class="linenr">13: </span><span style="color: #dcaeea;">score</span> = estimator.score(x_test, y_test)
+<span class="linenr">14: </span><span style="color: #51afef;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;:\n'</span>, score)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgfb741f2" class="outline-4">
+<h4 id="orgfb741f2"><span class="section-number-4">3.2.3</span> 作業</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf9ed8c0" class="outline-2">
+<h2 id="orgf9ed8c0"><span class="section-number-2">4</span> 非監督式學習</h2>
+</div>
+<div id="outline-container-orgd877d86" class="outline-2">
+<h2 id="orgd877d86"><span class="section-number-2">5</span> 增強式學翨</h2>
+</div>
+<div id="outline-container-org4e64c31" class="outline-2">
+<h2 id="org4e64c31"><span class="section-number-2">6</span> 深度學習</h2>
+</div>
+<div id="outline-container-org3e8fcd6" class="outline-2">
+<h2 id="org3e8fcd6"><span class="section-number-2">7</span> Hello world</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2021-03-26 Fri 00:11</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+#+TITLE: AI for TNFSH: 從入門到入土
+#+INCLUDE: ../purpleweb.org
+#+OPTIONS: ^:nil
+#+OPTIONS: toc:2
+
+#+latex:\newpage
+* 人工智慧簡介
+** Chat robot
+*** ELIZA
+- [[https://en.wikipedia.org/wiki/ELIZA#cite_note-turing-1][What is it]]
+- [[https://web.njit.edu/~ronkowit/eliza.html][web-based version]]
+*** ALICE
+- [[https://en.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity][About ALICE]]
+- [[http://www.mfellmann.net/content/alice.html][web-based version]]
+*** Mitsuku
+- [[https://en.wikipedia.org/wiki/Mitsuku][About Mitsuku]]
+- [[https://chat.kuki.ai/][Try it]]
+* 背景知識
+* 監督式學習
+** 最短距離分類器
+#+begin_src python -r -n :results output :exports both
+import math
+#from statistics import mean
+
+
+
+# importing reduce()
+from functools import reduce
+
+def Average(lst):
+    avgx = 0
+    avgy = 0
+    for (x, y) in lst:
+        avgx += x
+        avgy += y
+    return avgx/len(lst), avgy/len(lst)
+
+def ed(lst, x, y):
+    dist = 0
+    for (lx, ly) in lst:
+        dist += (x - lx)*(x - lx) + (y - ly)*(y - ly)
+    return math.sqrt(dist)
+
+groupA = [[4, 6] ,[5,7] ,[5,8] ,[5.8,6] ,[6,6] ,[6,7] ,[7,5] ,[7,7] ,[8,4] ,[9,5]]
+groupB = [[2,2] ,[4,2] ,[4,4] ,[5,4] ,[5,3] ,[6,2]]
+
+tarx = 5
+tary = 5
+
+centerX, centerY = Average(groupA)
+sdA = (tarx - centerX)*(tarx - centerX)
+centerX, centerY = Average(groupB)
+sdB = (tarx - centerX)*(tarx - centerX)
+
+if sdA < sdB:
+    print("A")
+else:
+    print("B")
+
+print(ed(groupA, tarx, tary))
+print(ed(groupB, tarx, tary))
+
+
+#+end_src
+
+#+RESULTS:
+: B
+: 7.851114570556208
+: 6.708203932499369
+
+** KNN實作
+K-NearestNeighbor分類算法是機器學習裡監督類學習中最簡單的方法之一,由Cover和Hart在1968年提出。kNN算法的核心思想是如果一個樣本在特徵空間中的k個最相鄰的樣本中的大多數屬於某一個類別，則該樣本也屬於這個類別，並具有這個類別上樣本的特性。
+
+KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不會從「訓練數據集」中學習出「判別函數」(discriminative function)，它的作法是把「訓練數據集」記憶起來。其步驟如下：
+1) 選定 k 的值和一個「距離度量」(distance metric)。
+2) 找出 k 個想要分類的、最相近的鄰近樣本。
+3) 以多數決的方式指定類別標籤。
+
+*** 鳶尾花分類問題
+**** DataSet
+收集了3種鳶尾花的四個特徵，分別是花萼(sepal)長寬、花瓣(petal)長寬度，以及對應的鳶尾花種類。
+#+CAPTION: 鳶尾花的花萼與花瓣
+#+LABEL:fig:iris-1
+#+name: fig:iris-1
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 400
+[[file:images/iris-1.png]]
+**** Mission
+輸入花萼和花瓣數據後，推測所屬的鳶尾花類型。
+#+CAPTION: 三種鳶尾花
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 400
+#+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 600
+[[file:images/iris-2.png]]
+
+*** 實作
+1. 讀取資料集
+   #+begin_src python -r -n :results output :exports no
+from sklearn import datasets
+
+# 讀入資料
+iris = datasets.load_iris()
+print(iris.DESCR)
+   #+end_src
+
+2. 取出特徵與標籤
+   #+begin_src python -r -n :results output :exports no
+x = iris.data
+y = iris.target
+print(x[:5])
+print(y[:5])
+   #+end_src
+3. 資料觀察
+   #+begin_src python -r -n :results output :exports both
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+#把nupmy ndarray轉為pandas dataFrame,加上columns title
+npx = pd.DataFrame(x, columns=['fac1','fac2','fac3','fac4'])
+npy = pd.DataFrame(y.astype(int), columns=['category'])
+#合併
+dataPD = pd.concat([npx, npy], axis=1)
+print(dataPD)
+# 畫圖
+sns.lmplot('fac1', 'fac2', data=dataPD, hue='category', fit_reg=False)
+plt.show()
+   #+end_src
+
+4. 分割資料集
+   #+begin_src python -r -n :results output :exports both
+from sklearn.model_selection import train_test_split
+# 劃分資料集
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=6)
+   #+end_src
+   - train_test_split()
+     所接受的變數其實非常單純，基本上為 3 項：『原始的資料』、『Seed』、『比例』
+     1. 原始的資料：就如同上方的 data 一般，是我們打算切成 Training data 以及 Test data 的原始資料
+     2. Seed： 亂數種子，可以固定我們切割資料的結果
+     3. 比例：可以設定 train_size 或 test_size，只要設定一邊即可，範圍在 [0-1] 之間
+   - scikit-learn.org: sklearn.model_selection.train_test_split
+     
+     Split arrays or matrices into random train and test subsets
+
+     Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) and application to input data into a single call for splitting (and optionally subsampling) data in a oneliner.
+     #+begin_src python -r -n :results output :exports both
+ sklearn.model_selection.train_test_split(*arrays, test_size=None, train_size=None, random_state=None, shuffle=True, stratify=None)[source]
+     #+end_src
+     - [[https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html][online docs]]
+
+5. 資料標準化
+   #+begin_src python -r -n :results output :exports both
+# 將資料標準化: 利用preprocessing模組裡的StandardScaler類別
+from sklearn.preprocessing import StandardScaler
+# 利用fit方法，對X_train中每個特徵值估平均數和標準差
+# 然後對每個特徵值進行標準化(train和test都要做)
+# 特徵工程：標準化
+transfer = StandardScaler()
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.fit_transform(x_test)
+   #+end_src
+
+6. 分類
+   #+begin_src python -r -n :results output :exports both
+from sklearn.neighbors import KNeighborsClassifier
+# KNN 分類器
+estimator = KNeighborsClassifier(n_neighbors=1)
+estimator.fit(x_train, y_train)
+
+# 模型評估
+# 方法一：直接對比真實值和預測值
+y_predict = estimator.predict(x_test)
+print('y_predict：\n', y_predict)
+print('直接對比真實值和預測值:\n', y_test == y_predict)
+
+# 方法二：計算準確率
+score = estimator.score(x_test, y_test)
+print('準確率:\n', score)
+  #+end_src
+
+*** 作業
+修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。
+
+* 非監督式學習
+* 增強式學翨
+* 深度學習
+* Hello world
