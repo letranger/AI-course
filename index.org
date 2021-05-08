@@ -686,7 +686,7 @@ env.close()
 上圖的實際功能與神經網絡有幾分相似，但比神經網絡要簡單得多。通過加入四個權值，我們可以通過改變權重值來改變決策（policy），即有加權和$$H_{sum} = w_1x+w_2\theta + w_3\dot{x} + w_4\dot\theta + b$$，若\(H_{sum}\)的符號爲正判定輸出爲1，否則爲0。
 
 爬山算法的基本思路是每次迭代時給當前取得的最優權重加上一組隨機值，如果加上這組值使得有效控制倒立擺的持續時間變長了那麼就更新它爲最優權重，如果沒有得到改善就保持原來的值不變，直到迭代結束。在迭代過程中，模型的參數不斷得到優化，最終得到一組最優的權值作爲控制模型的解。
-*** 其代碼如下: :noexport:
+*** 其代碼如下:
 #+begin_src python -r -n :results output :exports both
 import numpy as np
 import gym
@@ -744,7 +744,7 @@ env.close()
 #+end_src
 爬山算法本質是一種局部擇優的方法，效率高但因爲不是全局搜索，所以結果可能不是最優。
 
-** Q-Learning :noexport:
+** Q-Learning
 QLearning是強化學習算法中value-based的算法，Q即為Q（s,a）就是在某一時刻的 s 狀態下(s∈S)，採取 動作a (a∈A)動作能夠獲得收益的期望，環境會根據agent的動作反饋相應的回報reward r，所以算法的主要思想就是將State與Action構建成一張Q-table來存儲Q值，然後根據Q值來選取能夠獲得最大的收益的動作[fn:6]。
 
 一個 Q-learning 非常簡單的實現法複是用一個 model 來 approximate Q-value function，並藉由下面的 update rule 來訓練這個 model：

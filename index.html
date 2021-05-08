@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-08 Sat 11:44 -->
+<!-- 2021-05-08 Sat 15:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AI for TNFSH: 從入門到入土</title>
@@ -253,52 +253,53 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org718430e">1. 人工智慧簡介</a>
+<li><a href="#org363a009">1. 人工智慧簡介</a>
 <ul>
-<li><a href="#orga54afaa">1.1. Chat robot</a></li>
+<li><a href="#org3ba6c70">1.1. Chat robot</a></li>
 </ul>
 </li>
-<li><a href="#org1b9f498">2. 背景知識</a></li>
-<li><a href="#orgd34a338">3. 監督式學習</a>
+<li><a href="#org4f2a21c">2. 背景知識</a></li>
+<li><a href="#orge01828b">3. 監督式學習</a>
 <ul>
-<li><a href="#org13c125d">3.1. 最短距離分類器</a></li>
-<li><a href="#orgbded600">3.2. KNN實作</a></li>
-<li><a href="#org65585c6">3.3. 決策樹實作</a></li>
+<li><a href="#org3da2280">3.1. 最短距離分類器</a></li>
+<li><a href="#orgdc37c96">3.2. KNN實作</a></li>
+<li><a href="#org8dfeefa">3.3. 決策樹實作</a></li>
 </ul>
 </li>
-<li><a href="#orgb12b64e">4. 非監督式學習</a>
+<li><a href="#org5ef3c87">4. 非監督式學習</a>
 <ul>
-<li><a href="#orgbb7ef04">4.1. K-Means</a></li>
-<li><a href="#orgcc16a23">4.2. Hierarchical clustering</a></li>
-<li><a href="#org39c89c9">4.3. K-Means壓縮影像</a></li>
-<li><a href="#org917c43b">4.4. Hierarchical</a></li>
+<li><a href="#org7ccc954">4.1. K-Means</a></li>
+<li><a href="#org6eb1be5">4.2. Hierarchical clustering</a></li>
+<li><a href="#org8582300">4.3. K-Means壓縮影像</a></li>
+<li><a href="#orge8571c2">4.4. Hierarchical</a></li>
 </ul>
 </li>
 <li><a href="#AI-RL">5. 增強式學習</a>
 <ul>
-<li><a href="#org9b04f39">5.1. Open AI Gym</a></li>
-<li><a href="#org7524d93">5.2. CartPole</a></li>
-<li><a href="#org0e97c98">5.3. 直覺反應的CartPole</a></li>
-<li><a href="#org8432a94">5.4. Hill Climbing Strategy </a></li>
-<li><a href="#org86f7b17">5.5. 增強式學習有多強</a></li>
+<li><a href="#orgcd4a158">5.1. Open AI Gym</a></li>
+<li><a href="#orga2bd03a">5.2. CartPole</a></li>
+<li><a href="#org6bdb30b">5.3. 直覺反應的CartPole</a></li>
+<li><a href="#org8c19ffb">5.4. Hill Climbing Strategy </a></li>
+<li><a href="#org40fe369">5.5. Q-Learning</a></li>
+<li><a href="#orgd290599">5.6. 增強式學習有多強</a></li>
 </ul>
 </li>
-<li><a href="#orge37319c">6. 深度學習</a></li>
-<li><a href="#org3f0ba42">7. Hello world</a></li>
+<li><a href="#org7611b68">6. 深度學習</a></li>
+<li><a href="#org554923e">7. Hello world</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org718430e" class="outline-2">
-<h2 id="org718430e"><span class="section-number-2">1</span> 人工智慧簡介</h2>
+<div id="outline-container-org363a009" class="outline-2">
+<h2 id="org363a009"><span class="section-number-2">1</span> 人工智慧簡介</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orga54afaa" class="outline-3">
-<h3 id="orga54afaa"><span class="section-number-3">1.1</span> Chat robot</h3>
+<div id="outline-container-org3ba6c70" class="outline-3">
+<h3 id="org3ba6c70"><span class="section-number-3">1.1</span> Chat robot</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-org3c30b02" class="outline-4">
-<h4 id="org3c30b02"><span class="section-number-4">1.1.1</span> ELIZA</h4>
+<div id="outline-container-org2eaff22" class="outline-4">
+<h4 id="org2eaff22"><span class="section-number-4">1.1.1</span> ELIZA</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/ELIZA#cite_note-turing-1">What is it</a><br /></li>
@@ -306,8 +307,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbe7eb63" class="outline-4">
-<h4 id="orgbe7eb63"><span class="section-number-4">1.1.2</span> ALICE</h4>
+<div id="outline-container-orgf0f4e0a" class="outline-4">
+<h4 id="orgf0f4e0a"><span class="section-number-4">1.1.2</span> ALICE</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity">About ALICE</a><br /></li>
@@ -315,8 +316,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgda9ab5f" class="outline-4">
-<h4 id="orgda9ab5f"><span class="section-number-4">1.1.3</span> Mitsuku</h4>
+<div id="outline-container-org3db2172" class="outline-4">
+<h4 id="org3db2172"><span class="section-number-4">1.1.3</span> Mitsuku</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/Mitsuku">About Mitsuku</a><br /></li>
@@ -327,18 +328,18 @@
 </div>
 </div>
 
-<div id="outline-container-org1b9f498" class="outline-2">
-<h2 id="org1b9f498"><span class="section-number-2">2</span> 背景知識</h2>
+<div id="outline-container-org4f2a21c" class="outline-2">
+<h2 id="org4f2a21c"><span class="section-number-2">2</span> 背景知識</h2>
 <div class="outline-text-2" id="text-2">
 </div>
 </div>
 
-<div id="outline-container-orgd34a338" class="outline-2">
-<h2 id="orgd34a338"><span class="section-number-2">3</span> 監督式學習</h2>
+<div id="outline-container-orge01828b" class="outline-2">
+<h2 id="orge01828b"><span class="section-number-2">3</span> 監督式學習</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org13c125d" class="outline-3">
-<h3 id="org13c125d"><span class="section-number-3">3.1</span> 最短距離分類器</h3>
+<div id="outline-container-org3da2280" class="outline-3">
+<h3 id="org3da2280"><span class="section-number-3">3.1</span> 最短距離分類器</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> math
@@ -394,8 +395,8 @@ B
 </div>
 </div>
 
-<div id="outline-container-orgbded600" class="outline-3">
-<h3 id="orgbded600"><span class="section-number-3">3.2</span> KNN實作</h3>
+<div id="outline-container-orgdc37c96" class="outline-3">
+<h3 id="orgdc37c96"><span class="section-number-3">3.2</span> KNN實作</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 K-NearestNeighbor分類算法是機器學習裡監督類學習中最簡單的方法之一,由Cover和Hart在1968年提出。kNN算法的核心思想是如果一個樣本在特徵空間中的k個最相鄰的樣本中的大多數屬於某一個類別，則該樣本也屬於這個類別，並具有這個類別上樣本的特性。<br />
@@ -411,32 +412,32 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 </ol>
 </div>
 
-<div id="outline-container-org8fc9aa0" class="outline-4">
-<h4 id="org8fc9aa0"><span class="section-number-4">3.2.1</span> 鳶尾花分類問題</h4>
+<div id="outline-container-org175210f" class="outline-4">
+<h4 id="org175210f"><span class="section-number-4">3.2.1</span> 鳶尾花分類問題</h4>
 <div class="outline-text-4" id="text-3-2-1">
 </div>
-<div id="outline-container-orgce70a03" class="outline-5">
-<h5 id="orgce70a03"><span class="section-number-5">3.2.1.1</span> DataSet</h5>
+<div id="outline-container-orge6b25a5" class="outline-5">
+<h5 id="orge6b25a5"><span class="section-number-5">3.2.1.1</span> DataSet</h5>
 <div class="outline-text-5" id="text-3-2-1-1">
 <p>
 收集了3種鳶尾花的四個特徵，分別是花萼(sepal)長寬、花瓣(petal)長寬度，以及對應的鳶尾花種類。<br />
 </p>
 
-<div id="orgcea96b2" class="figure">
+<div id="org4bfbe23" class="figure">
 <p><img src="images/iris-1.png" alt="iris-1.png" width="400" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>鳶尾花的花萼與花瓣</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8e0eaba" class="outline-5">
-<h5 id="org8e0eaba"><span class="section-number-5">3.2.1.2</span> Mission</h5>
+<div id="outline-container-orgf43e538" class="outline-5">
+<h5 id="orgf43e538"><span class="section-number-5">3.2.1.2</span> Mission</h5>
 <div class="outline-text-5" id="text-3-2-1-2">
 <p>
 輸入花萼和花瓣數據後，推測所屬的鳶尾花類型。<br />
 </p>
 
-<div id="orgb9a3a71" class="figure">
+<div id="org015798c" class="figure">
 <p><img src="images/iris-2.png" alt="iris-2.png" width="600" /><br />
 </p>
 <p><span class="figure-number">Figure 2: </span>三種鳶尾花</p>
@@ -445,8 +446,8 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 </div>
 </div>
 
-<div id="outline-container-org62c5d36" class="outline-4">
-<h4 id="org62c5d36"><span class="section-number-4">3.2.2</span> 實作</h4>
+<div id="outline-container-org0e1ef17" class="outline-4">
+<h4 id="org0e1ef17"><span class="section-number-4">3.2.2</span> 實作</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <ol class="org-ol">
 <li><p>
@@ -566,8 +567,8 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 </div>
 </div>
 
-<div id="outline-container-orgf08034a" class="outline-4">
-<h4 id="orgf08034a"><span class="section-number-4">3.2.3</span> 作業</h4>
+<div id="outline-container-orgd6257f0" class="outline-4">
+<h4 id="orgd6257f0"><span class="section-number-4">3.2.3</span> 作業</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。<br />
@@ -576,21 +577,21 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 </div>
 </div>
 
-<div id="outline-container-org65585c6" class="outline-3">
-<h3 id="org65585c6"><span class="section-number-3">3.3</span> 決策樹實作</h3>
+<div id="outline-container-org8dfeefa" class="outline-3">
+<h3 id="org8dfeefa"><span class="section-number-3">3.3</span> 決策樹實作</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 一棵複雜的決策樹<br />
 </p>
 
-<div id="org7f5b336" class="figure">
+<div id="org65470aa" class="figure">
 <p><img src="images/SBQNWUA1dDtFsMHv.png" alt="SBQNWUA1dDtFsMHv.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 3: </span>Caption</p>
 </div>
 </div>
-<div id="outline-container-orgabb1f85" class="outline-4">
-<h4 id="orgabb1f85"><span class="section-number-4">3.3.1</span> iris</h4>
+<div id="outline-container-org78bc90e" class="outline-4">
+<h4 id="org78bc90e"><span class="section-number-4">3.3.1</span> iris</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> load_iris
@@ -651,15 +652,15 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 
 
 
-<div id="org604dbf2" class="figure">
+<div id="org35db5f6" class="figure">
 <p><img src="images/DecisionTree.png" alt="DecisionTree.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 4: </span>Decision Tree</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgef3bc9c" class="outline-4">
-<h4 id="orgef3bc9c"><span class="section-number-4">3.3.2</span> bank-loan<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
+<div id="outline-container-org5010dc6" class="outline-4">
+<h4 id="org5010dc6"><span class="section-number-4">3.3.2</span> bank-loan<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
 <div class="outline-text-4" id="text-3-3-2">
 <ol class="org-ol">
 <li><p>
@@ -792,8 +793,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </p></li>
 </ol>
 </div>
-<div id="outline-container-org80a4179" class="outline-5">
-<h5 id="org80a4179"><span class="section-number-5">3.3.2.1</span> DEMO</h5>
+<div id="outline-container-org41b3083" class="outline-5">
+<h5 id="org41b3083"><span class="section-number-5">3.3.2.1</span> DEMO</h5>
 <div class="outline-text-5" id="text-3-3-2-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -860,7 +861,7 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </pre>
 
 
-<div id="org3f8bd22" class="figure">
+<div id="org1b87958" class="figure">
 <p><img src="images/DecisionTree2.png" alt="DecisionTree2.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 5: </span>Bank Load 2</p>
@@ -871,12 +872,12 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </div>
 </div>
 
-<div id="outline-container-orgb12b64e" class="outline-2">
-<h2 id="orgb12b64e"><span class="section-number-2">4</span> 非監督式學習</h2>
+<div id="outline-container-org5ef3c87" class="outline-2">
+<h2 id="org5ef3c87"><span class="section-number-2">4</span> 非監督式學習</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgbb7ef04" class="outline-3">
-<h3 id="orgbb7ef04"><span class="section-number-3">4.1</span> K-Means</h3>
+<div id="outline-container-org7ccc954" class="outline-3">
+<h3 id="org7ccc954"><span class="section-number-3">4.1</span> K-Means</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 <a href="https://alankrantas.medium.com/kmeans-%E8%83%BD%E5%BE%9E%E8%B3%87%E6%96%99%E4%B8%AD%E6%89%BE%E5%87%BA-k-%E5%80%8B%E5%88%86%E9%A1%9E%E7%9A%84%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%BC%94%E7%AE%97%E6%B3%95-%E6%89%80%E4%BB%A5%E5%AE%83%E5%88%B0%E5%BA%95%E6%9C%89%E5%95%A5%E7%94%A8-%E4%BD%BF%E7%94%A8-scikit-learn-%E8%88%87-python-5dd8c0c8b167">KMeans：能從資料中找出 K 個分類的非監督式機器學習演算法 — — 所以它到底有啥用？</a><br />
@@ -899,8 +900,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </div>
 </div>
 
-<div id="outline-container-orgcc16a23" class="outline-3">
-<h3 id="orgcc16a23"><span class="section-number-3">4.2</span> Hierarchical clustering</h3>
+<div id="outline-container-org6eb1be5" class="outline-3">
+<h3 id="org6eb1be5"><span class="section-number-3">4.2</span> Hierarchical clustering</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 階層式分群法（Hierarchical Clustering）<br />
@@ -908,8 +909,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </p>
 </div>
 
-<div id="outline-container-orgb2cb6f3" class="outline-4">
-<h4 id="orgb2cb6f3"><span class="section-number-4">4.2.1</span> 聚合式階層分群法 (Bottom-up, agglomerative) : 如果採用聚合的方式，階層式分群法可由樹狀結構的底部開始，將資料或群聚逐次合併。</h4>
+<div id="outline-container-org38686e2" class="outline-4">
+<h4 id="org38686e2"><span class="section-number-4">4.2.1</span> 聚合式階層分群法 (Bottom-up, agglomerative) : 如果採用聚合的方式，階層式分群法可由樹狀結構的底部開始，將資料或群聚逐次合併。</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 定義兩個群聚之間的距離<br />
@@ -952,8 +953,8 @@ Agglomerative Clustering Sample<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-orga653371" class="outline-5">
-<h5 id="orga653371"><span class="section-number-5">4.2.1.1</span> 利用距離決定群數，或直接給定群數。</h5>
+<div id="outline-container-orgf6b7c2f" class="outline-5">
+<h5 id="orgf6b7c2f"><span class="section-number-5">4.2.1.1</span> 利用距離決定群數，或直接給定群數。</h5>
 <div class="outline-text-5" id="text-4-2-1-1">
 <p>
 建構好聚落樹狀圖後，我們可以依照距離的切割來進行分類，也可以直接給定想要分類的群數，讓系統自動切割到相對應的距離。<br />
@@ -980,8 +981,8 @@ Agglomerative Clustering Sample<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-orgad084b0" class="outline-5">
-<h5 id="orgad084b0"><span class="section-number-5">4.2.1.2</span> 如何評估最佳分群數:K</h5>
+<div id="outline-container-org5afc90c" class="outline-5">
+<h5 id="org5afc90c"><span class="section-number-5">4.2.1.2</span> 如何評估最佳分群數:K</h5>
 <div class="outline-text-5" id="text-4-2-1-2">
 <ul class="org-ul">
 <li><a href="https://jimmy-huang.medium.com/kmeans%E5%88%86%E7%BE%A4%E6%BC%94%E7%AE%97%E6%B3%95-%E8%88%87-silhouette-%E8%BC%AA%E5%BB%93%E5%88%86%E6%9E%90-8be17e634589">Kmeans分群演算法 與 Silhouette 輪廓分析</a><br /></li>
@@ -990,8 +991,8 @@ Agglomerative Clustering Sample<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org24d9cc7" class="outline-4">
-<h4 id="org24d9cc7"><span class="section-number-4">4.2.2</span> 分裂式階層分群法 (Top-down, divisible) : 如果採用分裂的方式，則由樹狀結構的頂端開始，將群聚逐次分裂。</h4>
+<div id="outline-container-org8ba7fd5" class="outline-4">
+<h4 id="org8ba7fd5"><span class="section-number-4">4.2.2</span> 分裂式階層分群法 (Top-down, divisible) : 如果採用分裂的方式，則由樹狀結構的頂端開始，將群聚逐次分裂。</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Divisive clustering : Also known as top-down approach. This algorithm also does not require to prespecify the number of clusters. Top-down clustering requires a method for splitting a cluster that contains the whole data and proceeds by splitting clusters recursively until individual data have been splitted into singleton cluster.<br />
@@ -1000,12 +1001,12 @@ Divisive clustering : Also known as top-down approach. This algorithm also does 
 </div>
 </div>
 
-<div id="outline-container-org39c89c9" class="outline-3">
-<h3 id="org39c89c9"><span class="section-number-3">4.3</span> K-Means壓縮影像</h3>
+<div id="outline-container-org8582300" class="outline-3">
+<h3 id="org8582300"><span class="section-number-3">4.3</span> K-Means壓縮影像</h3>
 </div>
 
-<div id="outline-container-org917c43b" class="outline-3">
-<h3 id="org917c43b"><span class="section-number-3">4.4</span> Hierarchical</h3>
+<div id="outline-container-orge8571c2" class="outline-3">
+<h3 id="orge8571c2"><span class="section-number-3">4.4</span> Hierarchical</h3>
 <div class="outline-text-3" id="text-4-4">
 </div>
 </div>
@@ -1031,15 +1032,15 @@ Divisive clustering : Also known as top-down approach. This algorithm also does 
 </p>
 </div>
 
-<div id="outline-container-org9b04f39" class="outline-3">
-<h3 id="org9b04f39"><span class="section-number-3">5.1</span> Open AI Gym</h3>
+<div id="outline-container-orgcd4a158" class="outline-3">
+<h3 id="orgcd4a158"><span class="section-number-3">5.1</span> Open AI Gym</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 OpenAI Gym 是一個提供許多測試環境的工具，讓大家有一個共同的環境可以測試自己的 RL 演算法，而不用花時間去搭建自己的測試環境。<br />
 </p>
 </div>
-<div id="outline-container-orge8f8398" class="outline-4">
-<h4 id="orge8f8398"><span class="section-number-4">5.1.1</span> module</h4>
+<div id="outline-container-org5fde4fa" class="outline-4">
+<h4 id="org5fde4fa"><span class="section-number-4">5.1.1</span> module</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 於本機執行至少會用到以下兩個python module，若要在遠端主機或colab上執行則要再做其他額外設定。<br />
@@ -1053,21 +1054,21 @@ OpenAI Gym 是一個提供許多測試環境的工具，讓大家有一個共同
 </div>
 </div>
 
-<div id="outline-container-org7524d93" class="outline-3">
-<h3 id="org7524d93"><span class="section-number-3">5.2</span> CartPole</h3>
+<div id="outline-container-orga2bd03a" class="outline-3">
+<h3 id="orga2bd03a"><span class="section-number-3">5.2</span> CartPole</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Gym上有許多可用工具，CartPole是其中較為簡單常見的一種，CartPole是一個桿子連在一個小車上，小車可以無摩擦的左右運動，桿子（倒立擺）一開始是豎直線向上的。小車通過左右運動使得桿子不倒。<br />
 </p>
 
-<div id="org9690999" class="figure">
+<div id="org2616a7f" class="figure">
 <p><img src="images/cartpole-sys.jpg" alt="cartpole-sys.jpg" width="400" /><br />
 </p>
 <p><span class="figure-number">Figure 6: </span>Cart-pole system</p>
 </div>
 </div>
-<div id="outline-container-org6f8bfa4" class="outline-4">
-<h4 id="org6f8bfa4"><span class="section-number-4">5.2.1</span> 執行測試與環境變數</h4>
+<div id="outline-container-org611e7af" class="outline-4">
+<h4 id="org611e7af"><span class="section-number-4">5.2.1</span> 執行測試與環境變數</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 以下是一段最基本的測試程式<br />
@@ -1136,8 +1137,8 @@ Rewards:  11.0
 </p>
 </div>
 </div>
-<div id="outline-container-org0c8963a" class="outline-4">
-<h4 id="org0c8963a"><span class="section-number-4">5.2.2</span> 重要環境變數</h4>
+<div id="outline-container-org56a424a" class="outline-4">
+<h4 id="org56a424a"><span class="section-number-4">5.2.2</span> 重要環境變數</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 在 Gym 的仿真環境中，有運動空間 action_space 和觀測空間observation_space 兩個指標，程序中被定義爲 Space類型，用於描述有效的運動和觀測的格式和範圍。我們可以利用以下程式碼大致觀察一下這兩個Space:<br />
@@ -1163,8 +1164,8 @@ Box(-3.4028234663852886e+38, 3.4028234663852886e+38, (4,), float32)
 <li>observation_space 是一個Box類型，從box.py源碼可知，表示一個 n 維的盒子，所以在上一節打印出來的observation是一個長度爲 4 的數組。數組中的每個元素都具有上下界。<br /></li>
 </ul>
 </div>
-<div id="outline-container-org434aaee" class="outline-5">
-<h5 id="org434aaee"><span class="section-number-5">5.2.2.1</span> Observation:</h5>
+<div id="outline-container-org4196f95" class="outline-5">
+<h5 id="org4196f95"><span class="section-number-5">5.2.2.1</span> Observation:</h5>
 <div class="outline-text-5" id="text-5-2-2-1">
 <p>
 Type: Box(4)<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup><br />
@@ -1221,8 +1222,8 @@ Type: Box(4)<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup><br />
 </table>
 </div>
 </div>
-<div id="outline-container-orgce942ab" class="outline-5">
-<h5 id="orgce942ab"><span class="section-number-5">5.2.2.2</span> Actions: 動作空間是離散空間</h5>
+<div id="outline-container-orgc438446" class="outline-5">
+<h5 id="orgc438446"><span class="section-number-5">5.2.2.2</span> Actions: 動作空間是離散空間</h5>
 <div class="outline-text-5" id="text-5-2-2-2">
 <p>
 Type: Discrete(2)<br />
@@ -1258,8 +1259,8 @@ Type: Discrete(2)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgdd9e824" class="outline-5">
-<h5 id="orgdd9e824"><span class="section-number-5">5.2.2.3</span> Reward</h5>
+<div id="outline-container-org85af7e2" class="outline-5">
+<h5 id="org85af7e2"><span class="section-number-5">5.2.2.3</span> Reward</h5>
 <div class="outline-text-5" id="text-5-2-2-3">
 <p>
 Reward is 1 for every step taken, including the termination step. The threshold is 475 for v1.<br />
@@ -1267,16 +1268,16 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </p>
 </div>
 </div>
-<div id="outline-container-org16758b7" class="outline-5">
-<h5 id="org16758b7"><span class="section-number-5">5.2.2.4</span> 初始狀態:</h5>
+<div id="outline-container-orge4893b8" class="outline-5">
+<h5 id="orge4893b8"><span class="section-number-5">5.2.2.4</span> 初始狀態:</h5>
 <div class="outline-text-5" id="text-5-2-2-4">
 <p>
 初始狀態所有觀測值都從[-0.05, 0.05]中隨機取值。<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org608676f" class="outline-5">
-<h5 id="org608676f"><span class="section-number-5">5.2.2.5</span> 達到下列條件之一即結束一回合(片段):</h5>
+<div id="outline-container-org2e3b140" class="outline-5">
+<h5 id="org2e3b140"><span class="section-number-5">5.2.2.5</span> 達到下列條件之一即結束一回合(片段):</h5>
 <div class="outline-text-5" id="text-5-2-2-5">
 <ol class="org-ol">
 <li>桿子與豎直方向角度超過12度<br /></li>
@@ -1287,8 +1288,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </div>
 </div>
 </div>
-<div id="outline-container-org7f1e30b" class="outline-4">
-<h4 id="org7f1e30b"><span class="section-number-4">5.2.3</span> 分組作業:</h4>
+<div id="outline-container-orgb82bdb0" class="outline-4">
+<h4 id="orgb82bdb0"><span class="section-number-4">5.2.3</span> 分組作業:</h4>
 <div class="outline-text-4" id="text-5-2-3">
 <p>
 上述程式只執行了一回合的模擬，請你修改上述程式，進行200回合的模擬，記錄每回合隨機運作的reward結果，並將結果畫成折線圖，x軸為回合數；y軸為每回合的reward，<br />
@@ -1297,8 +1298,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </div>
 </div>
 
-<div id="outline-container-org0e97c98" class="outline-3">
-<h3 id="org0e97c98"><span class="section-number-3">5.3</span> 直覺反應的CartPole</h3>
+<div id="outline-container-org6bdb30b" class="outline-3">
+<h3 id="org6bdb30b"><span class="section-number-3">5.3</span> 直覺反應的CartPole</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 前節程式以隨機方式來左右擺動車子，這很顯然不符合真實情境，再笨的人也會隨杆子的擺動來控制車子，例如：當杆子快往左傾，就把車子往左移，以下就是這種實作的程式碼：<br />
@@ -1339,8 +1340,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 Rewards:  51.0
 </pre>
 </div>
-<div id="outline-container-orgfe30fb9" class="outline-4">
-<h4 id="orgfe30fb9"><span class="section-number-4">5.3.1</span> 分組作業</h4>
+<div id="outline-container-org290eb55" class="outline-4">
+<h4 id="org290eb55"><span class="section-number-4">5.3.1</span> 分組作業</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 上述程式只是簡單的依杆子角度來移動車子，你能否再想出更好的策略(即可以在結束前得到更多reward，最多到200)?請觀察observation的內容，傾全組之力想出最佳策略並實作出來，進行200次模擬，畫出模擬的rewards折線統計圖。<br />
@@ -1349,8 +1350,8 @@ Rewards:  51.0
 </div>
 </div>
 
-<div id="outline-container-org8432a94" class="outline-3">
-<h3 id="org8432a94"><span class="section-number-3">5.4</span> Hill Climbing Strategy <sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></h3>
+<div id="outline-container-org8c19ffb" class="outline-3">
+<h3 id="org8c19ffb"><span class="section-number-3">5.4</span> Hill Climbing Strategy <sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 爲了能夠有效控制倒立擺首先應建立一個控制模型。明顯的，這個控制模型的輸入應該是當前倒立擺的狀態（observation）而輸出爲對當前狀態做出的決策動作（action）。從前面的知識我們瞭解到決定倒立擺狀態的observation是一個四維向量，包含小車位置（\(x\)）、杆子夾角（\(\theta\)）、小車速度（\(\dot{x}\)）及角變化率（\(\dot{\theta}\)），如果對這個向量求它的加權和，那麼就可以根據加權和值的符號來決定採取的動作（action），用sigmoid函數將這個問題轉化爲二分類問題，從而可以建立一個簡單的控制模型。其模型如下圖所示：<br />
@@ -1364,11 +1365,251 @@ Rewards:  51.0
 爬山算法的基本思路是每次迭代時給當前取得的最優權重加上一組隨機值，如果加上這組值使得有效控制倒立擺的持續時間變長了那麼就更新它爲最優權重，如果沒有得到改善就保持原來的值不變，直到迭代結束。在迭代過程中，模型的參數不斷得到優化，最終得到一組最優的權值作爲控制模型的解。<br />
 </p>
 </div>
+<div id="outline-container-orgef754d4" class="outline-4">
+<h4 id="orgef754d4"><span class="section-number-4">5.4.1</span> 其代碼如下:</h4>
+<div class="outline-text-4" id="text-5-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> gym
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">get_sum_reward_by_weights</span>(env, weights):
+<span class="linenr"> 5: </span>    <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#28204;&#35430;&#19981;&#21516;&#27402;&#37325;&#30340;model&#25152;&#24471;&#21040;&#30340;&#22892;&#21237;</span>
+<span class="linenr"> 6: </span>    <span style="color: #dcaeea;">observation</span> = env.reset() <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#37325;&#32622;&#29376;&#24907;</span>
+<span class="linenr"> 7: </span>    <span style="color: #dcaeea;">rewards</span> = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">for</span> t <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">1000</span>):
+<span class="linenr"> 9: </span>        env.render()
+<span class="linenr">10: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20381;&#30446;&#21069;&#27402;&#20540;&#37341;&#23565;&#30070;&#21069;&#29376;&#24907;&#20358;&#36984;action</span>
+<span class="linenr">11: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21407;&#20358;&#30340;&#20570;&#27861;&#28858;: action = env.action_space.sample()</span>
+<span class="linenr">12: </span>        <span style="color: #dcaeea;">action</span> = <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">if</span> np.dot(weights[:<span style="color: #da8548; font-weight: bold;">4</span>], observation) + weights[<span style="color: #da8548; font-weight: bold;">4</span>] &gt;= <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #51afef;">else</span> <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">13: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#22519;&#34892;action, &#21462;&#24471;&#19979;&#19968;&#27493;&#29376;&#24907;</span>
+<span class="linenr">14: </span>        <span style="color: #dcaeea;">observation</span>, <span style="color: #dcaeea;">reward</span>, <span style="color: #dcaeea;">done</span>, <span style="color: #dcaeea;">info</span> = env.step(action)
+<span class="linenr">15: </span>        <span style="color: #dcaeea;">rewards</span> += reward
+<span class="linenr">16: </span>        <span style="color: #51afef;">if</span> <span style="color: #dcaeea;">done</span>:
+<span class="linenr">17: </span>            <span style="color: #51afef;">print</span>(t)
+<span class="linenr">18: </span>            <span style="color: #51afef;">break</span>
+<span class="linenr">19: </span>    <span style="color: #51afef;">return</span> rewards
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>
+<span class="linenr">23: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">get_best_result</span>():
+<span class="linenr">24: </span>    np.random.seed(<span style="color: #da8548; font-weight: bold;">10</span>)
+<span class="linenr">25: </span>    best_reward = <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21021;&#22987;&#26368;&#20339;&#22892;&#21237;</span>
+<span class="linenr">26: </span>    <span style="color: #dcaeea;">best_weights</span> = np.random.rand(<span style="color: #da8548; font-weight: bold;">5</span>) <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21021;&#22987;&#27402;&#20540;&#28858;&#38568;&#27231;&#20540;</span>
+<span class="linenr">27: </span>
+<span class="linenr">28: </span>    <span style="color: #51afef;">for</span> <span style="color: #c678dd;">iter</span> <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">1000</span>): <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#36845;&#20195;100&#27425;</span>
+<span class="linenr">29: </span>        <span style="color: #dcaeea;">cur_weights</span> = <span style="color: #a9a1e1;">None</span>
+<span class="linenr">30: </span>        <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"iteration:"</span>,<span style="color: #c678dd;">iter</span>)
+<span class="linenr">31: </span>        cur_weights = best_weights + np.random.normal(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">0.1</span>, <span style="color: #da8548; font-weight: bold;">5</span>) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#22312;&#30070;&#21069;&#26368;&#20339;&#27402;&#20540;&#21152;&#20837;&#38568;&#27231;&#20540;</span>
+<span class="linenr">32: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">cur_weights = np.random.rand(5) #&#38568;&#27231;&#29468;&#28204;</span>
+<span class="linenr">33: </span>        <span style="color: #dcaeea;">cur_sum_reward</span> = get_sum_reward_by_weights(env, cur_weights)
+<span class="linenr">34: </span>        reward_rec.append(cur_sum_reward) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#35352;&#37636;&#29992;</span>
+<span class="linenr">35: </span>        <span style="color: #51afef;">if</span> cur_sum_reward &gt; <span style="color: #dcaeea;">best_reward</span>:
+<span class="linenr">36: </span>            best_reward = cur_sum_reward
+<span class="linenr">37: </span>            <span style="color: #dcaeea;">best_weights</span> = cur_weights
+<span class="linenr">38: </span>        <span style="color: #51afef;">if</span> best_reward &gt;= <span style="color: #da8548; font-weight: bold;">200</span>:
+<span class="linenr">39: </span>            <span style="color: #51afef;">print</span>(<span style="color: #c678dd;">iter</span>,<span style="color: #98be65;">":"</span>,best_reward)
+<span class="linenr">40: </span>            <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"best_weight"</span>,best_weights)
+<span class="linenr">41: </span>            <span style="color: #51afef;">break</span>;
+<span class="linenr">42: </span>
+<span class="linenr">43: </span><span style="color: #dcaeea;">env</span> = gym.make(<span style="color: #98be65;">"CartPole-v0"</span>)
+<span class="linenr">44: </span><span style="color: #dcaeea;">reward_rec</span> = []
+<span class="linenr">45: </span>
+<span class="linenr">46: </span><span style="color: #51afef;">print</span>(get_best_result())
+<span class="linenr">47: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36664;&#20986;&#32113;&#35336;</span>
+<span class="linenr">48: </span><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span class="linenr">49: </span>plt.clf()
+<span class="linenr">50: </span><span style="color: #dcaeea;">x</span> = <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #c678dd;">len</span>(reward_rec)+<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">51: </span>plt.plot(x, reward_rec)
+<span class="linenr">52: </span>env.close()
+<span class="linenr">53: </span>
+</pre>
+</div>
+<p>
+爬山算法本質是一種局部擇優的方法，效率高但因爲不是全局搜索，所以結果可能不是最優。<br />
+</p>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org86f7b17" class="outline-3">
-<h3 id="org86f7b17"><span class="section-number-3">5.5</span> 增強式學習有多強<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h3>
+<div id="outline-container-org40fe369" class="outline-3">
+<h3 id="org40fe369"><span class="section-number-3">5.5</span> Q-Learning</h3>
 <div class="outline-text-3" id="text-5-5">
+<p>
+QLearning是強化學習算法中value-based的算法，Q即為Q（s,a）就是在某一時刻的 s 狀態下(s∈S)，採取 動作a (a∈A)動作能夠獲得收益的期望，環境會根據agent的動作反饋相應的回報reward r，所以算法的主要思想就是將State與Action構建成一張Q-table來存儲Q值，然後根據Q值來選取能夠獲得最大的收益的動作<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>。<br />
+</p>
+
+<p>
+一個 Q-learning 非常簡單的實現法複是用一個 model 來 approximate Q-value function，並藉由下面的 update rule 來訓練這個 model：<br />
+\[Q(S_t, a_t) = Q(s_t, a_t) + \alpha(R_{t+1} + \gamma\max_aQ(s_{s_t+1},a)-Q(s_t,a_t))\]<br />
+Q-table 是用 lookup table 來 approximate Q-value function，並用 Q-learning 訓練的一個方法。這個 lookup table 會將每個 state-action pair (s, a) 對應到 approximation Q(s, a)，一開始 table 裡的 Q-value 隨機設置，並在訓練過程中更新這些 Q-value。所以我們其實沒有在訓練一個 model 更新參數讓預測數值更接近 Q-value，而是直接用一個 table 記錄這些值並更新。<br />
+</p>
+
+<p>
+另外我們的 state 是連續值，這樣會有無限多個可能的 state-action pair，因此我們要 discretize 這些值才能建立一個 lookup table。<br />
+</p>
+
+<p>
+例如實作中我們把 state 的 4 個 feature (position, velocity, angle, rotation rate) 分別 discretize 成 (1, 1, 6, 3) 個 bucket，6 個 bucket 就代表 angle 的範圍 [-0.5, 0.5] 被切成 6 個區間，區間中的值都對應到相同的 discrete value。<br />
+</p>
+</div>
+<div id="outline-container-orge828956" class="outline-4">
+<h4 id="orge828956"><span class="section-number-4">5.5.1</span> Algorithms</h4>
+<div class="outline-text-4" id="text-5-5-1">
+<p width="500">
+<img src="images/q-learning.png" alt="q-learning.png" width="500" /><br />
+在更新 Q table 時，計算 reward 不只包含採取 action \(a\)獲得的 reward \(r\)r，還包含 \(\gamma max_{a^{'}}Q(s^{'},q^{'})\)。這個概念是，agent 不僅僅看當下採取的行動帶來的好處，他也會估計到達下一個 state \(s^{'}\) 後，最多可以有多少好處（因為在\(s^{'}\)也可以採取各種 action）。<br />
+換句話說，這個 agent 不是一個目光如豆的 agent，他會考慮未來。因為加上了\(\gamma max_{a^{'}}Q(s^{'},q^{'})\)(當然\(\gamma\)不能是 0)，讓我們的 agent 從 會立刻吃掉棉花糖的小朋友，進化成可以晚一點再吃多一點棉花糖的小朋友，是不是很有趣呢！<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org711dd13" class="outline-4">
+<h4 id="org711dd13"><span class="section-number-4">5.5.2</span> Q-Table</h4>
+<div class="outline-text-4" id="text-5-5-2">
+<p>
+一個 Q-learning 非常簡單的實現法。複習一下我們在前篇提到 Q-learning，是用一個 model 來 approximate Q-value function，並藉由下面的 update rule 來訓練這個 model：<br />
+\[ Q(s_t,a_t) = Q(s_t,a_t) + \alpha(R_{t+1}) + \gamma \max_{a} Q(s_{t+1}, - Q(s_t,a_t)) \]<br />
+Q-table 是用 lookup table 來 approximate Q-value function，並用 Q-learning 訓練的一個方法。這個 lookup table 會將每個 state-action pair (s, a) 對應到 approximation Q(s, a)，一開始 table 裡的 Q-value 隨機設置，並在訓練過程中更新這些 Q-value。所以我們其實沒有在訓練一個 model 更新參數讓預測數值更接近 Q-value，而是直接用一個 table 記錄這些值並更新。<br />
+</p>
+
+<p>
+另外我們的 state 是連續值，這樣會有無限多個可能的 state-action pair，因此我們要 discretize 這些值才能建立一個 lookup table。<br />
+</p>
+
+<p>
+例如實作中我們把 state 的 4 個 feature (position, velocity, angle, rotation rate) 分別 discretize 成 (1, 1, 6, 3) 個 bucket，6 個 bucket 就代表 angle 的範圍 [-0.5, 0.5] 被切成 6 個區間，區間中的值都對應到相同的 discrete value。<br />
+</p>
+
+<ol class="org-ol">
+<li><p>
+整個 discretization 大概是這樣：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">state bucket &#35373;&#23450;</span>
+<span class="linenr"> 2: </span><span style="color: #dcaeea;">n_buckets</span> = (<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">6</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">action &#24050;&#32147;&#26159; discrete value</span>
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">n_actions</span> = env.action_space.n
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#24314;&#31435; Q-table</span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">q_table</span> = np.zeros(n_buckets + (n_actions,))
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35373;&#23450;&#22909;&#27599;&#20491; state feature &#30340;&#19978;&#19979;&#30028;</span>
+<span class="linenr">11: </span><span style="color: #dcaeea;">state_bounds</span> = <span style="color: #c678dd;">list</span>(<span style="color: #c678dd;">zip</span>(env.observation_space.low, env.observation_space.high))
+<span class="linenr">12: </span><span style="color: #dcaeea;">state_bounds</span>[<span style="color: #da8548; font-weight: bold;">1</span>] = [-<span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>]
+<span class="linenr">13: </span><span style="color: #dcaeea;">state_bounds</span>[<span style="color: #da8548; font-weight: bold;">3</span>] = [-math.radians(<span style="color: #da8548; font-weight: bold;">50</span>), math.radians(<span style="color: #da8548; font-weight: bold;">50</span>)]
+<span class="linenr">14: </span>
+<span class="linenr">15: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559; env &#32102;&#30340; state &#36681;&#25563;&#25104; discretized state</span>
+<span class="linenr">16: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">get_state</span>(observation, n_buckets, state_bounds):
+<span class="linenr">17: </span>    <span style="color: #dcaeea;">state</span> = [<span style="color: #da8548; font-weight: bold;">0</span>] * <span style="color: #c678dd;">len</span>(observation)
+<span class="linenr">18: </span>    <span style="color: #51afef;">for</span> i, s <span style="color: #51afef;">in</span> <span style="color: #c678dd;">enumerate</span>(observation):
+<span class="linenr">19: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27599;&#20491; feature &#19978;&#30028;&#12289;&#19979;&#30028;</span>
+<span class="linenr">20: </span>        <span style="color: #dcaeea;">l</span>, <span style="color: #dcaeea;">u</span> = state_bounds[i][<span style="color: #da8548; font-weight: bold;">0</span>], state_bounds[i][<span style="color: #da8548; font-weight: bold;">1</span>]
+<span class="linenr">21: </span>        <span style="color: #51afef;">if</span> s &lt;= <span style="color: #dcaeea;">l</span>: <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20302;&#26044;&#19979;&#30028;&#23660;&#26044;&#31532; 1 &#20491; bucket</span>
+<span class="linenr">22: </span>            state[i] = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">23: </span>        <span style="color: #51afef;">elif</span> s &gt;= <span style="color: #dcaeea;">u</span>: <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#39640;&#26044;&#19979;&#30028;&#23660;&#26044;&#26368;&#24460;&#19968;&#20491; bucket</span>
+<span class="linenr">24: </span>            state[i] = n_buckets[i] - <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">25: </span>        <span style="color: #51afef;">else</span>: <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20854;&#20182;&#30475;&#20320;&#22312;&#21738;&#20491;&#21312;&#38291;&#65292;&#27770;&#23450;&#20320;&#22312;&#21738;&#20491; bucket</span>
+<span class="linenr">26: </span>            state[i] = <span style="color: #c678dd;">int</span>(((s - l) / (u - l)) * n_buckets[i])
+<span class="linenr">27: </span>    <span style="color: #51afef;">return</span> <span style="color: #c678dd;">tuple</span>(state)
+</pre>
+</div></li>
+</ol>
+<p>
+state_bounds初始內容為<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>[(-<span style="color: #da8548; font-weight: bold;">4.8</span>, <span style="color: #da8548; font-weight: bold;">4.8</span>),
+<span class="linenr">2: </span> [-<span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>],
+<span class="linenr">3: </span> (-<span style="color: #da8548; font-weight: bold;">0.41887903</span>, <span style="color: #da8548; font-weight: bold;">0.41887903</span>),
+<span class="linenr">4: </span> [-<span style="color: #da8548; font-weight: bold;">0.8726646259971648</span>, <span style="color: #da8548; font-weight: bold;">0.8726646259971648</span>]]
+</pre>
+</div>
+<p>
+q_table為(1, 1, 6, 3, 2)的ndarray，初始內容為<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span>array([[[[[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr"> 4: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr"> 5: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]],
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>         [[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr"> 8: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr"> 9: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]],
+<span class="linenr">10: </span>
+<span class="linenr">11: </span>         [[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">12: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">13: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]],
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>         [[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">16: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">17: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]],
+<span class="linenr">18: </span>
+<span class="linenr">19: </span>         [[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">20: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">21: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]],
+<span class="linenr">22: </span>
+<span class="linenr">23: </span>         [[<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">24: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.],
+<span class="linenr">25: </span>          [<span style="color: #da8548; font-weight: bold;">0</span>., <span style="color: #da8548; font-weight: bold;">0</span>.]]]]])
+</pre>
+</div>
+<ol class="org-ol">
+<li><p>
+再來是\(\epsilon-greedy\)的使用，選擇 action 時，有\(\epsilon\)的機率隨機選擇以增加 exploration，其他時間照著現有 policy 選擇：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">choose_action</span>(state, q_table, action_space, epsilon):
+<span class="linenr">2: </span>    <span style="color: #51afef;">if</span> np.random.random_sample() &lt; epsilon: <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#38568;&#27231;</span>
+<span class="linenr">3: </span>        <span style="color: #51afef;">return</span> action_space.sample()
+<span class="linenr">4: </span>    <span style="color: #51afef;">else</span>: <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26681;&#25818; Q-table &#36984;&#25799;&#26368;&#22823; Q-value &#30340; action</span>
+<span class="linenr">5: </span>        <span style="color: #51afef;">return</span> np.argmax(q_table[state])
+</pre>
+</div></li>
+<li><p>
+最後就是做出 action 收集到 observation 和 reward 後，就可以 update Q-table：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#31639;&#20986;&#19979;&#20491; state</span>
+<span class="linenr">2: </span><span style="color: #dcaeea;">next_state</span> = get_state(observation, n_buckets, state_bounds)
+<span class="linenr">3: </span>
+<span class="linenr">4: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Q-learning</span>
+<span class="linenr">5: </span><span style="color: #dcaeea;">q_next_max</span> = np.amax(q_table[next_state])
+<span class="linenr">6: </span><span style="color: #dcaeea;">q_table</span>[state + (action,)] += lr * (reward + gamma * q_next_max - q_table[state + (action,)])
+<span class="linenr">7: </span>
+<span class="linenr">8: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Transition &#21040;&#19979;&#20491; state</span>
+<span class="linenr">9: </span><span style="color: #dcaeea;">state</span> = next_state
+</pre>
+</div></li>
+<li><p>
+剩下就跟前面的框架差不多了。實作中，還另外加了一些方法讓訓練成果更好，例如因為訓練後期有比較好的 policy，讓 <a href="https://chart.googleapis.com/chart?cht=tx&amp;chl=%5Cepsilon">https://chart.googleapis.com/chart?cht=tx&amp;chl=%5Cepsilon</a> 隨著訓練降低以減少 exploration，以及讓 learning rate 降低使訓練能收斂。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">get_epsilon</span> = <span style="color: #51afef;">lambda</span> i: <span style="color: #c678dd;">max</span>(<span style="color: #da8548; font-weight: bold;">0.01</span>, <span style="color: #c678dd;">min</span>(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1.0</span> - math.log10((i+<span style="color: #da8548; font-weight: bold;">1</span>)/<span style="color: #da8548; font-weight: bold;">25</span>)))
+<span class="linenr">2: </span><span style="color: #dcaeea;">get_lr</span> = <span style="color: #51afef;">lambda</span> i: <span style="color: #c678dd;">max</span>(<span style="color: #da8548; font-weight: bold;">0.01</span>, <span style="color: #c678dd;">min</span>(<span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">1.0</span> - math.log10((i+<span style="color: #da8548; font-weight: bold;">1</span>)/<span style="color: #da8548; font-weight: bold;">25</span>)))
+<span class="linenr">3: </span>
+<span class="linenr">4: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27599;&#22238;&#21512;&#26356;&#26032; epsilon &#21644; lr</span>
+<span class="linenr">5: </span><span style="color: #dcaeea;">epsilon</span> = get_epsilon(i_episode)
+<span class="linenr">6: </span><span style="color: #dcaeea;">lr</span> = get_lr(i_episode)
+</pre>
+</div></li>
+<li><p>
+成果<br />
+</p></li>
+</ol>
+
+<div id="orgdd7404f" class="figure">
+<p><img src="images/q-learning-result.png" alt="q-learning-result.png" width="500" /><br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd290599" class="outline-3">
+<h3 id="orgd290599"><span class="section-number-3">5.6</span> 增強式學習有多強<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></h3>
+<div class="outline-text-3" id="text-5-6">
 <p>
 我們可以使用強化學習來訓練圍棋機器人，知名的Alpha Go 就是基於強化學習來打敗人類的!<br />
 又或者學習如何玩超級馬力歐，透過一次又一次的死亡，Agent會慢慢地學習什麼時間點該跳躍閃避怪物，或者殺掉怪物。<br />
@@ -1386,14 +1627,14 @@ Rewards:  51.0
 </div>
 </div>
 
-<div id="outline-container-orge37319c" class="outline-2">
-<h2 id="orge37319c"><span class="section-number-2">6</span> 深度學習</h2>
+<div id="outline-container-org7611b68" class="outline-2">
+<h2 id="org7611b68"><span class="section-number-2">6</span> 深度學習</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 </div>
 
-<div id="outline-container-org3f0ba42" class="outline-2">
-<h2 id="org3f0ba42"><span class="section-number-2">7</span> Hello world</h2>
+<div id="outline-container-org554923e" class="outline-2">
+<h2 id="org554923e"><span class="section-number-2">7</span> Hello world</h2>
 <div class="outline-text-2" id="text-7">
 </div>
 </div>
@@ -1418,6 +1659,10 @@ Rewards:  51.0
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://blog.csdn.net/qq_30615903/article/details/80739243">【強化學習】Q-Learning算法詳解</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 <a href="https://ithelp.ithome.com.tw/articles/10234272">Day 6 強化學習就是一直學習? </a><br />
 </p></div></div>
 
@@ -1426,7 +1671,7 @@ Rewards:  51.0
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Yung Chin, Yen</p>
-<p class="date">Created: 2021-05-08 Sat 11:44</p>
+<p class="date">Created: 2021-05-08 Sat 15:52</p>
 </div>
 </body>
 </html>
