@@ -439,6 +439,7 @@ kmeans.fit(X) cluster = kmeans.predict(X) 
 plt.scatter(X[:,0], X[:,1], c=cluster, cmap=plt.cm.Set1) 
 plt.show()
 #+end_src
+
 ** Hierarchical clustering
 階層式分群法（Hierarchical Clustering）
 階層式分群法透過一種階層架構的方式，將資料層層反覆地進行分裂或聚合，以產生最後的樹狀結構，常見的方式有兩種：
@@ -496,13 +497,15 @@ clusters=sch.fcluster(dis,k,criterion='maxclust')
 *** 分裂式階層分群法 (Top-down, divisible) : 如果採用分裂的方式，則由樹狀結構的頂端開始，將群聚逐次分裂。
 Divisive clustering : Also known as top-down approach. This algorithm also does not require to prespecify the number of clusters. Top-down clustering requires a method for splitting a cluster that contains the whole data and proceeds by splitting clusters recursively until individual data have been splitted into singleton cluster.
 
-
-
 ** K-Means壓縮影像
+
 ** Hierarchical
 #+latex:\newpage
 
 * 增強式學習
+:PROPERTIES:
+:CUSTOM_ID: AI-RL
+:END:
 強化學習(Reinforcement learning, RL)是機器學習的一個子領域，在智能控制機器人及分析預測等領域有許多應用。強化學習通過與環境進行交互獲得的獎賞指導行為，目標是使智能體獲得最大的獎賞，最終開發出智能體(Agent)做出決策和控制[fn:5]。
 
 對RL稍有了解的同學都知道，Exploration是一件很重要同時也很困難的事情。與其他機器學習範式相比，RL通常只知道某個動作的能得多少分，卻不知道該動作是不是最好的——這就是基於evaluate的強化學習與基於instruct的監督學習的根本區別。
