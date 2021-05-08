@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-08 Sat 10:52 -->
+<!-- 2021-05-08 Sat 11:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AI for TNFSH: 從入門到入土</title>
@@ -223,6 +223,28 @@
     /*]]>*///-->
 // @license-end
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -231,51 +253,52 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga2b3f97">1. 人工智慧簡介</a>
+<li><a href="#org718430e">1. 人工智慧簡介</a>
 <ul>
-<li><a href="#org816e5e9">1.1. Chat robot</a></li>
+<li><a href="#orga54afaa">1.1. Chat robot</a></li>
 </ul>
 </li>
-<li><a href="#orge02299c">2. 背景知識</a></li>
-<li><a href="#org947797c">3. 監督式學習</a>
+<li><a href="#org1b9f498">2. 背景知識</a></li>
+<li><a href="#orgd34a338">3. 監督式學習</a>
 <ul>
-<li><a href="#orgd2ffa84">3.1. 最短距離分類器</a></li>
-<li><a href="#orgcde9639">3.2. KNN實作</a></li>
-<li><a href="#org720c5dc">3.3. 決策樹實作</a></li>
+<li><a href="#org13c125d">3.1. 最短距離分類器</a></li>
+<li><a href="#orgbded600">3.2. KNN實作</a></li>
+<li><a href="#org65585c6">3.3. 決策樹實作</a></li>
 </ul>
 </li>
-<li><a href="#org9266bb9">4. 非監督式學習</a>
+<li><a href="#orgb12b64e">4. 非監督式學習</a>
 <ul>
-<li><a href="#org762676e">4.1. K-Means</a></li>
-<li><a href="#orgb0c87ac">4.2. Hierarchical clustering</a></li>
-<li><a href="#orgdaf26a3">4.3. K-Means壓縮影像</a></li>
-<li><a href="#org1c2699b">4.4. Hierarchical</a></li>
+<li><a href="#orgbb7ef04">4.1. K-Means</a></li>
+<li><a href="#orgcc16a23">4.2. Hierarchical clustering</a></li>
+<li><a href="#org39c89c9">4.3. K-Means壓縮影像</a></li>
+<li><a href="#org917c43b">4.4. Hierarchical</a></li>
 </ul>
 </li>
 <li><a href="#AI-RL">5. 增強式學習</a>
 <ul>
-<li><a href="#orga9968a7">5.1. Open AI Gym</a></li>
-<li><a href="#orgde563b6">5.2. CartPole</a></li>
-<li><a href="#org2dd7ff9">5.3. 直覺反應的CartPole</a></li>
-<li><a href="#org90a7336">5.4. 增強式學習有多強</a></li>
+<li><a href="#org9b04f39">5.1. Open AI Gym</a></li>
+<li><a href="#org7524d93">5.2. CartPole</a></li>
+<li><a href="#org0e97c98">5.3. 直覺反應的CartPole</a></li>
+<li><a href="#org8432a94">5.4. Hill Climbing Strategy </a></li>
+<li><a href="#org86f7b17">5.5. 增強式學習有多強</a></li>
 </ul>
 </li>
-<li><a href="#orgb52891b">6. 深度學習</a></li>
-<li><a href="#org65e0751">7. Hello world</a></li>
+<li><a href="#orge37319c">6. 深度學習</a></li>
+<li><a href="#org3f0ba42">7. Hello world</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga2b3f97" class="outline-2">
-<h2 id="orga2b3f97"><span class="section-number-2">1</span> 人工智慧簡介</h2>
+<div id="outline-container-org718430e" class="outline-2">
+<h2 id="org718430e"><span class="section-number-2">1</span> 人工智慧簡介</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org816e5e9" class="outline-3">
-<h3 id="org816e5e9"><span class="section-number-3">1.1</span> Chat robot</h3>
+<div id="outline-container-orga54afaa" class="outline-3">
+<h3 id="orga54afaa"><span class="section-number-3">1.1</span> Chat robot</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-orgcd93395" class="outline-4">
-<h4 id="orgcd93395"><span class="section-number-4">1.1.1</span> ELIZA</h4>
+<div id="outline-container-org3c30b02" class="outline-4">
+<h4 id="org3c30b02"><span class="section-number-4">1.1.1</span> ELIZA</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/ELIZA#cite_note-turing-1">What is it</a><br /></li>
@@ -283,8 +306,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org16feaf9" class="outline-4">
-<h4 id="org16feaf9"><span class="section-number-4">1.1.2</span> ALICE</h4>
+<div id="outline-container-orgbe7eb63" class="outline-4">
+<h4 id="orgbe7eb63"><span class="section-number-4">1.1.2</span> ALICE</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity">About ALICE</a><br /></li>
@@ -292,8 +315,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org7caa76d" class="outline-4">
-<h4 id="org7caa76d"><span class="section-number-4">1.1.3</span> Mitsuku</h4>
+<div id="outline-container-orgda9ab5f" class="outline-4">
+<h4 id="orgda9ab5f"><span class="section-number-4">1.1.3</span> Mitsuku</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/Mitsuku">About Mitsuku</a><br /></li>
@@ -304,18 +327,18 @@
 </div>
 </div>
 
-<div id="outline-container-orge02299c" class="outline-2">
-<h2 id="orge02299c"><span class="section-number-2">2</span> 背景知識</h2>
+<div id="outline-container-org1b9f498" class="outline-2">
+<h2 id="org1b9f498"><span class="section-number-2">2</span> 背景知識</h2>
 <div class="outline-text-2" id="text-2">
 </div>
 </div>
 
-<div id="outline-container-org947797c" class="outline-2">
-<h2 id="org947797c"><span class="section-number-2">3</span> 監督式學習</h2>
+<div id="outline-container-orgd34a338" class="outline-2">
+<h2 id="orgd34a338"><span class="section-number-2">3</span> 監督式學習</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd2ffa84" class="outline-3">
-<h3 id="orgd2ffa84"><span class="section-number-3">3.1</span> 最短距離分類器</h3>
+<div id="outline-container-org13c125d" class="outline-3">
+<h3 id="org13c125d"><span class="section-number-3">3.1</span> 最短距離分類器</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> math
@@ -371,8 +394,8 @@ B
 </div>
 </div>
 
-<div id="outline-container-orgcde9639" class="outline-3">
-<h3 id="orgcde9639"><span class="section-number-3">3.2</span> KNN實作</h3>
+<div id="outline-container-orgbded600" class="outline-3">
+<h3 id="orgbded600"><span class="section-number-3">3.2</span> KNN實作</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 K-NearestNeighbor分類算法是機器學習裡監督類學習中最簡單的方法之一,由Cover和Hart在1968年提出。kNN算法的核心思想是如果一個樣本在特徵空間中的k個最相鄰的樣本中的大多數屬於某一個類別，則該樣本也屬於這個類別，並具有這個類別上樣本的特性。<br />
@@ -388,32 +411,32 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 </ol>
 </div>
 
-<div id="outline-container-orgcc59528" class="outline-4">
-<h4 id="orgcc59528"><span class="section-number-4">3.2.1</span> 鳶尾花分類問題</h4>
+<div id="outline-container-org8fc9aa0" class="outline-4">
+<h4 id="org8fc9aa0"><span class="section-number-4">3.2.1</span> 鳶尾花分類問題</h4>
 <div class="outline-text-4" id="text-3-2-1">
 </div>
-<div id="outline-container-orgb1cc78a" class="outline-5">
-<h5 id="orgb1cc78a"><span class="section-number-5">3.2.1.1</span> DataSet</h5>
+<div id="outline-container-orgce70a03" class="outline-5">
+<h5 id="orgce70a03"><span class="section-number-5">3.2.1.1</span> DataSet</h5>
 <div class="outline-text-5" id="text-3-2-1-1">
 <p>
 收集了3種鳶尾花的四個特徵，分別是花萼(sepal)長寬、花瓣(petal)長寬度，以及對應的鳶尾花種類。<br />
 </p>
 
-<div id="orgdd5c868" class="figure">
+<div id="orgcea96b2" class="figure">
 <p><img src="images/iris-1.png" alt="iris-1.png" width="400" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>鳶尾花的花萼與花瓣</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7f64f0" class="outline-5">
-<h5 id="orgc7f64f0"><span class="section-number-5">3.2.1.2</span> Mission</h5>
+<div id="outline-container-org8e0eaba" class="outline-5">
+<h5 id="org8e0eaba"><span class="section-number-5">3.2.1.2</span> Mission</h5>
 <div class="outline-text-5" id="text-3-2-1-2">
 <p>
 輸入花萼和花瓣數據後，推測所屬的鳶尾花類型。<br />
 </p>
 
-<div id="orgcaf461b" class="figure">
+<div id="orgb9a3a71" class="figure">
 <p><img src="images/iris-2.png" alt="iris-2.png" width="600" /><br />
 </p>
 <p><span class="figure-number">Figure 2: </span>三種鳶尾花</p>
@@ -422,8 +445,8 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 </div>
 </div>
 
-<div id="outline-container-orgad35ff7" class="outline-4">
-<h4 id="orgad35ff7"><span class="section-number-4">3.2.2</span> 實作</h4>
+<div id="outline-container-org62c5d36" class="outline-4">
+<h4 id="org62c5d36"><span class="section-number-4">3.2.2</span> 實作</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <ol class="org-ol">
 <li><p>
@@ -543,8 +566,8 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 </div>
 </div>
 
-<div id="outline-container-org79847b1" class="outline-4">
-<h4 id="org79847b1"><span class="section-number-4">3.2.3</span> 作業</h4>
+<div id="outline-container-orgf08034a" class="outline-4">
+<h4 id="orgf08034a"><span class="section-number-4">3.2.3</span> 作業</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。<br />
@@ -553,21 +576,21 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 </div>
 </div>
 
-<div id="outline-container-org720c5dc" class="outline-3">
-<h3 id="org720c5dc"><span class="section-number-3">3.3</span> 決策樹實作</h3>
+<div id="outline-container-org65585c6" class="outline-3">
+<h3 id="org65585c6"><span class="section-number-3">3.3</span> 決策樹實作</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 一棵複雜的決策樹<br />
 </p>
 
-<div id="org941dcd2" class="figure">
+<div id="org7f5b336" class="figure">
 <p><img src="images/SBQNWUA1dDtFsMHv.png" alt="SBQNWUA1dDtFsMHv.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 3: </span>Caption</p>
 </div>
 </div>
-<div id="outline-container-org692eaec" class="outline-4">
-<h4 id="org692eaec"><span class="section-number-4">3.3.1</span> iris</h4>
+<div id="outline-container-orgabb1f85" class="outline-4">
+<h4 id="orgabb1f85"><span class="section-number-4">3.3.1</span> iris</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> load_iris
@@ -628,15 +651,15 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 
 
 
-<div id="org8bac5f9" class="figure">
+<div id="org604dbf2" class="figure">
 <p><img src="images/DecisionTree.png" alt="DecisionTree.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 4: </span>Decision Tree</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd9df463" class="outline-4">
-<h4 id="orgd9df463"><span class="section-number-4">3.3.2</span> bank-loan<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
+<div id="outline-container-orgef3bc9c" class="outline-4">
+<h4 id="orgef3bc9c"><span class="section-number-4">3.3.2</span> bank-loan<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
 <div class="outline-text-4" id="text-3-3-2">
 <ol class="org-ol">
 <li><p>
@@ -769,8 +792,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </p></li>
 </ol>
 </div>
-<div id="outline-container-org5015c8a" class="outline-5">
-<h5 id="org5015c8a"><span class="section-number-5">3.3.2.1</span> DEMO</h5>
+<div id="outline-container-org80a4179" class="outline-5">
+<h5 id="org80a4179"><span class="section-number-5">3.3.2.1</span> DEMO</h5>
 <div class="outline-text-5" id="text-3-3-2-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -837,7 +860,7 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </pre>
 
 
-<div id="orgafdf009" class="figure">
+<div id="org3f8bd22" class="figure">
 <p><img src="images/DecisionTree2.png" alt="DecisionTree2.png" width="800" /><br />
 </p>
 <p><span class="figure-number">Figure 5: </span>Bank Load 2</p>
@@ -848,12 +871,12 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </div>
 </div>
 
-<div id="outline-container-org9266bb9" class="outline-2">
-<h2 id="org9266bb9"><span class="section-number-2">4</span> 非監督式學習</h2>
+<div id="outline-container-orgb12b64e" class="outline-2">
+<h2 id="orgb12b64e"><span class="section-number-2">4</span> 非監督式學習</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org762676e" class="outline-3">
-<h3 id="org762676e"><span class="section-number-3">4.1</span> K-Means</h3>
+<div id="outline-container-orgbb7ef04" class="outline-3">
+<h3 id="orgbb7ef04"><span class="section-number-3">4.1</span> K-Means</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 <a href="https://alankrantas.medium.com/kmeans-%E8%83%BD%E5%BE%9E%E8%B3%87%E6%96%99%E4%B8%AD%E6%89%BE%E5%87%BA-k-%E5%80%8B%E5%88%86%E9%A1%9E%E7%9A%84%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%BC%94%E7%AE%97%E6%B3%95-%E6%89%80%E4%BB%A5%E5%AE%83%E5%88%B0%E5%BA%95%E6%9C%89%E5%95%A5%E7%94%A8-%E4%BD%BF%E7%94%A8-scikit-learn-%E8%88%87-python-5dd8c0c8b167">KMeans：能從資料中找出 K 個分類的非監督式機器學習演算法 — — 所以它到底有啥用？</a><br />
@@ -876,8 +899,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </div>
 </div>
 
-<div id="outline-container-orgb0c87ac" class="outline-3">
-<h3 id="orgb0c87ac"><span class="section-number-3">4.2</span> Hierarchical clustering</h3>
+<div id="outline-container-orgcc16a23" class="outline-3">
+<h3 id="orgcc16a23"><span class="section-number-3">4.2</span> Hierarchical clustering</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 階層式分群法（Hierarchical Clustering）<br />
@@ -885,8 +908,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </p>
 </div>
 
-<div id="outline-container-orgffc4100" class="outline-4">
-<h4 id="orgffc4100"><span class="section-number-4">4.2.1</span> 聚合式階層分群法 (Bottom-up, agglomerative) : 如果採用聚合的方式，階層式分群法可由樹狀結構的底部開始，將資料或群聚逐次合併。</h4>
+<div id="outline-container-orgb2cb6f3" class="outline-4">
+<h4 id="orgb2cb6f3"><span class="section-number-4">4.2.1</span> 聚合式階層分群法 (Bottom-up, agglomerative) : 如果採用聚合的方式，階層式分群法可由樹狀結構的底部開始，將資料或群聚逐次合併。</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 定義兩個群聚之間的距離<br />
@@ -929,8 +952,8 @@ Agglomerative Clustering Sample<br />
 </pre>
 </div>
 </div>
-<div id="outline-container-org2348826" class="outline-5">
-<h5 id="org2348826"><span class="section-number-5">4.2.1.1</span> 利用距離決定群數，或直接給定群數。</h5>
+<div id="outline-container-orga653371" class="outline-5">
+<h5 id="orga653371"><span class="section-number-5">4.2.1.1</span> 利用距離決定群數，或直接給定群數。</h5>
 <div class="outline-text-5" id="text-4-2-1-1">
 <p>
 建構好聚落樹狀圖後，我們可以依照距離的切割來進行分類，也可以直接給定想要分類的群數，讓系統自動切割到相對應的距離。<br />
@@ -957,8 +980,8 @@ Agglomerative Clustering Sample<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-org97eb426" class="outline-5">
-<h5 id="org97eb426"><span class="section-number-5">4.2.1.2</span> 如何評估最佳分群數:K</h5>
+<div id="outline-container-orgad084b0" class="outline-5">
+<h5 id="orgad084b0"><span class="section-number-5">4.2.1.2</span> 如何評估最佳分群數:K</h5>
 <div class="outline-text-5" id="text-4-2-1-2">
 <ul class="org-ul">
 <li><a href="https://jimmy-huang.medium.com/kmeans%E5%88%86%E7%BE%A4%E6%BC%94%E7%AE%97%E6%B3%95-%E8%88%87-silhouette-%E8%BC%AA%E5%BB%93%E5%88%86%E6%9E%90-8be17e634589">Kmeans分群演算法 與 Silhouette 輪廓分析</a><br /></li>
@@ -967,8 +990,8 @@ Agglomerative Clustering Sample<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org21d32b7" class="outline-4">
-<h4 id="org21d32b7"><span class="section-number-4">4.2.2</span> 分裂式階層分群法 (Top-down, divisible) : 如果採用分裂的方式，則由樹狀結構的頂端開始，將群聚逐次分裂。</h4>
+<div id="outline-container-org24d9cc7" class="outline-4">
+<h4 id="org24d9cc7"><span class="section-number-4">4.2.2</span> 分裂式階層分群法 (Top-down, divisible) : 如果採用分裂的方式，則由樹狀結構的頂端開始，將群聚逐次分裂。</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Divisive clustering : Also known as top-down approach. This algorithm also does not require to prespecify the number of clusters. Top-down clustering requires a method for splitting a cluster that contains the whole data and proceeds by splitting clusters recursively until individual data have been splitted into singleton cluster.<br />
@@ -977,12 +1000,12 @@ Divisive clustering : Also known as top-down approach. This algorithm also does 
 </div>
 </div>
 
-<div id="outline-container-orgdaf26a3" class="outline-3">
-<h3 id="orgdaf26a3"><span class="section-number-3">4.3</span> K-Means壓縮影像</h3>
+<div id="outline-container-org39c89c9" class="outline-3">
+<h3 id="org39c89c9"><span class="section-number-3">4.3</span> K-Means壓縮影像</h3>
 </div>
 
-<div id="outline-container-org1c2699b" class="outline-3">
-<h3 id="org1c2699b"><span class="section-number-3">4.4</span> Hierarchical</h3>
+<div id="outline-container-org917c43b" class="outline-3">
+<h3 id="org917c43b"><span class="section-number-3">4.4</span> Hierarchical</h3>
 <div class="outline-text-3" id="text-4-4">
 </div>
 </div>
@@ -1008,15 +1031,15 @@ Divisive clustering : Also known as top-down approach. This algorithm also does 
 </p>
 </div>
 
-<div id="outline-container-orga9968a7" class="outline-3">
-<h3 id="orga9968a7"><span class="section-number-3">5.1</span> Open AI Gym</h3>
+<div id="outline-container-org9b04f39" class="outline-3">
+<h3 id="org9b04f39"><span class="section-number-3">5.1</span> Open AI Gym</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 OpenAI Gym 是一個提供許多測試環境的工具，讓大家有一個共同的環境可以測試自己的 RL 演算法，而不用花時間去搭建自己的測試環境。<br />
 </p>
 </div>
-<div id="outline-container-orgcd28729" class="outline-4">
-<h4 id="orgcd28729"><span class="section-number-4">5.1.1</span> module</h4>
+<div id="outline-container-orge8f8398" class="outline-4">
+<h4 id="orge8f8398"><span class="section-number-4">5.1.1</span> module</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 於本機執行至少會用到以下兩個python module，若要在遠端主機或colab上執行則要再做其他額外設定。<br />
@@ -1030,21 +1053,21 @@ OpenAI Gym 是一個提供許多測試環境的工具，讓大家有一個共同
 </div>
 </div>
 
-<div id="outline-container-orgde563b6" class="outline-3">
-<h3 id="orgde563b6"><span class="section-number-3">5.2</span> CartPole</h3>
+<div id="outline-container-org7524d93" class="outline-3">
+<h3 id="org7524d93"><span class="section-number-3">5.2</span> CartPole</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Gym上有許多可用工具，CartPole是其中較為簡單常見的一種，CartPole是一個桿子連在一個小車上，小車可以無摩擦的左右運動，桿子（倒立擺）一開始是豎直線向上的。小車通過左右運動使得桿子不倒。<br />
 </p>
 
-<div id="orgc6b9c1e" class="figure">
+<div id="org9690999" class="figure">
 <p><img src="images/cartpole-sys.jpg" alt="cartpole-sys.jpg" width="400" /><br />
 </p>
 <p><span class="figure-number">Figure 6: </span>Cart-pole system</p>
 </div>
 </div>
-<div id="outline-container-org5ca0aca" class="outline-4">
-<h4 id="org5ca0aca"><span class="section-number-4">5.2.1</span> 執行測試與環境變數</h4>
+<div id="outline-container-org6f8bfa4" class="outline-4">
+<h4 id="org6f8bfa4"><span class="section-number-4">5.2.1</span> 執行測試與環境變數</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 以下是一段最基本的測試程式<br />
@@ -1113,8 +1136,8 @@ Rewards:  11.0
 </p>
 </div>
 </div>
-<div id="outline-container-orgf9f6102" class="outline-4">
-<h4 id="orgf9f6102"><span class="section-number-4">5.2.2</span> 重要環境變數</h4>
+<div id="outline-container-org0c8963a" class="outline-4">
+<h4 id="org0c8963a"><span class="section-number-4">5.2.2</span> 重要環境變數</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 在 Gym 的仿真環境中，有運動空間 action_space 和觀測空間observation_space 兩個指標，程序中被定義爲 Space類型，用於描述有效的運動和觀測的格式和範圍。我們可以利用以下程式碼大致觀察一下這兩個Space:<br />
@@ -1140,8 +1163,8 @@ Box(-3.4028234663852886e+38, 3.4028234663852886e+38, (4,), float32)
 <li>observation_space 是一個Box類型，從box.py源碼可知，表示一個 n 維的盒子，所以在上一節打印出來的observation是一個長度爲 4 的數組。數組中的每個元素都具有上下界。<br /></li>
 </ul>
 </div>
-<div id="outline-container-org0da7ccf" class="outline-5">
-<h5 id="org0da7ccf"><span class="section-number-5">5.2.2.1</span> Observation:</h5>
+<div id="outline-container-org434aaee" class="outline-5">
+<h5 id="org434aaee"><span class="section-number-5">5.2.2.1</span> Observation:</h5>
 <div class="outline-text-5" id="text-5-2-2-1">
 <p>
 Type: Box(4)<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup><br />
@@ -1198,8 +1221,8 @@ Type: Box(4)<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup><br />
 </table>
 </div>
 </div>
-<div id="outline-container-orgb697086" class="outline-5">
-<h5 id="orgb697086"><span class="section-number-5">5.2.2.2</span> Actions: 動作空間是離散空間</h5>
+<div id="outline-container-orgce942ab" class="outline-5">
+<h5 id="orgce942ab"><span class="section-number-5">5.2.2.2</span> Actions: 動作空間是離散空間</h5>
 <div class="outline-text-5" id="text-5-2-2-2">
 <p>
 Type: Discrete(2)<br />
@@ -1235,8 +1258,8 @@ Type: Discrete(2)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgd907668" class="outline-5">
-<h5 id="orgd907668"><span class="section-number-5">5.2.2.3</span> Reward</h5>
+<div id="outline-container-orgdd9e824" class="outline-5">
+<h5 id="orgdd9e824"><span class="section-number-5">5.2.2.3</span> Reward</h5>
 <div class="outline-text-5" id="text-5-2-2-3">
 <p>
 Reward is 1 for every step taken, including the termination step. The threshold is 475 for v1.<br />
@@ -1244,16 +1267,16 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </p>
 </div>
 </div>
-<div id="outline-container-orga2a9168" class="outline-5">
-<h5 id="orga2a9168"><span class="section-number-5">5.2.2.4</span> 初始狀態:</h5>
+<div id="outline-container-org16758b7" class="outline-5">
+<h5 id="org16758b7"><span class="section-number-5">5.2.2.4</span> 初始狀態:</h5>
 <div class="outline-text-5" id="text-5-2-2-4">
 <p>
 初始狀態所有觀測值都從[-0.05, 0.05]中隨機取值。<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org15aa78e" class="outline-5">
-<h5 id="org15aa78e"><span class="section-number-5">5.2.2.5</span> 達到下列條件之一即結束一回合(片段):</h5>
+<div id="outline-container-org608676f" class="outline-5">
+<h5 id="org608676f"><span class="section-number-5">5.2.2.5</span> 達到下列條件之一即結束一回合(片段):</h5>
 <div class="outline-text-5" id="text-5-2-2-5">
 <ol class="org-ol">
 <li>桿子與豎直方向角度超過12度<br /></li>
@@ -1264,8 +1287,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </div>
 </div>
 </div>
-<div id="outline-container-org36b13c2" class="outline-4">
-<h4 id="org36b13c2"><span class="section-number-4">5.2.3</span> 分組作業:</h4>
+<div id="outline-container-org7f1e30b" class="outline-4">
+<h4 id="org7f1e30b"><span class="section-number-4">5.2.3</span> 分組作業:</h4>
 <div class="outline-text-4" id="text-5-2-3">
 <p>
 上述程式只執行了一回合的模擬，請你修改上述程式，進行200回合的模擬，記錄每回合隨機運作的reward結果，並將結果畫成折線圖，x軸為回合數；y軸為每回合的reward，<br />
@@ -1274,8 +1297,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 </div>
 </div>
 
-<div id="outline-container-org2dd7ff9" class="outline-3">
-<h3 id="org2dd7ff9"><span class="section-number-3">5.3</span> 直覺反應的CartPole</h3>
+<div id="outline-container-org0e97c98" class="outline-3">
+<h3 id="org0e97c98"><span class="section-number-3">5.3</span> 直覺反應的CartPole</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 前節程式以隨機方式來左右擺動車子，這很顯然不符合真實情境，再笨的人也會隨杆子的擺動來控制車子，例如：當杆子快往左傾，就把車子往左移，以下就是這種實作的程式碼：<br />
@@ -1316,8 +1339,8 @@ Reward is 1 for every step taken, including the termination step. The threshold 
 Rewards:  51.0
 </pre>
 </div>
-<div id="outline-container-orgb941017" class="outline-4">
-<h4 id="orgb941017"><span class="section-number-4">5.3.1</span> 分組作業</h4>
+<div id="outline-container-orgfe30fb9" class="outline-4">
+<h4 id="orgfe30fb9"><span class="section-number-4">5.3.1</span> 分組作業</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 上述程式只是簡單的依杆子角度來移動車子，你能否再想出更好的策略(即可以在結束前得到更多reward，最多到200)?請觀察observation的內容，傾全組之力想出最佳策略並實作出來，進行200次模擬，畫出模擬的rewards折線統計圖。<br />
@@ -1326,9 +1349,26 @@ Rewards:  51.0
 </div>
 </div>
 
-<div id="outline-container-org90a7336" class="outline-3">
-<h3 id="org90a7336"><span class="section-number-3">5.4</span> 增強式學習有多強<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h3>
+<div id="outline-container-org8432a94" class="outline-3">
+<h3 id="org8432a94"><span class="section-number-3">5.4</span> Hill Climbing Strategy <sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></h3>
 <div class="outline-text-3" id="text-5-4">
+<p>
+爲了能夠有效控制倒立擺首先應建立一個控制模型。明顯的，這個控制模型的輸入應該是當前倒立擺的狀態（observation）而輸出爲對當前狀態做出的決策動作（action）。從前面的知識我們瞭解到決定倒立擺狀態的observation是一個四維向量，包含小車位置（\(x\)）、杆子夾角（\(\theta\)）、小車速度（\(\dot{x}\)）及角變化率（\(\dot{\theta}\)），如果對這個向量求它的加權和，那麼就可以根據加權和值的符號來決定採取的動作（action），用sigmoid函數將這個問題轉化爲二分類問題，從而可以建立一個簡單的控制模型。其模型如下圖所示：<br />
+</p>
+<p width="500">
+<img src="images/hillclimbing.png" alt="hillclimbing.png" width="500" /><br />
+上圖的實際功能與神經網絡有幾分相似，但比神經網絡要簡單得多。通過加入四個權值，我們可以通過改變權重值來改變決策（policy），即有加權和\[H_{sum} = w_1x+w_2\theta + w_3\dot{x} + w_4\dot\theta + b\]，若\(H_{sum}\)的符號爲正判定輸出爲1，否則爲0。<br />
+</p>
+
+<p>
+爬山算法的基本思路是每次迭代時給當前取得的最優權重加上一組隨機值，如果加上這組值使得有效控制倒立擺的持續時間變長了那麼就更新它爲最優權重，如果沒有得到改善就保持原來的值不變，直到迭代結束。在迭代過程中，模型的參數不斷得到優化，最終得到一組最優的權值作爲控制模型的解。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org86f7b17" class="outline-3">
+<h3 id="org86f7b17"><span class="section-number-3">5.5</span> 增強式學習有多強<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h3>
+<div class="outline-text-3" id="text-5-5">
 <p>
 我們可以使用強化學習來訓練圍棋機器人，知名的Alpha Go 就是基於強化學習來打敗人類的!<br />
 又或者學習如何玩超級馬力歐，透過一次又一次的死亡，Agent會慢慢地學習什麼時間點該跳躍閃避怪物，或者殺掉怪物。<br />
@@ -1346,14 +1386,14 @@ Rewards:  51.0
 </div>
 </div>
 
-<div id="outline-container-orgb52891b" class="outline-2">
-<h2 id="orgb52891b"><span class="section-number-2">6</span> 深度學習</h2>
+<div id="outline-container-orge37319c" class="outline-2">
+<h2 id="orge37319c"><span class="section-number-2">6</span> 深度學習</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 </div>
 
-<div id="outline-container-org65e0751" class="outline-2">
-<h2 id="org65e0751"><span class="section-number-2">7</span> Hello world</h2>
+<div id="outline-container-org3f0ba42" class="outline-2">
+<h2 id="org3f0ba42"><span class="section-number-2">7</span> Hello world</h2>
 <div class="outline-text-2" id="text-7">
 </div>
 </div>
@@ -1386,7 +1426,7 @@ Rewards:  51.0
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Yung Chin, Yen</p>
-<p class="date">Created: 2021-05-08 Sat 10:52</p>
+<p class="date">Created: 2021-05-08 Sat 11:44</p>
 </div>
 </body>
 </html>
