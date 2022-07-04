@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-03 Sun 20:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Numpy</title>
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/white.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Numpy</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org419d728">1. 簡介</a></li>
+<li><a href="#org98b9bd8">2. NumPy 陣列</a>
+<ul>
+<li><a href="#org2c130da">2.1. create</a></li>
+<li><a href="#orgf48b027">2.2. numpy 矩陣間的運算</a></li>
+<li><a href="#org073d9aa">2.3. 矩陣間的 convolute 運算</a></li>
+</ul>
+</li>
+<li><a href="#orgd6b4a3a">3. Numpy 檔案輸出輸入</a>
+<ul>
+<li><a href="#org3c8c12c">3.1. Binary Format  </a></li>
+<li><a href="#org944ee62">3.2. Text Files</a></li>
+</ul>
+</li>
+<li><a href="#org19d0e75">4. Data Visualization</a>
+<ul>
+<li><a href="#org045806a">4.1. pylab</a></li>
+<li><a href="#org177ada6">4.2. Bokeh</a></li>
+<li><a href="#org45486eb">4.3. seaborn</a></li>
+<li><a href="#orgbdf1174">4.4. Altair</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org419d728" class="outline-2">
+<h2 id="org419d728"><span class="section-number-2">1.</span> 簡介</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+NumPy 是 Python 語言的一個擴充程式庫。支援高階大量的維度陣列與矩陣運算，此外也針對陣列運算提供大量的數學函式函式庫。NumPy 的前身 Numeric 最早是由 Jim Hugunin 與其它協作者共同開發，2005 年，Travis Oliphant 在 Numeric 中結合了另一個同性質的程式庫 Numarray 的特色，並加入了其它擴充功能而開發了 NumPy。NumPy 為開放原始碼並且由許多協作者共同維護開發。<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org98b9bd8" class="outline-2">
+<h2 id="org98b9bd8"><span class="section-number-2">2.</span> NumPy 陣列</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org2c130da" class="outline-3">
+<h3 id="org2c130da"><span class="section-number-3">2.1.</span> create</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Numpy 的重點在於陣列的操作，其所有功能特色都建築在同質且多重維度的 ndarray（N-dimensional array）上。ndarray 的關鍵屬性是維度（ndim）、形狀（shape）和數值類型（dtype）。 一般我們稱一維陣列為 vector 而二維陣列為 matrix。一開始我們會引入 numpy 模組，透過傳入 list 到 numpy.array() 創建陣列。<br />
+</p>
+
+<ul class="org-ul">
+<li>with data<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#24341;&#20837; numpy &#27169;&#32068;</span>
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 3: </span>  <span style="color: #dcaeea;">np1</span> = np.array([<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>])
+<span class="linenr"> 4: </span>  <span style="color: #dcaeea;">np2</span> = np.array([<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">5</span>])
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#38499;&#21015;&#30456;&#21152;</span>
+<span class="linenr"> 7: </span>  <span style="color: #c678dd;">print</span>(np1 + np2) <span style="color: #5B6268;"># </span><span style="color: #5B6268;">[4 6 8]</span>
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#39023;&#31034;&#30456;&#38364;&#36039;&#35338;</span>
+<span class="linenr">10: </span>  <span style="color: #c678dd;">print</span>(np1.ndim, np1.shape, np1.dtype) <span style="color: #5B6268;"># </span><span style="color: #5B6268;">1 (3,) int64 =&gt; &#19968;&#32173;&#38499;&#21015;, &#19977;&#20491;&#20803;&#32032;, &#36039;&#26009;&#22411;&#21029;</span>
+<span class="linenr">11: </span>
+<span class="linenr">12: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">create identity matrix</span>
+<span class="linenr">13: </span>  <span style="color: #dcaeea;">ary1</span> = np.eye(<span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">14: </span>  <span style="color: #c678dd;">print</span>(ary1)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">create diagonal array</span>
+<span class="linenr">17: </span>  <span style="color: #dcaeea;">ary2</span> = np.diag((<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">6</span>))
+<span class="linenr">18: </span>  <span style="color: #c678dd;">print</span>(ary2)
+<span class="linenr">19: </span>
+<span class="linenr">20: </span>  <span style="color: #5B6268;">#</span>
+<span class="linenr">21: </span>  <span style="color: #dcaeea;">ary3</span> = np.array([<span style="color: #c678dd;">range</span>(i, i+<span style="color: #da8548; font-weight: bold;">3</span>) <span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> [<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">6</span>]])
+<span class="linenr">22: </span>  <span style="color: #c678dd;">print</span>(ary3)
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">tile</span>
+<span class="linenr">25: </span>  <span style="color: #dcaeea;">ary4</span> = np.array([<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">2</span>])
+<span class="linenr">26: </span>  <span style="color: #c678dd;">print</span>(np.tile(ary4,<span style="color: #da8548; font-weight: bold;">2</span>))
+<span class="linenr">27: </span>  <span style="color: #c678dd;">print</span>(np.tile(ary4,(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>)))
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>  <span style="color: #dcaeea;">ary5</span> = np.array([[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">2</span>],[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">7</span>]])
+<span class="linenr">30: </span>  <span style="color: #c678dd;">print</span>(np.tile(ary5,<span style="color: #da8548; font-weight: bold;">3</span>))
+<span class="linenr">31: </span>  <span style="color: #c678dd;">print</span>(np.tile(ary5,(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>)))
+</pre>
+</div>
+
+<pre class="example" id="orgd6de587">
+[4 6 8]
+1 (3,) int64
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+[[2 0 0 0]
+ [0 1 0 0]
+ [0 0 4 0]
+ [0 0 0 6]]
+[[2 3 4]
+ [4 5 6]
+ [6 7 8]]
+[0 1 2 0 1 2]
+[[0 1 2 0 1 2]
+ [0 1 2 0 1 2]]
+[[1 2 1 2 1 2]
+ [6 7 6 7 6 7]]
+[[1 2 1 2]
+ [6 7 6 7]
+ [1 2 1 2]
+ [6 7 6 7]]
+</pre>
+
+<ul class="org-ul">
+<li>numpy.random.randint()<br /></li>
+</ul>
+<p>
+語法：numpy.random.randint(low, high=None, size=None, dtype=&rsquo;l&rsquo;)<br />
+</p>
+
+<p>
+函式的作用是，返回一個隨機整型數，範圍從低（包括）到高（不包括），即[low, high)。<br />
+如果沒有寫引數 high 的值，則返回[0,low)的值。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>  np.random.seed(<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr">3: </span>
+<span class="linenr">4: </span>  <span style="color: #dcaeea;">x1</span> = np.random.randint(<span style="color: #da8548; font-weight: bold;">10</span>, size=<span style="color: #da8548; font-weight: bold;">6</span>)
+<span class="linenr">5: </span>  x2 = np.random.randint(<span style="color: #da8548; font-weight: bold;">10</span>, size=(<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>))
+<span class="linenr">6: </span>  x3 = np.random.randint(<span style="color: #da8548; font-weight: bold;">10</span>, size=(<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">7: </span>  <span style="color: #c678dd;">print</span>(x1)
+<span class="linenr">8: </span>  <span style="color: #c678dd;">print</span>(x2)
+<span class="linenr">9: </span>  <span style="color: #c678dd;">print</span>(x3)
+</pre>
+</div>
+
+<pre class="example" id="org03bfeee">
+[5 0 3 3 7 9]
+[[3 5 2 4]
+ [7 6 8 8]
+ [1 6 7 7]]
+[[[8 1 5 9 8]
+  [9 4 3 0 3]
+  [5 0 2 3 8]
+  [1 3 3 3 7]]
+
+ [[0 1 9 9 0]
+  [4 7 3 2 7]
+  [2 0 0 4 5]
+  [5 6 8 4 1]]
+
+ [[4 9 8 1 1]
+  [7 9 9 3 6]
+  [7 2 0 3 5]
+  [9 4 4 6 4]]]
+</pre>
+
+<ul class="org-ul">
+<li>numpy.random.rand()<br /></li>
+</ul>
+<p>
+根據給定維度生成(0,1)間的資料，包含 0，不包含 1<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  np.random.seed(<span style="color: #da8548; font-weight: bold;">9627</span>) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#35373;&#32622;&#30456;&#21516;&#35722;&#25976;&#65292;&#27599;&#27425;&#29983;&#25104;&#30456;&#21516;&#20098;&#25976;</span>
+<span class="linenr">4: </span>  <span style="color: #dcaeea;">ar</span> = np.random.rand(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">5: </span>  <span style="color: #c678dd;">print</span>(ar)
+</pre>
+</div>
+
+<pre class="example">
+[[0.28012059 0.19216219 0.63985614 0.48842053]
+ [0.9441813  0.88992099 0.17534833 0.29543319]]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf48b027" class="outline-3">
+<h3 id="orgf48b027"><span class="section-number-3">2.2.</span> numpy 矩陣間的運算</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>element-wise<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">ar</span> = np.array([[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>],[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">6</span>],[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>]])
+<span class="linenr">4: </span>  <span style="color: #c678dd;">print</span>(ar)
+<span class="linenr">5: </span>  <span style="color: #c678dd;">print</span>(ar+ar)
+<span class="linenr">6: </span>  <span style="color: #c678dd;">print</span>(ar**.<span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">7: </span>
+<span class="linenr">8: </span>  <span style="color: #dcaeea;">ar1</span> = np.array([[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>],[<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">3</span>],[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">1</span>]])
+<span class="linenr">9: </span>  <span style="color: #c678dd;">print</span>(ar.dot(ar1))  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#30697;&#38499;dot</span>
+</pre>
+</div>
+
+<pre class="example" id="orgc27be3c">
+[[1 2 3]
+ [4 5 6]
+ [2 3 4]]
+[[ 2  4  6]
+ [ 8 10 12]
+ [ 4  6  8]]
+[[1.         1.41421356 1.73205081]
+ [2.         2.23606798 2.44948974]
+ [1.41421356 1.73205081 2.        ]]
+[[11 11]
+ [29 29]
+ [17 17]]
+</pre>
+
+<ul class="org-ul">
+<li>Expressing Conditional Logic as Array Operations<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span>  <span style="color: #dcaeea;">xr</span> = np.array([<span style="color: #da8548; font-weight: bold;">1.1</span>, <span style="color: #da8548; font-weight: bold;">1.2</span>, <span style="color: #da8548; font-weight: bold;">1.3</span>, <span style="color: #da8548; font-weight: bold;">1.4</span>, <span style="color: #da8548; font-weight: bold;">1.5</span>])
+<span class="linenr"> 4: </span>  <span style="color: #dcaeea;">yr</span> = np.array([<span style="color: #da8548; font-weight: bold;">2.1</span>, <span style="color: #da8548; font-weight: bold;">2.2</span>, <span style="color: #da8548; font-weight: bold;">2.3</span>, <span style="color: #da8548; font-weight: bold;">2.4</span>, <span style="color: #da8548; font-weight: bold;">2.5</span>])
+<span class="linenr"> 5: </span>  <span style="color: #dcaeea;">cond</span> = np.array([<span style="color: #a9a1e1;">True</span>, <span style="color: #a9a1e1;">False</span>, <span style="color: #a9a1e1;">True</span>, <span style="color: #a9a1e1;">True</span>, <span style="color: #a9a1e1;">False</span>])
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>  <span style="color: #dcaeea;">result</span> = [(x <span style="color: #51afef;">if</span> c <span style="color: #51afef;">else</span> y)
+<span class="linenr"> 8: </span>            <span style="color: #51afef;">for</span> x, y, c <span style="color: #51afef;">in</span> <span style="color: #c678dd;">zip</span>(xr, yr, cond)]
+<span class="linenr"> 9: </span>  <span style="color: #c678dd;">print</span>(result)
+<span class="linenr">10: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">type</span>(result))
+<span class="linenr">11: </span>  <span style="color: #c678dd;">print</span>(np.where(cond, xr, yr))
+<span class="linenr">12: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">type</span>(result))
+<span class="linenr">13: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#32080;&#26524;&#37117;&#20659;&#22238;list,&#28858;&#20309;&#26377;,&#30340;&#24046;&#30064;</span>
+</pre>
+</div>
+
+<pre class="example">
+[1.1, 2.2, 1.3, 1.4, 2.5]
+&lt;class 'list'&gt;
+[1.1 2.2 1.3 1.4 2.5]
+&lt;class 'list'&gt;
+</pre>
+
+
+<ul class="org-ul">
+<li>Braodcasting<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">x1</span> = np.arange(<span style="color: #da8548; font-weight: bold;">9.0</span>).reshape((<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">3</span>))
+<span class="linenr">4: </span>  <span style="color: #c678dd;">print</span>(x1)
+<span class="linenr">5: </span>  <span style="color: #dcaeea;">x2</span> = np.arange(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">6: </span>  <span style="color: #c678dd;">print</span>(x2)
+<span class="linenr">7: </span>  <span style="color: #c678dd;">print</span>(np.multiply(x1,x2))
+</pre>
+</div>
+
+<pre class="example">
+[[0. 1. 2.]
+ [3. 4. 5.]
+ [6. 7. 8.]]
+[1 2 3]
+[[ 0.  2.  6.]
+ [ 3.  8. 15.]
+ [ 6. 14. 24.]]
+</pre>
+
+
+<ul class="org-ul">
+<li>Array sorting<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">ar</span> = np.array([[<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">5</span>],[<span style="color: #da8548; font-weight: bold;">10</span>,-<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">9</span>],[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">12</span>]])
+<span class="linenr">4: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"origin:\n"</span>,ar)
+<span class="linenr">5: </span>  ar.sort(axis=<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr">6: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"axis=0:\n"</span>,ar)
+<span class="linenr">7: </span>  ar.sort(axis=<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">8: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"axis=1:\n"</span>,ar)
+</pre>
+</div>
+
+<pre class="example" id="orgae24918">
+origin:
+ [[ 3  2  5]
+ [10 -1  9]
+ [ 4  1 12]]
+axis=0:
+ [[ 3 -1  5]
+ [ 4  1  9]
+ [10  2 12]]
+axis=1:
+ [[-1  3  5]
+ [ 1  4  9]
+ [ 2 10 12]]
+</pre>
+
+<ul class="org-ul">
+<li>Array reverse<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">ar</span> = np.arange(<span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">4: </span>  <span style="color: #c678dd;">print</span>(ar[::-<span style="color: #da8548; font-weight: bold;">1</span>])
+</pre>
+</div>
+
+<pre class="example">
+[4 3 2 1 0]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org073d9aa" class="outline-3">
+<h3 id="org073d9aa"><span class="section-number-3">2.3.</span> 矩陣間的 convolute 運算</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>numpy.convolve(a, v, mode=&rsquo;full&rsquo;)，這是 numpy 函數中的卷積函數庫<br /></li>
+</ul>
+<p>
+參數：<br />
+</p>
+<ul class="org-ul">
+<li>a:(N,)輸入的一維數組<br /></li>
+<li>b:(M,)輸入的第二個一維數組<br /></li>
+<li>mode:{&rsquo;full&rsquo;, &rsquo;valid&rsquo;, &rsquo;same&rsquo;}參數可選<br />
+<ul class="org-ul">
+<li>full　預設值，返回每一個卷積值，長度是 N+M-1,在卷積的邊緣處，信號不重疊，存在邊際效應。<br /></li>
+</ul></li>
+</ul>
+<p>
+　- same　返回的數組長度為 max(M, N),邊際效應依舊存在。<br />
+　- valid 　返回的數組長度為 max(M,N)-min(M,N)+1,此時返回的是完全重疊的點。邊緣的點無效。<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">-*- coding: utf-8 -*-</span>
+<span class="linenr"> 2: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35299;&#27770;&#22294;&#24418;&#20013;&#25991;&#21839;&#38988;</span>
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">from</span> pylab <span style="color: #51afef;">import</span> *
+<span class="linenr"> 4: </span>  mpl.<span style="color: #dcaeea;">rcParams</span>[<span style="color: #98be65;">'font.sans-serif'</span>] = [<span style="color: #98be65;">'SimHei'</span>]
+<span class="linenr"> 5: </span>  plt.<span style="color: #dcaeea;">rcParams</span>[<span style="color: #98be65;">'axes.unicode_minus'</span>]=<span style="color: #a9a1e1;">False</span>
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 8: </span>  <span style="color: #51afef;">import</span> matplotlib.pylab <span style="color: #51afef;">as</span> plt
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>  <span style="color: #dcaeea;">a</span> = np.array([<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>])
+<span class="linenr">11: </span>  <span style="color: #dcaeea;">b</span> = np.array([<span style="color: #da8548; font-weight: bold;">0.1</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>])
+<span class="linenr">12: </span>  <span style="color: #dcaeea;">y</span> = np.arange(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">13: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"a: "</span>,a)
+<span class="linenr">14: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"b: "</span>,b)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">1.</span>
+<span class="linenr">17: </span>  <span style="color: #c678dd;">print</span>(a*b[<span style="color: #da8548; font-weight: bold;">0</span>])
+<span class="linenr">18: </span>  <span style="color: #c678dd;">print</span>(a*b[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">19: </span>  <span style="color: #c678dd;">print</span>(a*b[<span style="color: #da8548; font-weight: bold;">2</span>])
+<span class="linenr">20: </span>  plt.clf()
+<span class="linenr">21: </span>  plt.xlim((-<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">22: </span>  plt.ylim((<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">23: </span>  plt.bar(y, a*b[<span style="color: #da8548; font-weight: bold;">0</span>], .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'blue'</span>)
+<span class="linenr">24: </span>  plt.xlabel(<span style="color: #98be65;">'a[n]&#20056;&#20197;b[0]&#24460;&#24179;&#31227;&#33267;&#20301;&#32622;0'</span>);
+<span class="linenr">25: </span>  plt.savefig(<span style="color: #98be65;">"anb0.png"</span>)
+<span class="linenr">26: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">2.</span>
+<span class="linenr">27: </span>  plt.clf()
+<span class="linenr">28: </span>  plt.xlim((-<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">29: </span>  plt.ylim((<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">30: </span>  plt.bar(y+<span style="color: #da8548; font-weight: bold;">1</span>, a*b[<span style="color: #da8548; font-weight: bold;">1</span>], .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'green'</span>)
+<span class="linenr">31: </span>  plt.xlabel(<span style="color: #98be65;">'a[n]&#20056;&#20197;b[1]&#24460;&#24179;&#31227;&#33267;&#20301;&#32622;1'</span>);
+<span class="linenr">32: </span>  plt.savefig(<span style="color: #98be65;">"anb1.png"</span>)
+<span class="linenr">33: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">3.</span>
+<span class="linenr">34: </span>  plt.clf()
+<span class="linenr">35: </span>  plt.xlim((-<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">36: </span>  plt.ylim((<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">37: </span>  plt.bar(y+<span style="color: #da8548; font-weight: bold;">2</span>, a*b[<span style="color: #da8548; font-weight: bold;">2</span>], .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'orange'</span>)
+<span class="linenr">38: </span>  plt.xlabel(<span style="color: #98be65;">'a[n]&#20056;&#20197;b[2]&#24460;&#24179;&#31227;&#33267;&#20301;&#32622;2'</span>);
+<span class="linenr">39: </span>  plt.savefig(<span style="color: #98be65;">"anb2.png"</span>)
+<span class="linenr">40: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Stack</span>
+<span class="linenr">41: </span>  anb0 = [<span style="color: #da8548; font-weight: bold;">0.1</span>, <span style="color: #da8548; font-weight: bold;">0.2</span>, <span style="color: #da8548; font-weight: bold;">0.3</span>, <span style="color: #da8548; font-weight: bold;">0</span>,   <span style="color: #da8548; font-weight: bold;">0</span>]
+<span class="linenr">42: </span>  anb1 = [  <span style="color: #da8548; font-weight: bold;">0</span>,   <span style="color: #da8548; font-weight: bold;">1</span>,   <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>,   <span style="color: #da8548; font-weight: bold;">0</span>]
+<span class="linenr">43: </span>  anb2 = [  <span style="color: #da8548; font-weight: bold;">0</span>,   <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1.5</span>]
+<span class="linenr">44: </span>  plt.clf()
+<span class="linenr">45: </span>  plt.xlim((-<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">46: </span>  plt.ylim((<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">5</span>))
+<span class="linenr">47: </span>  plt.bar(np.arange(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">5</span>), anb0, .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'blue'</span>)
+<span class="linenr">48: </span>  plt.bar(np.arange(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">5</span>), anb1, .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'green'</span>, bottom=anb0)
+<span class="linenr">49: </span>  plt.bar(np.arange(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">5</span>), anb2, .<span style="color: #da8548; font-weight: bold;">5</span>, color=<span style="color: #98be65;">'orange'</span>, bottom=np.add(anb0,anb1))
+<span class="linenr">50: </span>  plt.xlabel(<span style="color: #98be65;">'&#23559;&#19977;&#22294;&#30090;&#21152;&#36215;&#20358;'</span>);
+<span class="linenr">51: </span>
+<span class="linenr">52: </span>  plt.savefig(<span style="color: #98be65;">"abStack.png"</span>)
+<span class="linenr">53: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Full:"</span>,np.convolve(a, b))
+<span class="linenr">54: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"same:"</span>,np.convolve(a, b, <span style="color: #98be65;">'same'</span>))
+<span class="linenr">55: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"valid:"</span>,np.convolve(a, b, <span style="color: #98be65;">'valid'</span>))
+<span class="linenr">56: </span>
+</pre>
+</div>
+
+<pre class="example">
+a:  [1 2 3]
+b:  [0.1 1.  0.5]
+[0.1 0.2 0.3]
+[1. 2. 3.]
+[0.5 1.  1.5]
+Full: [0.1 1.2 2.8 4.  1.5]
+same: [1.2 2.8 4. ]
+valid: [2.8]
+</pre>
+
+
+<p>
+以矩陣 a = np.array([1, 2, 3]), b = np.array([0.1, 1, 0.5])為例，numpy.convolve 的計算過程如下：<br />
+</p>
+<ol class="org-ol">
+<li>求出 a*b[0]，平移至位置 0，如圖[[fig:convolve-1]<br /></li>
+</ol>
+
+<div id="orga615124" class="figure">
+<p><img src="images/anb0.png" alt="anb0.png" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>convolve 的計算過程-1</p>
+</div>
+<ol class="org-ol">
+<li>求出 a*b[1]，平移至位置 1，如圖<a href="#orgd8a61d7">2</a><br /></li>
+</ol>
+
+<div id="orgd8a61d7" class="figure">
+<p><img src="images/anb1.png" alt="anb1.png" /><br />
+</p>
+<p><span class="figure-number">Figure 2: </span>convolve 的計算過程-2</p>
+</div>
+<ol class="org-ol">
+<li>求出 a*b[2]，平移至位置 2，如圖<a href="#orgb99a081">3</a><br /></li>
+</ol>
+
+<div id="orgb99a081" class="figure">
+<p><img src="images/anb2.png" alt="anb2.png" /><br />
+</p>
+<p><span class="figure-number">Figure 3: </span>convolve 的計算過程-1</p>
+</div>
+<ol class="org-ol">
+<li>將圖<a href="#orga615124">1</a>，圖<a href="#orgd8a61d7">2</a>，圖<a href="#orgb99a081">3</a>疊加起來<br /></li>
+</ol>
+
+<div id="orgf917620" class="figure">
+<p><img src="images/abStack.png" alt="abStack.png" /><br />
+</p>
+<p><span class="figure-number">Figure 4: </span>convolve 的計算過程-1</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd6b4a3a" class="outline-2">
+<h2 id="orgd6b4a3a"><span class="section-number-2">3.</span> Numpy 檔案輸出輸入</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org3c8c12c" class="outline-3">
+<h3 id="org3c8c12c"><span class="section-number-3">3.1.</span> Binary Format  <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>save() / load()<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span><span style="color: #51afef;">import</span> subprocess
+<span class="linenr">3: </span>
+<span class="linenr">4: </span><span style="color: #dcaeea;">x</span> = np.arange(<span style="color: #da8548; font-weight: bold;">20</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"&#21407;&#22987;&#20839;&#23481;:"</span>, x)
+<span class="linenr">6: </span>np.save(<span style="color: #98be65;">"test_array.npy"</span>, x) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">.npy</span>
+<span class="linenr">7: </span>y = np.load(<span style="color: #98be65;">"test_array.npy"</span>)
+<span class="linenr">8: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"&#35712;&#22238;&#20358;:"</span>, y)
+</pre>
+</div>
+
+<pre class="example">
+原始內容: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19]
+讀回來: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19]
+</pre>
+
+
+<ul class="org-ul">
+<li>savez(): 儲存多個陣列在一個 zip 的檔案中<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span><span style="color: #dcaeea;">aData</span> = [<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">6</span>]
+<span class="linenr">3: </span><span style="color: #dcaeea;">bData</span> = [<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">10</span>,<span style="color: #da8548; font-weight: bold;">11</span>,<span style="color: #da8548; font-weight: bold;">12</span>]
+<span class="linenr">4: </span>np.savez(<span style="color: #98be65;">'my_archive.npz'</span>, a=aData, b=bData)
+<span class="linenr">5: </span>myArch = np.load(<span style="color: #98be65;">'my_archive.npz'</span>)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(myArch[<span style="color: #98be65;">'a'</span>])
+</pre>
+</div>
+
+<pre class="example">
+[1 2 3 4 5 6]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org944ee62" class="outline-3">
+<h3 id="org944ee62"><span class="section-number-3">3.2.</span> Text Files</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>savetxt<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span>
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">ac</span> = np.array([np.arange(<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">6</span>),np.arange(<span style="color: #da8548; font-weight: bold;">10</span>,<span style="color: #da8548; font-weight: bold;">15</span>)])
+<span class="linenr">4: </span>  np.savetxt(<span style="color: #98be65;">'txtfile.txt'</span>, ac)
+<span class="linenr">5: </span>
+<span class="linenr">6: </span>  <span style="color: #dcaeea;">myArr</span> = np.loadtxt(<span style="color: #98be65;">'txtfile.txt'</span>, delimiter=<span style="color: #98be65;">' '</span>)
+<span class="linenr">7: </span>  <span style="color: #c678dd;">print</span>(myArr)
+</pre>
+</div>
+
+<pre class="example">
+[[ 1.  2.  3.  4.  5.]
+ [10. 11. 12. 13. 14.]]
+</pre>
+
+
+<ul class="org-ul">
+<li>savez(): 儲存多個陣列在一個 zip 的檔案中<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr">2: </span><span style="color: #dcaeea;">aData</span> = [<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">6</span>]
+<span class="linenr">3: </span><span style="color: #dcaeea;">bData</span> = [<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">10</span>,<span style="color: #da8548; font-weight: bold;">11</span>,<span style="color: #da8548; font-weight: bold;">12</span>]
+<span class="linenr">4: </span>np.savez(<span style="color: #98be65;">'my_archive.npz'</span>, a=aData, b=bData)
+<span class="linenr">5: </span>myArch = np.load(<span style="color: #98be65;">'my_archive.npz'</span>)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(myArch[<span style="color: #98be65;">'a'</span>])
+</pre>
+</div>
+
+<pre class="example">
+[1 2 3 4 5 6]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org19d0e75" class="outline-2">
+<h2 id="org19d0e75"><span class="section-number-2">4.</span> Data Visualization</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org045806a" class="outline-3">
+<h3 id="org045806a"><span class="section-number-3">4.1.</span> pylab</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> pylab <span style="color: #51afef;">as</span> pl
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #dcaeea;">x</span> = np.arange(<span style="color: #da8548; font-weight: bold;">0.0</span>, <span style="color: #da8548; font-weight: bold;">2.0</span>*np.pi, <span style="color: #da8548; font-weight: bold;">0.01</span>)
+<span class="linenr"> 5: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"x:"</span>, x[:<span style="color: #da8548; font-weight: bold;">5</span>])
+<span class="linenr"> 6: </span>  y = np.sin(x)
+<span class="linenr"> 7: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"y:"</span>, y[:<span style="color: #da8548; font-weight: bold;">5</span>])
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>  pl.plot(x,y)
+<span class="linenr">10: </span>  pl.xlabel(<span style="color: #98be65;">'x'</span>)
+<span class="linenr">11: </span>  pl.ylabel(<span style="color: #98be65;">'y'</span>)
+<span class="linenr">12: </span>  pl.title(<span style="color: #98be65;">'sin'</span>)
+<span class="linenr">13: </span>  pl.savefig(<span style="color: #98be65;">"sinPlot.png"</span>)
+</pre>
+</div>
+
+<pre class="example">
+x: [0.   0.01 0.02 0.03 0.04]
+y: [0.         0.00999983 0.01999867 0.0299955  0.03998933]
+</pre>
+
+
+<div id="orgc6a2525" class="figure">
+<p><img src="images/sinPlot.png" alt="sinPlot.png" /><br />
+</p>
+<p><span class="figure-number">Figure 5: </span>sinPlot</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org177ada6" class="outline-3">
+<h3 id="org177ada6"><span class="section-number-3">4.2.</span> Bokeh</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">from</span> bokeh.plotting <span style="color: #51afef;">import</span> figure, show
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">from</span> bokeh.io <span style="color: #51afef;">import</span> output_notebook, export_png, output_file, save
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">import</span> matplotlib.pylab <span style="color: #51afef;">as</span> plt
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>  <span style="color: #dcaeea;">N</span> = <span style="color: #da8548; font-weight: bold;">4000</span>
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #dcaeea;">x</span> = np.random.random(size=N)*<span style="color: #da8548; font-weight: bold;">100</span>
+<span class="linenr"> 9: </span>  y = np.random.random(size=N)*<span style="color: #da8548; font-weight: bold;">100</span>
+<span class="linenr">10: </span>  radii = np.random.random(size=N)*<span style="color: #da8548; font-weight: bold;">1.5</span>
+<span class="linenr">11: </span>  colors = [<span style="color: #98be65;">"#%02x%02x%02x"</span> % (r, g, <span style="color: #da8548; font-weight: bold;">150</span>) <span style="color: #51afef;">for</span> r, g <span style="color: #51afef;">in</span> <span style="color: #c678dd;">zip</span>(np.floor(<span style="color: #da8548; font-weight: bold;">50</span>+<span style="color: #da8548; font-weight: bold;">2</span>*x).astype(<span style="color: #c678dd;">int</span>), np.floor(<span style="color: #da8548; font-weight: bold;">30</span>+<span style="color: #da8548; font-weight: bold;">2</span>*y).astype(<span style="color: #c678dd;">int</span>))]
+<span class="linenr">12: </span>
+<span class="linenr">13: </span>  output_notebook()
+<span class="linenr">14: </span>  p = figure(title=<span style="color: #98be65;">"Basic Title"</span>, plot_width=<span style="color: #da8548; font-weight: bold;">300</span>, plot_height=<span style="color: #da8548; font-weight: bold;">300</span>)
+<span class="linenr">15: </span>  p.circle(x, y, radius=radii, fill_color=colors, fill_alpha=<span style="color: #da8548; font-weight: bold;">0.6</span>, line_color=<span style="color: #a9a1e1;">None</span>)
+<span class="linenr">16: </span>  output_file(<span style="color: #98be65;">'bokehPlot.html'</span>, mode=<span style="color: #98be65;">'inline'</span>)
+<span class="linenr">17: </span>  save(p)
+</pre>
+</div>
+
+<p>
+<a href="bokehPlot.htm">bokehPlot.htm</a><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org45486eb" class="outline-3">
+<h3 id="org45486eb"><span class="section-number-3">4.3.</span> seaborn</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> seaborn <span style="color: #51afef;">as</span> sns
+<span class="linenr"> 2: </span>  sns.<span style="color: #c678dd;">set</span>(style=<span style="color: #98be65;">"ticks"</span>)
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">Load the example dataset for Anscombe's quartet</span>
+<span class="linenr"> 5: </span>  df = sns.load_dataset(<span style="color: #98be65;">"anscombe"</span>)
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Show the results of a linear regression within each dataset</span>
+<span class="linenr"> 8: </span>  sns.lmplot(x=<span style="color: #98be65;">"x"</span>, y=<span style="color: #98be65;">"y"</span>, col=<span style="color: #98be65;">"dataset"</span>, hue=<span style="color: #98be65;">"dataset"</span>, data=df, col_wrap=<span style="color: #da8548; font-weight: bold;">2</span>, ci=<span style="color: #a9a1e1;">None</span>, palette=<span style="color: #98be65;">"muted"</span>, height=<span style="color: #da8548; font-weight: bold;">4</span>, scatter_kws={<span style="color: #98be65;">'s'</span> :<span style="color: #da8548; font-weight: bold;">50</span>,<span style="color: #98be65;">'alpha'</span>:<span style="color: #da8548; font-weight: bold;">1</span>})
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>  <span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span class="linenr">11: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">sns.sns_plot.savefig("seabornPlot.png")</span>
+<span class="linenr">12: </span>  plt.savefig(<span style="color: #98be65;">"seabornPlot.png"</span>)
+</pre>
+</div>
+
+
+<div id="orgb03e24f" class="figure">
+<p><img src="images/seabornPlot.png" alt="seabornPlot.png" /><br />
+</p>
+<p><span class="figure-number">Figure 6: </span>seabornPlot</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdf1174" class="outline-3">
+<h3 id="orgbdf1174"><span class="section-number-3">4.4.</span> Altair</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> altair <span style="color: #51afef;">as</span> alt
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">from</span> vega_datasets <span style="color: #51afef;">import</span> data
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #dcaeea;">cars</span> = data.cars()
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>  <span style="color: #dcaeea;">chart</span> = alt.Chart(cars).mark_point().encode( x=<span style="color: #98be65;">'Horsepower'</span>, y=<span style="color: #98be65;">'Miles_per_Gallon'</span>, color=<span style="color: #98be65;">'Origin'</span>).interactive()
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">import pylab as pl</span>
+<span class="linenr"> 9: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">pl.savefig("altairPlot.png")</span>
+<span class="linenr">10: </span>  chart.save(<span style="color: #98be65;">'altairPlot.png'</span>, webdriver=<span style="color: #98be65;">'firefox'</span>)
+<span class="linenr">11: </span>  chart.savechart(<span style="color: #98be65;">'altairPlot.html'</span>)
+</pre>
+</div>
+
+
+<div id="org6407de2" class="figure">
+<p><img src="images/altairPlot.png" alt="altairPlot.png" /><br />
+</p>
+<p><span class="figure-number">Figure 7: </span>altairPlot</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zh.wikipedia.org/wiki/NumPy">NumPy</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://ithelp.ithome.com.tw/articles/10196167">Day18-Numpy檔案輸入與輸出!</a><br />
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-03 Sun 20:41</p>
+</div>
+</body>
+</html>

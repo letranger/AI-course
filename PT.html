@@ -1,0 +1,2553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-02 Sat 21:07 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PyTorch</title>
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">PyTorch</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbdfbc98">1. 簡介</a></li>
+<li><a href="#org61c558d">2. PyTorch 基本架構</a>
+<ul>
+<li><a href="#org806051a">2.1. 先確定 pytorch 的版本</a></li>
+<li><a href="#org09d3056">2.2. 可用 model</a></li>
+<li><a href="#orgba7a630">2.3. torchsummary</a></li>
+<li><a href="#org5d27465">2.4. 核心套件</a></li>
+<li><a href="#orge2d1454">2.5. torch.nn.functional 功能模組</a></li>
+<li><a href="#orgdc634be">2.6. torch.nn.functional.conv1d</a></li>
+<li><a href="#org4f9c99a">2.7. torch.optim 優化模組</a></li>
+</ul>
+</li>
+<li><a href="#org67b7698">3. PyTorch 基礎運算</a>
+<ul>
+<li><a href="#org3cb0309">3.1. 創造矩陣</a></li>
+<li><a href="#org2f43801">3.2. 矩陣操作</a></li>
+<li><a href="#orgad48738">3.3. 常用方法</a></li>
+<li><a href="#org46aea82">3.4. Variable（變數）以及模型自動更新器</a></li>
+<li><a href="#orgcfd2674">3.5. PyTorch 的優勢</a></li>
+</ul>
+</li>
+<li><a href="#orgd568e98">4. PyTorch 簡單案例：線性迴歸</a>
+<ul>
+<li><a href="#orgb66d720">4.1. Example #1: 線性迴歸</a></li>
+<li><a href="#org02d9238">4.2. Example #2: 世界人口數預測</a></li>
+<li><a href="#orgfe47d54">4.3. Example #3: Cifar-10</a></li>
+</ul>
+</li>
+<li><a href="#orgb7af9f4">5. PyTorch 基本運算</a>
+<ul>
+<li><a href="#org4e1aa87">5.1. 使用 tensor 建構一個未初始化的矩陣</a></li>
+<li><a href="#orgdd9455c">5.2. 建構一個亂數的矩陣</a></li>
+</ul>
+</li>
+<li><a href="#orgc417447">6. PyTorch 自動求導(autograd)機制</a>
+<ul>
+<li><a href="#org7c663fd">6.1. Autograd: 自動微分</a></li>
+<li><a href="#org9b2eafe">6.2. autograd.Variable</a></li>
+<li><a href="#orgf22ff7a">6.3. Example</a></li>
+<li><a href="#orge49f14b">6.4. PyTorch 的梯度計算</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbdfbc98" class="outline-2">
+<h2 id="orgbdfbc98"><span class="section-number-2">1.</span> 簡介</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+PyTorch 為 Facebook 在 2017 年初開源的深度學習框架，其建立在 Torch 之上，且標榜 Python First ，為量身替 Python 語言所打造，使用起來就跟寫一般 Python 專案沒兩樣，也能和其他 Python 套件無痛整合。PyTorch 的優勢在於其概念相當直觀且語法簡潔優雅，因此視為新手入門的一個好選項；再來其輕量架構讓模型得以快速訓練且有效運用資源<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org61c558d" class="outline-2">
+<h2 id="org61c558d"><span class="section-number-2">2.</span> PyTorch 基本架構</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org806051a" class="outline-3">
+<h3 id="org806051a"><span class="section-number-3">2.1.</span> 先確定 pytorch 的版本</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+1.2 版於 2019-08release<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span class="linenr">1: </span>pip3 list | grep torch
+</pre>
+</div>
+
+<pre class="example">
+torch                1.2.0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org09d3056" class="outline-3">
+<h3 id="org09d3056"><span class="section-number-3">2.2.</span> 可用 model</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>永遠使用最新發展的套件，效能永遠最好，比賽成績永遠最好 :D，<br /></li>
+<li>練習：一個主題用三個 model 跑一次，調參數<br /></li>
+<li>TorchVision<br /></li>
+<li>Torchtext<br /></li>
+<li>TorchAudio<br /></li>
+<li>2018 BIRT<br /></li>
+<li>2918 XLNET<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgba7a630" class="outline-3">
+<h3 id="orgba7a630"><span class="section-number-3">2.3.</span> torchsummary</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>  <span style="color: #51afef;">from</span> torchsummary <span style="color: #51afef;">import</span> summary
+<span class="linenr">3: </span>  <span style="color: #51afef;">from</span> torchvision.models <span style="color: #51afef;">import</span> vgg11 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">vgg16,19 &#29992;GPU&#36305;&#21487;&#33021;&#35201;&#36305;2,3&#36913;</span>
+<span class="linenr">4: </span>
+<span class="linenr">5: </span>  <span style="color: #dcaeea;">model</span> = vgg11(pretrained=<span style="color: #a9a1e1;">False</span>)
+<span class="linenr">6: </span>  <span style="color: #51afef;">if</span> torch.cuda.is_available():  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#22914;&#26524;&#21487;&#20197;&#23601;&#20351;&#29992;GPU&#35336;&#31639;</span>
+<span class="linenr">7: </span>      model.cuda()
+<span class="linenr">8: </span>  summary(model, (<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">224</span>, <span style="color: #da8548; font-weight: bold;">224</span>))  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">RGB&#19977;&#33394;&#65292;224*224</span>
+</pre>
+</div>
+
+<pre class="example" id="org93288a8">
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 64, 224, 224]           1,792
+              ReLU-2         [-1, 64, 224, 224]               0
+         MaxPool2d-3         [-1, 64, 112, 112]               0
+            Conv2d-4        [-1, 128, 112, 112]          73,856
+              ReLU-5        [-1, 128, 112, 112]               0
+         MaxPool2d-6          [-1, 128, 56, 56]               0
+            Conv2d-7          [-1, 256, 56, 56]         295,168
+              ReLU-8          [-1, 256, 56, 56]               0
+            Conv2d-9          [-1, 256, 56, 56]         590,080
+             ReLU-10          [-1, 256, 56, 56]               0
+        MaxPool2d-11          [-1, 256, 28, 28]               0
+           Conv2d-12          [-1, 512, 28, 28]       1,180,160
+             ReLU-13          [-1, 512, 28, 28]               0
+           Conv2d-14          [-1, 512, 28, 28]       2,359,808
+             ReLU-15          [-1, 512, 28, 28]               0
+        MaxPool2d-16          [-1, 512, 14, 14]               0
+           Conv2d-17          [-1, 512, 14, 14]       2,359,808
+             ReLU-18          [-1, 512, 14, 14]               0
+           Conv2d-19          [-1, 512, 14, 14]       2,359,808
+             ReLU-20          [-1, 512, 14, 14]               0
+        MaxPool2d-21            [-1, 512, 7, 7]               0
+AdaptiveAvgPool2d-22            [-1, 512, 7, 7]               0
+           Linear-23                 [-1, 4096]     102,764,544
+             ReLU-24                 [-1, 4096]               0
+          Dropout-25                 [-1, 4096]               0
+           Linear-26                 [-1, 4096]      16,781,312
+             ReLU-27                 [-1, 4096]               0
+          Dropout-28                 [-1, 4096]               0
+           Linear-29                 [-1, 1000]       4,097,000
+================================================================
+Total params: 132,863,336
+Trainable params: 132,863,336
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.57
+Forward/backward pass size (MB): 125.37
+Params size (MB): 506.83
+Estimated Total Size (MB): 632.78
+----------------------------------------------------------------
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5d27465" class="outline-3">
+<h3 id="org5d27465"><span class="section-number-3">2.4.</span> 核心套件</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>torch<br /></li>
+<li>torch.Tensor<br /></li>
+<li>Tensor Attributes<br /></li>
+<li>Type Info<br /></li>
+<li>torch.sparse<br /></li>
+<li>torch.cuda<br /></li>
+<li>torch.Storage<br /></li>
+<li>torch.nn (*)<br /></li>
+<li>torch.nn.functional<br /></li>
+<li>torch.nn.init<br /></li>
+<li>torch.optim<br /></li>
+<li>torch.autograd<br /></li>
+<li>torch.distributed<br /></li>
+<li>torch.distributions<br /></li>
+<li>torch.hub<br /></li>
+<li>torch.jit<br /></li>
+<li>torch.multiprocessing<br /></li>
+<li>torch.random<br /></li>
+<li>torch.utils.bottleneck<br /></li>
+<li>torch.utils.checkpoint<br /></li>
+<li>torch.utils.cpp_extension<br /></li>
+<li>torch.utils.data<br /></li>
+<li>torch.utils.dlpack<br /></li>
+<li>torch.utils.model_zoo<br /></li>
+<li>torch.utils.tensorboard<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge2d1454" class="outline-3">
+<h3 id="orge2d1454"><span class="section-number-3">2.5.</span> torch.nn.functional 功能模組</h3>
+<div class="outline-text-3" id="text-2-5">
+<ol class="org-ol">
+<li>Convolution functions (*) 卷積函數<br /></li>
+<li>Pooling functions  池化函數<br /></li>
+<li>Non-linear activation functions 激活函數<br /></li>
+<li>Normalization functions<br /></li>
+<li>Linear functions<br /></li>
+<li>Dropout functions<br /></li>
+<li>Sparse functions<br /></li>
+<li>Distance functions<br /></li>
+<li>Loss functions<br /></li>
+<li>Vision functions<br /></li>
+<li>DataParallel functions (multi-GPU, distributed)<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgdc634be" class="outline-3">
+<h3 id="orgdc634be"><span class="section-number-3">2.6.</span> torch.nn.functional.conv1d</h3>
+<div class="outline-text-3" id="text-2-6">
+</div>
+<ol class="org-ol">
+<li><a id="org0c1e070"></a>torch.nn.functional.conv1d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1) → Tensor<br />
+<ol class="org-ol">
+<li><a id="orgff8d4f3"></a>Parameters<br />
+<div class="outline-text-5" id="text-2-6-1-1">
+<ul class="org-ul">
+<li>input – input tensor of shape (minibatch,in_channels,iW)(\text{minibatch} , \text{in\_channels} , iW)(minibatch,in_channels,iW)<br /></li>
+<li>weight – filters of shape (out_channels,in_channelsgroups,kW)(\text{out\_channels} , \frac{\text{in\_channels}}{\text{groups}} , kW)(out_channels,groupsin_channels​,kW)<br /></li>
+<li>bias – optional bias of shape (out_channels)(\text{out\_channels})(out_channels) . Default: None<br /></li>
+<li>stride – the stride of the convolving kernel. Can be a single number or a one-element tuple (sW,). Default: 1<br /></li>
+<li>padding – implicit paddings on both sides of the input. Can be a single number or a one-element tuple (padW,). Default: 0<br /></li>
+<li>dilation – the spacing between kernel elements. Can be a single number or a one-element tuple (dW,). Default: 1<br /></li>
+<li>groups – split input into groups, in_channels\text{in\_channels}in_channels should be divisible by the number of groups. Default: 1<br /></li>
+</ul>
+</div>
+</li>
+
+<li><a id="orgc3a857a"></a>Examples:<br />
+<div class="outline-text-5" id="text-2-6-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr">3: </span><span style="color: #51afef;">from</span> torch <span style="color: #51afef;">import</span> nn
+<span class="linenr">4: </span><span style="color: #51afef;">import</span> torch.nn.functional <span style="color: #51afef;">as</span> F
+<span class="linenr">5: </span><span style="color: #dcaeea;">filters</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">33</span>, <span style="color: #da8548; font-weight: bold;">16</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">6: </span><span style="color: #dcaeea;">inputs</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">16</span>, <span style="color: #da8548; font-weight: bold;">50</span>)
+<span class="linenr">7: </span>F.conv1d(inputs, filters)
+<span class="linenr">8: </span><span style="color: #c678dd;">print</span>(F)
+</pre>
+</div>
+
+<pre class="example">
+&lt;module 'torch.nn.functional' from '/usr/local/lib/python3.7/site-packages/torch/nn/functional.py'&gt;
+</pre>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org4f9c99a" class="outline-3">
+<h3 id="org4f9c99a"><span class="section-number-3">2.7.</span> torch.optim 優化模組</h3>
+<div class="outline-text-3" id="text-2-7">
+</div>
+<ol class="org-ol">
+<li><a id="org2aaad1f"></a>To use torch.optim you have to construct an optimizer object, that will hold the current state and will update the parameters based on the computed gradients.<br /></li>
+<li><a id="org3a895c2"></a>To construct an Optimizer you have to give it an iterable containing the parameters (all should be Variable s) to optimize. Then, you can specify optimizer-specific options such as the learning rate, weight decay, etc.<br /></li>
+<li><a id="org1a428e9"></a>語法<br />
+<div class="outline-text-4" id="text-2-7-3">
+<ul class="org-ul">
+<li>#1<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #51afef;">for</span> <span style="color: #c678dd;">input</span>, target <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">dataset</span>:
+<span class="linenr">3: </span>    optimizer.zero_grad()
+<span class="linenr">4: </span>    output = model(<span style="color: #c678dd;">input</span>)
+<span class="linenr">5: </span>    <span style="color: #dcaeea;">loss</span> = loss_fn(output, target)
+<span class="linenr">6: </span>    loss.backward()
+<span class="linenr">7: </span>    optimizer.step()
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>#2<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #51afef;">for</span> <span style="color: #c678dd;">input</span>, target <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">dataset</span>:
+<span class="linenr">3: </span>    <span style="color: #51afef;">def</span> <span style="color: #c678dd;">closure</span>():
+<span class="linenr">4: </span>        optimizer.zero_grad()
+<span class="linenr">5: </span>        output = model(<span style="color: #c678dd;">input</span>)
+<span class="linenr">6: </span>        <span style="color: #dcaeea;">loss</span> = loss_fn(output, target)
+<span class="linenr">7: </span>        loss.backward()
+<span class="linenr">8: </span>        <span style="color: #51afef;">return</span> loss
+<span class="linenr">9: </span>    optimizer.step(closure)
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgbc380f3"></a>source code<br />
+<div class="outline-text-4" id="text-2-7-4">
+<p>
+github: <a href="https://github.com/pytorch/pytorch/blob/master/torch/optim/sgd.py">https://github.com/pytorch/pytorch/blob/master/torch/optim/sgd.py</a><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">  1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">  2: </span><span style="color: #51afef;">from</span> .optimizer <span style="color: #51afef;">import</span> Optimizer, required
+<span class="linenr">  3: </span>
+<span class="linenr">  4: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">SGD</span>(Optimizer):
+<span class="linenr">  5: </span>    <span style="color: #83898d;">"""Implements stochastic gradient descent (optionally with momentum).</span>
+<span class="linenr">  6: </span>
+<span class="linenr">  7: </span><span style="color: #83898d;">    Nesterov momentum is based on the formula from</span>
+<span class="linenr">  8: </span><span style="color: #83898d;">    `On the importance of initialization and momentum in deep learning`__.</span>
+<span class="linenr">  9: </span>
+<span class="linenr"> 10: </span><span style="color: #83898d;">    Args:</span>
+<span class="linenr"> 11: </span><span style="color: #83898d;">        params (iterable): iterable of parameters to optimize or dicts defining</span>
+<span class="linenr"> 12: </span><span style="color: #83898d;">            parameter groups</span>
+<span class="linenr"> 13: </span><span style="color: #83898d;">        lr (float): learning rate</span>
+<span class="linenr"> 14: </span><span style="color: #83898d;">        momentum (float, optional): momentum factor (default: 0)</span>
+<span class="linenr"> 15: </span><span style="color: #83898d;">        weight_decay (float, optional): weight decay (L2 penalty) (default: 0)</span>
+<span class="linenr"> 16: </span><span style="color: #83898d;">        dampening (float, optional): dampening for momentum (default: 0)</span>
+<span class="linenr"> 17: </span><span style="color: #83898d;">        nesterov (bool, optional): enables Nesterov momentum (default: False)</span>
+<span class="linenr"> 18: </span>
+<span class="linenr"> 19: </span><span style="color: #83898d;">    Example:</span>
+<span class="linenr"> 20: </span><span style="color: #83898d;">        &gt;&gt;&gt; optimizer = torch.optim.SGD(model.parameters(), lr=0.1, momentum=0.9)</span>
+<span class="linenr"> 21: </span><span style="color: #83898d;">        &gt;&gt;&gt; optimizer.zero_grad()</span>
+<span class="linenr"> 22: </span><span style="color: #83898d;">        &gt;&gt;&gt; loss_fn(model(input), target).backward()</span>
+<span class="linenr"> 23: </span><span style="color: #83898d;">        &gt;&gt;&gt; optimizer.step()</span>
+<span class="linenr"> 24: </span>
+<span class="linenr"> 25: </span><span style="color: #83898d;">    __ http://www.cs.toronto.edu/%7Ehinton/absps/momentum.pdf</span>
+<span class="linenr"> 26: </span>
+<span class="linenr"> 27: </span><span style="color: #83898d;">    .. note::</span>
+<span class="linenr"> 28: </span><span style="color: #83898d;">        The implementation of SGD with Momentum/Nesterov subtly differs from</span>
+<span class="linenr"> 29: </span><span style="color: #83898d;">        Sutskever et. al. and implementations in some other frameworks.</span>
+<span class="linenr"> 30: </span>
+<span class="linenr"> 31: </span><span style="color: #83898d;">        Considering the specific case of Momentum, the update can be written as</span>
+<span class="linenr"> 32: </span>
+<span class="linenr"> 33: </span><span style="color: #83898d;">        .. math::</span>
+<span class="linenr"> 34: </span><span style="color: #83898d;">                  v_{t+1} = \mu * v_{t} + g_{t+1} \\</span>
+<span class="linenr"> 35: </span><span style="color: #83898d;">                  p_{t+1} = p_{t} - lr * v_{t+1}</span>
+<span class="linenr"> 36: </span>
+<span class="linenr"> 37: </span><span style="color: #83898d;">        where p, g, v and :math:`\mu` denote the parameters, gradient,</span>
+<span class="linenr"> 38: </span><span style="color: #83898d;">        velocity, and momentum respectively.</span>
+<span class="linenr"> 39: </span>
+<span class="linenr"> 40: </span><span style="color: #83898d;">        This is in contrast to Sutskever et. al. and</span>
+<span class="linenr"> 41: </span><span style="color: #83898d;">        other frameworks which employ an update of the form</span>
+<span class="linenr"> 42: </span>
+<span class="linenr"> 43: </span><span style="color: #83898d;">        .. math::</span>
+<span class="linenr"> 44: </span><span style="color: #83898d;">             v_{t+1} = \mu * v_{t} + lr * g_{t+1} \\</span>
+<span class="linenr"> 45: </span><span style="color: #83898d;">             p_{t+1} = p_{t} - v_{t+1}</span>
+<span class="linenr"> 46: </span>
+<span class="linenr"> 47: </span><span style="color: #83898d;">        The Nesterov version is analogously modified.</span>
+<span class="linenr"> 48: </span><span style="color: #83898d;">    """</span>
+<span class="linenr"> 49: </span>
+<span class="linenr"> 50: </span>    <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>, params, lr=required, momentum=<span style="color: #da8548; font-weight: bold;">0</span>, dampening=<span style="color: #da8548; font-weight: bold;">0</span>,
+<span class="linenr"> 51: </span>                 weight_decay=<span style="color: #da8548; font-weight: bold;">0</span>, nesterov=<span style="color: #a9a1e1;">False</span>):
+<span class="linenr"> 52: </span>        <span style="color: #51afef;">if</span> lr <span style="color: #51afef;">is</span> <span style="color: #51afef;">not</span> required <span style="color: #51afef;">and</span> lr &lt; <span style="color: #da8548; font-weight: bold;">0.0</span>:
+<span class="linenr"> 53: </span>            <span style="color: #51afef;">raise</span> <span style="color: #ECBE7B;">ValueError</span>(<span style="color: #98be65;">"Invalid learning rate: {}"</span>.<span style="color: #c678dd;">format</span>(lr))
+<span class="linenr"> 54: </span>        <span style="color: #51afef;">if</span> momentum &lt; <span style="color: #da8548; font-weight: bold;">0.0</span>:
+<span class="linenr"> 55: </span>            <span style="color: #51afef;">raise</span> <span style="color: #ECBE7B;">ValueError</span>(<span style="color: #98be65;">"Invalid momentum value: {}"</span>.<span style="color: #c678dd;">format</span>(momentum))
+<span class="linenr"> 56: </span>        <span style="color: #51afef;">if</span> weight_decay &lt; <span style="color: #da8548; font-weight: bold;">0.0</span>:
+<span class="linenr"> 57: </span>            <span style="color: #51afef;">raise</span> <span style="color: #ECBE7B;">ValueError</span>(<span style="color: #98be65;">"Invalid weight_decay value: {}"</span>.<span style="color: #c678dd;">format</span>(weight_decay))
+<span class="linenr"> 58: </span>
+<span class="linenr"> 59: </span>        defaults = <span style="color: #c678dd;">dict</span>(lr=lr, momentum=momentum, dampening=dampening,
+<span class="linenr"> 60: </span>                        weight_decay=weight_decay, nesterov=nesterov)
+<span class="linenr"> 61: </span>        <span style="color: #51afef;">if</span> nesterov <span style="color: #51afef;">and</span> (momentum &lt;= <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #51afef;">or</span> dampening != <span style="color: #da8548; font-weight: bold;">0</span>):
+<span class="linenr"> 62: </span>            <span style="color: #51afef;">raise</span> <span style="color: #ECBE7B;">ValueError</span>(<span style="color: #98be65;">"Nesterov momentum requires a momentum and zero dampening"</span>)
+<span class="linenr"> 63: </span>        <span style="color: #c678dd;">super</span>(SGD, <span style="color: #51afef;">self</span>).__init__(params, defaults)
+<span class="linenr"> 64: </span>
+<span class="linenr"> 65: </span>    <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__setstate__</span>(<span style="color: #51afef;">self</span>, state):
+<span class="linenr"> 66: </span>        <span style="color: #c678dd;">super</span>(SGD, <span style="color: #51afef;">self</span>).__setstate__(state)
+<span class="linenr"> 67: </span>        <span style="color: #51afef;">for</span> group <span style="color: #51afef;">in</span> <span style="color: #51afef;">self</span>.param_groups:
+<span class="linenr"> 68: </span>            group.setdefault(<span style="color: #98be65;">'nesterov'</span>, <span style="color: #a9a1e1;">False</span>)
+<span class="linenr"> 69: </span>
+<span class="linenr"> 70: </span>    <span style="color: #51afef;">def</span> <span style="color: #c678dd;">step</span>(<span style="color: #51afef;">self</span>, closure=<span style="color: #a9a1e1;">None</span>):
+<span class="linenr"> 71: </span>        <span style="color: #83898d;">"""Performs a single optimization step.</span>
+<span class="linenr"> 72: </span>
+<span class="linenr"> 73: </span><span style="color: #83898d;">        Arguments:</span>
+<span class="linenr"> 74: </span><span style="color: #83898d;">            closure (callable, optional): A closure that reevaluates the model</span>
+<span class="linenr"> 75: </span><span style="color: #83898d;">                and returns the loss.</span>
+<span class="linenr"> 76: </span><span style="color: #83898d;">        """</span>
+<span class="linenr"> 77: </span>        loss = <span style="color: #a9a1e1;">None</span>
+<span class="linenr"> 78: </span>        <span style="color: #51afef;">if</span> closure <span style="color: #51afef;">is</span> <span style="color: #51afef;">not</span> <span style="color: #a9a1e1;">None</span>:
+<span class="linenr"> 79: </span>            loss = closure()
+<span class="linenr"> 80: </span>
+<span class="linenr"> 81: </span>        <span style="color: #51afef;">for</span> group <span style="color: #51afef;">in</span> <span style="color: #51afef;">self</span>.param_groups:
+<span class="linenr"> 82: </span>            weight_decay = group[<span style="color: #98be65;">'weight_decay'</span>]
+<span class="linenr"> 83: </span>            momentum = group[<span style="color: #98be65;">'momentum'</span>]
+<span class="linenr"> 84: </span>            dampening = group[<span style="color: #98be65;">'dampening'</span>]
+<span class="linenr"> 85: </span>            nesterov = group[<span style="color: #98be65;">'nesterov'</span>]
+<span class="linenr"> 86: </span>
+<span class="linenr"> 87: </span>            <span style="color: #51afef;">for</span> p <span style="color: #51afef;">in</span> group[<span style="color: #98be65;">'params'</span>]:
+<span class="linenr"> 88: </span>                <span style="color: #51afef;">if</span> p.grad <span style="color: #51afef;">is</span> <span style="color: #a9a1e1;">None</span>:
+<span class="linenr"> 89: </span>                    <span style="color: #51afef;">continue</span>
+<span class="linenr"> 90: </span>                d_p = p.grad.data
+<span class="linenr"> 91: </span>                <span style="color: #51afef;">if</span> weight_decay != <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr"> 92: </span>                    d_p.add_(weight_decay, p.data)
+<span class="linenr"> 93: </span>                <span style="color: #51afef;">if</span> momentum != <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr"> 94: </span>                    param_state = <span style="color: #51afef;">self</span>.state[p]
+<span class="linenr"> 95: </span>                    <span style="color: #51afef;">if</span> <span style="color: #98be65;">'momentum_buffer'</span> <span style="color: #51afef;">not</span> <span style="color: #51afef;">in</span> param_state:
+<span class="linenr"> 96: </span>                        buf = param_state[<span style="color: #98be65;">'momentum_buffer'</span>] = torch.clone(d_p).detach()
+<span class="linenr"> 97: </span>                    <span style="color: #51afef;">else</span>:
+<span class="linenr"> 98: </span>                        buf = param_state[<span style="color: #98be65;">'momentum_buffer'</span>]
+<span class="linenr"> 99: </span>                        buf.mul_(momentum).add_(<span style="color: #da8548; font-weight: bold;">1</span> - dampening, d_p)
+<span class="linenr">100: </span>                    <span style="color: #51afef;">if</span> nesterov:
+<span class="linenr">101: </span>                        d_p = d_p.add(momentum, buf)
+<span class="linenr">102: </span>                    <span style="color: #51afef;">else</span>:
+<span class="linenr">103: </span>                        d_p = buf
+<span class="linenr">104: </span>
+<span class="linenr">105: </span>                p.data.add_(-group[<span style="color: #98be65;">'lr'</span>], d_p)
+<span class="linenr">106: </span>
+<span class="linenr">107: </span>        <span style="color: #51afef;">return</span> loss
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org67b7698" class="outline-2">
+<h2 id="org67b7698"><span class="section-number-2">3.</span> PyTorch 基礎運算</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org3cb0309" class="outline-3">
+<h3 id="org3cb0309"><span class="section-number-3">3.1.</span> 創造矩陣</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+註:<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(torch.ones(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>))    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21109;&#36896;&#19968;&#20491;&#22635;&#28415;1&#30340;&#30697;&#38499;</span>
+<span class="linenr">3: </span>
+<span class="linenr">4: </span>torch.zeros(<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">3</span>)          <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21109;&#36896;&#19968;&#20491;&#22635;&#28415;0&#30340;&#30697;&#38499;</span>
+<span class="linenr">5: </span>
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.eye(<span style="color: #da8548; font-weight: bold;">3</span>))        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21109;&#36896;&#19968;&#20491;4x4&#30340;&#21934;&#20301;&#30697;&#38499;</span>
+<span class="linenr">7: </span>
+<span class="linenr">8: </span><span style="color: #c678dd;">print</span>(torch.rand(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>) )   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21109;&#36896;&#19968;&#20491;&#20803;&#32032;&#22312;[0,1)&#20013;&#38568;&#27231;&#20998;&#20296;&#30340;&#30697;&#38499;</span>
+<span class="linenr">9: </span><span style="color: #c678dd;">print</span>(torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>))   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21109;&#36896;&#19968;&#20491;&#20803;&#32032;&#24478;&#24120;&#24907;&#20998;&#20296;(0, 1)&#38568;&#27231;&#21462;&#20540;&#30340;&#30697;&#38499;</span>
+</pre>
+</div>
+
+<pre class="example">
+tensor([[1., 1., 1.],
+        [1., 1., 1.]])
+tensor([[1., 0., 0.],
+        [0., 1., 0.],
+        [0., 0., 1.]])
+tensor([[0.0469, 0.1002, 0.3170],
+        [0.6663, 0.0566, 0.3846]])
+tensor([[-1.0977, -0.0200, -1.2239],
+        [-0.4332, -0.6190,  0.7148]])
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2f43801" class="outline-3">
+<h3 id="org2f43801"><span class="section-number-3">3.2.</span> 矩陣操作</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">from</span> torch.optim <span style="color: #51afef;">import</span> SGD
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>  <span style="color: #dcaeea;">m1</span> = torch.ones(<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 6: </span>  <span style="color: #dcaeea;">m2</span> = torch.zeros(<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #c678dd;">print</span>(torch.cat((m1, m2), <span style="color: #da8548; font-weight: bold;">1</span>)  )  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;m1&#21644;m2&#20841;&#20491;&#30697;&#38499;&#22312;&#31532;&#19968;&#20491;&#32173;&#24230;&#21512;&#20341;&#36215;&#20358;</span>
+<span class="linenr"> 9: </span>  <span style="color: #c678dd;">print</span>(torch.stack((m1, m2), <span style="color: #da8548; font-weight: bold;">1</span>))  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;m1&#21644;m2&#20841;&#20491;&#30697;&#38499;&#22312;&#26032;&#30340;&#32173;&#24230;&#65288;&#31532;&#19968;&#32173;&#65289;&#30090;&#36215;&#20358;</span>
+<span class="linenr">10: </span>
+<span class="linenr">11: </span>  <span style="color: #c678dd;">print</span>(m1 + m2)                   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#30697;&#38499;element-wise&#30456;&#21152;&#65292;&#20854;&#20182;&#22522;&#26412;&#36939;&#31639;&#26159;&#19968;&#27171;&#30340;</span>
+<span class="linenr">12: </span>
+</pre>
+</div>
+
+<pre class="example" id="org5bf37b8">
+tensor([[1., 1., 1., 0., 0., 0.],
+        [1., 1., 1., 0., 0., 0.],
+        [1., 1., 1., 0., 0., 0.],
+        [1., 1., 1., 0., 0., 0.],
+        [1., 1., 1., 0., 0., 0.]])
+tensor([[[1., 1., 1.],
+         [0., 0., 0.]],
+
+        [[1., 1., 1.],
+         [0., 0., 0.]],
+
+        [[1., 1., 1.],
+         [0., 0., 0.]],
+
+        [[1., 1., 1.],
+         [0., 0., 0.]],
+
+        [[1., 1., 1.],
+         [0., 0., 0.]]])
+tensor([[1., 1., 1.],
+        [1., 1., 1.],
+        [1., 1., 1.],
+        [1., 1., 1.],
+        [1., 1., 1.]])
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgad48738" class="outline-3">
+<h3 id="orgad48738"><span class="section-number-3">3.3.</span> 常用方法<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup></h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgc822b07"></a>torch.rand(*sizes, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+返回一個張量，包含了從區間[0, 1)的均勻分佈中抽取的一組隨機數。張量的形狀由參數 sizes 定義。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org3a63fb0"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-1-1">
+<ul class="org-ul">
+<li>sizes (int&#x2026;) - 整數序列，定義了輸出張量的形狀<br /></li>
+<li>out (Tensor, optional) - 結果張量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgf04fe3f"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>  <span style="color: #c678dd;">print</span>(torch.rand(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[0.8113, 0.0879, 0.8150],
+        [0.6705, 0.5357, 0.4015]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org1ddd188"></a>torch.randn(*sizes, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+返回一個張量，包含了從標準正態分佈（均值爲 0，方差爲 1，即高斯白噪聲）中抽取的一組隨機數。張量的形狀由參數 sizes 定義。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgb8dd9fc"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-2-1">
+<ul class="org-ul">
+<li>sizes (int&#x2026;) - 整數序列，定義了輸出張量的形狀<br /></li>
+<li>out (Tensor, optional) - 結果張量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org8f05673"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 0.3587, -0.8452,  0.1752],
+        [ 0.3541, -2.2761, -1.1221]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org6e9a1f0"></a>torch.normal(means, std, out=None) → → Tensor<br />
+<div class="outline-text-4" id="text-3-3-3">
+<p>
+返回一個張量，包含了從指定均值 means 和標準差 std 的離散正態分佈中抽取的一組隨機數。<br />
+標準差 std 是一個張量，包含每個輸出元素相關的正態分佈標準差。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgc42c6d6"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-3-1">
+<ul class="org-ul">
+<li>means (float, optional) - 均值<br /></li>
+<li>std (Tensor) - 標準差<br /></li>
+<li>out (Tensor) - 輸出張量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgc44a162"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-3-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(torch.normal(mean=<span style="color: #da8548; font-weight: bold;">0.5</span>, std=torch.arange(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">6</span>)))
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgd4698ea"></a>torch.linspace(start, end, steps=100, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-4">
+<p>
+返回一個 1 維張量，包含在區間 start 和 end 上均勻間隔的 step 個點。<br />
+輸出張量的長度由 steps 決定。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgebc80bc"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-4-1">
+<ul class="org-ul">
+<li>start (float) - 區間的起始點<br /></li>
+<li>end (float) - 區間的終點<br /></li>
+<li>steps (int) - 在 start 和 end 間生成的樣本數<br /></li>
+<li>out (Tensor, optional) - 結果張量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org49dfc5b"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-4-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(torch.linspace(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">10</span>, steps=<span style="color: #da8548; font-weight: bold;">7</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([ 3.0000,  4.1667,  5.3333,  6.5000,  7.6667,  8.8333, 10.0000])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgcae3cc7"></a>torch.sum(input) → float<br />
+<div class="outline-text-4" id="text-3-3-5">
+<p>
+返回输入向量 input 中所有元素的和。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org7b5c727"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-5-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgc7f970f"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-5-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(a))
+<span class="linenr">5: </span><span style="color: #dcaeea;">b</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">6</span>)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(b)
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[-0.7402,  0.5678, -0.4867]])
+tensor(-0.6591)
+tensor([[-0.4197, -0.9463, -0.0399,  0.3360,  0.7250,  1.7494],
+        [-0.6536,  0.1619, -1.8099,  0.8848, -0.4127, -0.3032]])
+tensor(-0.7282)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org3b06aaf"></a>torch.sum(input, dim, keepdim=False, out=None) → Tensortorch<br />
+<div class="outline-text-4" id="text-3-3-6">
+<p>
+返回新的张量，其中包括输入张量 input 中指定维度 dim 中每行的和。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgc245f8f"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-6-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>dim (int) - 指定维度<br /></li>
+<li>keepdim (bool) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+<li>out (Tensor,optional) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orga9992e7"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-6-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.rand(<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">False</span>))
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">sum</span>(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">False</span>))
+</pre>
+</div>
+
+<pre class="example" id="org27b9463">
+tensor([[0.4779, 0.2066, 0.1321, 0.0134],
+        [0.4947, 0.9133, 0.4378, 0.3185],
+        [0.0167, 0.6487, 0.8574, 0.4689],
+        [0.6329, 0.9853, 0.6804, 0.4612]])
+tensor([[0.8300],
+        [2.1643],
+        [1.9917],
+        [2.7598]])
+tensor([0.8300, 2.1643, 1.9917, 2.7598])
+tensor([[1.6222, 2.7539, 2.1078, 1.2620]])
+tensor([0.8300, 2.1643, 1.9917, 2.7598])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgc29e7dd"></a>torch.prod(input) → float<br />
+<div class="outline-text-4" id="text-3-3-7">
+<p>
+返回输入张量 input 所有元素的乘积。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org4ee0661"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-7-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgf3954fb"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-7-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>  <span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span>  <span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span>  <span style="color: #c678dd;">print</span>(torch.prod(a))
+<span class="linenr">5: </span>  <span style="color: #dcaeea;">b</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">6: </span>  <span style="color: #c678dd;">print</span>(b)
+<span class="linenr">7: </span>  <span style="color: #c678dd;">print</span>(torch.prod(b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 0.5791, -0.8357, -0.7155]])
+tensor(0.3463)
+tensor([[ 1.2112, -0.6698,  1.2576],
+        [ 0.3263, -1.0300, -0.8296]])
+tensor(-0.2845)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgc4f7f9b"></a>torch.prod(input, dim, keepdim=False, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-8">
+<p>
+返回新的张量，其中包括输入张量 input 中指定维度 dim 中每行的乘积。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org6b8fd32"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-8-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入<br /></li>
+<li>Tensordim (int) - 指定维度<br /></li>
+<li>keepdim (bool) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+<li>out (Tensor,optional) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgb57544c"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-8-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.prod(a,<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #a9a1e1;">True</span>))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.prod(a,<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #a9a1e1;">False</span>))
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.prod(a,<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #a9a1e1;">True</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[-0.0529,  1.9590, -0.8325, -1.5983],
+        [-2.0691, -1.6575, -1.0308,  0.4937]])
+tensor([[-0.1378],
+        [-1.7454]])
+tensor([-0.1378, -1.7454])
+tensor([[ 0.1094, -3.2470,  0.8581, -0.7891]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgbca0d72"></a>torch.Tensor.indexadd(dim, index, tensor) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-9">
+<p>
+按索引参数 index 中所确定的顺序，将参数张量 tensor 中的元素与执行本方法的张量的元素逐个相加。参数 tensor 的尺寸必须严格地与执行方法的张量匹配，否则会发生错误。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orga5fba53"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-9-1">
+<ul class="org-ul">
+<li>dim (int) - 索引 index 所指向的维度<br /></li>
+<li>index (LongTensor) - 包含索引数的张量<br /></li>
+<li>tensor (Tensor) - 含有相加元素的张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org703ca79"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-9-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">x</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>], [<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>], [<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>]])
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(x)
+<span class="linenr">4: </span><span style="color: #dcaeea;">t</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>], [<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">6</span>], [<span style="color: #da8548; font-weight: bold;">7</span>, <span style="color: #da8548; font-weight: bold;">8</span>, <span style="color: #da8548; font-weight: bold;">9</span>]])
+<span class="linenr">5: </span><span style="color: #dcaeea;">index</span> = torch.LongTensor([<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(x.index_add_(<span style="color: #da8548; font-weight: bold;">0</span>, index, t))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[1., 1., 1.],
+        [1., 1., 1.],
+        [1., 1., 1.]])
+tensor([[ 2.,  3.,  4.],
+        [ 8.,  9., 10.],
+        [ 5.,  6.,  7.]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org1c83011"></a>torch.mean(input)<br />
+<div class="outline-text-4" id="text-3-3-10">
+<p>
+返回输入张量 input 中每个元素的平均值。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org9edf967"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-10-1">
+<p>
+input (Tensor) – 输入张量<br />
+</p>
+</div>
+</li>
+<li><a id="orgfcb7811"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-10-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.mean(a))
+<span class="linenr">5: </span><span style="color: #dcaeea;">b</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(b)
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(torch.mean(b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 0.3628, -0.4053, -1.5295]])
+tensor(-0.5240)
+tensor([[ 0.5471, -1.1326, -1.1903,  0.2861, -0.3787],
+        [ 1.9305,  0.6218,  0.0304,  0.6502,  0.3808],
+        [-0.1583, -0.5865,  0.9115,  1.3594, -1.1852]])
+tensor(0.1391)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org508b5c7"></a>torch.mean(input, dim, keepdim=False, out=None)<br />
+<div class="outline-text-4" id="text-3-3-11">
+<p>
+返回新的张量，其中包含输入张量 input 指定维度 dim 中每行的平均值。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgef98623"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-11-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入张量<br /></li>
+<li>dim (int) - 指定进行均值计算的维度<br /></li>
+<li>keepdim (bool, optional) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+<li>out (Tensor) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgd3df8c9"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-11-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.mean(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.mean(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">False</span>))
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.mean(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">True</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[-0.6692, -0.8781, -1.1615, -0.4666],
+        [ 1.6185, -1.4797,  0.3792,  0.6478],
+        [ 2.5029,  0.5638, -0.3332,  0.6206]])
+tensor([[-0.7939],
+        [ 0.2914],
+        [ 0.8385]])
+tensor([-0.7939,  0.2914,  0.8385])
+tensor([[ 1.1507, -0.5980, -0.3718,  0.2673]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orga9044c8"></a>orch.var(input, unbiased=True) → float<br />
+<div class="outline-text-4" id="text-3-3-12">
+<p>
+返回输入向量 input 中所有元素的方差。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgf4dde4e"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-12-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入张量<br /></li>
+<li>unbiased (bool) - 是否使用基于修正贝塞尔函数的无偏估计<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org4b42ea1"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-12-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.var(a))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.var(a, unbiased = <span style="color: #a9a1e1;">False</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[-1.6751,  0.0469, -1.4719]])
+tensor(0.8856)
+tensor(0.5904)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org44e03b2"></a>torch.var(input, dim, keepdim=False, unbiased=True, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-13">
+<p>
+返回新的张量，其中包括输入张量 input 中指定维度 dim 中每行的方差。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org8801000"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-13-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>dim (int) - 指定维度<br /></li>
+<li>keepdim (bool) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+<li>unbiased (bool) - 是否使用基于修正贝塞尔函数的无偏估计<br /></li>
+</ul>
+<p>
+= out (Tensor,optional) - 结果张量<br />
+</p>
+</div>
+</li>
+<li><a id="org5876759"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-13-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.var(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.var(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">False</span>))
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.var(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(torch.var(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">False</span>))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 0.1367, -0.7436, -1.1812, -1.2855],
+        [-0.1468, -1.8947, -0.3956,  2.1252],
+        [-1.4925, -0.2174, -0.5797, -1.0848],
+        [-0.0302, -0.5172, -1.6083,  1.1392]])
+tensor([0.4192, 2.7533, 0.3137, 1.2982])
+tensor([0.3144, 2.0650, 0.2352, 0.9736])
+tensor([0.5604, 0.5378, 0.3104, 2.8145])
+tensor([0.4203, 0.4033, 0.2328, 2.1109])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgd0c00a1"></a>torch.max(input) → float<br />
+<div class="outline-text-4" id="text-3-3-14">
+<p>
+返回输入张量所有元素的最大值。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org8bd086e"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-14-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgba89327"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-14-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">max</span>(a))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 0.0471, -1.2301, -0.5085],
+        [ 0.5317, -1.2448,  0.2068],
+        [ 0.5227,  0.4452, -0.3307]])
+tensor(0.5317)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgb53119b"></a>torch.max(input, dim, keepdim=False, out=None) -&gt; (Tensor, LongTensor)<br />
+<div class="outline-text-4" id="text-3-3-15">
+<p>
+返回新的张量，其中包括输入张量 input 中指定维度 dim 中每行的最大值，同时返回每个最大值的位置索引。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org7c0df1b"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-15-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>dim (int) - 指定维度<br /></li>
+<li>keepdim (bool) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+</ul>
+<p>
+= out (Tensor,optional) - 结果张量<br />
+</p>
+</div>
+</li>
+<li><a id="org3b02f63"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-15-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">max</span>(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">max</span>(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">True</span>))
+</pre>
+</div>
+
+<pre class="example" id="org3dbca56">
+tensor([[-0.4094, -0.6951, -0.1855],
+        [-1.2454,  0.8155, -0.3386],
+        [ 0.0014,  0.0167, -0.5409]])
+torch.return_types.max(
+values=tensor([[-0.1855],
+        [ 0.8155],
+        [ 0.0167]]),
+indices=tensor([[2],
+        [1],
+        [1]]))
+torch.return_types.max(
+values=tensor([[ 0.0014,  0.8155, -0.1855]]),
+indices=tensor([[2, 1, 0]]))
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org1f29f4e"></a>torch.max(input, other, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-16">
+<p>
+逐个元素比较张量 input 与张量 other，将比较出的最大值保存到输出张量中。<br />
+两个张量尺寸不需要完全相同，但需要支持自动扩展法则。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org4b6d16a"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-16-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>other (Tensor) - 另一个输入的 Tensor<br /></li>
+<li>out (Tensor,optional) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org268c3c8"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-16-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #dcaeea;">b</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(b)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">max</span>(a, b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([-0.8179,  0.5469,  2.1019, -0.3898])
+tensor([1.5829])
+tensor([1.5829, 1.5829, 2.1019, 1.5829])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org03d9617"></a>torch.min(input) → float<br />
+<div class="outline-text-4" id="text-3-3-17">
+<p>
+返回输入张量所有元素的最小值。torch<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org2a874e8"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-17-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org8a86070"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-17-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">min</span>(a))
+<span class="linenr">5: </span>
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 1.0204, -0.4053,  0.7325],
+        [ 2.9686,  0.0682,  1.0189],
+        [ 0.3362, -1.4859,  1.3518]])
+tensor(-1.4859)
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org77f85a8"></a>torch.min(input, dim, keepdim=False, out=None) -&gt; (Tensor, LongTensor)<br />
+<div class="outline-text-4" id="text-3-3-18">
+<p>
+返回新的张量，其中包括输入张量 input 中指定维度 dim 中每行的最小值，同时返回每个最小值的位置索引。<br />
+</p>
+
+<p>
+若 keepdim 值为 True，则在输出张量中，除了被操作的 dim 维度值降为 1，其它维度与输入张量 input 相同。否则，dim 维度相当于被执行 torch.squeeze()维度压缩操作，导致此维度消失，最终输出张量会比输入张量少一个维度。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org61abd3f"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-18-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>dim (int) - 指定维度<br /></li>
+<li>keepdim (bool) - 输出张量是否保持与输入张量有相同数量的维度<br /></li>
+</ul>
+<p>
+= out (Tensor,optional) - 结果张量<br />
+</p>
+</div>
+</li>
+<li><a id="orgda58212"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-18-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">3: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">min</span>(a, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #a9a1e1;">True</span>))
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">min</span>(a, <span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #a9a1e1;">True</span>))
+</pre>
+</div>
+
+<pre class="example" id="org74ed252">
+tensor([[ 0.4263, -0.1528, -0.6943],
+        [-0.5110, -0.4034, -1.8242],
+        [ 0.0458,  1.1824,  1.5221]])
+torch.return_types.min(
+values=tensor([[-0.6943],
+        [-1.8242],
+        [ 0.0458]]),
+indices=tensor([[2],
+        [2],
+        [0]]))
+torch.return_types.min(
+values=tensor([[-0.5110, -0.4034, -1.8242]]),
+indices=tensor([[1, 1, 1]]))
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org9f8eb9f"></a>torch.min(input, other, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-19">
+<p>
+逐个元素比较张量 input 与张量 other，将比较出的最小值保存到输出张量中。<br />
+两个张量尺寸不需要完全相同，但需要支持自动扩展法则。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orga0e36a6"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-19-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入 Tensor<br /></li>
+<li>other (Tensor) - 另一个输入的 Tensor<br /></li>
+<li>out (Tensor,optional) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org5ed5b94"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-19-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #dcaeea;">b</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(b)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.<span style="color: #c678dd;">min</span>(a, b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([0.8462, 0.6718, 0.2461, 0.2186])
+tensor([1.2698])
+tensor([0.8462, 0.6718, 0.2461, 0.2186])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org75782de"></a>torch.rsqrt(input) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-20">
+<p>
+返回新的张量，其中包含 input 张量每个元素平方根的倒数。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org68e3e0e"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-20-1">
+<ul class="org-ul">
+<li>input (Tensor) – 输入张量<br /></li>
+<li>out (Tensor, optional) – 输出张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orga3c8597"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-20-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(torch.rsqrt(a))
+</pre>
+</div>
+
+<pre class="example">
+tensor([-0.1436,  0.4214,  0.5820, -0.7108])
+tensor([   nan, 1.5404, 1.3108,    nan])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgb6ca79a"></a>torch.lerp(star,end,weight) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-21">
+<p>
+基于 weight 对输入的两个张量 start 与 end 逐个元素计算线性插值，结果返回至输出张量。<br />
+</p>
+
+<p>
+返回结果是： \( outs_i = start_i + weight * (end_i - start_i) \)<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org4188d91"></a>參數:<br />
+<div class="outline-text-5" id="text-3-3-21-1">
+<ul class="org-ul">
+<li>start (Tensor) – 起始点张量<br /></li>
+<li>end (Tensor) – 终止点张量<br /></li>
+<li>weight (float) – 插入公式的 weight<br /></li>
+<li>out (Tensor, optional) – 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgf2449c2"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-21-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">start</span> = torch.arange(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">4: </span><span style="color: #dcaeea;">end</span> = torch.Tensor(<span style="color: #da8548; font-weight: bold;">4</span>).fill_(<span style="color: #da8548; font-weight: bold;">10</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(start)
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.lerp(start, end, <span style="color: #da8548; font-weight: bold;">0.5</span>))
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orgab6cc04"></a>torch.tanh(input, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-22">
+<p>
+返回新的张量，其中包括输入张量 input 中每个元素的双曲正切。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgd2c5aea"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-22-1">
+<ul class="org-ul">
+<li>input (Tensor) - 输入张量<br /></li>
+<li>out (Tensor,optional) - 结果张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgbcbaa73"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-22-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">a</span> = torch.randn(<span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">4: </span><span style="color: #c678dd;">print</span>(a)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(torch.tanh(a))
+</pre>
+</div>
+
+<pre class="example">
+tensor([-0.9255, -1.4683,  0.0821, -0.3610])
+tensor([-0.7285, -0.8992,  0.0819, -0.3461])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org2110d5c"></a>torch.equal(tensor1, tensor2) → bool<br />
+<div class="outline-text-4" id="text-3-3-23">
+<p>
+如果两个张量的尺寸和元素都相同，则返回 True，否则返回 False。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org7ef24bc"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-23-1">
+<ul class="org-ul">
+<li>tensor1 (Tensor) - 要比较的张量<br /></li>
+<li>tensor2 (Tensor) - 要比较的张量<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org2367e2e"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-23-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #c678dd;">print</span>(torch.equal(torch.Tensor([<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>]), torch.Tensor([<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>])))
+</pre>
+</div>
+
+<pre class="example">
+True
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org52c1021"></a>torch.gt(input, other, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-24">
+<p>
+计算 input tensor &gt; other<br />
+</p>
+
+<p>
+逐个元素比较输入张量 input 是否大于另外的张量或浮点数 other。若大于则返回为 True，否则返回 False。<br />
+若张量 other 无法自动扩展成与输入张量 input 相同尺寸，则返回为 False。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org78f89df"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-24-1">
+<ul class="org-ul">
+<li>input (Tensor) - 要比较的张量<br /></li>
+<li>other (Tensor or float) - 要比较的张量或浮点数<br /></li>
+<li>out (Tensor, optional) - 输出张量，必须是 ByteTensor 或与输入张量相同。<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org800554f"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-24-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">a</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>], [<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">4</span>]])
+<span class="linenr">4: </span><span style="color: #dcaeea;">b</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>], [<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">4</span>]])
+<span class="linenr">5: </span>
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.gt(a, b))
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(torch.gt(torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>], [<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">4</span>]]), torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>], [<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">4</span>]])))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[False,  True],
+        [False, False]])
+tensor([[False,  True],
+        [False, False]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="orga5d421c"></a>torch.ge(input, other, out=None) → Tensor<br />
+<div class="outline-text-4" id="text-3-3-25">
+<p>
+计算 input tensor &gt;= other<br />
+</p>
+
+<p>
+逐个元素比较输入张量 input 是否大于或等于另外的张量或浮点数 other。若大于或等于则返回为 True，否则返回 False。<br />
+若张量 other 无法自动扩展成与输入张量 input 相同尺寸，则返回为 False。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org669bacf"></a>參數<br />
+<div class="outline-text-5" id="text-3-3-25-1">
+<ul class="org-ul">
+<li>input (Tensor) - 要比较的张量<br /></li>
+<li>other (Tensor or float) - 要比较的张量或浮点数<br /></li>
+<li>out (Tensor, optional) - 输出张量，必须是 ByteTensor 或与输入张量相同。<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org3054628"></a>Example<br />
+<div class="outline-text-5" id="text-3-3-25-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">a</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>], [<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">4</span>]])
+<span class="linenr">4: </span><span style="color: #dcaeea;">b</span> = torch.Tensor([[<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>], [<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">4</span>]])
+<span class="linenr">5: </span>
+<span class="linenr">6: </span><span style="color: #c678dd;">print</span>(torch.ge(a, b))
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ True,  True],
+        [False,  True]])
+</pre>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org46aea82" class="outline-3">
+<h3 id="org46aea82"><span class="section-number-3">3.4.</span> Variable（變數）以及模型自動更新器</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+我們常常聽到人說「train 一個 model」，一個模型（model）代表著一系列的運算，將一個代表輸入（可能是文字、音訊、影像等任何你想的到的資料）的矩陣變成結果（可能是文字翻譯、影像辨識結果）的過程。而訓練（training）即是更新模型參數的過程。<br />
+所以究竟該怎麼訓練一個模型？首先，我們必須先了解誤差（loss）是什麼。誤差代表我們的模型預測出來的結果和真實情況的差距，通常是一個純量（scalar）。得到誤差後，我們通常使用梯度下降法（gradient descent），藉由反向傳播（<a href="https://www.youtube.com/watch?v=ibJpTrp5mcE">backpropagation</a>）來更新我們的模型。如果你不知道什麼是<a href="https://www.youtube.com/watch?v=NjZygLDXxjg">梯度下降</a>和反向傳播，你可以想像是一個更新參數的方式，在更新的過程中，誤差將會從結果往資料流向相反的方向傳遞。我們並不是一次就能夠更新到最後的結果；相反的，我們每次只走了一小步（還不一定每次都是正確的方向）。不過我們希望，這些更新的累積能減少誤差，使我們的預測越來越接近真實結果。<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org3b73278"></a>Variable<br />
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+Variable 為 PyTorch 裡建立模型的最小元件。深度學習的模型常常用一層一層的 layer 來作為變數操作的單位。Layer 又是五花八門，常用的有 Full-connected layer，Convolutional layer、Recurrent layer 等等。每一種 layer 通常包含不只一個 Variable 的操作。Pytorch 的模組可以把這些操作群組在一起。模組甚至可以包含其他模組，組成一個樹狀結構。如此一來，變數的建立與管理變得十分方便。事實上，我們通常把整個模型包裝成一個模組，這麼做尤其在儲存和載入模型的時候非常有用。<br />
+</p>
+
+<p>
+一個 Variable 最重要的屬性（attribute）是 data，它是一個 Tensor 物件，儲存這個變數現在的值。一個 Variable 創建與使用方式長這個樣子：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr"> 2: </span><span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">m1</span> = torch.ones(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">m2</span> = torch.ones(<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 6: </span><span style="color: #dcaeea;">a</span> = Variable(m1)
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">b</span> = Variable(m2)
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">c</span> = a + b
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #c678dd;">print</span>(c)
+</pre>
+</div>
+
+<pre class="example">
+tensor([[2., 2., 2.],
+        [2., 2., 2.]])
+</pre>
+
+
+<p>
+<img src="images/autograd-2.jpg" alt="autograd-2.jpg" /><br />
+<img src="images/autograd-3.jpg" alt="autograd-3.jpg" /><br />
+</p>
+
+<p>
+PyTorch 的優勢之一為：幾乎所有對 Tensor 的操作都可以用在 Variable 上！所以我們使用者只需要熟悉一種語法。而，搭配前面對於有向圖的說明，大家必須了解到其背後所做的事情是不一樣的！Tensor 的操作是單純的資料修改，沒有紀錄；而 Variable 的操作除了 data 的資料會有改動，所有的操作也會記錄下來變成一個有向圖，藉由 creator 這個屬性儲存起來。<br />
+Variable 還有兩個重要的屬性。<br />
+</p>
+<ul class="org-ul">
+<li>requires_grad<br /></li>
+</ul>
+<p>
+指定要不要更新這個變數，對於不需要更新的變數可以把他設定成 False，可以加快運算。<br />
+</p>
+<ul class="org-ul">
+<li>volatile<br /></li>
+</ul>
+<p>
+指定需不需要保留紀錄用的變數。指定變數為 True 代表運算不需要記錄，可以加快運算。如果一個變數的 volatil 是 True，則它的 requires_grad 一定是 False。<br />
+</p>
+</div>
+</li>
+<li><a id="org06665e8"></a>Parameter<br />
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+參數（Parameter）是變數（Variable）的子物件。意思是說，它們能做到的事情幾乎一模一樣。唯一的不同點是，因為 Module 會維護自己用到參數的集合，當我們將 Parameter 物件指定給模組的屬性時，它就會被記錄在這個集合裡，而且還會有一個唯一對應的名稱；Variable 不會有這種效果。<br />
+</p>
+
+<p>
+模組的套疊在這個邏輯也能正確的運作。例如說，子模組的參數也會自動變成父模組的參數。在下面的範例中，nn.Conv2d 是個內建的模組，包含兩個參數 weight 和 bias，正確的變成我們自訂模組的參數。<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> torch.nn <span style="color: #51afef;">as</span> nn
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> torch.nn.functional <span style="color: #51afef;">as</span> F
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Model</span>(nn.Module):
+<span class="linenr"> 5: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr"> 6: </span>          <span style="color: #c678dd;">super</span>().__init__()
+<span class="linenr"> 7: </span>          <span style="color: #51afef;">self</span>.<span style="color: #dcaeea;">conv1</span> = nn.Conv2d(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">5</span>)    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35387;&#20874;&#20102;conv1&#36889;&#20491;&#21517;&#23383;</span>
+<span class="linenr"> 8: </span>          <span style="color: #51afef;">self</span>.<span style="color: #dcaeea;">conv2</span> = nn.Conv2d(<span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">5</span>)   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35387;&#20874;&#20102;conv2&#36889;&#20491;&#21517;&#23383;</span>
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">forward</span>(<span style="color: #51afef;">self</span>, x):
+<span class="linenr">11: </span>         <span style="color: #dcaeea;">x</span> = F.relu(<span style="color: #51afef;">self</span>.conv1(x))
+<span class="linenr">12: </span>         <span style="color: #51afef;">return</span> F.relu(<span style="color: #51afef;">self</span>.conv2(x))
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>  <span style="color: #c678dd;">print</span>(Model().parameters())    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26371;&#21360;&#20986;4&#20491;&#21443;&#25976;'conv1.weight', 'conv1.bias',</span>
+<span class="linenr">15: </span>                                 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">'conv2.weight', 'conv2.bias'&#30340;&#20540;</span>
+</pre>
+</div>
+
+
+<pre class="example">
+&lt;generator object Module.parameters at 0x1239cabd0&gt;
+</pre>
+
+
+<p>
+簡單來說，參數才是我們使用 Module 時候會面對到的物件，但一般來說這些差異都已經被包裝起來了，就如同上面的範例一樣。<br />
+</p>
+</div>
+</li>
+
+<li><a id="org186819b"></a>Module<br />
+<div class="outline-text-4" id="text-3-4-3">
+<p>
+那怎麼使用模組呢？一般來說，我們只需要定義模組創建的時候用到的參數，以及模組從輸入到輸出做了怎樣的操作。前者被定義在__init__函數裡，後者被定義在 forward 函數裡。讓我們再看一次上面的範例：<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> torch.nn <span style="color: #51afef;">as</span> nn
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> torch.nn.functional <span style="color: #51afef;">as</span> F
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Model</span>(nn.Module):
+<span class="linenr"> 5: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr"> 6: </span>          <span style="color: #83898d;">"""</span>
+<span class="linenr"> 7: </span><span style="color: #83898d;">          &#22312;__init__&#20989;&#25976;&#35041;&#23450;&#32681;&#36889;&#20491;&#27169;&#32068;&#26371;&#29992;&#21040;&#30340;&#21443;&#25976;</span>
+<span class="linenr"> 8: </span><span style="color: #83898d;">          """</span>
+<span class="linenr"> 9: </span>          <span style="color: #c678dd;">super</span>().__init__()
+<span class="linenr">10: </span>          <span style="color: #51afef;">self</span>.<span style="color: #dcaeea;">conv1</span> = nn.Conv2d(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">11: </span>          <span style="color: #51afef;">self</span>.<span style="color: #dcaeea;">conv2</span> = nn.Conv2d(<span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">5</span>)
+<span class="linenr">12: </span>
+<span class="linenr">13: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">forward</span>(<span style="color: #51afef;">self</span>, x):
+<span class="linenr">14: </span>         <span style="color: #83898d;">"""</span>
+<span class="linenr">15: </span><span style="color: #83898d;">         &#22312;forward&#20989;&#25976;&#35041;&#23450;&#32681;&#36664;&#20837;&#21644;&#36664;&#20986;&#20540;&#30340;&#38364;&#20418;</span>
+<span class="linenr">16: </span><span style="color: #83898d;">         """</span>
+<span class="linenr">17: </span>         <span style="color: #dcaeea;">x</span> = F.relu(<span style="color: #51afef;">self</span>.conv1(x))
+<span class="linenr">18: </span>         <span style="color: #51afef;">return</span> F.relu(<span style="color: #51afef;">self</span>.conv2(x))
+<span class="linenr">19: </span>
+<span class="linenr">20: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20551;&#35373; _input&#26159;&#19968;&#20491;&#35722;&#25976;</span>
+<span class="linenr">21: </span>  <span style="color: #dcaeea;">model</span> = Model()
+<span class="linenr">22: </span>  <span style="color: #dcaeea;">y</span> = model(_input)    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">y&#23601;&#26159;&#25105;&#20497;&#27169;&#32068;&#30340;&#36664;&#20986;</span>
+<span class="linenr">23: </span>
+</pre>
+</div>
+
+<p>
+PyTorch 使用 Python class 來代表管理一群參數的單位，我們能夠用物件的屬性直接存取內部用到的參數，這樣的架構是非常直覺並符合語義（semantics）的。<br />
+</p>
+
+<p>
+幾個 Module 非常重要的功能：<br />
+</p>
+
+<ul class="org-ul">
+<li>將資料搬到 CPU/GPU<br /></li>
+</ul>
+
+<p>
+之前提過 PyTorch 支援 GPU 運算。Module 可以讓我們一次把所有包含的變數一次搬到 CPU/GPU。注意到兩個 Tensor 的運算只能在同一個 CPU/GPU 上執行，所以將所有變數一次搬移是個很重要的功能。呼叫 cpu()和 cuda()可以執行這個功能。另外，我們可以用 torch.cuda.is_available()來檢查我們可不可以使用 CUDA 來運算。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #dcaeea;">model</span> = Model()
+<span class="linenr">2: </span>  <span style="color: #51afef;">if</span> torch.cuda.is_available():
+<span class="linenr">3: </span>      model.cuda()
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>訓練/運算模式<br /></li>
+</ul>
+
+<p>
+有很多模組在訓練的時候和預測的時候用到同樣的參數，但是執行的運算不一樣，例如 Dropout、Batch Normalization 等。因此在訓練和運算的時候，記得分別呼叫 train()和 eval()來切換模式。<br />
+</p>
+
+<p>
+一般來說，我們會分別用不同的函式來包裝訓練和預測的功能。所以一個典型的程式會長的像下面這個樣子。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">update</span>(model, loader):
+<span class="linenr">2: </span>      model.train()
+<span class="linenr">3: </span>      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">...</span>
+<span class="linenr">4: </span>
+<span class="linenr">5: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">evaluate</span>(model, loader):
+<span class="linenr">6: </span>      model.<span style="color: #c678dd;">eval</span>()
+<span class="linenr">7: </span>      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">...</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>儲存/載入模型<br /></li>
+</ul>
+<p>
+當我們訓練完一個模型，最重要的當然是把它儲存起來在日後使用。當我們呼叫 state_dict()，會拿到一個參數名稱對應到值的字典，然後我們可以呼叫 PyTorch 的內建函式把它儲存起來。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>torch.save(model.state_dict(), PATH)
+</pre>
+</div>
+
+<p>
+而日後要拿回來的時候，可以呼叫 load_state_dict 把值載入到對應的參數名稱。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>model.load_state_dict(torch.load(PATH))
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org02b0535"></a>Autograd<br />
+<div class="outline-text-4" id="text-3-4-4">
+<p>
+如同上面所說的，反向傳播是我們現在廣泛使用的更新模型方式。當我們定義了誤差如何計算的同時，其實也隱含定義了反向傳播的傳遞方向。這正是 Autograd 的運作原理：藉由前面所說的有向圖，PyTorch 可以自動幫我們計算梯度。我們只要對於誤差的 Variable 物件呼叫 backward 函數，就可以把沿途所用到參數的 gradient 都計算出來，儲存在各個參數的 grad 屬性裡。最後，更新每個參數的 data 值。通常，我們使用優化器（optimizer）來更新它們。<br />
+</p>
+
+<p>
+優化器的使用方法也非常簡單。首先在初始化優化器時提供被更新參數的清單。在每一次更新前，先呼叫優化器的 zero_grad 把上一次更新時用到的梯度歸零（這一步很容易忘記。如果沒有做，backward 得到的梯度會被累加）。接著，呼叫 backward 將參數的 grad 算出來後，再呼叫 step 利用儲存的 grad 和 data 來計算新的 data 的值。<br />
+</p>
+
+<p>
+就讓我們延續上面的範例來解釋使用原理。<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">from</span> torch.optim <span style="color: #51afef;">import</span> SGD
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>  <span style="color: #dcaeea;">m1</span> = torch.ones(<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 6: </span>  <span style="color: #dcaeea;">m2</span> = torch.ones(<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35352;&#24471;&#35201;&#23559;requires_grad&#35373;&#25104;True</span>
+<span class="linenr"> 9: </span>  <span style="color: #dcaeea;">a</span> = Variable(m1, requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr">10: </span>  b = Variable(m2, requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr">11: </span>
+<span class="linenr">12: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21021;&#22987;&#21270;&#20778;&#21270;&#22120;&#65292;&#20351;&#29992;SGD&#36889;&#20491;&#26356;&#26032;&#26041;&#24335;&#20358;&#26356;&#26032;a&#21644;b</span>
+<span class="linenr">13: </span>  optimizer = SGD([a, b], lr=<span style="color: #da8548; font-weight: bold;">0.1</span>)
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>  <span style="color: #51afef;">for</span> _ <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">10</span>):        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#25105;&#20497;&#31034;&#31684;&#26356;&#26032;10&#27425;</span>
+<span class="linenr">16: </span>      loss = (a + b).<span style="color: #c678dd;">sum</span>()   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20551;&#35373;a + b&#23601;&#26159;&#25105;&#20497;&#30340;loss</span>
+<span class="linenr">17: </span>      <span style="color: #c678dd;">print</span>(loss)
+<span class="linenr">18: </span>      optimizer.zero_grad()
+<span class="linenr">19: </span>      loss.backward()
+<span class="linenr">20: </span>      optimizer.step()       <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26356;&#26032;</span>
+<span class="linenr">21: </span>
+</pre>
+</div>
+
+<pre class="example" id="org6b1a66f">
+tensor(30., grad_fn=&lt;SumBackward0&gt;)
+tensor(27.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(24.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(21.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(18.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(15.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(12.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(9.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(6.0000, grad_fn=&lt;SumBackward0&gt;)
+tensor(3.0000, grad_fn=&lt;SumBackward0&gt;)
+</pre>
+
+<p>
+Backword 基本更新步驟：<br />
+</p>
+<ol class="org-ol">
+<li>操作現有的參數與輸入的變數，得到預測。利用預測和正確答案定義我們的誤差。<br /></li>
+<li>呼叫優化器的 zero_grad 將上次更新的梯度歸零。<br /></li>
+<li>呼叫誤差的 backward 算出所有參數的梯度。<br /></li>
+<li>呼叫優化器的 step 更新參數。<br /></li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgcfd2674" class="outline-3">
+<h3 id="orgcfd2674"><span class="section-number-3">3.5.</span> PyTorch 的優勢</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<ol class="org-ol">
+<li><a id="org0f32af8"></a>與 Python、NumPy 的操作十分類似<br />
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+PyTorch 中 Tensor 的使用方式就和 NumPy 差不多，與 NumPy 之間的轉換也是非常容易。不過就算沒有用過 NumPy，也許你也能夠看出來 Tensor 的操作就和使用一個普通的 Python 變數沒有什麼差異。由於這些操作的方法有統一的規則，就算臨時忘記要用的功能，查閱說明文件很快就能夠找到。<br />
+</p>
+</div>
+</li>
+
+<li><a id="org63aa6b3"></a>動態建立模型<br />
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+上述利用 autograd 更新的過程揭露了 PyTorch 和 TensorFlow、Theano 等其他深度學習框架最不一樣的差異：PyTorch 會動態的在每一次更新/計算結果的過程建立有向圖，每一行對 Variable 的操作都是建立模型的過程；其他框架會先編譯整個模型再開始更新/計算。也許有人會懷疑，每一次都要重新建立模型是否會讓運算速度變慢，但就我們的使用經驗是感覺不出來的。此一動態建立有向圖的過程有兩個好處：<br />
+</p>
+<ul class="org-ul">
+<li>當我們的模型有錯誤的時候，PyTorch 會被迫中止在發生錯誤的地方，並立即回報錯誤原因。其他框架如 Keras，因為需要靜態建立模型並呼叫 compile，會在執行編譯時才回報錯誤的原因。要從錯誤的原因回推造成錯誤的程式碼不一定非常容易，這方面的差異大大的影響我們除錯的速度。<br /></li>
+<li>動態的建立模型代表我們能夠根據每一次的輸入來建立對應的模型，這點對於某些特殊的 RNN 模型特別有用，在 TensorFlow 這樣靜態建立模型的框架中是很難實踐的。<br /></li>
+</ul>
+</div>
+</li>
+
+<li><a id="org0c8ca51"></a>PyTorch 與靜態建立模型的框架（TensorFlow）比較<br />
+<div class="outline-text-4" id="text-3-5-3">
+<p>
+如果你有使用過 TensorFlow，這個段落的描述應該十分熟悉。對於 Tensorflow，如果要根據輸入來判斷執行不同的運算，唯一的做法是針對每一種可能的操作都預先建立模型，再利用一個判斷的物件 tf.cond 來執行不同的操作，如下面的範例（改寫自一篇 StackOverflow 的回答）<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #dcaeea;">x</span> = tf.placeholder(tf.float32, shape=[<span style="color: #a9a1e1;">None</span>, <span style="color: #da8548; font-weight: bold;">20</span>], name=<span style="color: #98be65;">"x_input"</span>)
+<span class="linenr">2: </span>      condition = tf.placeholder(tf.int32, shape=[], name=<span style="color: #98be65;">"condition"</span>)
+<span class="linenr">3: </span>      W = tf.Variable(tf.zeros([<span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">10</span>]), name=<span style="color: #98be65;">"weights"</span>)
+<span class="linenr">4: </span>      b = tf.Variable(tf.zeros([<span style="color: #da8548; font-weight: bold;">10</span>]), name=<span style="color: #98be65;">"bias"</span>)
+<span class="linenr">5: </span>
+<span class="linenr">6: </span>      y = tf.cond(condition &gt; <span style="color: #da8548; font-weight: bold;">0</span>,
+<span class="linenr">7: </span>                  <span style="color: #51afef;">lambda</span>: tf.matmul(x, W) + b,
+<span class="linenr">8: </span>                  <span style="color: #51afef;">lambda</span>: tf.matmul(x, W) - b)
+<span class="linenr">9: </span>
+</pre>
+</div>
+<p>
+注意最後三行，對於 condition &gt; 0 的兩種操作都會在靜態建立模型時被執行到，而且必須被包裝成函式的型態（這裡使用 lambda 來建立匿名函式）。同樣的情況也出現在需要用到迴圈的模型。筆者認為這樣子的架構下寫出來的程式是十分迂迴，不符合直覺的。以下是 PyTorch 版本，因為是動態建立模型，直接使用一般的 Python 運算式。<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #dcaeea;">x</span> = Variable(torch.randn(<span style="color: #da8548; font-weight: bold;">32</span>, <span style="color: #da8548; font-weight: bold;">20</span>), requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr"> 2: </span>      W = Variable(torch.zeros(<span style="color: #da8548; font-weight: bold;">20</span>, <span style="color: #da8548; font-weight: bold;">10</span>), requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr"> 3: </span>      b = Variable(torch.zeros(<span style="color: #da8548; font-weight: bold;">10</span>), requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>      y = x.mm(W)
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>      <span style="color: #51afef;">if</span> condition &gt; <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr"> 8: </span>          y = y + b.expand_as(y)
+<span class="linenr"> 9: </span>      <span style="color: #51afef;">else</span>:
+<span class="linenr">10: </span>          y = y - b.expand_as(y)
+<span class="linenr">11: </span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd568e98" class="outline-2">
+<h2 id="orgd568e98"><span class="section-number-2">4.</span> PyTorch 簡單案例：線性迴歸</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgb66d720" class="outline-3">
+<h3 id="orgb66d720"><span class="section-number-3">4.1.</span> Example #1: 線性迴歸</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> sys
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">import</span> torch.nn <span style="color: #51afef;">as</span> nn
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 5: </span>  <span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span class="linenr"> 6: </span>  <span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr"> 7: </span>  <span style="color: #51afef;">from</span> torchsummary <span style="color: #51afef;">import</span> summary
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Hyper Parameters</span>
+<span class="linenr">10: </span>  <span style="color: #dcaeea;">input_size</span> = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">11: </span>  <span style="color: #dcaeea;">output_size</span> = <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">12: </span>  <span style="color: #dcaeea;">num_epochs</span> = <span style="color: #da8548; font-weight: bold;">1000</span>
+<span class="linenr">13: </span>  <span style="color: #dcaeea;">learning_rate</span> = <span style="color: #da8548; font-weight: bold;">0.001</span>
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">xtrain&#29986;&#29983;&#30697;&#38499;&#36039;&#26009;</span>
+<span class="linenr">16: </span>  <span style="color: #dcaeea;">x_train</span> = np.array([[<span style="color: #da8548; font-weight: bold;">2.3</span>], [<span style="color: #da8548; font-weight: bold;">4.4</span>], [<span style="color: #da8548; font-weight: bold;">3.7</span>], [<span style="color: #da8548; font-weight: bold;">6.1</span>], [<span style="color: #da8548; font-weight: bold;">7.3</span>], [<span style="color: #da8548; font-weight: bold;">2.1</span>],[<span style="color: #da8548; font-weight: bold;">5.6</span>], [<span style="color: #da8548; font-weight: bold;">7.7</span>], [<span style="color: #da8548; font-weight: bold;">8.7</span>], [<span style="color: #da8548; font-weight: bold;">4.1</span>],
+<span class="linenr">17: </span>                      [<span style="color: #da8548; font-weight: bold;">6.7</span>], [<span style="color: #da8548; font-weight: bold;">6.1</span>], [<span style="color: #da8548; font-weight: bold;">7.5</span>], [<span style="color: #da8548; font-weight: bold;">2.1</span>], [<span style="color: #da8548; font-weight: bold;">7.2</span>],
+<span class="linenr">18: </span>                      [<span style="color: #da8548; font-weight: bold;">5.6</span>], [<span style="color: #da8548; font-weight: bold;">5.7</span>], [<span style="color: #da8548; font-weight: bold;">7.7</span>], [<span style="color: #da8548; font-weight: bold;">3.1</span>]], dtype=np.float32)
+<span class="linenr">19: </span>
+<span class="linenr">20: </span>  y_train = np.array([[<span style="color: #da8548; font-weight: bold;">3.7</span>], [<span style="color: #da8548; font-weight: bold;">4.76</span>], [<span style="color: #da8548; font-weight: bold;">4</span>.], [<span style="color: #da8548; font-weight: bold;">7.1</span>], [<span style="color: #da8548; font-weight: bold;">8.6</span>], [<span style="color: #da8548; font-weight: bold;">3.5</span>],[<span style="color: #da8548; font-weight: bold;">5.4</span>], [<span style="color: #da8548; font-weight: bold;">7.6</span>], [<span style="color: #da8548; font-weight: bold;">7.9</span>], [<span style="color: #da8548; font-weight: bold;">5.3</span>],
+<span class="linenr">21: </span>                      [<span style="color: #da8548; font-weight: bold;">7.3</span>], [<span style="color: #da8548; font-weight: bold;">7.5</span>], [<span style="color: #da8548; font-weight: bold;">8.5</span>], [<span style="color: #da8548; font-weight: bold;">3.2</span>], [<span style="color: #da8548; font-weight: bold;">8.7</span>],
+<span class="linenr">22: </span>                      [<span style="color: #da8548; font-weight: bold;">6.4</span>], [<span style="color: #da8548; font-weight: bold;">6.6</span>], [<span style="color: #da8548; font-weight: bold;">7.9</span>], [<span style="color: #da8548; font-weight: bold;">5.3</span>]], dtype=np.float32)
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Linear Regression Model</span>
+<span class="linenr">25: </span>  <span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">LinearRegression</span>(nn.Module):
+<span class="linenr">26: </span>      <span style="color: #5B6268;">#</span><span style="color: #5B6268;">__init__&#23450;&#32681; model &#20013;&#38656;&#35201;&#30340;&#21443;&#25976;&#65292;weight&#12289;bias &#31561;&#31561;</span>
+<span class="linenr">27: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>, input_size, output_size):
+<span class="linenr">28: </span>          <span style="color: #c678dd;">super</span>(LinearRegression, <span style="color: #51afef;">self</span>).__init__()
+<span class="linenr">29: </span>          <span style="color: #51afef;">self</span>.linear = nn.Linear(input_size, output_size)
+<span class="linenr">30: </span>      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23450;&#32681; model &#25509;&#25910; input &#26178;&#65292;data &#35201;&#24590;&#40636;&#20659;&#36958;&#12289;&#32147;&#36942;&#21738;&#20123; activation function &#31561;&#31561;</span>
+<span class="linenr">31: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">forward</span>(<span style="color: #51afef;">self</span>, x):
+<span class="linenr">32: </span>          out = <span style="color: #51afef;">self</span>.linear(x)
+<span class="linenr">33: </span>          <span style="color: #51afef;">return</span> out
+<span class="linenr">34: </span>
+<span class="linenr">35: </span>  model = LinearRegression(input_size, output_size)
+<span class="linenr">36: </span>
+<span class="linenr">37: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Loss and Optimizer</span>
+<span class="linenr">38: </span>  criterion = nn.MSELoss()
+<span class="linenr">39: </span>  optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+<span class="linenr">40: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Train the Model</span>
+<span class="linenr">41: </span>  <span style="color: #51afef;">for</span> epoch <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(num_epochs):
+<span class="linenr">42: </span>      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;x&#24478;numpy&#30340;&#26684;&#24335;&#36681;&#28858;torch&#30340;&#35722;&#25976;&#26684;&#24335;</span>
+<span class="linenr">43: </span>      inputs = Variable(torch.from_numpy(x_train))
+<span class="linenr">44: </span>      targets = Variable(torch.from_numpy(y_train))
+<span class="linenr">45: </span>
+<span class="linenr">46: </span>      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Forward + Backward + Optimize</span>
+<span class="linenr">47: </span>      optimizer.zero_grad()
+<span class="linenr">48: </span>      outputs = model(inputs)
+<span class="linenr">49: </span>      loss = criterion(outputs, targets)
+<span class="linenr">50: </span>      loss.backward()
+<span class="linenr">51: </span>      optimizer.step()
+<span class="linenr">52: </span>
+<span class="linenr">53: </span>      <span style="color: #51afef;">if</span> (epoch+<span style="color: #da8548; font-weight: bold;">1</span>) % <span style="color: #da8548; font-weight: bold;">100</span>   == <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">54: </span>  <span style="color: #5B6268;">#        </span><span style="color: #5B6268;">print ('Epoch [%d/%d], Loss: %.4f' %(epoch+1, num_epochs, loss.data[0]))</span>
+<span class="linenr">55: </span>            <span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'Epoch [%d/%d], Loss: %.4f'</span> %(epoch+<span style="color: #da8548; font-weight: bold;">1</span>, num_epochs, loss.data))
+<span class="linenr">56: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Plot the graph</span>
+<span class="linenr">57: </span>  model.<span style="color: #c678dd;">eval</span>()
+<span class="linenr">58: </span>  predicted = model(Variable(torch.from_numpy(x_train))).data.numpy()
+<span class="linenr">59: </span>
+<span class="linenr">60: </span>  plt.figure()
+<span class="linenr">61: </span>  plt.scatter(x_train,y_train)
+<span class="linenr">62: </span>  plt.xlabel(<span style="color: #98be65;">'x_train'</span>)
+<span class="linenr">63: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">x&#36600;&#21517;&#31281;</span>
+<span class="linenr">64: </span>  plt.ylabel(<span style="color: #98be65;">'y_train'</span>)
+<span class="linenr">65: </span>
+<span class="linenr">66: </span>  plt.plot(x_train, y_train, <span style="color: #98be65;">'ro'</span>)
+<span class="linenr">67: </span>  plt.plot(x_train, predicted, label=<span style="color: #98be65;">'predict'</span>)
+<span class="linenr">68: </span>  plt.legend()
+<span class="linenr">69: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">plt.show() #for Google coLab environment</span>
+<span class="linenr">70: </span>  plt.plot()
+<span class="linenr">71: </span>  plt.savefig(<span style="color: #98be65;">"linearReg.png"</span>)
+<span class="linenr">72: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21576;&#29694;model&#30340;layers&#29376;&#27841;</span>
+<span class="linenr">73: </span>  summary(model, (<span style="color: #da8548; font-weight: bold;">19</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>))
+</pre>
+</div>
+
+<pre class="example" id="orgf03b270">
+  Epoch [100/1000], Loss: 0.5649
+  Epoch [200/1000], Loss: 0.5559
+  Epoch [300/1000], Loss: 0.5474
+  Epoch [400/1000], Loss: 0.5393
+  Epoch [500/1000], Loss: 0.5316
+  Epoch [600/1000], Loss: 0.5243
+  Epoch [700/1000], Loss: 0.5172
+  Epoch [800/1000], Loss: 0.5105
+  Epoch [900/1000], Loss: 0.5042
+  Epoch [1000/1000], Loss: 0.4981
+  ----------------------------------------------------------------
+          Layer (type)               Output Shape         Param #
+  ================================================================
+              Linear-1             [-1, 19, 1, 1]               2
+  ================================================================
+  Total params: 2
+  Trainable params: 2
+  Non-trainable params: 0
+  ----------------------------------------------------------------
+  Input size (MB): 0.00
+  Forward/backward pass size (MB): 0.00
+  Params size (MB): 0.00
+  Estimated Total Size (MB): 0.00
+  ----------------------------------------------------------------
+</pre>
+
+
+<div id="org75a9265" class="figure">
+<p><img src="images/linearReg.png" alt="linearReg.png" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>線性迴歸分佈圖</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org02d9238" class="outline-3">
+<h3 id="org02d9238"><span class="section-number-3">4.2.</span> Example #2: 世界人口數預測</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> pandas <span style="color: #51afef;">as</span> pd
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr"> 5: </span>  <span style="color: #51afef;">import</span> torch.nn
+<span class="linenr"> 6: </span>  <span style="color: #51afef;">import</span> torch.optim
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#19979;&#36617;&#20154;&#25976;</span>
+<span class="linenr"> 9: </span>  <span style="color: #51afef;">try</span>:
+<span class="linenr">10: </span>      url = r<span style="color: #98be65;">'http://en.wikipedia.org/wiki/World_population_estimates'</span>
+<span class="linenr">11: </span>      <span style="color: #dcaeea;">df</span> = pd.read_html(url, header=<span style="color: #da8548; font-weight: bold;">0</span>, attrs={<span style="color: #98be65;">"class"</span> : <span style="color: #98be65;">"wikitable"</span>})[<span style="color: #da8548; font-weight: bold;">2</span>]
+<span class="linenr">12: </span>  <span style="color: #51afef;">except</span>:
+<span class="linenr">13: </span>      url = <span style="color: #98be65;">'https://raw.githubusercontent.com/MyDearGreatTeacher/AI201909/master/data/population.csv'</span>
+<span class="linenr">14: </span>      df = pd.read_csv(url, index_col=<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr">15: </span>  df
+<span class="linenr">16: </span>
+<span class="linenr">17: </span>
+<span class="linenr">18: </span>  years = torch.tensor(df.iloc[:, <span style="color: #da8548; font-weight: bold;">0</span>], dtype=torch.float32)
+<span class="linenr">19: </span>  populations = torch.tensor(df.iloc[:, <span style="color: #da8548; font-weight: bold;">1</span>], dtype=torch.float32)
+<span class="linenr">20: </span>
+<span class="linenr">21: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#32218;&#24615;&#22238;&#27512;</span>
+<span class="linenr">22: </span>  x = torch.stack([years, torch.ones_like(years)], <span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">23: </span>  y = populations
+<span class="linenr">24: </span>  wr, _ = torch.lstsq(y, x)  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26368;&#23567;&#24179;&#26041;&#21644;</span>
+<span class="linenr">25: </span>  slope, intercept = wr[:<span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">0</span>] <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27714;&#26012;&#29575;&#12289;&#25130;&#36317;</span>
+<span class="linenr">26: </span>  result = <span style="color: #98be65;">'population = {:.2e} * year + {:.2e}'</span>.<span style="color: #c678dd;">format</span>(slope, intercept)
+<span class="linenr">27: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#22238;&#27512;&#32080;&#26524;&#65306;'</span> + result)
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#30059;&#22294;</span>
+<span class="linenr">30: </span>  plt.scatter(years, populations, s=<span style="color: #da8548; font-weight: bold;">0.1</span>, label=<span style="color: #98be65;">'actual'</span>, color=<span style="color: #98be65;">'k'</span>)
+<span class="linenr">31: </span>  plt.plot(years.tolist(), (slope * years + intercept).tolist(), label=result, color=<span style="color: #98be65;">'k'</span>)
+<span class="linenr">32: </span>  plt.xlabel(<span style="color: #98be65;">'Year'</span>)
+<span class="linenr">33: </span>  plt.ylabel(<span style="color: #98be65;">'Population'</span>)
+<span class="linenr">34: </span>  plt.legend()
+<span class="linenr">35: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">plt.show();</span>
+<span class="linenr">36: </span>  plt.plot()
+<span class="linenr">37: </span>  plt.savefig(<span style="color: #98be65;">"population.png"</span>)
+<span class="linenr">38: </span>
+<span class="linenr">39: </span>  x = years.reshape(-<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">40: </span>  y = populations
+<span class="linenr">41: </span>
+<span class="linenr">42: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21478;&#19968;&#31278;&#20316;&#27861;&#65292;&#27714;&#27161;&#28310;&#24046;&#65292;&#23565;y&#20570;&#27491;&#35215;&#21270;</span>
+<span class="linenr">43: </span>  x_mean, x_std = torch.mean(x), torch.std(x)
+<span class="linenr">44: </span>  x_norm = (x - x_mean) / x_std
+<span class="linenr">45: </span>  y_mean, y_std = torch.mean(y), torch.std(y)
+<span class="linenr">46: </span>  y_norm = (y - y_mean) / y_std
+<span class="linenr">47: </span>
+<span class="linenr">48: </span>  fc = torch.nn.Linear(<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">49: </span>  criterion = torch.nn.MSELoss()
+<span class="linenr">50: </span>  optimizer = torch.optim.Adam(fc.parameters())
+<span class="linenr">51: </span>  weight_norm, bias_norm = fc.parameters()
+<span class="linenr">52: </span>
+<span class="linenr">53: </span>  <span style="color: #51afef;">for</span> step <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">5001</span>):
+<span class="linenr">54: </span>      <span style="color: #51afef;">if</span> step:
+<span class="linenr">55: </span>          fc.zero_grad()
+<span class="linenr">56: </span>          loss_norm.backward()
+<span class="linenr">57: </span>          optimizer.step() <span style="color: #5B6268;">#</span><span style="color: #5B6268;">adam</span>
+<span class="linenr">58: </span>      output_norm = fc(x_norm)
+<span class="linenr">59: </span>      pred_norm = output_norm.squeeze()
+<span class="linenr">60: </span>      loss_norm = criterion(pred_norm, y_norm)
+<span class="linenr">61: </span>      weight = y_std / x_std * weight_norm
+<span class="linenr">62: </span>      bias = (weight_norm * (<span style="color: #da8548; font-weight: bold;">0</span> - x_mean) / x_std + bias_norm) * y_std + y_mean
+<span class="linenr">63: </span>      <span style="color: #51afef;">if</span> step % <span style="color: #da8548; font-weight: bold;">1000</span> == <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">64: </span>          <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#31532;{}&#27493;&#65306;weight = {}, bias = {}'</span>.<span style="color: #c678dd;">format</span>(step, weight.item(), bias.item()))
+<span class="linenr">65: </span>
+<span class="linenr">66: </span>  result = <span style="color: #98be65;">'population = {:.2e} * year + {:.2e}'</span>.<span style="color: #c678dd;">format</span>(weight.item(), bias.item())
+<span class="linenr">67: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#22238;&#27512;&#32080;&#26524;&#65306;'</span> + result)
+</pre>
+</div>
+
+<pre class="example">
+回歸結果：population = 7.53e+07 * year + -1.45e+11
+第 0 步：weight = 54825928.0, bias = -105385164800.0
+第 1000 步：weight = 75289896.0, bias = -144881893376.0
+第 2000 步：weight = 75291168.0, bias = -144550854656.0
+第 3000 步：weight = 75291208.0, bias = -144524410880.0
+第 4000 步：weight = 75291224.0, bias = -144524197888.0
+第 5000 步：weight = 75291232.0, bias = -144524230656.0
+回歸結果：population = 7.53e+07 * year + -1.45e+11
+</pre>
+
+
+
+<div id="orgeaab95e" class="figure">
+<p><img src="images/population.png" alt="population.png" /><br />
+</p>
+<p><span class="figure-number">Figure 2: </span>線性迴歸分佈圖</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe47d54" class="outline-3">
+<h3 id="orgfe47d54"><span class="section-number-3">4.3.</span> Example #3: Cifar-10</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">ResNet-18&#23454;&#29616;Cifar-10&#22270;&#20687;&#20998;&#31867;</span>
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr"> 3: </span>  <span style="color: #51afef;">import</span> torch.nn <span style="color: #51afef;">as</span> nn
+<span class="linenr"> 4: </span>  <span style="color: #51afef;">import</span> torch.nn.functional <span style="color: #51afef;">as</span> F
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span>  <span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">ResidualBlock</span>(nn.Module):
+<span class="linenr"> 7: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>, inchannel, outchannel, stride=<span style="color: #da8548; font-weight: bold;">1</span>):
+<span class="linenr"> 8: </span>          <span style="color: #c678dd;">super</span>(ResidualBlock, <span style="color: #51afef;">self</span>).__init__()
+<span class="linenr"> 9: </span>          <span style="color: #51afef;">self</span>.left = nn.Sequential(
+<span class="linenr">10: </span>              nn.Conv2d(inchannel, outchannel, kernel_size=<span style="color: #da8548; font-weight: bold;">3</span>, stride=stride, padding=<span style="color: #da8548; font-weight: bold;">1</span>, bias=<span style="color: #a9a1e1;">False</span>),
+<span class="linenr">11: </span>              nn.BatchNorm2d(outchannel),
+<span class="linenr">12: </span>              nn.ReLU(inplace=<span style="color: #a9a1e1;">True</span>),
+<span class="linenr">13: </span>              nn.Conv2d(outchannel, outchannel, kernel_size=<span style="color: #da8548; font-weight: bold;">3</span>, stride=<span style="color: #da8548; font-weight: bold;">1</span>, padding=<span style="color: #da8548; font-weight: bold;">1</span>, bias=<span style="color: #a9a1e1;">False</span>),
+<span class="linenr">14: </span>              nn.BatchNorm2d(outchannel)
+<span class="linenr">15: </span>          )
+<span class="linenr">16: </span>          <span style="color: #51afef;">self</span>.shortcut = nn.Sequential() <span style="color: #5B6268;">#</span>
+<span class="linenr">17: </span>          <span style="color: #51afef;">if</span> stride != <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">or</span> inchannel != outchannel:
+<span class="linenr">18: </span>              <span style="color: #51afef;">self</span>.shortcut = nn.Sequential(
+<span class="linenr">19: </span>                  nn.Conv2d(inchannel, outchannel, kernel_size=<span style="color: #da8548; font-weight: bold;">1</span>, stride=stride, bias=<span style="color: #a9a1e1;">False</span>),
+<span class="linenr">20: </span>                  nn.BatchNorm2d(outchannel)
+<span class="linenr">21: </span>              )
+<span class="linenr">22: </span>
+<span class="linenr">23: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">forward</span>(<span style="color: #51afef;">self</span>, x): <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36889;&#26159;&#19968;&#20491;block</span>
+<span class="linenr">24: </span>          out = <span style="color: #51afef;">self</span>.left(x) <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#32102;&#24038;&#37002;&#30340;layer&#36305;&#19968;&#27425;</span>
+<span class="linenr">25: </span>          out += <span style="color: #51afef;">self</span>.shortcut(x) <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#20877;&#32102;&#21491;&#37002;&#30340;&#25463;&#24465;layer&#36305;&#19968;&#27425;&#65292;&#20108;&#32773;&#30456;&#21152;</span>
+<span class="linenr">26: </span>          out = F.relu(out)
+<span class="linenr">27: </span>          <span style="color: #51afef;">return</span> out
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>  <span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">ResNet</span>(nn.Module):
+<span class="linenr">30: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>, ResidualBlock, num_classes=<span style="color: #da8548; font-weight: bold;">10</span>):
+<span class="linenr">31: </span>          <span style="color: #c678dd;">super</span>(ResNet, <span style="color: #51afef;">self</span>).__init__()
+<span class="linenr">32: </span>          <span style="color: #51afef;">self</span>.inchannel = <span style="color: #da8548; font-weight: bold;">64</span>
+<span class="linenr">33: </span>          <span style="color: #51afef;">self</span>.conv1 = nn.Sequential(
+<span class="linenr">34: </span>              nn.Conv2d(<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">64</span>, kernel_size=<span style="color: #da8548; font-weight: bold;">3</span>, stride=<span style="color: #da8548; font-weight: bold;">1</span>, padding=<span style="color: #da8548; font-weight: bold;">1</span>, bias=<span style="color: #a9a1e1;">False</span>),
+<span class="linenr">35: </span>              nn.BatchNorm2d(<span style="color: #da8548; font-weight: bold;">64</span>),
+<span class="linenr">36: </span>              nn.ReLU(),
+<span class="linenr">37: </span>          )
+<span class="linenr">38: </span>          <span style="color: #51afef;">self</span>.layer1 = <span style="color: #51afef;">self</span>.make_layer(ResidualBlock, <span style="color: #da8548; font-weight: bold;">64</span>,  <span style="color: #da8548; font-weight: bold;">2</span>, stride=<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">39: </span>          <span style="color: #51afef;">self</span>.layer2 = <span style="color: #51afef;">self</span>.make_layer(ResidualBlock, <span style="color: #da8548; font-weight: bold;">128</span>, <span style="color: #da8548; font-weight: bold;">2</span>, stride=<span style="color: #da8548; font-weight: bold;">2</span>)
+<span class="linenr">40: </span>          <span style="color: #51afef;">self</span>.layer3 = <span style="color: #51afef;">self</span>.make_layer(ResidualBlock, <span style="color: #da8548; font-weight: bold;">256</span>, <span style="color: #da8548; font-weight: bold;">2</span>, stride=<span style="color: #da8548; font-weight: bold;">2</span>)
+<span class="linenr">41: </span>          <span style="color: #51afef;">self</span>.layer4 = <span style="color: #51afef;">self</span>.make_layer(ResidualBlock, <span style="color: #da8548; font-weight: bold;">512</span>, <span style="color: #da8548; font-weight: bold;">2</span>, stride=<span style="color: #da8548; font-weight: bold;">2</span>)
+<span class="linenr">42: </span>          <span style="color: #51afef;">self</span>.fc = nn.Linear(<span style="color: #da8548; font-weight: bold;">512</span>, num_classes)
+<span class="linenr">43: </span>
+<span class="linenr">44: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">make_layer</span>(<span style="color: #51afef;">self</span>, block, channels, num_blocks, stride):
+<span class="linenr">45: </span>          strides = [stride] + [<span style="color: #da8548; font-weight: bold;">1</span>] * (num_blocks - <span style="color: #da8548; font-weight: bold;">1</span>)   <span style="color: #5B6268;">#</span><span style="color: #5B6268;">strides=[1,1]</span>
+<span class="linenr">46: </span>          layers = []
+<span class="linenr">47: </span>          <span style="color: #51afef;">for</span> stride <span style="color: #51afef;">in</span> strides:
+<span class="linenr">48: </span>              layers.append(block(<span style="color: #51afef;">self</span>.inchannel, channels, stride))
+<span class="linenr">49: </span>              <span style="color: #51afef;">self</span>.inchannel = channels
+<span class="linenr">50: </span>          <span style="color: #51afef;">return</span> nn.Sequential(*layers)
+<span class="linenr">51: </span>
+<span class="linenr">52: </span>      <span style="color: #51afef;">def</span> <span style="color: #c678dd;">forward</span>(<span style="color: #51afef;">self</span>, x):
+<span class="linenr">53: </span>          out = <span style="color: #51afef;">self</span>.conv1(x)
+<span class="linenr">54: </span>          out = <span style="color: #51afef;">self</span>.layer1(out)
+<span class="linenr">55: </span>          out = <span style="color: #51afef;">self</span>.layer2(out)
+<span class="linenr">56: </span>          out = <span style="color: #51afef;">self</span>.layer3(out)
+<span class="linenr">57: </span>          out = <span style="color: #51afef;">self</span>.layer4(out)
+<span class="linenr">58: </span>          out = F.avg_pool2d(out, <span style="color: #da8548; font-weight: bold;">4</span>)
+<span class="linenr">59: </span>          out = out.view(out.size(<span style="color: #da8548; font-weight: bold;">0</span>), -<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">60: </span>          out = <span style="color: #51afef;">self</span>.fc(out)
+<span class="linenr">61: </span>          <span style="color: #51afef;">return</span> out
+<span class="linenr">62: </span>
+<span class="linenr">63: </span>
+<span class="linenr">64: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">ResNet18</span>():
+<span class="linenr">65: </span>      <span style="color: #51afef;">return</span> ResNet(ResidualBlock)
+<span class="linenr">66: </span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb7af9f4" class="outline-2">
+<h2 id="orgb7af9f4"><span class="section-number-2">5.</span> PyTorch 基本運算</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org4e1aa87" class="outline-3">
+<h3 id="org4e1aa87"><span class="section-number-3">5.1.</span> 使用 tensor 建構一個未初始化的矩陣</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> sys
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(sys.version)
+<span class="linenr">3: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">4: </span><span style="color: #dcaeea;">x</span> = torch.empty(<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(x)
+</pre>
+</div>
+
+<pre class="example">
+3.7.4 (default, Sep  7 2019, 18:27:02)
+[Clang 10.0.1 (clang-1001.0.46.4)]
+tensor([[4.6894e+27, 7.9463e+08, 3.2604e-12],
+        [1.7743e+28, 2.0535e-19, 5.9682e-02],
+        [7.0374e+22, 3.8946e+21, 4.4650e+30],
+        [7.0975e+22, 7.9309e+34, 7.9439e+08],
+        [3.2604e-12, 7.3113e+34, 2.0706e-19]])
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdd9455c" class="outline-3">
+<h3 id="orgdd9455c"><span class="section-number-3">5.2.</span> 建構一個亂數的矩陣</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> sys
+<span class="linenr">2: </span><span style="color: #c678dd;">print</span>(sys.version)
+<span class="linenr">3: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr">4: </span><span style="color: #dcaeea;">x</span> = torch.empty(<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">3</span>)
+<span class="linenr">5: </span><span style="color: #c678dd;">print</span>(x)
+</pre>
+</div>
+
+<pre class="example">
+3.7.4 (default, Jul  9 2019, 18:13:23)
+[Clang 10.0.1 (clang-1001.0.46.4)]
+tensor([[ 0.0000e+00,  0.0000e+00,  0.0000e+00],
+        [ 0.0000e+00,  0.0000e+00,  1.1704e-41],
+        [ 0.0000e+00,  2.2369e+08,  0.0000e+00],
+        [ 0.0000e+00,  0.0000e+00,  0.0000e+00],
+        [        nan,         nan, -7.0351e+02]])
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc417447" class="outline-2">
+<h2 id="orgc417447"><span class="section-number-2">6.</span> PyTorch 自動求導(autograd)機制</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org7c663fd" class="outline-3">
+<h3 id="org7c663fd"><span class="section-number-3">6.1.</span> Autograd: 自動微分</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+autograd 包是 PyTorch 所有神經網路的核心，為 Tensors 上的所有操作提供了自動區分。同時，它也是一個逐個執行的框架，意味著 backprop 由程式碼執行定義，每一次迭代都可以不同。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b2eafe" class="outline-3">
+<h3 id="org9b2eafe"><span class="section-number-3">6.2.</span> autograd.Variable</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+autograd.Variable 是 torch.autograd 中很重要的 class。它用來包裝 Tensor，將 Tensor 轉換為 Variable 之後，可以裝載梯度信息。autograd.Variable 包含一個張量，並支援幾乎所有定義的操作，在完成計算後，呼叫.backward()並自動計算所有梯度。可以通過.data 屬性訪問原始張量，而將此變數的梯度累加到.grad。<br />
+如圖<a href="#orge82c83e">3</a>，data 負責儲存 tensor 數據，grad 屬性儲存關於該變數的導數。<br />
+</p>
+
+<div id="orge82c83e" class="figure">
+<p><img src="images/autogradVariable.png" alt="autogradVariable.png" width="300" /><br />
+</p>
+<p><span class="figure-number">Figure 3: </span>autograd.Variable</p>
+</div>
+
+<p>
+pytorch 的一個重要特點就是動態計算圖（Dynamic Computational Graphs）。計算圖中每一個節點代表一個變量，變量間建立運算關係並且可以修改，而不像 Tensorflow 中的計算圖是固定不可變的。<br />
+</p>
+
+<p>
+Variable 用來構建一個計算圖中的節點。將 Tensor 轉換為 Variabla 類型之後，該 Tensor 就成了計算圖中的一個節點。對於該節點，有兩個重要的特性：<br />
+</p>
+
+<ul class="org-ul">
+<li>.data——獲得該節點的值，即 Tensor 類型的值<br /></li>
+<li>.grad——獲得該節點處的梯度信息<br /></li>
+</ul>
+
+<p>
+關於 Variable 的參數之一「requires_grad」和特性之一「grad_fn」有要注意的地方，都和該變量是否是人自己創建的有關：<br />
+</p>
+
+<ol class="org-ol">
+<li>requires_grad 有兩個值：True 和 False，True 代表此變量處需要計算梯度，False 代表不需要。變量的「requires_grad」值是 Variable 的一個參數，在建立 Variable 的時候就已經設定好，默認是 False。<br /></li>
+<li>grad_fn 的值可以得知該變量是否是一個計算結果，也就是說該變量是不是一個函數的輸出值。若是，則 grad_fn 返回一個與該函數相關的對象，否則是 None。<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf22ff7a" class="outline-3">
+<h3 id="orgf22ff7a"><span class="section-number-3">6.3.</span> Example</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+自動求導是 PyTorch 中非常重要的特性，可自動計算複雜的導數。以下式為例：<br />
+</p>
+\begin{equation}
+\label{orge16c9c8}
+y = x + 2 \\
+z = y^2 + 3 \\
+\frac{\partial Z}{\partial X} = \frac{\partial Z}{\partial Y} \frac{\partial Y}{\partial X}
+\end{equation}
+
+<p>
+公式\eqref{orge16c9c8}相當於\(z=(x+2)^2+3\)之\(x\)，也就是說，我們有一個向量 x，在經過一系列的運算後，會得到變量 z，現在，我們想要求 z 關於 x 的導數，此時可以透過 PyTorch 來算動求解。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> torch
+<span class="linenr"> 2: </span><span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">x</span> = Variable(torch.Tensor([<span style="color: #da8548; font-weight: bold;">2</span>]), requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr"> 5: </span>y = x + <span style="color: #da8548; font-weight: bold;">2</span>
+<span class="linenr"> 6: </span>z = y**<span style="color: #da8548; font-weight: bold;">2</span> + <span style="color: #da8548; font-weight: bold;">3</span>
+<span class="linenr"> 7: </span><span style="color: #c678dd;">print</span>(z)
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#33258;&#21205;&#27714;&#23566;</span>
+<span class="linenr">10: </span>z.backward()
+<span class="linenr">11: </span><span style="color: #c678dd;">print</span>(x.grad)
+</pre>
+</div>
+
+<pre class="example">
+tensor([19.], grad_fn=&lt;AddBackward0&gt;)
+tensor([8.])
+</pre>
+
+
+<p>
+其中，x.grad 會傳回 z 關於 x 的向量梯度。計算結果與手動計算相同，即，\( \frac{\partial Z}{\partial X} = 2(x+2) = 2(2+2) = 8 \)<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge49f14b" class="outline-3">
+<h3 id="orge49f14b"><span class="section-number-3">6.4.</span> PyTorch 的梯度計算<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+pytorch 的一個重要特點就是動態計算圖（Dynamic Computational Graphs）。計算圖中每一個節點代表一個變量，變量間建立運算關係並且可以修改，而不像 Tensorflow 中的計算圖是固定不可變的。<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span>  <span style="color: #51afef;">import</span> torch
+<span class="linenr">2: </span>  <span style="color: #51afef;">from</span> torch.autograd <span style="color: #51afef;">import</span> Variable
+<span class="linenr">3: </span>  <span style="color: #dcaeea;">x</span>=Variable(torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>))
+<span class="linenr">4: </span>  <span style="color: #dcaeea;">y</span>=Variable(torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>))
+<span class="linenr">5: </span>  <span style="color: #dcaeea;">z</span>=Variable(torch.randn(<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">2</span>),requires_grad=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr">6: </span>  a=x+y
+<span class="linenr">7: </span>  b=a+z
+<span class="linenr">8: </span>  <span style="color: #c678dd;">print</span>(b)
+</pre>
+</div>
+
+<pre class="example">
+tensor([[ 3.1240,  0.7868],
+        [-0.9371, -2.5228]], grad_fn=&lt;AddBackward0&gt;)
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://medium.com/pyladies-taiwan/%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E6%96%B0%E6%89%8B%E6%9D%91-pytorch%E5%85%A5%E9%96%80-511df3c1c025">深度學習新手村：PyTorch入門</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305d9cd231015d9d0992ef0030">https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305d9cd231015d9d0992ef0030</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.twblogs.net/a/5bd3c1902b717778ac20ccb6">PyTorch 常用方法總結</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zhuanlan.zhihu.com/p/29904755">Autograd:PyTorch中的梯度計算</a><br />
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-02 Sat 21:07</p>
+</div>
+</body>
+</html>

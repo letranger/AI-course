@@ -1,0 +1,1167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-04 Mon 09:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TensorFlow</title>
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">TensorFlow</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org15bc269">1. TensorFlow簡介</a>
+<ul>
+<li><a href="#orgd0253c0">1.1. 簡介</a></li>
+<li><a href="#org4e62d15">1.2. 為何不用 sklearn</a></li>
+<li><a href="#org1000338">1.3. Converting TF 1.0 code to 2.0</a></li>
+<li><a href="#org068a27a">1.4. 學習資源</a></li>
+</ul>
+</li>
+<li><a href="#org006e4d6">2. 安裝</a>
+<ul>
+<li><a href="#orgc102960">2.1. windows 10</a></li>
+</ul>
+</li>
+<li><a href="#org2813738">3. Tenser運算原理</a>
+<ul>
+<li><a href="#org97a8a68">3.1. 常用的常數向量建構函數</a></li>
+<li><a href="#orga69b868">3.2. 常用的矩陣建構與計算函數</a></li>
+<li><a href="#orgf25c1e5">3.3. 變數</a></li>
+<li><a href="#orgf73a8f4">3.4. Placeholder</a></li>
+<li><a href="#orgefef920">3.5. placeholder 與 variable 的差異</a></li>
+</ul>
+</li>
+<li><a href="#org7fcdb8c">4. TenserBoard</a></li>
+<li><a href="#orgc402197">5. 情緒分析 sentiment analysis</a></li>
+<li><a href="#org012daa4">6. IMDb-Movie-Review</a></li>
+<li><a href="#orgcce8920">7. 使用 XLNet(2019)</a></li>
+<li><a href="#orgcc69889">8. Basic</a>
+<ul>
+<li><a href="#org2106ce2">8.1. Tensors</a></li>
+</ul>
+</li>
+<li><a href="#orgbbb3db8">9. Prediction:</a>
+<ul>
+<li><a href="#orga62126f">9.1. Classification</a></li>
+<li><a href="#orgf9b4cc0">9.2. Numeric Prediction</a></li>
+</ul>
+</li>
+<li><a href="#orgc84e1a9">10. Classification two steps</a></li>
+<li><a href="#orgadef8c0">11. 分類演算法</a></li>
+<li><a href="#org13e7173">12. Unsupervised Learning</a>
+<ul>
+<li><a href="#org9397934">12.1. Cluster Analysis</a></li>
+<li><a href="#org4b12335">12.2. Algorithms</a></li>
+</ul>
+</li>
+<li><a href="#org89f2119">13. 類神經網路</a>
+<ul>
+<li><a href="#orgbc8369c">13.1. preceptron</a></li>
+<li><a href="#orgf3ef254">13.2. Activation</a></li>
+<li><a href="#orgef0cf14">13.3. AND gate 實作</a></li>
+<li><a href="#org6f00674">13.4. Or gate 實作</a></li>
+<li><a href="#orgea302d7">13.5. 重要關鍵</a></li>
+<li><a href="#org67d4507">13.6. 具有學習能力的類神經網路</a></li>
+</ul>
+</li>
+<li><a href="#org0200013">14. 神經網路的基本步驟</a>
+<ul>
+<li><a href="#orgb151524">14.1. 如何計算誤差</a></li>
+<li><a href="#org14398ca">14.2. 類神經網路的 Back-Propagation</a></li>
+</ul>
+</li>
+<li><a href="#orgbd610e4">15. 梯度下降法</a></li>
+<li><a href="#org3c5583c">16. 優化器演算法</a></li>
+<li><a href="#orgefade04">17. Tensorflow</a>
+<ul>
+<li><a href="#orgaa601ac">17.1. Tensor 資料型別</a></li>
+<li><a href="#org9f0b96b">17.2. Tensorflow 教材</a></li>
+</ul>
+</li>
+<li><a href="#org86a7679">18. Keras</a>
+<ul>
+<li><a href="#orgdbc82bf">18.1. 如何判斷 Keras</a></li>
+<li><a href="#org9938ef1">18.2. steps</a></li>
+<li><a href="#orga73917d">18.3. tensorflow 開發三種模式</a></li>
+<li><a href="#org59853c7">18.4. Model class API</a></li>
+<li><a href="#org8a67818">18.5. 用 Keras 來做剛剛的迴歸</a></li>
+<li><a href="#orgf8c3003">18.6. 何時用 function 式的寫法</a></li>
+<li><a href="#orgce4ffaf">18.7. kernel density</a></li>
+</ul>
+</li>
+<li><a href="#org48387d5">19. 20200613 #2/3</a>
+<ul>
+<li><a href="#org8b05828">19.1. 版本差異</a></li>
+<li><a href="#orgad9873c">19.2. 閱讀 Tensorflow</a></li>
+<li><a href="#orgcf9b522">19.3. TensorFlow Hub</a></li>
+</ul>
+</li>
+<li><a href="#orgca5bfd6">20. tf.data</a>
+<ul>
+<li><a href="#org81cb5b1">20.1. 資料預處理: tf.data.Dataset API</a></li>
+<li><a href="#orgae306f7">20.2. TensorFlow 能接受的資料輸入(如圖片大小及色階)有固定</a></li>
+</ul>
+</li>
+<li><a href="#org8fff5d4">21. Data is the king</a>
+<ul>
+<li><a href="#org5d675c6">21.1. 資料太少？</a></li>
+<li><a href="#org1a12e46">21.2. 過度擬合</a></li>
+</ul>
+</li>
+<li><a href="#org097d9c0">22. homework</a></li>
+<li><a href="#org56e3d44">23. 比賽可以出的題目</a></li>
+<li><a href="#orgdf2b5a6">24. 感知機(Perceptron)</a></li>
+<li><a href="#org1f28df9">25. RNN</a>
+<ul>
+<li><a href="#org3397c3b">25.1. Sequential pattern</a></li>
+</ul>
+</li>
+<li><a href="#orgfad024d">26. Book: Deep Learning</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org15bc269" class="outline-2">
+<h2 id="org15bc269"><span class="section-number-2">1.</span> TensorFlow簡介</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgd0253c0" class="outline-3">
+<h3 id="orgd0253c0"><span class="section-number-3">1.1.</span> 簡介</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<a href="https://www.tensorflow.org/tutorials/generative/adversarial_fgsm">官網學習資源</a><br />
+是 Google 繼 2011 年開發了 DistBelief 之後的產品，最初由 Google Brain Team 團隊開發，Google 使用 TensorFlow 進行研究及自身產品開發，並於 2015 年 11 月開放原始碼。Google 的 TensorFlow 產品應用包括 GMail 垃圾郵件過濾、Google 語音辨識、Google 圖像辨識、Google 翻譯等等。<br />
+</p>
+
+<p>
+TensorFlow 可以在 CPU、GPU、TPU(Tensor Processing Unit，由 google 為 AI 研發的專屬晶片)上執行，此外，TensorFlow 也有極佳的跨平台能力，可以在不修改程式碼的前題下，於下列平台上執行訓練，包括：Windows、Linux、iOS、Android、Raspberry Pi。<br />
+</p>
+
+<p>
+TensorFlow 為較低階的深度學習 API，所以模型必須自行設計，包括張量乘積、卷積等底層操作也要自行撰寫，優點是可以自行規劃模型內容，缺點是開發需要更多時間。所有，有許多開發商以 TensorFlow 為底層開發了許多高階 API，如：Keras、TF-Learn、TF-Slim、TF-Layer。<br />
+</p>
+
+<p>
+透過使用資料流(flow)圖像，來進行數值演算的新一代開源機器學習工具。這個機器學習工具的基礎設計，主要透過圖學裡的「節點」來表達數學運算，「邊」來表示「節點」間的多維度資料陣列 (tensors，張量)，因此命名做 TensorFlow。<br />
+</p>
+
+<p>
+TensorFlow 的設計模式核心為「計算圖」(computational graph)，可分為建立計算圖與執行計算圖兩個部份，其程式架構大致如下。<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>  <span style="color: #51afef;">import</span> tensorflow <span style="color: #51afef;">as</span> tf
+<span class="linenr"> 2: </span>  <span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 3: </span>  <span style="color: #98be65;">'''1. &#24314;&#31435;&#35336;&#31639;&#22294;'''</span>
+<span class="linenr"> 4: </span>  <span style="color: #dcaeea;">W</span> = tf.Variable(tf.random_normal([<span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #da8548; font-weight: bold;">2</span>]), name=<span style="color: #98be65;">'W'</span>)
+<span class="linenr"> 5: </span>  b = tf.Variable(tf.random_normal([<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">2</span>]), name=<span style="color: #98be65;">'b'</span>)
+<span class="linenr"> 6: </span>  X = tf.placeholder(<span style="color: #98be65;">"float"</span>, [<span style="color: #a9a1e1;">None</span>,<span style="color: #da8548; font-weight: bold;">3</span>], name=<span style="color: #98be65;">'X'</span>)
+<span class="linenr"> 7: </span>  y = tf.nn.sigmoid(tf.matmul(X,W)+b, <span style="color: #98be65;">'y'</span>)
+<span class="linenr"> 8: </span>  <span style="color: #83898d;">'''2. &#22519;&#34892;&#35336;&#31639;&#22294;'''</span>
+<span class="linenr"> 9: </span>  <span style="color: #51afef;">with</span> tf.Session() <span style="color: #51afef;">as</span> sess:
+<span class="linenr">10: </span>      init= tf.global_variables_initializer()
+<span class="linenr">11: </span>      sess.run(init)
+<span class="linenr">12: </span>      X_array = np.array([[<span style="color: #da8548; font-weight: bold;">0.4</span>, <span style="color: #da8548; font-weight: bold;">0.2</span>, <span style="color: #da8548; font-weight: bold;">0.4</span>],
+<span class="linenr">13: </span>                          [<span style="color: #da8548; font-weight: bold;">0.3</span>, <span style="color: #da8548; font-weight: bold;">0.4</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>],
+<span class="linenr">14: </span>                          [<span style="color: #da8548; font-weight: bold;">0.3</span>, -<span style="color: #da8548; font-weight: bold;">0.4</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>]])
+<span class="linenr">15: </span>      (<span style="color: #dcaeea;">_b</span>,<span style="color: #dcaeea;">_W</span>,<span style="color: #dcaeea;">_X</span>,<span style="color: #dcaeea;">_y</span>) = sess.run((b,W,X,y), feed_dict={X:X_array})
+<span class="linenr">16: </span>
+<span class="linenr">17: </span>  <span style="color: #c678dd;">print</span>(_b)
+<span class="linenr">18: </span>  <span style="color: #c678dd;">print</span>(_W)
+<span class="linenr">19: </span>  <span style="color: #c678dd;">print</span>(_X)
+<span class="linenr">20: </span>  <span style="color: #c678dd;">print</span>(_y)
+</pre>
+</div>
+
+<pre class="example" id="orgd6ce0c8">
+[[-0.28260672  2.0333097 ]]
+[[-1.5098639   0.07314453]
+ [ 0.5849383   1.2003893 ]
+ [ 1.8941628   0.44426546]]
+[[ 0.4  0.2  0.4]
+ [ 0.3  0.4  0.5]
+ [ 0.3 -0.4  0.5]]
+[[0.49702516 0.92275286]
+ [0.60956657 0.9403379 ]
+ [0.4943853  0.8578114 ]]
+</pre>
+</div>
+</div>
+<div id="outline-container-org4e62d15" class="outline-3">
+<h3 id="org4e62d15"><span class="section-number-3">1.2.</span> 為何不用 sklearn</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><a href="AI-Introduction.html">AI Introduction</a><br /></li>
+<li>sklearn 不能跑 GPU<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1000338" class="outline-3">
+<h3 id="org1000338"><span class="section-number-3">1.3.</span> Converting TF 1.0 code to 2.0</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+若在 colab 則於最前面加!<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">simple script converts TF 1.0 code to TF 2.0 code !tf_upgrade_v2 --infile</span>
+<span class="linenr">2: </span>tf_upgrade_v2 --infile tf_1_code.py tf2_code.py
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org068a27a" class="outline-3">
+<h3 id="org068a27a"><span class="section-number-3">1.4.</span> 學習資源</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li><a href="https://www.tensorflow.org/tutorials">官方教學網站</a><br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org006e4d6" class="outline-2">
+<h2 id="org006e4d6"><span class="section-number-2">2.</span> 安裝</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc102960" class="outline-3">
+<h3 id="orgc102960"><span class="section-number-3">2.1.</span> windows 10</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>download python3<br /></li>
+<li>download CUDA 9/10<br /></li>
+<li>download and setup cuDNN<br /></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2813738" class="outline-2">
+<h2 id="org2813738"><span class="section-number-2">3.</span> Tenser運算原理</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+一個 TensorFlow 的基礎數值運算需要三個步驟：<br />
+</p>
+<ol class="org-ol">
+<li>宣告張量為常數<br /></li>
+</ol>
+<p>
+TensorFlow 的基本運算單位是張量（Tensor），張量的維度可以是零（零維張量更常見的名稱是純量，Scalar） 、可以是 1（1 維張量更常見的名稱是向量，Vector）、可以是 2（2 維張量更常見的名稱是矩陣，Matrix）亦可以為 n（n 維張量），這個設計與 NumPy 中 ndarray 不謀而合，對於熟悉 NumPy 的 Python 使用者是一大福音。<br />
+</p>
+<ol class="org-ol">
+<li>宣告數值運算的公式<br /></li>
+</ol>
+<p>
+基礎的數值運算（四則運算、次方、求餘數或求商數等）都有 TensorFlow 的函數可以呼叫。<br />
+</p>
+<ul class="org-ul">
+<li>相加 +：tf.add()<br /></li>
+<li>相減 -： tf.sub()<br /></li>
+<li>相乘 *： tf.multiply()<br /></li>
+<li>相除 /： tf.divide()<br /></li>
+<li>次方 **： tf.pow()<br /></li>
+<li>求餘數 %： tf.mod()<br /></li>
+<li>求商數 //：tf.div()<br /></li>
+</ul>
+<p>
+與 Python 數值運算不同的是，這些函數都必須在 TensorFlow 的 Session 中執行才會有運算結果的輸出，否則只是顯示張量物件的資訊而已。<br />
+</p>
+<ol class="org-ol">
+<li>以 Session 執行數值運算<br /></li>
+</ol>
+<p>
+利用 tf.Session() 建立 Session 後再執行數值運算是正規的 TensorFlow 寫法，但對於慣用 Jupyter Notebook 的資料科學家可能會略嫌麻煩，這時可以選擇以 tf.InteractiveSession() 互動模式啟動 Session，一但設定為互動模式後，執行運算變為呼叫張量的 .eval() 方法，並記得在使用完畢之後呼叫 Session 的 .close() 方法關閉互動模式。<br />
+</p>
+</div>
+
+<div id="outline-container-org97a8a68" class="outline-3">
+<h3 id="org97a8a68"><span class="section-number-3">3.1.</span> 常用的常數向量建構函數</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+除了使用 tf.constant() 創造常數張量以外，常用的建構函數有：<br />
+</p>
+<ol class="org-ol">
+<li>tf.zeros() ：建構內容數值皆為 0 的常數張量<br /></li>
+<li>tf.ones() ：建構內容數值皆為 1 的常數張量<br /></li>
+<li>tf.fill() ：建構內容數值皆為特定值的常數張量<br /></li>
+<li>tf.range() ：建構內容數值為 (start, limit, delta) 數列的常數張量<br /></li>
+<li>tf.random_normal() ：建構內容數值為符合常態分佈數列的常數張量<br /></li>
+<li>tf.random_uniform() ：建構內容數值為符合均勻分佈數列的常數張量<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga69b868" class="outline-3">
+<h3 id="orga69b868"><span class="section-number-3">3.2.</span> 常用的矩陣建構與計算函數</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+TensorFlow 的二維張量與 NumPy 的二維陣列相同為矩陣提供了各種方便使用者呼叫的建構、運算函數，而矩陣亦是 NumPy 與 TensorFlow 應用實務中最常被使用的類型，而常用的矩陣建構與計算函數有：<br />
+</p>
+<ol class="org-ol">
+<li>tf.reshape() ：調整矩陣外觀<br /></li>
+<li>tf.eye() ：建構單位矩陣<br /></li>
+<li>tf.diag() ：建構對角矩陣<br /></li>
+<li>tf.matrix_transpose() ：轉置矩陣<br /></li>
+<li>tf.matmul() ：矩陣相乘<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgf25c1e5" class="outline-3">
+<h3 id="orgf25c1e5"><span class="section-number-3">3.3.</span> 變數</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+雖然以常數進行數值運算很方便，但就如同在程式設計中不可能永遠只倚賴值（Values）一般，常見的情況是為了保持彈性，必須將值宣告賦值給變數（Variables）讓使用者能夠動態地進行相同的計算來得到不同的結果，這在 TensorFlow 中是以 tf.Variable() 來完成，就像是在 Python 中簡單宣告變數一般。<br />
+</p>
+
+<p>
+不過在 TensorFlow 的觀念之中，宣告變數張量並不如 Python 或者先前宣告常數張量那麼單純，它需要兩個步驟：<br />
+</p>
+<ol class="org-ol">
+<li>宣告變數張量的初始值、類型與外觀<br /></li>
+<li>初始化變數張量<br /></li>
+</ol>
+<p>
+如果宣告的變數張量沒有經過初始化，我們將會得到<br />
+</p>
+
+<p>
+該如何初始化變數張量呢？只需將變數張量的 initializer 屬性放入 Session 中執行即可。初始化成功後的變數張量，可以透過 .assign() 方法賦予不同值。<br />
+值得注意的地方是對變數張量重新賦値這件事對 TensorFlow 來說也是一個運算，必須在宣告之後放入 Session 中執行，否則重新賦值並不會有作用。變數張量一但被宣告之後，重新賦值時必須要注意類型，賦予不同類型的值會得到 TypeError。不僅是值的類型，外觀也必須跟當初所宣告的相同，賦予不同外觀的值會得到 ValueError。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgf73a8f4" class="outline-3">
+<h3 id="orgf73a8f4"><span class="section-number-3">3.4.</span> Placeholder</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+第三種在 TensorFlow 中張量將被宣告的類型稱為 Placeholder，這是一種常見將資料輸入 TensorFlow 計算圖形（Graph）的方法，我們可以將它對照為像是在佔有一個長度卻沒有初始值的 Python None、或者是 NumPy np.NaN ，差異在於 None 或 np.NaN 不需要將之後想要擺放的資料類型預先定義，但是 Placeholder 張量和變數張量一樣，必須預先定義好之後欲輸入的資料類型與外觀。使用 tf.placeholder() 可以建出 Placeholder 張量，未來利用 TensorFlow 訓練機器學習與深度學習的模型時，將會使用 Placeholder 將 X 與 y 的資料輸入計算圖形。<br />
+那麼宣告完 Placeholder 張量以後，又該如何將資料輸入？TensorFlow 的術語稱作是 Feed dictionaries，意即將資料以 Python dict 餵進（Feed）Placeholder 張量之中，而 TensorFlow 術語則將完成計算後的輸出資料稱作是 Fetch，是 ndarray 的類型。<br />
+Placeholder 張量具備隱性型別轉換的功能，假如我們用浮點數餵入已經被宣告為 tf.int32 的 Placeholder 張量中，將會被自動轉換為整數。假如餵入資料外觀與 Placeholder 張量所定義的不同，則會產生錯誤。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgefef920" class="outline-3">
+<h3 id="orgefef920"><span class="section-number-3">3.5.</span> placeholder 與 variable 的差異</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+The difference is that with tf.Variable you have to provide an initial value when you declare it. With tf.placeholder you don&rsquo;t have to provide an initial value and you can specify it at run time with the feed_dict argument inside Session.run<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7fcdb8c" class="outline-2">
+<h2 id="org7fcdb8c"><span class="section-number-2">4.</span> TenserBoard</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+TensorFlow 的開發團隊提供了 TensorBoard 應用程式可以在本機端啟動網頁伺服器，並在其中顯示 TensorFlow 程式的相關視覺化，若希望能夠在 TensorBoard 中檢視，必須手動在 TensorFlow 程式中加入 tf.summary.FileWriter() 來指定 TensorBoard 儲存日誌的檔案路徑，例如寫作一個簡單的張量相加運算，並將這個運算記錄在 graphs/tf_add 資料夾中。<br />
+</p>
+
+<p>
+接著回到終端機，在啟動 Jupyter Notebook 的路徑下執行指令啟動 TensorBoard 服務，並指定日誌儲存的檔案路徑 &#x2013;logdir=graphs/tf_add 以及 TensorBoard 網頁伺服器的啟動位址（本機位址 localhost） &#x2013;host=127.0.0.1 。<br />
+</p>
+
+<p>
+最後打開瀏覽器在網址列輸入 127.0.0.1:6006 就可以瀏覽 TensorBoard 的服務內容，點選 GRAPHS 標籤就可以觀察一個張量相加運算在 TensorBoard 的視覺化。<br />
+</p>
+
+<p>
+檢視完畢之後可以回到終端機畫面以 CTRL-C 終止 TensorBoard 服務。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc402197" class="outline-2">
+<h2 id="orgc402197"><span class="section-number-2">5.</span> 情緒分析 sentiment analysis</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<a href="https://github.com/MyDearGreatTeacher/TensorSecurity/blob/master/code/TF/RNN/%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F_%E6%83%85%E7%B7%92%E5%88%86%E6%9E%90sentiment%20analysis.md">https://github.com/MyDearGreatTeacher/TensorSecurity/blob/master/code/TF/RNN/%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F_%E6%83%85%E7%B7%92%E5%88%86%E6%9E%90sentiment%20analysis.md</a><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org012daa4" class="outline-2">
+<h2 id="org012daa4"><span class="section-number-2">6.</span> IMDb-Movie-Review</h2>
+</div>
+
+<div id="outline-container-orgcce8920" class="outline-2">
+<h2 id="orgcce8920"><span class="section-number-2">7.</span> 使用 XLNet(2019)</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+</div>
+
+
+<div id="outline-container-orgcc69889" class="outline-2">
+<h2 id="orgcc69889"><span class="section-number-2">8.</span> Basic</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org2106ce2" class="outline-3">
+<h3 id="org2106ce2"><span class="section-number-3">8.1.</span> Tensors</h3>
+<div class="outline-text-3" id="text-8-1">
+</div>
+<ol class="org-ol">
+<li><a id="org5855661"></a>Creating Tensors<br />
+<div class="outline-text-4" id="text-8-1-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> tensorflow <span style="color: #51afef;">as</span> tf
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #dcaeea;">string</span> = tf.Variable([<span style="color: #98be65;">"This is a string"</span>], tf.string)
+<span class="linenr">4: </span><span style="color: #dcaeea;">number</span> = tf.Variable(<span style="color: #da8548; font-weight: bold;">9527</span>, tf.int16)
+<span class="linenr">5: </span><span style="color: #dcaeea;">floating</span> = tf.Variable(<span style="color: #da8548; font-weight: bold;">3.141592</span>, tf.float64)
+<span class="linenr">6: </span>
+<span class="linenr">7: </span><span style="color: #c678dd;">print</span>(string)
+<span class="linenr">8: </span><span style="color: #c678dd;">print</span>(number)
+<span class="linenr">9: </span><span style="color: #c678dd;">print</span>(floating.v)
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbbb3db8" class="outline-2">
+<h2 id="orgbbb3db8"><span class="section-number-2">9.</span> Prediction:</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-orga62126f" class="outline-3">
+<h3 id="orga62126f"><span class="section-number-3">9.1.</span> Classification</h3>
+<div class="outline-text-3" id="text-9-1">
+<ul class="org-ul">
+<li>Decision tree<br /></li>
+<li>Ensemble Methods: 整合/集成/, bagging, boosting<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf9b4cc0" class="outline-3">
+<h3 id="orgf9b4cc0"><span class="section-number-3">9.2.</span> Numeric Prediction</h3>
+</div>
+</div>
+
+<div id="outline-container-orgc84e1a9" class="outline-2">
+<h2 id="orgc84e1a9"><span class="section-number-2">10.</span> Classification two steps</h2>
+<div class="outline-text-2" id="text-10">
+<ol class="org-ol">
+<li>process 1: Model construction<br /></li>
+<li>process 2: Using the Model in prediction<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgadef8c0" class="outline-2">
+<h2 id="orgadef8c0"><span class="section-number-2">11.</span> 分類演算法</h2>
+<div class="outline-text-2" id="text-11">
+<ul class="org-ul">
+<li>評估指標<br /></li>
+<li>作業：找出有漏洞程式碼資料集(有 Label 的)，找 Metrics 評估指標<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org13e7173" class="outline-2">
+<h2 id="org13e7173"><span class="section-number-2">12.</span> Unsupervised Learning</h2>
+<div class="outline-text-2" id="text-12">
+</div>
+<div id="outline-container-org9397934" class="outline-3">
+<h3 id="org9397934"><span class="section-number-3">12.1.</span> Cluster Analysis</h3>
+</div>
+<div id="outline-container-org4b12335" class="outline-3">
+<h3 id="org4b12335"><span class="section-number-3">12.2.</span> Algorithms</h3>
+</div>
+</div>
+
+<div id="outline-container-org89f2119" class="outline-2">
+<h2 id="org89f2119"><span class="section-number-2">13.</span> 類神經網路</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-orgbc8369c" class="outline-3">
+<h3 id="orgbc8369c"><span class="section-number-3">13.1.</span> preceptron</h3>
+<div class="outline-text-3" id="text-13-1">
+<ul class="org-ul">
+<li>Weight<br /></li>
+<li>Bias<br /></li>
+<li>Activation function<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf3ef254" class="outline-3">
+<h3 id="orgf3ef254"><span class="section-number-3">13.2.</span> Activation</h3>
+<div class="outline-text-3" id="text-13-2">
+<p>
+哪一種 function 最好：跑出來有效的就是好的<br />
+</p>
+<ul class="org-ul">
+<li>Sigmoid function<br /></li>
+<li>tanh<br /></li>
+<li>ReLU<br /></li>
+<li>Leaky ReLU<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgef0cf14" class="outline-3">
+<h3 id="orgef0cf14"><span class="section-number-3">13.3.</span> AND gate 實作</h3>
+<div class="outline-text-3" id="text-13-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">coding: utf-8</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 3: </span><span style="color: #da8548; font-weight: bold;">3</span>
+<span class="linenr"> 4: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">AND</span>(x1, x2):
+<span class="linenr"> 5: </span>    <span style="color: #dcaeea;">x</span> = np.array([x1, x2])
+<span class="linenr"> 6: </span>    <span style="color: #dcaeea;">w</span> = np.array([<span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>])
+<span class="linenr"> 7: </span>    <span style="color: #dcaeea;">b</span> = -<span style="color: #da8548; font-weight: bold;">0.7</span>
+<span class="linenr"> 8: </span>    <span style="color: #dcaeea;">tmp</span> = np.<span style="color: #c678dd;">sum</span>(w*x) + b
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">if</span> tmp &lt;= <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">10: </span>        <span style="color: #51afef;">return</span> <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">11: </span>    <span style="color: #51afef;">else</span>:
+<span class="linenr">12: </span>        <span style="color: #51afef;">return</span> <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">__name__</span> == <span style="color: #98be65;">'__main__'</span>:
+<span class="linenr">15: </span>    <span style="color: #51afef;">for</span> xs <span style="color: #51afef;">in</span> [(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">0</span>), (<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">0</span>), (<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">1</span>), (<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>)]:
+<span class="linenr">16: </span>        y = AND(xs[<span style="color: #da8548; font-weight: bold;">0</span>], xs[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">17: </span>        <span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">str</span>(xs) + <span style="color: #98be65;">" -&gt; "</span> + <span style="color: #c678dd;">str</span>(y))
+</pre>
+</div>
+
+<pre class="example">
+(0, 0) -&gt; 0
+(1, 0) -&gt; 0
+(0, 1) -&gt; 0
+(1, 1) -&gt; 1
+</pre>
+</div>
+</div>
+<div id="outline-container-org6f00674" class="outline-3">
+<h3 id="org6f00674"><span class="section-number-3">13.4.</span> Or gate 實作</h3>
+<div class="outline-text-3" id="text-13-4">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">coding: utf-8</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">OR</span>(x1, x2):
+<span class="linenr"> 5: </span>    <span style="color: #dcaeea;">x</span> = np.array([x1, x2])
+<span class="linenr"> 6: </span>    <span style="color: #dcaeea;">w</span> = np.array([<span style="color: #da8548; font-weight: bold;">0.5</span>, <span style="color: #da8548; font-weight: bold;">0.5</span>])
+<span class="linenr"> 7: </span>    <span style="color: #dcaeea;">b</span> = -<span style="color: #da8548; font-weight: bold;">0.3</span>
+<span class="linenr"> 8: </span>    <span style="color: #dcaeea;">tmp</span> = np.<span style="color: #c678dd;">sum</span>(w*x) + b
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">if</span> tmp &lt;= <span style="color: #da8548; font-weight: bold;">0</span>:
+<span class="linenr">10: </span>        <span style="color: #51afef;">return</span> <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">11: </span>    <span style="color: #51afef;">else</span>:
+<span class="linenr">12: </span>        <span style="color: #51afef;">return</span> <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">13: </span>
+<span class="linenr">14: </span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">__name__</span> == <span style="color: #98be65;">'__main__'</span>:
+<span class="linenr">15: </span>    <span style="color: #51afef;">for</span> xs <span style="color: #51afef;">in</span> [(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">0</span>), (<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">0</span>), (<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">1</span>), (<span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">1</span>)]:
+<span class="linenr">16: </span>        y = OR(xs[<span style="color: #da8548; font-weight: bold;">0</span>], xs[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">17: </span>        <span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">str</span>(xs) + <span style="color: #98be65;">" -&gt; "</span> + <span style="color: #c678dd;">str</span>(y))
+<span class="linenr">18: </span>
+</pre>
+</div>
+
+<pre class="example">
+(0, 0) -&gt; 0
+(1, 0) -&gt; 1
+(0, 1) -&gt; 1
+(1, 1) -&gt; 1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgea302d7" class="outline-3">
+<h3 id="orgea302d7"><span class="section-number-3">13.5.</span> 重要關鍵</h3>
+<div class="outline-text-3" id="text-13-5">
+<p>
+如果要實作 XOR，會發現無法實作出來，這個事實告訴我們，單一的 perceptron 無法完成所<br />
+有的任務，需要多層感知機:multiple-layer perceptron<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org67d4507" class="outline-3">
+<h3 id="org67d4507"><span class="section-number-3">13.6.</span> 具有學習能力的類神經網路</h3>
+<div class="outline-text-3" id="text-13-6">
+<ul class="org-ul">
+<li>前述的 perceptron 是由我們手動填值，不算具有學習能力<br /></li>
+<li>如何建立 weight, bias 的初值：<br />
+<ul class="org-ul">
+<li>全部填 0<br /></li>
+<li>random<br /></li>
+</ul></li>
+<li>加上誤差函數<br /></li>
+<li>根據誤差函數，乘上一個學習率，將這些數值回饋給 perceptron，修正較佳的 weight,<br />
+bias，如此重複迭代，直到誤差最小化<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0200013" class="outline-2">
+<h2 id="org0200013"><span class="section-number-2">14.</span> 神經網路的基本步驟</h2>
+<div class="outline-text-2" id="text-14">
+</div>
+<div id="outline-container-orgb151524" class="outline-3">
+<h3 id="orgb151524"><span class="section-number-3">14.1.</span> 如何計算誤差</h3>
+<div class="outline-text-3" id="text-14-1">
+</div>
+<ol class="org-ol">
+<li><a id="org80d4648"></a>error = 真正的值(t)-預測值(y)<br /></li>
+<li><a id="orgcd8e2e1"></a>兩種類型<br />
+<div class="outline-text-4" id="text-14-1-2">
+<ul class="org-ul">
+<li>\(E=\frac{1}{2}\Sigma_{i=1}^{n} (y_i-t_i)^2 \)<br /></li>
+<li>\(E=-\Sigma_{i=1}^{n}t_i*\logy_i\)<br /></li>
+</ul>
+
+<p>
+深度學習最常用的損失函數為 cross entropy，典型公式為：\(-\Sigma{Y_k^{'} \times \log{(Y_i)}\)，預測的結果與數字影像真實值(label)間的誤差值均是以 one-hot encoding 表示。<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org14398ca" class="outline-3">
+<h3 id="org14398ca"><span class="section-number-3">14.2.</span> 類神經網路的 Back-Propagation</h3>
+<div class="outline-text-3" id="text-14-2">
+<ul class="org-ul">
+<li>2018 年 Turing Prize 得主(Yoshua Bengio and Yann LeCun)<br /></li>
+<li>\(\eta\) = 0.1 v.s. \(\lamda\)<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd610e4" class="outline-2">
+<h2 id="orgbd610e4"><span class="section-number-2">15.</span> 梯度下降法</h2>
+<div class="outline-text-2" id="text-15">
+<ul class="org-ul">
+<li>為何學習率不能設太大的圖示(TF2020 投影片 day 1, 2, p.49)<br /></li>
+<li>實作梯度下降法的演算法<br /></li>
+<li>最佳化問題(非線性關係)<br /></li>
+<li>types:<br />
+<ol class="org-ol">
+<li>GD: 所有樣本都要算<br /></li>
+<li>Batch GD: 不全部取，只取部份的點出來算(也許 50 個)<br /></li>
+<li>Scotachtic GD: 隨機抽一個<br /></li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3c5583c" class="outline-2">
+<h2 id="org3c5583c"><span class="section-number-2">16.</span> 優化器演算法</h2>
+<div class="outline-text-2" id="text-16">
+<ul class="org-ul">
+<li>Momentum，不叫動能？<br /></li>
+<li>學習率：應該要可以調整，一開始學比較慢，後續應該會越來越快(Adaptvie Learning<br />
+Rates)<br /></li>
+<li>學習率公式：<br />
+<ol class="org-ol">
+<li>Adagrad: hiton 在上課時寫出來的, 較簡單<br /></li>
+<li>RMSprop: 除以更多參數, 目前最常見<br /></li>
+<li>Adam<br /></li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgefade04" class="outline-2">
+<h2 id="orgefade04"><span class="section-number-2">17.</span> Tensorflow</h2>
+<div class="outline-text-2" id="text-17">
+<ul class="org-ul">
+<li>Tensor: N 維陣列+Flow<br /></li>
+<li>版本變動：不到半年升了三個版本，書會跟不上更新版本<br /></li>
+<li>Tensorflow 1.X 版的問題：API 亂放,除錯困難，可能跑到快結束後才報錯誤, Tensorflow<br />
+底層為 C++，上層為 Python<br /></li>
+<li>Tensowflow 早期的高層為 tf-learn，但自從 Google 將 Keras 買下後，Keras 就成為最常用的<br />
+上層為 python<br /></li>
+<li>Tensorflow Estimator API, 因為 Tensorflow 所處理的數據太大，測試用資料集動軏成千<br />
+上萬，所以：讀入的 function 要很有效率，所以影像變成一維陣列，所以要用 batch 的方<br />
+式來跑，每次跑一點<br /></li>
+<li>Transfer learning: 拿現成的 model，修改，用來預測自己要的東西<br /></li>
+<li>Tensorflow Hub:<br /></li>
+<li>2019 年 10 月前的 tensorflow 都不要買<br /></li>
+<li>在 code 中看到 tf.placeholder(), global_initializer()的關鍵字都是 1.X 版的<br /></li>
+</ul>
+<p>
+_<br />
+</p>
+</div>
+<div id="outline-container-orgaa601ac" class="outline-3">
+<h3 id="orgaa601ac"><span class="section-number-3">17.1.</span> Tensor 資料型別</h3>
+<div class="outline-text-3" id="text-17-1">
+<ul class="org-ul">
+<li>scalar number<br /></li>
+<li>vector<br /></li>
+<li>matrix<br /></li>
+<li>3d<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9f0b96b" class="outline-3">
+<h3 id="org9f0b96b"><span class="section-number-3">17.2.</span> Tensorflow 教材</h3>
+<div class="outline-text-3" id="text-17-2">
+</div>
+<ol class="org-ol">
+<li><a id="org289a426"></a>Tutorials<br /></li>
+<li><a id="org3620094"></a><a href="https://tensorflow.org/tutorials">Tensorflow Tutorials</a><br /></li>
+<li><a id="orgeddca3e"></a>Keras<br /></li>
+<li><a id="org9429cad"></a>MIT: DEEP LEARNING<br /></li>
+<li><a id="org3c170d5"></a>O&rsquo;REILLY: 精通機器學習，蜥蜴<br /></li>
+<li><a id="org2f6765e"></a>台大：李宏易<br />
+<div class="outline-text-4" id="text-17-2-6">
+<p>
+p<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org86a7679" class="outline-2">
+<h2 id="org86a7679"><span class="section-number-2">18.</span> Keras</h2>
+<div class="outline-text-2" id="text-18">
+</div>
+<div id="outline-container-orgdbc82bf" class="outline-3">
+<h3 id="orgdbc82bf"><span class="section-number-3">18.1.</span> 如何判斷 Keras</h3>
+<div class="outline-text-3" id="text-18-1">
+<ul class="org-ul">
+<li>import Keras v.s. import tf.keras<br /></li>
+<li>使用 Tensorflow 版的 Keras 的優勢：對於分散式的運算有較好的支援<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9938ef1" class="outline-3">
+<h3 id="org9938ef1"><span class="section-number-3">18.2.</span> steps</h3>
+<div class="outline-text-3" id="text-18-2">
+</div>
+<ol class="org-ol">
+<li><a id="org154ca19"></a>載入資料(google colab import google drive)<br /></li>
+<li><a id="orga5b5b25"></a>資料預處理 (這個步驟其實是最重要也最困難的，因為資料處理的不好,如圖片模精，則後面 model 再好都沒用)<br />
+<div class="outline-text-4" id="text-18-2-2">
+<ol class="org-ol">
+<li>歸一化<br /></li>
+<li>normalization<br /></li>
+<li>大小不同的圖 -&gt; resize -&gt; 模糊 -&gt;<br /></li>
+</ol>
+</div>
+</li>
+<li><a id="org4607f0a"></a>build the model<br /></li>
+<li><a id="orga692317"></a>config the model with losses<br />
+<div class="outline-text-4" id="text-18-2-4">
+<p>
+設定 loss function,<br />
+</p>
+</div>
+</li>
+<li><a id="org8dbac78"></a>train the model<br /></li>
+<li><a id="orgde431eb"></a>評估準確度<br /></li>
+</ol>
+</div>
+<div id="outline-container-orga73917d" class="outline-3">
+<h3 id="orga73917d"><span class="section-number-3">18.3.</span> tensorflow 開發三種模式</h3>
+<div class="outline-text-3" id="text-18-3">
+<ol class="org-ol">
+<li>Model (functional)<br /></li>
+<li>Sequential(堆積木)<br /></li>
+<li>自建 model<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org59853c7" class="outline-3">
+<h3 id="org59853c7"><span class="section-number-3">18.4.</span> Model class API</h3>
+<div class="outline-text-3" id="text-18-4">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">from</span> keras.models <span style="color: #51afef;">import</span> Model
+<span class="linenr">2: </span><span style="color: #51afef;">from</span> keras.layers <span style="color: #51afef;">import</span> Input, Dense
+<span class="linenr">3: </span>
+<span class="linenr">4: </span><span style="color: #dcaeea;">a</span>=Input(shape=(<span style="color: #da8548; font-weight: bold;">784</span>,))
+<span class="linenr">5: </span>b = Dense(<span style="color: #da8548; font-weight: bold;">32</span>)(a)
+<span class="linenr">6: </span>
+<span class="linenr">7: </span>model = Model(inputs)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8a67818" class="outline-3">
+<h3 id="org8a67818"><span class="section-number-3">18.5.</span> 用 Keras 來做剛剛的迴歸</h3>
+</div>
+<div id="outline-container-orgf8c3003" class="outline-3">
+<h3 id="orgf8c3003"><span class="section-number-3">18.6.</span> 何時用 function 式的寫法</h3>
+<div class="outline-text-3" id="text-18-6">
+<p>
+multiple input v.s. mutlipel output, 這類 model 無法以 Sequentail 實作<br />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgce4ffaf" class="outline-3">
+<h3 id="orgce4ffaf"><span class="section-number-3">18.7.</span> kernel density</h3>
+</div>
+</div>
+
+<div id="outline-container-org48387d5" class="outline-2">
+<h2 id="org48387d5"><span class="section-number-2">19.</span> 20200613 #2/3</h2>
+<div class="outline-text-2" id="text-19">
+</div>
+<div id="outline-container-org8b05828" class="outline-3">
+<h3 id="org8b05828"><span class="section-number-3">19.1.</span> 版本差異</h3>
+<div class="outline-text-3" id="text-19-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgbda272f"></a>1.0: static computation graph: graph control flow<br />
+<div class="outline-text-4" id="text-19-1-1">
+<ul class="org-ul">
+<li>速度快，但當程式較長時不易 debut<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="orgbf6ed62"></a>2.x: Dynamic control flow, 動態圖，使用 eager execution (Tensorfl<br />
+<div class="outline-text-4" id="text-19-1-2">
+<p>
+ow 1.4 後開始)<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgad9873c" class="outline-3">
+<h3 id="orgad9873c"><span class="section-number-3">19.2.</span> 閱讀 Tensorflow</h3>
+<div class="outline-text-3" id="text-19-2">
+<ul class="org-ul">
+<li><a href="https://www.tensorflow.org/api_docs/python/tf">Tensorflow API</a><br /></li>
+<li>Tutorial<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf9b522" class="outline-3">
+<h3 id="orgcf9b522"><span class="section-number-3">19.3.</span> TensorFlow Hub</h3>
+<div class="outline-text-3" id="text-19-3">
+<ul class="org-ul">
+<li>a library for reusable machine learning modules<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgca5bfd6" class="outline-2">
+<h2 id="orgca5bfd6"><span class="section-number-2">20.</span> tf.data</h2>
+<div class="outline-text-2" id="text-20">
+</div>
+<div id="outline-container-org81cb5b1" class="outline-3">
+<h3 id="org81cb5b1"><span class="section-number-3">20.1.</span> 資料預處理: tf.data.Dataset API</h3>
+</div>
+<div id="outline-container-orgae306f7" class="outline-3">
+<h3 id="orgae306f7"><span class="section-number-3">20.2.</span> TensorFlow 能接受的資料輸入(如圖片大小及色階)有固定</h3>
+</div>
+</div>
+
+<div id="outline-container-org8fff5d4" class="outline-2">
+<h2 id="org8fff5d4"><span class="section-number-2">21.</span> Data is the king</h2>
+<div class="outline-text-2" id="text-21">
+</div>
+<div id="outline-container-org5d675c6" class="outline-3">
+<h3 id="org5d675c6"><span class="section-number-3">21.1.</span> 資料太少？</h3>
+<div class="outline-text-3" id="text-21-1">
+<p>
+Data augmentation<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org1a12e46" class="outline-3">
+<h3 id="org1a12e46"><span class="section-number-3">21.2.</span> 過度擬合</h3>
+<div class="outline-text-3" id="text-21-2">
+<ul class="org-ul">
+<li>Data augmentation: tf.keras.preprocessing.image.ImageDataGenerator()<br /></li>
+<li>Data Dropout<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org097d9c0" class="outline-2">
+<h2 id="org097d9c0"><span class="section-number-2">22.</span> homework</h2>
+<div class="outline-text-2" id="text-22">
+<ol class="org-ol">
+<li>tf.keras.layers.Conv2D()的各項參數說明 -&gt; 簡報<br /></li>
+<li>講義: p.212, 參考 code: Google TransorFlow 2.0<br />
+<ol class="org-ol">
+<li>使用 CIFAR-10 資料集實驗三種 weight initilazation<br /></li>
+<li>實驗 Batch Normalization 方法<br /></li>
+</ol></li>
+
+<li>tf.keras.applications<br /></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org56e3d44" class="outline-2">
+<h2 id="org56e3d44"><span class="section-number-2">23.</span> 比賽可以出的題目</h2>
+<div class="outline-text-2" id="text-23">
+<ul class="org-ul">
+<li>芒果等級分類：將芒果分為 N 個等級<br /></li>
+<li>醫院依 X 光片預測是否有武漢肺炎：陽性(目前台灣可能有 400 張),另外可以找正常的樣本 20000 張，<br /></li>
+<li>工業暇疵品分類: 人工智慧的模組應用主要是在調參數；工業的產品(如晶片製造)也是在透過調整機器的參數在控制良率<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdf2b5a6" class="outline-2">
+<h2 id="orgdf2b5a6"><span class="section-number-2">24.</span> 感知機(Perceptron)</h2>
+<div class="outline-text-2" id="text-24">
+<ul class="org-ul">
+<li>多層：一層以上就叫多層<br />
+一層的例子：AND/OR gate [link]<br /></li>
+<li>何謂測度學習: 3-5 層<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1f28df9" class="outline-2">
+<h2 id="org1f28df9"><span class="section-number-2">25.</span> RNN</h2>
+<div class="outline-text-2" id="text-25">
+<p>
+與時間序列有關<br />
+Time series prediction<br />
+台灣某局處之地震分析<br />
+</p>
+</div>
+<div id="outline-container-org3397c3b" class="outline-3">
+<h3 id="org3397c3b"><span class="section-number-3">25.1.</span> Sequential pattern</h3>
+<div class="outline-text-3" id="text-25-1">
+<ul class="org-ul">
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfad024d" class="outline-2">
+<h2 id="orgfad024d"><span class="section-number-2">26.</span> Book: Deep Learning</h2>
+<div class="outline-text-2" id="text-26">
+<ul class="org-ul">
+<li><a href="https://www.books.com.tw/products/0010832030">輕鬆學會Google TensorFlow 2.0人工智慧深度學習實作開發</a><br /></li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-04 Mon 09:21</p>
+</div>
+</body>
+</html>

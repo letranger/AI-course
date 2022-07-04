@@ -1,0 +1,411 @@
+#+title: TensorFlow
+#+INCLUDE: ../pdf.org
+#+TAGS: AI
+#+OPTIONS: toc:2 ^:nil num:5
+#+PROPERTY: header-args :eval never-export
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+EXCLUDE_TAGS: noexport
+#+latex:\newpage
+
+* TensorFlow簡介
+** 簡介
+[[https://www.tensorflow.org/tutorials/generative/adversarial_fgsm][官網學習資源]]
+是 Google 繼 2011 年開發了 DistBelief 之後的產品，最初由 Google Brain Team 團隊開發，Google 使用 TensorFlow 進行研究及自身產品開發，並於 2015 年 11 月開放原始碼。Google 的 TensorFlow 產品應用包括 GMail 垃圾郵件過濾、Google 語音辨識、Google 圖像辨識、Google 翻譯等等。
+
+TensorFlow 可以在 CPU、GPU、TPU(Tensor Processing Unit，由 google 為 AI 研發的專屬晶片)上執行，此外，TensorFlow 也有極佳的跨平台能力，可以在不修改程式碼的前題下，於下列平台上執行訓練，包括：Windows、Linux、iOS、Android、Raspberry Pi。
+
+TensorFlow 為較低階的深度學習 API，所以模型必須自行設計，包括張量乘積、卷積等底層操作也要自行撰寫，優點是可以自行規劃模型內容，缺點是開發需要更多時間。所有，有許多開發商以 TensorFlow 為底層開發了許多高階 API，如：Keras、TF-Learn、TF-Slim、TF-Layer。
+
+透過使用資料流(flow)圖像，來進行數值演算的新一代開源機器學習工具。這個機器學習工具的基礎設計，主要透過圖學裡的「節點」來表達數學運算，「邊」來表示「節點」間的多維度資料陣列 (tensors，張量)，因此命名做 TensorFlow。
+
+TensorFlow 的設計模式核心為「計算圖」(computational graph)，可分為建立計算圖與執行計算圖兩個部份，其程式架構大致如下。
+
+#+BEGIN_SRC python -r -n :results output :exports both
+  import tensorflow as tf
+  import numpy as np
+  '''1. 建立計算圖'''
+  W = tf.Variable(tf.random_normal([3, 2]), name='W')
+  b = tf.Variable(tf.random_normal([1, 2]), name='b')
+  X = tf.placeholder("float", [None,3], name='X')
+  y = tf.nn.sigmoid(tf.matmul(X,W)+b, 'y')
+  '''2. 執行計算圖'''
+  with tf.Session() as sess:
+      init= tf.global_variables_initializer()
+      sess.run(init)
+      X_array = np.array([[0.4, 0.2, 0.4],
+                          [0.3, 0.4, 0.5],
+                          [0.3, -0.4, 0.5]])
+      (_b,_W,_X,_y) = sess.run((b,W,X,y), feed_dict={X:X_array})
+
+  print(_b)
+  print(_W)
+  print(_X)
+  print(_y)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[[-0.28260672  2.0333097 ]]
+[[-1.5098639   0.07314453]
+ [ 0.5849383   1.2003893 ]
+ [ 1.8941628   0.44426546]]
+[[ 0.4  0.2  0.4]
+ [ 0.3  0.4  0.5]
+ [ 0.3 -0.4  0.5]]
+[[0.49702516 0.92275286]
+ [0.60956657 0.9403379 ]
+ [0.4943853  0.8578114 ]]
+#+end_example
+** 為何不用 sklearn
+- [[file:AI-Introduction.org][AI Introduction]]
+- sklearn 不能跑 GPU
+** Converting TF 1.0 code to 2.0
+若在 colab 則於最前面加!
+#+begin_src shell -r -n :results output :exports both
+# simple script converts TF 1.0 code to TF 2.0 code !tf_upgrade_v2 --infile
+tf_upgrade_v2 --infile tf_1_code.py tf2_code.py
+#+end_src
+** 學習資源
+- [[https://www.tensorflow.org/tutorials][官方教學網站]]
+
+* 安裝
+** windows 10
+1. download python3
+1. download CUDA 9/10
+1. download and setup cuDNN
+
+* Tenser運算原理
+
+一個 TensorFlow 的基礎數值運算需要三個步驟：
+1. 宣告張量為常數
+TensorFlow 的基本運算單位是張量（Tensor），張量的維度可以是零（零維張量更常見的名稱是純量，Scalar） 、可以是 1（1 維張量更常見的名稱是向量，Vector）、可以是 2（2 維張量更常見的名稱是矩陣，Matrix）亦可以為 n（n 維張量），這個設計與 NumPy 中 ndarray 不謀而合，對於熟悉 NumPy 的 Python 使用者是一大福音。
+1. 宣告數值運算的公式
+基礎的數值運算（四則運算、次方、求餘數或求商數等）都有 TensorFlow 的函數可以呼叫。
+- 相加 +：tf.add()
+- 相減 -： tf.sub()
+- 相乘 *： tf.multiply()
+- 相除 /： tf.divide()
+- 次方 **： tf.pow()
+- 求餘數 %： tf.mod()
+- 求商數 //：tf.div()
+與 Python 數值運算不同的是，這些函數都必須在 TensorFlow 的 Session 中執行才會有運算結果的輸出，否則只是顯示張量物件的資訊而已。
+1. 以 Session 執行數值運算
+利用 tf.Session() 建立 Session 後再執行數值運算是正規的 TensorFlow 寫法，但對於慣用 Jupyter Notebook 的資料科學家可能會略嫌麻煩，這時可以選擇以 tf.InteractiveSession() 互動模式啟動 Session，一但設定為互動模式後，執行運算變為呼叫張量的 .eval() 方法，並記得在使用完畢之後呼叫 Session 的 .close() 方法關閉互動模式。
+
+** 常用的常數向量建構函數
+除了使用 tf.constant() 創造常數張量以外，常用的建構函數有：
+1. tf.zeros() ：建構內容數值皆為 0 的常數張量
+1. tf.ones() ：建構內容數值皆為 1 的常數張量
+1. tf.fill() ：建構內容數值皆為特定值的常數張量
+1. tf.range() ：建構內容數值為 (start, limit, delta) 數列的常數張量
+1. tf.random_normal() ：建構內容數值為符合常態分佈數列的常數張量
+1. tf.random_uniform() ：建構內容數值為符合均勻分佈數列的常數張量
+** 常用的矩陣建構與計算函數
+TensorFlow 的二維張量與 NumPy 的二維陣列相同為矩陣提供了各種方便使用者呼叫的建構、運算函數，而矩陣亦是 NumPy 與 TensorFlow 應用實務中最常被使用的類型，而常用的矩陣建構與計算函數有：
+1. tf.reshape() ：調整矩陣外觀
+1. tf.eye() ：建構單位矩陣
+1. tf.diag() ：建構對角矩陣
+1. tf.matrix_transpose() ：轉置矩陣
+1. tf.matmul() ：矩陣相乘
+** 變數
+雖然以常數進行數值運算很方便，但就如同在程式設計中不可能永遠只倚賴值（Values）一般，常見的情況是為了保持彈性，必須將值宣告賦值給變數（Variables）讓使用者能夠動態地進行相同的計算來得到不同的結果，這在 TensorFlow 中是以 tf.Variable() 來完成，就像是在 Python 中簡單宣告變數一般。
+
+不過在 TensorFlow 的觀念之中，宣告變數張量並不如 Python 或者先前宣告常數張量那麼單純，它需要兩個步驟：
+1. 宣告變數張量的初始值、類型與外觀
+1. 初始化變數張量
+如果宣告的變數張量沒有經過初始化，我們將會得到
+
+該如何初始化變數張量呢？只需將變數張量的 initializer 屬性放入 Session 中執行即可。初始化成功後的變數張量，可以透過 .assign() 方法賦予不同值。
+值得注意的地方是對變數張量重新賦値這件事對 TensorFlow 來說也是一個運算，必須在宣告之後放入 Session 中執行，否則重新賦值並不會有作用。變數張量一但被宣告之後，重新賦值時必須要注意類型，賦予不同類型的值會得到 TypeError。不僅是值的類型，外觀也必須跟當初所宣告的相同，賦予不同外觀的值會得到 ValueError。
+** Placeholder
+
+第三種在 TensorFlow 中張量將被宣告的類型稱為 Placeholder，這是一種常見將資料輸入 TensorFlow 計算圖形（Graph）的方法，我們可以將它對照為像是在佔有一個長度卻沒有初始值的 Python None、或者是 NumPy np.NaN ，差異在於 None 或 np.NaN 不需要將之後想要擺放的資料類型預先定義，但是 Placeholder 張量和變數張量一樣，必須預先定義好之後欲輸入的資料類型與外觀。使用 tf.placeholder() 可以建出 Placeholder 張量，未來利用 TensorFlow 訓練機器學習與深度學習的模型時，將會使用 Placeholder 將 X 與 y 的資料輸入計算圖形。
+那麼宣告完 Placeholder 張量以後，又該如何將資料輸入？TensorFlow 的術語稱作是 Feed dictionaries，意即將資料以 Python dict 餵進（Feed）Placeholder 張量之中，而 TensorFlow 術語則將完成計算後的輸出資料稱作是 Fetch，是 ndarray 的類型。
+Placeholder 張量具備隱性型別轉換的功能，假如我們用浮點數餵入已經被宣告為 tf.int32 的 Placeholder 張量中，將會被自動轉換為整數。假如餵入資料外觀與 Placeholder 張量所定義的不同，則會產生錯誤。
+** placeholder 與 variable 的差異
+The difference is that with tf.Variable you have to provide an initial value when you declare it. With tf.placeholder you don't have to provide an initial value and you can specify it at run time with the feed_dict argument inside Session.run
+
+* TenserBoard
+TensorFlow 的開發團隊提供了 TensorBoard 應用程式可以在本機端啟動網頁伺服器，並在其中顯示 TensorFlow 程式的相關視覺化，若希望能夠在 TensorBoard 中檢視，必須手動在 TensorFlow 程式中加入 tf.summary.FileWriter() 來指定 TensorBoard 儲存日誌的檔案路徑，例如寫作一個簡單的張量相加運算，並將這個運算記錄在 graphs/tf_add 資料夾中。
+
+接著回到終端機，在啟動 Jupyter Notebook 的路徑下執行指令啟動 TensorBoard 服務，並指定日誌儲存的檔案路徑 --logdir=graphs/tf_add 以及 TensorBoard 網頁伺服器的啟動位址（本機位址 localhost） --host=127.0.0.1 。
+
+最後打開瀏覽器在網址列輸入 127.0.0.1:6006 就可以瀏覽 TensorBoard 的服務內容，點選 GRAPHS 標籤就可以觀察一個張量相加運算在 TensorBoard 的視覺化。
+
+檢視完畢之後可以回到終端機畫面以 CTRL-C 終止 TensorBoard 服務。
+
+* 情緒分析 sentiment analysis
+
+https://github.com/MyDearGreatTeacher/TensorSecurity/blob/master/code/TF/RNN/%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F_%E6%83%85%E7%B7%92%E5%88%86%E6%9E%90sentiment%20analysis.md
+
+* IMDb-Movie-Review
+
+* 使用 XLNet(2019)
+
+
+#+latex:\newpage
+
+
+* Basic
+** Tensors
+*** Creating Tensors
+#+begin_src python -r -n :results output :exports both
+import tensorflow as tf
+
+string = tf.Variable(["This is a string"], tf.string)
+number = tf.Variable(9527, tf.int16)
+floating = tf.Variable(3.141592, tf.float64)
+
+print(string)
+print(number)
+print(floating.v)
+#+end_src
+
+#+RESULTS:
+
+* Prediction:
+** Classification
+- Decision tree
+- Ensemble Methods: 整合/集成/, bagging, boosting
+** Numeric Prediction
+
+* Classification two steps
+1. process 1: Model construction
+1. process 2: Using the Model in prediction
+
+* 分類演算法
+- 評估指標
+- 作業：找出有漏洞程式碼資料集(有 Label 的)，找 Metrics 評估指標
+
+* Unsupervised Learning
+** Cluster Analysis
+** Algorithms
+
+* 類神經網路
+** preceptron
+- Weight
+-  Bias
+- Activation function
+** Activation
+哪一種 function 最好：跑出來有效的就是好的
+- Sigmoid function
+- tanh
+- ReLU
+- Leaky ReLU
+** AND gate 實作
+#+begin_src python -r -n :results output :exports both
+# coding: utf-8
+import numpy as np
+3
+def AND(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([0.5, 0.5])
+    b = -0.7
+    tmp = np.sum(w*x) + b
+    if tmp <= 0:
+        return 0
+    else:
+        return 1
+
+if __name__ == '__main__':
+    for xs in [(0, 0), (1, 0), (0, 1), (1, 1)]:
+        y = AND(xs[0], xs[1])
+        print(str(xs) + " -> " + str(y))
+#+end_src
+
+#+RESULTS:
+: (0, 0) -> 0
+: (1, 0) -> 0
+: (0, 1) -> 0
+: (1, 1) -> 1
+** Or gate 實作
+#+begin_src python -r -n :results output :exports both
+# coding: utf-8
+import numpy as np
+
+def OR(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([0.5, 0.5])
+    b = -0.3
+    tmp = np.sum(w*x) + b
+    if tmp <= 0:
+        return 0
+    else:
+        return 1
+
+if __name__ == '__main__':
+    for xs in [(0, 0), (1, 0), (0, 1), (1, 1)]:
+        y = OR(xs[0], xs[1])
+        print(str(xs) + " -> " + str(y))
+
+#+end_src
+
+#+RESULTS:
+: (0, 0) -> 0
+: (1, 0) -> 1
+: (0, 1) -> 1
+: (1, 1) -> 1
+
+** 重要關鍵
+如果要實作 XOR，會發現無法實作出來，這個事實告訴我們，單一的 perceptron 無法完成所
+有的任務，需要多層感知機:multiple-layer perceptron
+
+** 具有學習能力的類神經網路
+- 前述的 perceptron 是由我們手動填值，不算具有學習能力
+- 如何建立 weight, bias 的初值：
+  + 全部填 0
+  + random
+- 加上誤差函數
+- 根據誤差函數，乘上一個學習率，將這些數值回饋給 perceptron，修正較佳的 weight,
+  bias，如此重複迭代，直到誤差最小化
+
+* 神經網路的基本步驟
+** 如何計算誤差
+*** error = 真正的值(t)-預測值(y)
+*** 兩種類型
+- \(E=\frac{1}{2}\Sigma_{i=1}^{n} (y_i-t_i)^2 \)
+- \(E=-\Sigma_{i=1}^{n}t_i*\logy_i\)
+
+深度學習最常用的損失函數為 cross entropy，典型公式為：\(-\Sigma{Y_k^{'} \times \log{(Y_i)}\)，預測的結果與數字影像真實值(label)間的誤差值均是以 one-hot encoding 表示。
+
+** 類神經網路的 Back-Propagation
+- 2018 年 Turing Prize 得主(Yoshua Bengio and Yann LeCun)
+- \(\eta\) = 0.1 v.s. \(\lamda\)
+
+* 梯度下降法
+- 為何學習率不能設太大的圖示(TF2020 投影片 day 1, 2, p.49)
+- 實作梯度下降法的演算法
+- 最佳化問題(非線性關係)
+- types:
+  1. GD: 所有樣本都要算
+  1. Batch GD: 不全部取，只取部份的點出來算(也許 50 個)
+  1. Scotachtic GD: 隨機抽一個
+
+* 優化器演算法
+- Momentum，不叫動能？
+- 學習率：應該要可以調整，一開始學比較慢，後續應該會越來越快(Adaptvie Learning
+  Rates)
+- 學習率公式：
+  1. Adagrad: hiton 在上課時寫出來的, 較簡單
+  1. RMSprop: 除以更多參數, 目前最常見
+  1. Adam
+
+* Tensorflow
+- Tensor: N 維陣列+Flow
+- 版本變動：不到半年升了三個版本，書會跟不上更新版本
+- Tensorflow 1.X 版的問題：API 亂放,除錯困難，可能跑到快結束後才報錯誤, Tensorflow
+  底層為 C++，上層為 Python
+- Tensowflow 早期的高層為 tf-learn，但自從 Google 將 Keras 買下後，Keras 就成為最常用的
+  上層為 python
+- Tensorflow Estimator API, 因為 Tensorflow 所處理的數據太大，測試用資料集動軏成千
+  上萬，所以：讀入的 function 要很有效率，所以影像變成一維陣列，所以要用 batch 的方
+  式來跑，每次跑一點
+- Transfer learning: 拿現成的 model，修改，用來預測自己要的東西
+- Tensorflow Hub:
+- 2019 年 10 月前的 tensorflow 都不要買
+- 在 code 中看到 tf.placeholder(), global_initializer()的關鍵字都是 1.X 版的
+_
+** Tensor 資料型別
+- scalar number
+- vector
+- matrix
+- 3d
+
+** Tensorflow 教材
+*** Tutorials
+*** [[https://tensorflow.org/tutorials][Tensorflow Tutorials]]
+*** Keras
+*** MIT: DEEP LEARNING
+*** O'REILLY: 精通機器學習，蜥蜴
+*** 台大：李宏易
+p
+
+* Keras
+** 如何判斷 Keras
+- import Keras v.s. import tf.keras
+- 使用 Tensorflow 版的 Keras 的優勢：對於分散式的運算有較好的支援
+** steps
+*** 載入資料(google colab import google drive)
+*** 資料預處理 (這個步驟其實是最重要也最困難的，因為資料處理的不好,如圖片模精，則後面 model 再好都沒用)
+1. 歸一化
+1. normalization
+1. 大小不同的圖 -> resize -> 模糊 ->
+*** build the model
+*** config the model with losses
+設定 loss function,
+*** train the model
+*** 評估準確度
+** tensorflow 開發三種模式
+1. Model (functional)
+1. Sequential(堆積木)
+1. 自建 model
+** Model class API
+#+begin_src python -r -n :results output :exports both
+from keras.models import Model
+from keras.layers import Input, Dense
+
+a=Input(shape=(784,))
+b = Dense(32)(a)
+
+model = Model(inputs)
+#+end_src
+** 用 Keras 來做剛剛的迴歸
+** 何時用 function 式的寫法
+multiple input v.s. mutlipel output, 這類 model 無法以 Sequentail 實作
+
+
+** kernel density
+
+* 20200613 #2/3
+
+** 版本差異
+*** 1.0: static computation graph: graph control flow
+- 速度快，但當程式較長時不易 debut
+*** 2.x: Dynamic control flow, 動態圖，使用 eager execution (Tensorfl
+ow 1.4 後開始)
+** 閱讀 Tensorflow
+- [[https://www.tensorflow.org/api_docs/python/tf][Tensorflow API]]
+- Tutorial
+** TensorFlow Hub
+- a library for reusable machine learning modules
+
+* tf.data
+** 資料預處理: tf.data.Dataset API
+** TensorFlow 能接受的資料輸入(如圖片大小及色階)有固定
+
+* Data is the king
+** 資料太少？
+Data augmentation
+** 過度擬合
+- Data augmentation: tf.keras.preprocessing.image.ImageDataGenerator()
+- Data Dropout
+
+* homework
+1. tf.keras.layers.Conv2D()的各項參數說明 -> 簡報
+1. 講義: p.212, 參考 code: Google TransorFlow 2.0
+   1) 使用 CIFAR-10 資料集實驗三種 weight initilazation
+   2) 實驗 Batch Normalization 方法
+
+1. tf.keras.applications
+
+
+* 比賽可以出的題目
+- 芒果等級分類：將芒果分為 N 個等級
+- 醫院依 X 光片預測是否有武漢肺炎：陽性(目前台灣可能有 400 張),另外可以找正常的樣本 20000 張，
+- 工業暇疵品分類: 人工智慧的模組應用主要是在調參數；工業的產品(如晶片製造)也是在透過調整機器的參數在控制良率
+
+* 感知機(Perceptron)
+- 多層：一層以上就叫多層
+  一層的例子：AND/OR gate [link]
+- 何謂測度學習: 3-5 層
+
+* RNN
+與時間序列有關
+Time series prediction
+台灣某局處之地震分析
+** Sequential pattern
+-
+
+* Book: Deep Learning
+- [[https://www.books.com.tw/products/0010832030][輕鬆學會Google TensorFlow 2.0人工智慧深度學習實作開發]]
+-

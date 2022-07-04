@@ -1,0 +1,53 @@
+#+TITLE: AI for TNFSH: 從入門到入土
+# -*- org-export-babel-evaluate: nil -*-
+#+TAGS: AI
+#+OPTIONS: toc:0 ^:nil num:5
+#+PROPERTY: header-args :eval never-export
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+latex:\newpage
+
+- [[file:~/Dropbox/AI/AI-Introduction.org][AI簡介]]
+- [[file:~/Dropbox/AI/MachineLearning.org][機器學習]]
+- [[file:SL.org][監督式學習]]
+- [[file:UL.org][非監督式學習]]
+- [[file:RL.org][強化學習]]
+- [[file:DL.org][深度學習]]
+- [[https://www.youtube.com/watch?v=PqsTbDxiyBs][Python 期末報告：用deep learning分類心電圖]]
+- [[https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.21068&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false][Tinker With a Neural Network Right Here in Your Browser.]]
+- [[file:FinalProject.org][期末報告]]
+
+* Resources
+- http://pclearn0915.blogspot.com/
+- https://docs.google.com/presentation/d/1s-gKtfANo2X7ytzW7FAkYR3_9QsVRNnrXLfXZwVWXRI/edit#slide=id.ge3eb5dba0d_0_0
+- https://docs.google.com/presentation/d/1s-gKtfANo2X7ytzW7FAkYR3_9QsVRNnrXLfXZwVWXRI/edit?usp=sharing
+- https://github.com/ys-fang/OSEP
+- https://sites.google.com/view/yjmtechnology/%E7%A7%91%E6%8A%80%E5%B0%88%E9%A1%8C/%E7%94%A8scratch%E5%AD%B8%E7%BF%92ai?authuser=1
+- https://www.youtube.com/watch?v=jU559bEUFmE
+- https://www.youtube.com/watch?v=uit-b2KUgYc
+- https://codecombat.com/
+- https://www.youtube.com/watch?v=YRaa71Kyiy8
+- https://sites.google.com/view/yjmtechnology/%E8%B3%87%E8%A8%8A%E7%A7%91%E6%8A%80/%E5%9C%8B%E4%B8%89%E8%B3%87%E8%A8%8A%E7%A7%91%E6%8A%80/%E8%AA%9E%E9%9F%B3%E8%BE%A8%E8%AD%98?authuser=1
+- http://jakevdp.github.io/blog/2013/07/10/XKCD-plots-in-matplotlib/
+- https://gradio.app/introducing-hosted
+- https://colab.research.google.com/github/yenlung/Deep-Learning-Basics/blob/master/colab03b%20%E4%BD%BF%E7%94%A8%E7%B4%85%E6%A8%93%E5%A4%A2%E7%94%9F%E6%88%90%E5%99%A8.ipynb?fbclid=IwAR1Q6a1EqJSlDix5_WKIB2Q-9UlRd2_tJ9kbgi52VoK_EpICzY0GEedCVro#scrollTo=dpUaHxdug6sI
+** 中文
+- https://medium.com/nlp-tsupei/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E5%AD%B8%E7%BF%92%E8%87%AA%E7%84%B6%E8%AA%9E%E8%A8%80%E8%99%95%E7%90%86-a729bccecda
+- https://ckip.iis.sinica.edu.tw/resource
+- https://github.com/ckiplab/ckipnlp
+- https://github.com/zake7749/Gossiping-Chinese-Corpus/tree/master/data
+
+* Footnotes
+
+[fn:7] [[https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53][Decision Trees Explained With a Practical Example]]
+
+[fn:6] [[http://gym.openai.com/docs/][Getting Started with Gym]]
+
+[fn:5] [[https://kknews.cc/zh-tw/news/34mob53.html][強化學習Exploration漫遊]]
+
+[fn:4] [[https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py][GitHub: openai/gym ]]
+
+[fn:3] [[https://blog.csdn.net/qq_32892383/article/details/89576003][OpenAI Gym 經典控制環境介紹——CartPole（倒立擺）]]
+
+[fn:2] [[https://blog.csdn.net/qq_30615903/article/details/80739243][【強化學習】Q-Learning算法詳解]]
+
+[fn:1] [[https://ithelp.ithome.com.tw/articles/10234272][Day 6 強化學習就是一直學習? ]]

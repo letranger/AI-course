@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-03 Sun 14:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NLTK</title>
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/white.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">NLTK</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf198743">1. 英文自然語言處理的經典工具: NLTK</a>
+<ul>
+<li><a href="#org224e3de">1.1. NLTK 進行文本前處理的幾個流程項目：</a></li>
+<li><a href="#org35af341">1.2. sentence segmentation (斷句)</a></li>
+<li><a href="#orgf79f602">1.3. WordNet</a></li>
+</ul>
+</li>
+<li><a href="#orgf63af61">2. 預處理</a>
+<ul>
+<li><a href="#orgaa0b039">2.1. 3.2　分詞 Tokenization ——學習使用 NLTK 內置的分詞器 inbuilt tokenizers of NLTK</a></li>
+<li><a href="#org4afaa14">2.2. 3.3　詞幹提取 Stemming——學習使用 NLTK 內置的詞幹提取器 inbuilt stemmers of NLTK</a></li>
+<li><a href="#org6fc257f">2.3. 3.4　詞形還原 Lemmatization——學習使用 NLTK 中的 WordnetLemmatizer 函數</a></li>
+<li><a href="#orgb706828">2.4. 3.5　停用詞 Stopwords ——學習使用停用詞語料庫及其應用</a></li>
+<li><a href="#org9a8b18e">2.5. 3.6　編輯距離 Edit distance——編寫計算兩個字串之間編輯距離的演算法 writing your own algorithm to find edit distance between two strings</a></li>
+<li><a href="#orgbc1dfb9">2.6. 3.7　處理兩篇短文並提取共有詞彙 Processing two short stories and extracting the common vocabulary between two of them</a></li>
+</ul>
+</li>
+<li><a href="#org681e24b">3. 作業:完成文章的練習</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf198743" class="outline-2">
+<h2 id="orgf198743"><span class="section-number-2">1.</span> 英文自然語言處理的經典工具: NLTK</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org224e3de" class="outline-3">
+<h3 id="org224e3de"><span class="section-number-3">1.1.</span> NLTK 進行文本前處理的幾個流程項目：</h3>
+<div class="outline-text-3" id="text-1-1">
+<ol class="org-ol">
+<li>sentence segmentation (斷句)<br /></li>
+<li>word segmentation (斷詞)<br /></li>
+<li>pos (詞性標記)<br /></li>
+<li>lemmatization (字型還原)<br /></li>
+<li>stopword (停用詞)<br /></li>
+<li>ner (命名實體辨識)<br /></li>
+</ol>
+<p>
+參考:<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org35af341" class="outline-3">
+<h3 id="org35af341"><span class="section-number-3">1.2.</span> sentence segmentation (斷句)</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgab67dd6"></a>nltk.download(&rsquo;punkt&rsquo;)<br />
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> nltk
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">text</span> = <span style="color: #98be65;">"""I went to Japan. (NOT I went to the Japan.)</span>
+<span class="linenr"> 4: </span><span style="color: #98be65;">He played tennis with Ben. (NOT He played tennis with the Ben.)</span>
+<span class="linenr"> 5: </span><span style="color: #98be65;">They had breakfast at 9 o&#8217;clock. (NOT They had a breakfast at 9 o'clock.)</span>
+<span class="linenr"> 6: </span><span style="color: #98be65;">(Some words don't have an article. We don't usually use articles for countries, meals or people.)"""</span>
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">sentences</span> = nltk.sent_tokenize(text)
+<span class="linenr"> 9: </span>sentences
+<span class="linenr">10: </span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orge5cd4cc"></a>word segmentation (斷詞)<br />
+<div class="outline-text-4" id="text-1-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">from</span> nltk <span style="color: #51afef;">import</span> word_tokenize
+<span class="linenr">2: </span><span style="color: #5B6268;">##</span><span style="color: #5B6268;">tokens = word_tokenize(raw)</span>
+<span class="linenr">3: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">tokens = [tokenizer.tokenize(sent) for sent in sentences]</span>
+<span class="linenr">4: </span><span style="color: #dcaeea;">tokens</span> = [word_tokenize(sent) <span style="color: #51afef;">for</span> sent <span style="color: #51afef;">in</span> sentences]
+<span class="linenr">5: </span>tokens
+<span class="linenr">6: </span><span style="color: #5B6268;">### </span><span style="color: #5B6268;">pos (&#35422;&#24615;&#27161;&#35352;)</span>
+<span class="linenr">7: </span>nltk.download(<span style="color: #98be65;">'averaged_perceptron_tagger'</span>)
+<span class="linenr">8: </span><span style="color: #dcaeea;">pos</span> = [nltk.pos_tag(token) <span style="color: #51afef;">for</span> token <span style="color: #51afef;">in</span> tokens]
+<span class="linenr">9: </span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org4e9fe4f"></a>Python 自然語言處理 NLTK 庫用法入門教程【經典】<br />
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+指令碼專欄 · 發表 2018-06-26<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> bs4 <span style="color: #51afef;">import</span> BeautifulSoup
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> urllib.request
+<span class="linenr"> 3: </span><span style="color: #51afef;">import</span> nltk
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">response</span> = urllib.request.urlopen(<span style="color: #98be65;">'http://php.net/'</span>)
+<span class="linenr"> 6: </span><span style="color: #dcaeea;">html</span> = response.read()
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">soup</span> = BeautifulSoup(html,<span style="color: #98be65;">"html5lib"</span>)
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">text</span> = soup.get_text(strip=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>tokens = [t <span style="color: #51afef;">for</span> t <span style="color: #51afef;">in</span> text.split()]
+<span class="linenr">11: </span>freq = nltk.FreqDist(tokens)
+<span class="linenr">12: </span><span style="color: #51afef;">for</span> key,val <span style="color: #51afef;">in</span> freq.items():
+<span class="linenr">13: </span>  <span style="color: #c678dd;">print</span> (<span style="color: #c678dd;">str</span>(key) + <span style="color: #98be65;">':'</span> + <span style="color: #c678dd;">str</span>(val))
+<span class="linenr">14: </span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org4bd3c28"></a>Corpus 語料庫 and WordNet<br />
+<div class="outline-text-4" id="text-1-2-4">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23384;&#21462;NLTK&#20839;&#24314;&#30340;&#35486;&#26009;&#24235;Corpus</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> reuters
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">files</span> = reuters.fileids()
+<span class="linenr"> 5: </span><span style="color: #c678dd;">print</span>(files)
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">words16097</span> = reuters.words([<span style="color: #98be65;">'test/16097'</span>])
+<span class="linenr"> 8: </span><span style="color: #c678dd;">print</span>(words16097)
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #dcaeea;">words20</span> = reuters.words([<span style="color: #98be65;">'test/16097'</span>])[:<span style="color: #da8548; font-weight: bold;">20</span>]
+<span class="linenr">11: </span><span style="color: #c678dd;">print</span>(words20)
+<span class="linenr">12: </span>
+<span class="linenr">13: </span><span style="color: #dcaeea;">reutersGenres</span> = reuters.categories()
+<span class="linenr">14: </span><span style="color: #c678dd;">print</span>(reutersGenres)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #51afef;">for</span> w <span style="color: #51afef;">in</span> reuters.words(categories=[<span style="color: #98be65;">'bop'</span>,<span style="color: #98be65;">'cocoa'</span>]):
+<span class="linenr">17: </span>    <span style="color: #c678dd;">print</span>(w+<span style="color: #98be65;">' '</span>,end=<span style="color: #98be65;">''</span>)
+<span class="linenr">18: </span>    <span style="color: #51afef;">if</span>(w <span style="color: #51afef;">is</span> <span style="color: #98be65;">'.'</span>):
+<span class="linenr">19: </span>        <span style="color: #c678dd;">print</span>()
+<span class="linenr">20: </span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org012e2c0"></a>1.4　計算布朗語料庫中三種不同類別的特殊疑問詞<br />
+<div class="outline-text-4" id="text-1-2-5">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> nltk
+<span class="linenr"> 2: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> brown
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #c678dd;">print</span>(brown.categories())
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #dcaeea;">genres</span> = [<span style="color: #98be65;">'fiction'</span>, <span style="color: #98be65;">'humor'</span>, <span style="color: #98be65;">'romance'</span>]
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">whwords</span> = [<span style="color: #98be65;">'what'</span>, <span style="color: #98be65;">'which'</span>, <span style="color: #98be65;">'how'</span>, <span style="color: #98be65;">'why'</span>, <span style="color: #98be65;">'when'</span>, <span style="color: #98be65;">'where'</span>, <span style="color: #98be65;">'who'</span>]
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #c678dd;">len</span>(genres)):
+<span class="linenr">11: </span>    <span style="color: #dcaeea;">genre</span> = genres[i]
+<span class="linenr">12: </span>    <span style="color: #c678dd;">print</span>()
+<span class="linenr">13: </span>    <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Analysing '"</span>+ genre + <span style="color: #98be65;">"' wh words"</span>)
+<span class="linenr">14: </span>    <span style="color: #dcaeea;">genre_text</span> = brown.words(categories = genre)
+<span class="linenr">15: </span>    fdist = nltk.FreqDist(genre_text)
+<span class="linenr">16: </span>    <span style="color: #51afef;">for</span> wh <span style="color: #51afef;">in</span> whwords:
+<span class="linenr">17: </span>        <span style="color: #c678dd;">print</span>(wh + <span style="color: #98be65;">':'</span>, fdist[wh], end=<span style="color: #98be65;">' '</span>)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org0565a42"></a>1-5 探討網路文本和聊天文本的詞頻分佈<br />
+<div class="outline-text-4" id="text-1-2-6">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> nltk
+<span class="linenr"> 2: </span>nltk.download(<span style="color: #98be65;">'webtext'</span>)
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> webtext
+<span class="linenr"> 5: </span><span style="color: #c678dd;">print</span>(webtext.fileids())
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">fileid</span> = <span style="color: #98be65;">'singles.txt'</span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">wbt_words</span> = webtext.words(fileid)
+<span class="linenr"> 9: </span><span style="color: #dcaeea;">fdist</span> = nltk.FreqDist(wbt_words)
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Count of the maximum appearing word "'</span>,fdist.<span style="color: #c678dd;">max</span>(),<span style="color: #98be65;">'" : '</span>, fdist[fdist.<span style="color: #c678dd;">max</span>()])
+<span class="linenr">12: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Total Number of distinct tokens in the bag : '</span>, fdist.N())
+<span class="linenr">13: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Following are the most common 10 words in the bag'</span>)
+<span class="linenr">14: </span><span style="color: #c678dd;">print</span>(fdist.most_common(<span style="color: #da8548; font-weight: bold;">10</span>))
+<span class="linenr">15: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Frequency Distribution on Personal Advertisements'</span>)
+<span class="linenr">16: </span><span style="color: #c678dd;">print</span>(fdist.tabulate())
+<span class="linenr">17: </span>fdist.plot(cumulative=<span style="color: #a9a1e1;">True</span>)
+<span class="linenr">18: </span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgf79f602" class="outline-3">
+<h3 id="orgf79f602"><span class="section-number-3">1.3.</span> WordNet</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="https://zh.wikipedia.org/wiki/WordNet">https://zh.wikipedia.org/wiki/WordNet</a><br />
+WordNet 是一個由普林斯頓大學認識科學實驗室在心理學教授喬治·A·米勒的指導下建立和維護的英語字典。開發工作從 1985 年開始，從此以後該項目接受了超過 300 萬美元的資助。<br />
+由於它包含了語義信息，所以有別於通常意義上的字典。WordNet 根據詞條的意義將它們分組，每一個具有相同意義的字條組稱為一個 synset。<br />
+</p>
+
+<p>
+在 WordNet 中，名詞，動詞，形容詞和副詞各自被組織成一個同義詞的網絡，每個同義詞集合都代表一個基本的語義概念，並且這些集合之間也由各種關係連接。（一個多義詞將出現在它的每個意思的同義詞集合中）。<br />
+</p>
+
+<p>
+在 WordNet 的第一版中（標記為 1.x），四種不同詞性的網絡之間並無連接。WordNet 的名詞網絡是第一個發展起來的。<br />
+</p>
+
+<p>
+名詞網絡的主幹是蘊涵關係的層次（上位／下位關係），它占據了關係中的將近 80%。層次中的最頂層是 11 個抽象概念，稱為基本類別始點（unique beginners），例如實體（entity，「有生命的或無生命的具體存在」），心理特徵（psychological feature，「生命有機體的精神上的特徵）。名詞層次中最深的層次是 16 個節點。<br />
+</p>
+
+<p>
+<a href="https://zhuanlan.zhihu.com/p/26527203">https://zhuanlan.zhihu.com/p/26527203</a><br />
+</p>
+
+<p>
+中文詞彙網路 (Chinese Wordnet, 以下簡稱中文詞網) 計畫，目的是在提供完整的中文詞義 (sense) 區分與詞彙語意關係知識庫<a href="http://lope.linguistics.ntu.edu.tw/cwn/">http://lope.linguistics.ntu.edu.tw/cwn/</a><br />
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orge682fcd"></a>1.6　使用 WordNet 進行詞義消歧<br />
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> wordnet <span style="color: #51afef;">as</span> wn
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">woman</span> = wn.synset(<span style="color: #98be65;">'woman.n.01'</span>)
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">bed</span> = wn.synset(<span style="color: #98be65;">'bed.n.01'</span>)
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #c678dd;">print</span>(woman.hypernyms())
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">woman_paths</span> = woman.hypernym_paths()
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">for</span> idx, path <span style="color: #51afef;">in</span> <span style="color: #c678dd;">enumerate</span>(woman_paths):
+<span class="linenr">10: </span>    <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'\n\nHypernym Path :'</span>, idx + <span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">11: </span>    <span style="color: #51afef;">for</span> synset <span style="color: #51afef;">in</span> path:
+<span class="linenr">12: </span>        <span style="color: #c678dd;">print</span>(synset.name(), <span style="color: #98be65;">', '</span>, end=<span style="color: #98be65;">''</span>)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>types_of_beds = bed.hyponyms()
+<span class="linenr">17: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'\n\nTypes of beds(Hyponyms): '</span>, types_of_beds)
+<span class="linenr">18: </span>
+<span class="linenr">19: </span><span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">sorted</span>(<span style="color: #c678dd;">set</span>(lemma.name() <span style="color: #51afef;">for</span> synset <span style="color: #51afef;">in</span> types_of_beds <span style="color: #51afef;">for</span> lemma <span style="color: #51afef;">in</span> synset.lemmas())))
+<span class="linenr">20: </span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org1dc3395"></a>1.7　選擇兩個不同的同義詞集，使用 WordNet 探討上位詞和下位詞的概念<br />
+<div class="outline-text-4" id="text-1-3-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> wordnet <span style="color: #51afef;">as</span> wn
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">woman</span> = wn.synset(<span style="color: #98be65;">'woman.n.01'</span>)
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">bed</span> = wn.synset(<span style="color: #98be65;">'bed.n.01'</span>)
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #c678dd;">print</span>(woman.hypernyms())
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">woman_paths</span> = woman.hypernym_paths()
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span><span style="color: #51afef;">for</span> idx, path <span style="color: #51afef;">in</span> <span style="color: #c678dd;">enumerate</span>(woman_paths):
+<span class="linenr">10: </span>    <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'\n\nHypernym Path :'</span>, idx + <span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">11: </span>    <span style="color: #51afef;">for</span> synset <span style="color: #51afef;">in</span> path:
+<span class="linenr">12: </span>        <span style="color: #c678dd;">print</span>(synset.name(), <span style="color: #98be65;">', '</span>, end=<span style="color: #98be65;">''</span>)
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>types_of_beds = bed.hyponyms()
+<span class="linenr">17: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'\n\nTypes of beds(Hyponyms): '</span>, types_of_beds)
+<span class="linenr">18: </span>
+<span class="linenr">19: </span><span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">sorted</span>(<span style="color: #c678dd;">set</span>(lemma.name() <span style="color: #51afef;">for</span> synset <span style="color: #51afef;">in</span> types_of_beds <span style="color: #51afef;">for</span> lemma <span style="color: #51afef;">in</span> synset.lemmas())))
+<span class="linenr">20: </span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgd99a9ab"></a>1.8　基於 WordNet 計算名詞、動詞、形容詞和副詞的平均多義性<br />
+<div class="outline-text-4" id="text-1-3-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> wordnet <span style="color: #51afef;">as</span> wn
+<span class="linenr"> 2: </span><span style="color: #c678dd;">type</span> = <span style="color: #98be65;">'n'</span>
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">synsets</span> = wn.all_synsets(<span style="color: #c678dd;">type</span>)
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span style="color: #dcaeea;">lemmas</span> = []
+<span class="linenr"> 7: </span><span style="color: #51afef;">for</span> synset <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">synsets</span>:
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">for</span> lemma <span style="color: #51afef;">in</span> synset.lemmas():
+<span class="linenr"> 9: </span>        lemmas.append(lemma.name())
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">len</span>(lemmas))
+<span class="linenr">12: </span>lemmas = <span style="color: #c678dd;">set</span>(lemmas)
+<span class="linenr">13: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Total distinct lemmas: '</span>, <span style="color: #c678dd;">len</span>(lemmas))
+<span class="linenr">14: </span>
+<span class="linenr">15: </span>count = <span style="color: #da8548; font-weight: bold;">0</span>
+<span class="linenr">16: </span><span style="color: #51afef;">for</span> lemma <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">lemmas</span>:
+<span class="linenr">17: </span>    count = count + <span style="color: #c678dd;">len</span>(wn.synsets(lemma, <span style="color: #c678dd;">type</span>))
+<span class="linenr">18: </span>
+<span class="linenr">19: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Total senses :'</span>,count)
+<span class="linenr">20: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Average Polysemy of '</span>, <span style="color: #c678dd;">type</span>,<span style="color: #98be65;">': '</span> ,  count/<span style="color: #c678dd;">len</span>(lemmas))
+<span class="linenr">21: </span>
+</pre>
+</div>
+<p>
+```<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf63af61" class="outline-2">
+<h2 id="orgf63af61"><span class="section-number-2">2.</span> 預處理</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>引言<br /></li>
+<li>分詞——學習使用 NLTK 內置的分詞器<br /></li>
+<li>詞幹提取——學習使用 NLTK 內置的詞幹提取器<br /></li>
+<li>詞形還原——學習使用 NLTK 中的 WordnetLemmatizer 函數<br /></li>
+<li>停用詞——學習使用停用詞語料庫及其應用<br /></li>
+<li>編輯距離——編寫計算兩個字串之間編輯距離的演算法<br /></li>
+<li>處理兩篇短文並提取共有詞彙<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-orgaa0b039" class="outline-3">
+<h3 id="orgaa0b039"><span class="section-number-3">2.1.</span> 3.2　分詞 Tokenization ——學習使用 NLTK 內置的分詞器 inbuilt tokenizers of NLTK</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk.tokenize <span style="color: #51afef;">import</span> LineTokenizer, SpaceTokenizer, TweetTokenizer
+<span class="linenr"> 2: </span><span style="color: #51afef;">from</span> nltk <span style="color: #51afef;">import</span> word_tokenize
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">lTokenizer</span> = LineTokenizer();
+<span class="linenr"> 5: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Line tokenizer output :"</span>,lTokenizer.tokenize(<span style="color: #98be65;">"My name is Maximus Decimus Meridius, commander of the Armies of the North, General of the Felix Legions and loyal servant to the true emperor, Marcus Aurelius. \nFather to a murdered son, husband to a murdered wife. \nAnd I will have my vengeance, in this life or the next."</span>))
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>rawText = <span style="color: #98be65;">"By 11 o'clock on Sunday, the doctor shall open the dispensary."</span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">sTokenizer</span> = SpaceTokenizer()
+<span class="linenr"> 9: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Space Tokenizer output :"</span>,sTokenizer.tokenize(rawText))
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Word Tokenizer output :"</span>, word_tokenize(rawText))
+<span class="linenr">12: </span>
+<span class="linenr">13: </span>tTokenizer = TweetTokenizer()
+<span class="linenr">14: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Tweet Tokenizer output :"</span>,tTokenizer.tokenize(<span style="color: #98be65;">"This is a cooool #dummysmiley: :-) :-P &lt;3"</span>))
+<span class="linenr">15: </span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4afaa14" class="outline-3">
+<h3 id="org4afaa14"><span class="section-number-3">2.2.</span> 3.3　詞幹提取 Stemming——學習使用 NLTK 內置的詞幹提取器 inbuilt stemmers of NLTK</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk <span style="color: #51afef;">import</span> PorterStemmer, LancasterStemmer, word_tokenize
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">raw</span> = <span style="color: #98be65;">"My name is Maximus Decimus Meridius, commander of the Armies of the North, General of the Felix Legions and loyal servant to the true emperor, Marcus Aurelius. Father to a murdered son, husband to a murdered wife. And I will have my vengeance, in this life or the next."</span>
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">tokens</span> = word_tokenize(raw)
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span><span style="color: #dcaeea;">porter</span> = PorterStemmer()
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">pStems</span> = [porter.stem(t) <span style="color: #51afef;">for</span> t <span style="color: #51afef;">in</span> tokens]
+<span class="linenr"> 9: </span><span style="color: #c678dd;">print</span>(pStems)
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #dcaeea;">lancaster</span> = LancasterStemmer()
+<span class="linenr">12: </span><span style="color: #dcaeea;">lStems</span> = [lancaster.stem(t) <span style="color: #51afef;">for</span> t <span style="color: #51afef;">in</span> tokens]
+<span class="linenr">13: </span><span style="color: #c678dd;">print</span>(lStems)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6fc257f" class="outline-3">
+<h3 id="org6fc257f"><span class="section-number-3">2.3.</span> 3.4　詞形還原 Lemmatization——學習使用 NLTK 中的 WordnetLemmatizer 函數</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span>nltk.download(<span style="color: #98be65;">'gutenberg'</span>)
+<span class="linenr"> 2: </span>nltk.download(<span style="color: #98be65;">'stopwords'</span>)
+<span class="linenr"> 3: </span>
+<span class="linenr"> 4: </span><span style="color: #51afef;">import</span> nltk
+<span class="linenr"> 5: </span><span style="color: #51afef;">from</span> nltk.corpus <span style="color: #51afef;">import</span> gutenberg
+<span class="linenr"> 6: </span><span style="color: #c678dd;">print</span>(gutenberg.fileids())
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #dcaeea;">gb_words</span> = gutenberg.words(<span style="color: #98be65;">'bible-kjv.txt'</span>)
+<span class="linenr"> 9: </span><span style="color: #dcaeea;">words_filtered</span> = [e.lower() <span style="color: #51afef;">for</span> e <span style="color: #51afef;">in</span> gb_words <span style="color: #51afef;">if</span> <span style="color: #c678dd;">len</span>(e) &gt;= <span style="color: #da8548; font-weight: bold;">3</span>]
+<span class="linenr">10: </span><span style="color: #dcaeea;">stopwords</span> = nltk.corpus.stopwords.words(<span style="color: #98be65;">'english'</span>)
+<span class="linenr">11: </span><span style="color: #dcaeea;">words</span> = [w <span style="color: #51afef;">for</span> w <span style="color: #51afef;">in</span> words_filtered <span style="color: #51afef;">if</span> w.lower() <span style="color: #51afef;">not</span> <span style="color: #51afef;">in</span> stopwords]
+<span class="linenr">12: </span>
+<span class="linenr">13: </span><span style="color: #dcaeea;">fdist</span> = nltk.FreqDist(words)
+<span class="linenr">14: </span><span style="color: #dcaeea;">fdist2</span> = nltk.FreqDist(gb_words)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Following are the most common 10 words in the bag'</span>)
+<span class="linenr">17: </span><span style="color: #c678dd;">print</span>(fdist2.most_common(<span style="color: #da8548; font-weight: bold;">10</span>))
+<span class="linenr">18: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Following are the most common 10 words in the bag minus the stopwords'</span>)
+<span class="linenr">19: </span><span style="color: #c678dd;">print</span>(fdist.most_common(<span style="color: #da8548; font-weight: bold;">10</span>))
+<span class="linenr">20: </span>fdist.plot()
+<span class="linenr">21: </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb706828" class="outline-3">
+<h3 id="orgb706828"><span class="section-number-3">2.4.</span> 3.5　停用詞 Stopwords ——學習使用停用詞語料庫及其應用</h3>
+</div>
+<div id="outline-container-org9a8b18e" class="outline-3">
+<h3 id="org9a8b18e"><span class="section-number-3">2.5.</span> 3.6　編輯距離 Edit distance——編寫計算兩個字串之間編輯距離的演算法 writing your own algorithm to find edit distance between two strings</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> nltk.metrics.distance <span style="color: #51afef;">import</span> edit_distance
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">my_edit_distance</span>(str1, str2):
+<span class="linenr"> 4: </span>    <span style="color: #dcaeea;">m</span>= <span style="color: #c678dd;">len</span>(str1) + <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr"> 5: </span>    <span style="color: #dcaeea;">n</span>= <span style="color: #c678dd;">len</span>(str2) + <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>    <span style="color: #dcaeea;">table</span> = {}
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(m): <span style="color: #dcaeea;">table</span>[i,<span style="color: #da8548; font-weight: bold;">0</span>]=i
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">for</span> j <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(n): <span style="color: #dcaeea;">table</span>[<span style="color: #da8548; font-weight: bold;">0</span>,j]=j
+<span class="linenr">10: </span>
+<span class="linenr">11: </span>    <span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">1</span>, m):
+<span class="linenr">12: </span>        <span style="color: #51afef;">for</span> j <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">1</span>, n):
+<span class="linenr">13: </span>            <span style="color: #dcaeea;">cost</span> = <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #51afef;">if</span> str1[i - <span style="color: #da8548; font-weight: bold;">1</span>] == str2[j - <span style="color: #da8548; font-weight: bold;">1</span>] <span style="color: #51afef;">else</span> <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">14: </span>            table[<span style="color: #dcaeea;">i</span>,<span style="color: #dcaeea;">j</span>] = <span style="color: #c678dd;">min</span>(table[i, j-<span style="color: #da8548; font-weight: bold;">1</span>]+<span style="color: #da8548; font-weight: bold;">1</span>, table[i-<span style="color: #da8548; font-weight: bold;">1</span>, j]+<span style="color: #da8548; font-weight: bold;">1</span>, table[i-<span style="color: #da8548; font-weight: bold;">1</span>, j-<span style="color: #da8548; font-weight: bold;">1</span>]+cost)
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>    <span style="color: #51afef;">return</span> table[i,j]
+<span class="linenr">17: </span>
+<span class="linenr">18: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Our Algorithm :"</span>,my_edit_distance(<span style="color: #98be65;">"hand"</span>, <span style="color: #98be65;">"and"</span>))
+<span class="linenr">19: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"NLTK Algorithm :"</span>,edit_distance(<span style="color: #98be65;">"hand"</span>, <span style="color: #98be65;">"and"</span>))
+<span class="linenr">20: </span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc1dfb9" class="outline-3">
+<h3 id="orgbc1dfb9"><span class="section-number-3">2.6.</span> 3.7　處理兩篇短文並提取共有詞彙 Processing two short stories and extracting the common vocabulary between two of them</h3>
+<div class="outline-text-3" id="text-2-6">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #dcaeea;">story1</span> = <span style="color: #98be65;">"""In a far away kingdom, there was a river. This river was home to many golden swans. The swans spent most of their time on the banks of the river. Every six months, the swans would leave a golden feather as a fee for using the lake. The soldiers of the kingdom would collect the feathers and deposit them in the royal treasury.</span>
+<span class="linenr"> 2: </span><span style="color: #98be65;">One day, a homeless bird saw the river. "The water in this river seems so cool and soothing. I will make my home here," thought the bird.</span>
+<span class="linenr"> 3: </span><span style="color: #98be65;">As soon as the bird settled down near the river, the golden swans noticed her. They came shouting. "This river belongs to us. We pay a golden feather to the King to use this river. You can not live here."</span>
+<span class="linenr"> 4: </span><span style="color: #98be65;">"I am homeless, brothers. I too will pay the rent. Please give me shelter," the bird pleaded. "How will you pay the rent? You do not have golden feathers," said the swans laughing. They further added, "Stop dreaming and leave once." The humble bird pleaded many times. But the arrogant swans drove the bird away.</span>
+<span class="linenr"> 5: </span><span style="color: #98be65;">"I will teach them a lesson!" decided the humiliated bird.</span>
+<span class="linenr"> 6: </span><span style="color: #98be65;">She went to the King and said, "O King! The swans in your river are impolite and unkind. I begged for shelter but they said that they had purchased the river with golden feathers."</span>
+<span class="linenr"> 7: </span><span style="color: #98be65;">The King was angry with the arrogant swans for having insulted the homeless bird. He ordered his soldiers to bring the arrogant swans to his court. In no time, all the golden swans were brought to the King&#8217;s court.</span>
+<span class="linenr"> 8: </span><span style="color: #98be65;">"Do you think the royal treasury depends upon your golden feathers? You can not decide who lives by the river. Leave the river at once or you all will be beheaded!" shouted the King.</span>
+<span class="linenr"> 9: </span><span style="color: #98be65;">The swans shivered with fear on hearing the King. They flew away never to return. The bird built her home near the river and lived there happily forever. The bird gave shelter to all other birds in the river. """</span>
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #dcaeea;">story2</span> = <span style="color: #98be65;">"""Long time ago, there lived a King. He was lazy and liked all the comforts of life. He never carried out his duties as a King. &#8220;Our King does not take care of our needs. He also ignores the affairs of his kingdom." The people complained.</span>
+<span class="linenr">12: </span><span style="color: #98be65;">One day, the King went into the forest to hunt. After having wandered for quite sometime, he became thirsty. To his relief, he spotted a lake. As he was drinking water, he suddenly saw a golden swan come out of the lake and perch on a stone. &#8220;Oh! A golden swan. I must capture it," thought the King.</span>
+<span class="linenr">13: </span><span style="color: #98be65;">But as soon as he held his bow up, the swan disappeared. And the King heard a voice, &#8220;I am the Golden Swan. If you want to capture me, you must come to heaven."</span>
+<span class="linenr">14: </span><span style="color: #98be65;">Surprised, the King said, &#8220;Please show me the way to heaven." &#8220;Do good deeds, serve your people and the messenger from heaven would come to fetch you to heaven," replied the voice.</span>
+<span class="linenr">15: </span><span style="color: #98be65;">The selfish King, eager to capture the Swan, tried doing some good deeds in his Kingdom. &#8220;Now, I suppose a messenger will come to take me to heaven," he thought. But, no messenger came.</span>
+<span class="linenr">16: </span><span style="color: #98be65;">The King then disguised himself and went out into the street. There he tried helping an old man. But the old man became angry and said, &#8220;You need not try to help. I am in this miserable state because of out selfish King. He has done nothing for his people."</span>
+<span class="linenr">17: </span><span style="color: #98be65;">Suddenly, the King heard the golden swan&#8217;s voice, &#8220;Do good deeds and you will come to heaven." It dawned on the King that by doing selfish acts, he will not go to heaven.</span>
+<span class="linenr">18: </span><span style="color: #98be65;">He realized that his people needed him and carrying out his duties was the only way to heaven. After that day he became a responsible King.</span>
+<span class="linenr">19: </span><span style="color: #98be65;">"""</span>
+<span class="linenr">20: </span>
+<span class="linenr">21: </span><span style="color: #dcaeea;">story1</span> = story1.replace(<span style="color: #98be65;">","</span>, <span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">"\n"</span>, <span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">'.'</span>, <span style="color: #98be65;">''</span>).replace(<span style="color: #98be65;">'"'</span>, <span style="color: #98be65;">''</span>).replace(<span style="color: #98be65;">"!"</span>,<span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">"?"</span>,<span style="color: #98be65;">""</span>).casefold()
+<span class="linenr">22: </span><span style="color: #dcaeea;">story2</span> = story2.replace(<span style="color: #98be65;">","</span>, <span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">"\n"</span>, <span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">'.'</span>, <span style="color: #98be65;">''</span>).replace(<span style="color: #98be65;">'"'</span>, <span style="color: #98be65;">''</span>).replace(<span style="color: #98be65;">"!"</span>,<span style="color: #98be65;">""</span>).replace(<span style="color: #98be65;">"?"</span>,<span style="color: #98be65;">""</span>).casefold()
+<span class="linenr">23: </span>
+<span class="linenr">24: </span><span style="color: #dcaeea;">story1_words</span> = story1.split(<span style="color: #98be65;">" "</span>)
+<span class="linenr">25: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"First Story words :"</span>,story1_words)
+<span class="linenr">26: </span>story2_words = story2.split(<span style="color: #98be65;">" "</span>)
+<span class="linenr">27: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Second Story words :"</span>,story2_words)
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>story1_vocab = <span style="color: #c678dd;">set</span>(story1_words)
+<span class="linenr">30: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"First Story vocabulary :"</span>,story1_vocab)
+<span class="linenr">31: </span>story2_vocab = <span style="color: #c678dd;">set</span>(story2_words)
+<span class="linenr">32: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Second Story vocabulary"</span>,story2_vocab)
+<span class="linenr">33: </span>
+<span class="linenr">34: </span><span style="color: #dcaeea;">common_vocab</span> = story1_vocab &amp; story2_vocab
+<span class="linenr">35: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">"Common Vocabulary :"</span>,common_vocab)
+<span class="linenr">36: </span>
+</pre>
+</div>
+<pre class="example" id="org14eda1e">
+['austen-emma.txt', 'austen-persuasion.txt', 'austen-sense.txt', 'bible-kjv.txt', 'blake-poems.txt', 'bryant-stories.txt', 'burgess-busterbrown.txt', 'carroll-alice.txt', 'chesterton-ball.txt', 'chesterton-brown.txt', 'chesterton-thursday.txt', 'edgeworth-parents.txt', 'melville-moby_dick.txt', 'milton-paradise.txt', 'shakespeare-caesar.txt', 'shakespeare-hamlet.txt', 'shakespeare-macbeth.txt', 'whitman-leaves.txt']
+
+Following are the most common 10 words in the bag
+[(',', 70509), ('the', 62103), (':', 43766), ('and', 38847), ('of', 34480), ('.', 26160), ('to', 13396), ('And', 12846), ('that', 12576), ('in', 12331)]
+
+Following are the most common 10 words in the bag minus the stopwords
+[('shall', 9838), ('unto', 8997), ('lord', 7964), ('thou', 5474), ('thy', 4600), ('god', 4472), ('said', 3999), ('thee', 3827), ('upon', 2748), ('man', 2735)]
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org681e24b" class="outline-2">
+<h2 id="org681e24b"><span class="section-number-2">3.</span> 作業:完成文章的練習</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Python 自然語言處理 NLTK 庫用法入門教程【經典】<br />
+指令碼專欄 · 發表 2018-06-26<br />
+<a href="https://www.itread01.com/article/1529980432.html">https://www.itread01.com/article/1529980432.html</a><br />
+</p>
+
+<p>
+NLTK Python Tutorial (Natural Language Toolkit)<br />
+<a href="https://data-flair.training/blogs/nltk-python-tutorial/">https://data-flair.training/blogs/nltk-python-tutorial/</a><br />
+```<br />
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://clay-atlas.com/blog/2019/07/30/%E3%80%90nlp%E3%80%91nltk-%E5%9F%BA%E6%9C%AC%E6%95%99%E5%AD%B8/">https://clay-atlas.com/blog/2019/07/30/%E3%80%90nlp%E3%80%91nltk-%E5%9F%BA%E6%9C%AC%E6%95%99%E5%AD%B8/</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://www.itread01.com/article/1529980432.html">https://www.itread01.com/article/1529980432.html</a><br />
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-03 Sun 14:53</p>
+</div>
+</body>
+</html>

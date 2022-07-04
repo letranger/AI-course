@@ -1,0 +1,687 @@
+#+title: Numpy
+#+INCLUDE: ../pdf.org
+#+TAGS: AI
+#+OPTIONS: toc:2 ^:nil num:5
+#+PROPERTY: header-args :eval never-export
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+EXCLUDE_TAGS: noexport
+#+latex:\newpage
+
+* 簡介
+NumPy 是 Python 語言的一個擴充程式庫。支援高階大量的維度陣列與矩陣運算，此外也針對陣列運算提供大量的數學函式函式庫。NumPy 的前身 Numeric 最早是由 Jim Hugunin 與其它協作者共同開發，2005 年，Travis Oliphant 在 Numeric 中結合了另一個同性質的程式庫 Numarray 的特色，並加入了其它擴充功能而開發了 NumPy。NumPy 為開放原始碼並且由許多協作者共同維護開發。[fn:1]
+
+* NumPy 陣列
+** create
+Numpy 的重點在於陣列的操作，其所有功能特色都建築在同質且多重維度的 ndarray（N-dimensional array）上。ndarray 的關鍵屬性是維度（ndim）、形狀（shape）和數值類型（dtype）。 一般我們稱一維陣列為 vector 而二維陣列為 matrix。一開始我們會引入 numpy 模組，透過傳入 list 到 numpy.array() 創建陣列。
+
+- with data
+#+BEGIN_SRC python -r -n :results output :exports both
+  # 引入 numpy 模組
+  import numpy as np
+  np1 = np.array([1, 2, 3])
+  np2 = np.array([3, 4, 5])
+
+  # 陣列相加
+  print(np1 + np2) # [4 6 8]
+
+  # 顯示相關資訊
+  print(np1.ndim, np1.shape, np1.dtype) # 1 (3,) int64 => 一維陣列, 三個元素, 資料型別
+
+  # create identity matrix
+  ary1 = np.eye(3)
+  print(ary1)
+
+  # create diagonal array
+  ary2 = np.diag((2,1,4,6))
+  print(ary2)
+
+  #
+  ary3 = np.array([range(i, i+3) for i in [2,4,6]])
+  print(ary3)
+
+  # tile
+  ary4 = np.array([0,1,2])
+  print(np.tile(ary4,2))
+  print(np.tile(ary4,(2,2)))
+
+  ary5 = np.array([[1,2],[6,7]])
+  print(np.tile(ary5,3))
+  print(np.tile(ary5,(2,2)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[4 6 8]
+1 (3,) int64
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+[[2 0 0 0]
+ [0 1 0 0]
+ [0 0 4 0]
+ [0 0 0 6]]
+[[2 3 4]
+ [4 5 6]
+ [6 7 8]]
+[0 1 2 0 1 2]
+[[0 1 2 0 1 2]
+ [0 1 2 0 1 2]]
+[[1 2 1 2 1 2]
+ [6 7 6 7 6 7]]
+[[1 2 1 2]
+ [6 7 6 7]
+ [1 2 1 2]
+ [6 7 6 7]]
+#+end_example
+
+- numpy.random.randint()
+語法：numpy.random.randint(low, high=None, size=None, dtype='l')
+
+函式的作用是，返回一個隨機整型數，範圍從低（包括）到高（不包括），即[low, high)。
+如果沒有寫引數 high 的值，則返回[0,low)的值。
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  np.random.seed(0)
+
+  x1 = np.random.randint(10, size=6)
+  x2 = np.random.randint(10, size=(3,4))
+  x3 = np.random.randint(10, size=(3,4,5))
+  print(x1)
+  print(x2)
+  print(x3)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[5 0 3 3 7 9]
+[[3 5 2 4]
+ [7 6 8 8]
+ [1 6 7 7]]
+[[[8 1 5 9 8]
+  [9 4 3 0 3]
+  [5 0 2 3 8]
+  [1 3 3 3 7]]
+
+ [[0 1 9 9 0]
+  [4 7 3 2 7]
+  [2 0 0 4 5]
+  [5 6 8 4 1]]
+
+ [[4 9 8 1 1]
+  [7 9 9 3 6]
+  [7 2 0 3 5]
+  [9 4 4 6 4]]]
+#+end_example
+
+- numpy.random.rand()
+根據給定維度生成(0,1)間的資料，包含 0，不包含 1
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  np.random.seed(9627) #設置相同變數，每次生成相同亂數
+  ar = np.random.rand(2,4)
+  print(ar)
+#+END_SRC
+
+#+RESULTS:
+: [[0.28012059 0.19216219 0.63985614 0.48842053]
+:  [0.9441813  0.88992099 0.17534833 0.29543319]]
+
+** COMMENT NumPy ndarray 運算
+- reshape
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  x = np.arange(2,10)
+  print(x.reshape(2,4))
+#+END_SRC
+
+#+RESULTS:
+: [[2 3 4 5]
+:  [6 7 8 9]]
+
+- Flattening and Transpose
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  ac = np.array([np.arange(1,6),np.arange(10,15)])
+  print(ac)
+  print(ac.ravel())
+  print(ac.T)
+
+#+END_SRC
+
+#+RESULTS:
+: [[ 1  2  3  4  5]
+:  [10 11 12 13 14]]
+: [ 1  2  3  4  5 10 11 12 13 14]
+: [[ 1 10]
+:  [ 2 11]
+:  [ 3 12]
+:  [ 4 13]
+:  [ 5 14]]
+
+- Add a dimension
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  ar = np.array([14,15,16])
+  print(ar)
+  print(ar.shape)
+
+  ar = ar[:,np.newaxis]
+  print(ar.shape)
+  print(ar)
+#+END_SRC
+
+#+RESULTS:
+: [14 15 16]
+: (3,)
+: (3, 1)
+: [[14]
+:  [15]
+:  [16]]
+
+- Array Indexing
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  x = np.array([[2,3,4],[9,8,7],[11,12,13]])
+  print(x)
+  print(x[1,2])
+  print(x[2,:])
+  print(x[:,1])
+  print(x[2,-1])
+
+#+END_SRC
+
+#+RESULTS:
+: [[ 2  3  4]
+:  [ 9  8  7]
+:  [11 12 13]]
+: 7
+: [11 12 13]
+: [ 3  8 12]
+: 13
+
+- Array slicing
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  ar = 2*np.arange(6)
+  print(ar)
+  print(ar[1:5:2]) # 從第1個到第5個，每隔兩個取一個
+  print(ar[1:6:2])
+  print(ar[:4])
+  print(ar[4:])
+  print(ar[:3])
+
+#+END_SRC
+
+#+RESULTS:
+: [ 0  2  4  6  8 10]
+: [2 6]
+: [ 2  6 10]
+: [0 2 4 6]
+: [ 8 10]
+: [0 2 4]
+
+
+- Fancy Indexing
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  ar = np.empty((8,4))
+  print(ar)
+  for i in range(8):
+      ar[i] = i
+  print(ar)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[[-2.31584178e+077 -2.31584178e+077 -7.90505033e-323  0.00000000e+000]
+ [ 2.12199579e-314  0.00000000e+000  0.00000000e+000  0.00000000e+000]
+ [ 1.77229088e-310  3.50977866e+064  0.00000000e+000  0.00000000e+000]
+ [             nan              nan  3.50977942e+064  2.12615637e-314]
+ [-2.68679191e+154  3.11109248e+231 -3.95252517e-323  0.00000000e+000]
+ [ 2.12199579e-314  0.00000000e+000  0.00000000e+000  0.00000000e+000]
+ [ 1.77229088e-310  3.50977866e+064  0.00000000e+000  0.00000000e+000]
+ [             nan              nan  3.50977942e+064  2.27089688e-308]]
+[[0. 0. 0. 0.]
+ [1. 1. 1. 1.]
+ [2. 2. 2. 2.]
+ [3. 3. 3. 3.]
+ [4. 4. 4. 4.]
+ [5. 5. 5. 5.]
+ [6. 6. 6. 6.]
+ [7. 7. 7. 7.]]
+#+end_example
+
+- Reduction Operations
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  ar = np.arange(1,5)
+  print(ar.prod())
+
+  ar1 = np.array([np.arange(1,4),np.arange(4,7),np.arange(7,10)])
+  print(ar1)
+  print(np.prod(ar1, axis=1))
+  print(ar1.sum())
+  print(ar1.mean())
+  print(np.median(ar1))
+  #+END_SRC
+
+#+RESULTS:
+: 24
+: [[1 2 3]
+:  [4 5 6]
+:  [7 8 9]]
+: [  6 120 504]
+: 45
+: 5.0
+: 5.0
+
+- Universal Functions
+#+BEGIN_SRC python -r -n :results output :exports both :eval no
+  import numpy as np
+  import timeit
+  # 以for 運算
+  ar = range(1000)
+  print(ari[i]**3 for i in ar)
+  # 以向量平行運算
+  ar = np.arange(1000)
+  print(ar**3)
+  np.sqrt(ar)
+  np.exp(ar)
+#+END_SRC
+
+** numpy 矩陣間的運算
+
+- element-wise
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  ar = np.array([[1,2,3],[4,5,6],[2,3,4]])
+  print(ar)
+  print(ar+ar)
+  print(ar**.5)
+
+  ar1 = np.array([[2,2],[3,3],[1,1]])
+  print(ar.dot(ar1))  #矩陣dot
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[[1 2 3]
+ [4 5 6]
+ [2 3 4]]
+[[ 2  4  6]
+ [ 8 10 12]
+ [ 4  6  8]]
+[[1.         1.41421356 1.73205081]
+ [2.         2.23606798 2.44948974]
+ [1.41421356 1.73205081 2.        ]]
+[[11 11]
+ [29 29]
+ [17 17]]
+#+end_example
+
+- Expressing Conditional Logic as Array Operations
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  xr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+  yr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+  cond = np.array([True, False, True, True, False])
+
+  result = [(x if c else y)
+            for x, y, c in zip(xr, yr, cond)]
+  print(result)
+  print(type(result))
+  print(np.where(cond, xr, yr))
+  print(type(result))
+  #結果都傳回list,為何有,的差異
+#+END_SRC
+
+#+RESULTS:
+: [1.1, 2.2, 1.3, 1.4, 2.5]
+: <class 'list'>
+: [1.1 2.2 1.3 1.4 2.5]
+: <class 'list'>
+
+- Braodcasting
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  x1 = np.arange(9.0).reshape((3,3))
+  print(x1)
+  x2 = np.arange(1, 4)
+  print(x2)
+  print(np.multiply(x1,x2))
+#+END_SRC
+
+#+RESULTS:
+: [[0. 1. 2.]
+:  [3. 4. 5.]
+:  [6. 7. 8.]]
+: [1 2 3]
+: [[ 0.  2.  6.]
+:  [ 3.  8. 15.]
+:  [ 6. 14. 24.]]
+
+- Array sorting
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  ar = np.array([[3,2,5],[10,-1,9],[4,1,12]])
+  print("origin:\n",ar)
+  ar.sort(axis=0)
+  print("axis=0:\n",ar)
+  ar.sort(axis=1)
+  print("axis=1:\n",ar)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+origin:
+ [[ 3  2  5]
+ [10 -1  9]
+ [ 4  1 12]]
+axis=0:
+ [[ 3 -1  5]
+ [ 4  1  9]
+ [10  2 12]]
+axis=1:
+ [[-1  3  5]
+ [ 1  4  9]
+ [ 2 10 12]]
+#+end_example
+
+- Array reverse
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  ar = np.arange(5)
+  print(ar[::-1])
+#+END_SRC
+
+#+RESULTS:
+: [4 3 2 1 0]
+
+** 矩陣間的 convolute 運算
+- numpy.convolve(a, v, mode='full')，這是 numpy 函數中的卷積函數庫
+參數：
++ a:(N,)輸入的一維數組
++ b:(M,)輸入的第二個一維數組
++ mode:{'full', 'valid', 'same'}參數可選
+  - full　預設值，返回每一個卷積值，長度是 N+M-1,在卷積的邊緣處，信號不重疊，存在邊際效應。
+　- same　返回的數組長度為 max(M, N),邊際效應依舊存在。
+　- valid 　返回的數組長度為 max(M,N)-min(M,N)+1,此時返回的是完全重疊的點。邊緣的點無效。
+
+#+BEGIN_SRC python -r -n :results output :exports both
+  # -*- coding: utf-8 -*-
+  # 解決圖形中文問題
+  from pylab import *
+  mpl.rcParams['font.sans-serif'] = ['SimHei']
+  plt.rcParams['axes.unicode_minus']=False
+
+  import numpy as np
+  import matplotlib.pylab as plt
+
+  a = np.array([1, 2, 3])
+  b = np.array([0.1, 1, 0.5])
+  y = np.arange(0, 3)
+  print("a: ",a)
+  print("b: ",b)
+
+  # 1.
+  print(a*b[0])
+  print(a*b[1])
+  print(a*b[2])
+  plt.clf()
+  plt.xlim((-1, 5))
+  plt.ylim((0, 5))
+  plt.bar(y, a*b[0], .5, color='blue')
+  plt.xlabel('a[n]乘以b[0]後平移至位置0');
+  plt.savefig("anb0.png")
+  # 2.
+  plt.clf()
+  plt.xlim((-1, 5))
+  plt.ylim((0, 5))
+  plt.bar(y+1, a*b[1], .5, color='green')
+  plt.xlabel('a[n]乘以b[1]後平移至位置1');
+  plt.savefig("anb1.png")
+  # 3.
+  plt.clf()
+  plt.xlim((-1, 5))
+  plt.ylim((0, 5))
+  plt.bar(y+2, a*b[2], .5, color='orange')
+  plt.xlabel('a[n]乘以b[2]後平移至位置2');
+  plt.savefig("anb2.png")
+  # Stack
+  anb0 = [0.1, 0.2, 0.3, 0,   0]
+  anb1 = [  0,   1,   2, 3,   0]
+  anb2 = [  0,   0, 0.5, 1, 1.5]
+  plt.clf()
+  plt.xlim((-1, 5))
+  plt.ylim((0, 5))
+  plt.bar(np.arange(0,5), anb0, .5, color='blue')
+  plt.bar(np.arange(0,5), anb1, .5, color='green', bottom=anb0)
+  plt.bar(np.arange(0,5), anb2, .5, color='orange', bottom=np.add(anb0,anb1))
+  plt.xlabel('將三圖疊加起來');
+
+  plt.savefig("abStack.png")
+  print("Full:",np.convolve(a, b))
+  print("same:",np.convolve(a, b, 'same'))
+  print("valid:",np.convolve(a, b, 'valid'))
+
+#+END_SRC
+
+#+RESULTS:
+: a:  [1 2 3]
+: b:  [0.1 1.  0.5]
+: [0.1 0.2 0.3]
+: [1. 2. 3.]
+: [0.5 1.  1.5]
+: Full: [0.1 1.2 2.8 4.  1.5]
+: same: [1.2 2.8 4. ]
+: valid: [2.8]
+
+以矩陣 a = np.array([1, 2, 3]), b = np.array([0.1, 1, 0.5])為例，numpy.convolve 的計算過程如下：
+1. 求出 a*b[0]，平移至位置 0，如圖[[fig:convolve-1]
+#+CAPTION: convolve 的計算過程-1
+#+LABEL:fig:convolve-1
+#+name: fig:convolve-1
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/anb0.png]]
+1. 求出 a*b[1]，平移至位置 1，如圖[[fig:convolve-2]]
+#+CAPTION: convolve 的計算過程-2
+#+LABEL:fig:convolve-2
+#+name: fig:convolve-2
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/anb1.png]]
+1. 求出 a*b[2]，平移至位置 2，如圖[[fig:convolve-3]]
+#+CAPTION: convolve 的計算過程-1
+#+LABEL:fig:convolve-3
+#+name: fig:convolve-3
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/anb2.png]]
+1. 將圖[[fig:convolve-1]]，圖[[fig:convolve-2]]，圖[[fig:convolve-3]]疊加起來
+#+CAPTION: convolve 的計算過程-1
+#+LABEL:fig:convolve-4
+#+name: fig:convolve-4
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/abStack.png]]
+
+* Numpy 檔案輸出輸入
+** Binary Format  [fn:2]
+- save() / load()
+#+BEGIN_SRC python -r -n :results output :exports both
+import numpy as np
+import subprocess
+
+x = np.arange(20)
+print("原始內容:", x)
+np.save("test_array.npy", x) #.npy
+y = np.load("test_array.npy")
+print("讀回來:", y)
+#+END_SRC
+
+#+RESULTS:
+: 原始內容: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19]
+: 讀回來: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19]
+
+- savez(): 儲存多個陣列在一個 zip 的檔案中
+#+BEGIN_SRC python -r -n :results output :exports both
+import numpy as np
+aData = [1,2,3,4,5,6]
+bData = [7,8,9,10,11,12]
+np.savez('my_archive.npz', a=aData, b=bData)
+myArch = np.load('my_archive.npz')
+print(myArch['a'])
+#+END_SRC
+
+#+RESULTS:
+: [1 2 3 4 5 6]
+
+** Text Files
+- savetxt
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+
+  ac = np.array([np.arange(1,6),np.arange(10,15)])
+  np.savetxt('txtfile.txt', ac)
+
+  myArr = np.loadtxt('txtfile.txt', delimiter=' ')
+  print(myArr)
+#+END_SRC
+
+#+RESULTS:
+: [[ 1.  2.  3.  4.  5.]
+:  [10. 11. 12. 13. 14.]]
+
+- savez(): 儲存多個陣列在一個 zip 的檔案中
+#+BEGIN_SRC python -r -n :results output :exports both
+import numpy as np
+aData = [1,2,3,4,5,6]
+bData = [7,8,9,10,11,12]
+np.savez('my_archive.npz', a=aData, b=bData)
+myArch = np.load('my_archive.npz')
+print(myArch['a'])
+#+END_SRC
+
+#+RESULTS:
+: [1 2 3 4 5 6]
+
+* Data Visualization
+** pylab
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  import pylab as pl
+
+  x = np.arange(0.0, 2.0*np.pi, 0.01)
+  print("x:", x[:5])
+  y = np.sin(x)
+  print("y:", y[:5])
+
+  pl.plot(x,y)
+  pl.xlabel('x')
+  pl.ylabel('y')
+  pl.title('sin')
+  pl.savefig("sinPlot.png")
+#+END_SRC
+
+#+RESULTS:
+: x: [0.   0.01 0.02 0.03 0.04]
+: y: [0.         0.00999983 0.01999867 0.0299955  0.03998933]
+#+CAPTION: sinPlot
+#+LABEL:fig:sinPlot
+#+name: fig:sinPlot
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/sinPlot.png]]
+
+** Bokeh
+#+BEGIN_SRC python -r -n :results output :exports both
+  import numpy as np
+  from bokeh.plotting import figure, show
+  from bokeh.io import output_notebook, export_png, output_file, save
+  import matplotlib.pylab as plt
+
+  N = 4000
+
+  x = np.random.random(size=N)*100
+  y = np.random.random(size=N)*100
+  radii = np.random.random(size=N)*1.5
+  colors = ["#%02x%02x%02x" % (r, g, 150) for r, g in zip(np.floor(50+2*x).astype(int), np.floor(30+2*y).astype(int))]
+
+  output_notebook()
+  p = figure(title="Basic Title", plot_width=300, plot_height=300)
+  p.circle(x, y, radius=radii, fill_color=colors, fill_alpha=0.6, line_color=None)
+  output_file('bokehPlot.html', mode='inline')
+  save(p)
+#+END_SRC
+
+#+RESULTS:
+file:bokehPlot.htm
+
+** seaborn
+#+BEGIN_SRC python -r -n :results output :exports both
+  import seaborn as sns
+  sns.set(style="ticks")
+
+  #Load the example dataset for Anscombe's quartet
+  df = sns.load_dataset("anscombe")
+
+  # Show the results of a linear regression within each dataset
+  sns.lmplot(x="x", y="y", col="dataset", hue="dataset", data=df, col_wrap=2, ci=None, palette="muted", height=4, scatter_kws={'s' :50,'alpha':1})
+
+  import matplotlib.pyplot as plt
+  #sns.sns_plot.savefig("seabornPlot.png")
+  plt.savefig("seabornPlot.png")
+#+END_SRC
+
+#+CAPTION: seabornPlot
+#+LABEL:fig:seabornPlot
+#+name: fig:seabornPlot
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+RESULTS:
+[[file:images/seabornPlot.png]]
+
+** Altair
+#+BEGIN_SRC python -r -n :results output :exports both
+  import altair as alt
+  from vega_datasets import data
+
+  cars = data.cars()
+
+  chart = alt.Chart(cars).mark_point().encode( x='Horsepower', y='Miles_per_Gallon', color='Origin').interactive()
+
+  #import pylab as pl
+  #pl.savefig("altairPlot.png")
+  chart.save('altairPlot.png', webdriver='firefox')
+  chart.savechart('altairPlot.html')
+#+END_SRC
+
+#+RESULTS:
+#+CAPTION: altairPlot
+#+LABEL:fig:altairPlot
+#+name: fig:altairPlot
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+[[file:images/altairPlot.png]]
+
+
+#+latex:\newpage
+
+* Footnotes
+
+[fn:1][[https://zh.wikipedia.org/wiki/NumPy][NumPy]]
+
+[fn:2][[https://ithelp.ithome.com.tw/articles/10196167][Day18-Numpy檔案輸入與輸出!]]
