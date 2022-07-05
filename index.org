@@ -5,11 +5,12 @@
 #+PROPERTY: header-args :eval never-export
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+latex:\newpage
-
+這是為[[http://www.tnfsh.tn.edu.tw/][TNFSH]]的[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=20][AI入門]]選修課程隨便編的講義，這門課假設你已修過[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=25][Python入門]]的選修課程或是已自學基本的Python，內容持續編修中，編者不保證內容正確性，服用前請保持對一切內容懷疑的精神...
 - [[file:~/Dropbox/AI/AI-Introduction.org][AI簡介]]
 - [[file:~/Dropbox/AI/MachineLearning.org][機器學習]]
 - [[file:SL.org][監督式學習]]
 - [[file:UL.org][非監督式學習]]
+- [[file:CNN.org][Say Hi to CNN]]
 - [[file:RL.org][強化學習]]
 - [[file:DL.org][深度學習]]
 - [[https://www.youtube.com/watch?v=PqsTbDxiyBs][Python 期末報告：用deep learning分類心電圖]]
@@ -30,24 +31,8 @@
 - http://jakevdp.github.io/blog/2013/07/10/XKCD-plots-in-matplotlib/
 - https://gradio.app/introducing-hosted
 - https://colab.research.google.com/github/yenlung/Deep-Learning-Basics/blob/master/colab03b%20%E4%BD%BF%E7%94%A8%E7%B4%85%E6%A8%93%E5%A4%A2%E7%94%9F%E6%88%90%E5%99%A8.ipynb?fbclid=IwAR1Q6a1EqJSlDix5_WKIB2Q-9UlRd2_tJ9kbgi52VoK_EpICzY0GEedCVro#scrollTo=dpUaHxdug6sI
-** 中文
 - https://medium.com/nlp-tsupei/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E5%AD%B8%E7%BF%92%E8%87%AA%E7%84%B6%E8%AA%9E%E8%A8%80%E8%99%95%E7%90%86-a729bccecda
 - https://ckip.iis.sinica.edu.tw/resource
 - https://github.com/ckiplab/ckipnlp
 - https://github.com/zake7749/Gossiping-Chinese-Corpus/tree/master/data
 
-* Footnotes
-
-[fn:7] [[https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53][Decision Trees Explained With a Practical Example]]
-
-[fn:6] [[http://gym.openai.com/docs/][Getting Started with Gym]]
-
-[fn:5] [[https://kknews.cc/zh-tw/news/34mob53.html][強化學習Exploration漫遊]]
-
-[fn:4] [[https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py][GitHub: openai/gym ]]
-
-[fn:3] [[https://blog.csdn.net/qq_32892383/article/details/89576003][OpenAI Gym 經典控制環境介紹——CartPole（倒立擺）]]
-
-[fn:2] [[https://blog.csdn.net/qq_30615903/article/details/80739243][【強化學習】Q-Learning算法詳解]]
-
-[fn:1] [[https://ithelp.ithome.com.tw/articles/10234272][Day 6 強化學習就是一直學習? ]]

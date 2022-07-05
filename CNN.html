@@ -1,0 +1,1368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-07-05 Tue 11:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Say Hi to CNN</title>
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Say Hi to CNN</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org882e56e">1. 神經網路解題步驟</a></li>
+<li><a href="#orgc99b8c8">2. 收集資料</a>
+<ul>
+<li><a href="#orgb581f0b">2.1. 資料類型</a></li>
+<li><a href="#org0652336">2.2. DEMO</a></li>
+</ul>
+</li>
+<li><a href="#org28b1af5">3. 準備數據 (Preparing that data)</a>
+<ul>
+<li><a href="#org8278a3a">3.1. 常態化</a></li>
+<li><a href="#org23b4b47">3.2. 標準化</a></li>
+<li><a href="#org6d192d0">3.3. DEMO</a></li>
+</ul>
+</li>
+<li><a href="#orgf9c793d">4. 選擇模型 (Choosing a model)</a>
+<ul>
+<li><a href="#orgf69a8db">4.1. 語法</a></li>
+<li><a href="#org1a6985a">4.2. DEMO</a></li>
+</ul>
+</li>
+<li><a href="#orgf24e8ca">5. 訓練機器 (Training)</a>
+<ul>
+<li><a href="#orge0bb042">5.1. 語法</a></li>
+<li><a href="#org3791f9e">5.2. DEMO</a></li>
+</ul>
+</li>
+<li><a href="#orgdbf7e26">6. 評估分析 (Evaluation)</a></li>
+<li><a href="#org7448833">7. 調整參數 (Hyperparameter tuning)</a>
+<ul>
+<li><a href="#orgfcefc53">7.1. model參數</a></li>
+<li><a href="#org3aaaff0">7.2. Hyperparameters</a></li>
+</ul>
+</li>
+<li><a href="#org7ebbb7c">8. 預測推論 (Prediction)</a></li>
+<li><a href="#org8a12b1e">9. DEMO 1: Regression</a>
+<ul>
+<li><a href="#org9ef0118">9.1. 產生數據</a></li>
+<li><a href="#org3e6de7c">9.2. 建立model</a></li>
+<li><a href="#org18ecd0c">9.3. 訓練model</a></li>
+<li><a href="#orgb640c06">9.4. 查看訓練過程</a></li>
+<li><a href="#org1764497">9.5. 評估model</a></li>
+<li><a href="#orgac7b2bc">9.6. 預測結果</a></li>
+<li><a href="#org2b53254">9.7. 調整model/參數</a></li>
+</ul>
+</li>
+<li><a href="#org94479a2">10. 練習: Regression</a>
+<ul>
+<li><a href="#orgabc7941">10.1. 數據</a></li>
+</ul>
+</li>
+<li><a href="#Hi-MNIST">11. DEMO 2: MNIST 資料集</a>
+<ul>
+<li><a href="#orgf4b3705">11.1. MNIST</a></li>
+<li><a href="#orge5c01d8">11.2. 準備 MNIST 資料</a></li>
+<li><a href="#orgeec9451">11.3. MNIST 的推論處理</a></li>
+<li><a href="#org30db80c">11.4. MNIST 資料集:以 DNN Sequential 模型為例</a></li>
+</ul>
+</li>
+<li><a href="#HomeWork-2">12. 個人作業二</a>
+<ul>
+<li><a href="#orgc077c3e">12.1. 背景</a></li>
+<li><a href="#org2ada9f5">12.2. 作業要求</a></li>
+</ul>
+</li>
+<li><a href="#org4a522f3">13. 小組作業三</a>
+<ul>
+<li><a href="#org707d246">13.1. Resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org882e56e" class="outline-2">
+<h2 id="org882e56e"><span class="section-number-2">1.</span> 神經網路解題步驟</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+使用神經網路解決問題可大致分為兩個步驟：「學習」與「推論」。
+</p>
+<ul class="org-ul">
+<li>學習指使用訓練資料進行權重參數的學習</li>
+<li>推論指使用學習過的參數進行資料分類CNN</li>
+</ul>
+<p>
+而實際的動手實作可再細分為以下幾個步驟
+</p>
+<ol class="org-ol">
+<li>收集資料 (Gathering data)</li>
+<li>準備數據 (Preparing that data)</li>
+<li>選擇模型 (Choosing a model)</li>
+<li>訓練機器 (Training)</li>
+<li>評估分析 (Evaluation)</li>
+<li>調整參數 (Hyperparameter tuning)</li>
+<li>預測推論 (Prediction)</li>
+</ol>
+<p>
+實際動手玩一下神經網路架構: <a href="https://playground.tensorflow.org">Tensorflow Playground</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc99b8c8" class="outline-2">
+<h2 id="orgc99b8c8"><span class="section-number-2">2.</span> 收集資料</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgb581f0b" class="outline-3">
+<h3 id="orgb581f0b"><span class="section-number-3">2.1.</span> 資料類型</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org8200578" class="outline-4">
+<h4 id="org8200578"><span class="section-number-4">2.1.1.</span> 人工收集</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<ul class="org-ul">
+<li>預測股市股價: 開盤、收盤、成交量、技術指標、財務指標、籌碼指標等等</li>
+<li>以物品識別:大量物品照片並給予名稱(label)</li>
+<li>以注音符號手寫辨識: 大量手寫照片及其對應答案(label)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org576235a" class="outline-4">
+<h4 id="org576235a"><span class="section-number-4">2.1.2.</span> 現成資料集</h4>
+<div class="outline-text-4" id="text-2-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org30bc809"></a>MNIST<br />
+<div class="outline-text-5" id="text-2-1-2-1">
+<p>
+資料集由 0~9 的數字影像構成(如圖<a href="#orgb9f7a1d">1</a>)，共計 60000 張訓練影像、10000 張測試影像。
+</p>
+
+<div id="orgb9f7a1d" class="figure">
+<p><img src="images/MNIST.jpg" alt="MNIST.jpg" width="500" />
+</p>
+<p><span class="figure-number">Figure 1: </span>MNIST 資料集內容範例</p>
+</div>
+</div>
+</li>
+
+<li><a id="org4fb99ef"></a>Boston housing<br />
+<div class="outline-text-5" id="text-2-1-2-2">
+<p>
+預測目標：房地產價格，特徵包括房地產客觀數據，如年份、平面大小
+</p>
+</div>
+</li>
+<li><a id="org10fdfd9"></a>Iris<br />
+<div class="outline-text-5" id="text-2-1-2-3">
+<p>
+鳶尾花資料集是非常著名的生物資訊資料集之一，取自美國加州大學歐文分校的機器學習資料庫，資料的筆數為150筆，共有五個欄位：花萼長度(Sepal Length)、花萼寬度(Sepal Width)、花瓣長度(Petal Length) 、花瓣寬度(Petal Width)、類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
+</p>
+
+<div id="org65c632e" class="figure">
+<p><img src="images/cqy409dEexm96zavyuw.png" alt="cqy409dEexm96zavyuw.png" width="500" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Iris資料集</p>
+</div>
+</div>
+</li>
+<li><a id="org3a87592"></a>Cifar-10<br />
+<div class="outline-text-5" id="text-2-1-2-4">
+<p>
+由深度學習大師 Geoffrey Hinton 教授與其在加拿大多倫多大學的學生 Alex Krixhevsky 與 Vinoid Nair 所整理之影像資料集, 包含 6 萬筆 32*32 低解析度之彩色圖片, 其中 5 萬筆為訓練集; 1 萬筆為測試集, 是機器學習中常用的圖片辨識資料集
+</p>
+
+<div id="org9558457" class="figure">
+<p><img src="images/cifar10-ten-categories.jpg" alt="cifar10-ten-categories.jpg" width="500" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Cifar-10</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org0652336" class="outline-3">
+<h3 id="org0652336"><span class="section-number-3">2.2.</span> DEMO</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+mnist.load_data(): 自網路下載資料集(內容會包含 <b>資料(x)</b> 和 <b>標籤(y)</b> 兩部份)，load_data()這個function會把整份資料集分割成兩個子集合：訓練集(training set)和測試集(testing set)。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> keras.datasets <span style="color: #51afef;">import</span> mnist
+(x_Train, y_Train), (<span style="color: #dcaeea;">x_Test</span>, <span style="color: #dcaeea;">y_Test</span>) = mnist.load_data()
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org28b1af5" class="outline-2">
+<h2 id="org28b1af5"><span class="section-number-2">3.</span> 準備數據 (Preparing that data)</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+當我們在比較分析兩組數據資料時，可能會遭遇因單位的不同(例如：身高與體重)，或數字大小的代表性不同(例如：粉專1萬人與滿足感0.8)，造成各自變化的程度不一，進而影響統計分析的結果。<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+</p>
+
+<p>
+資料的正規化(Normalization)是將原始資料的數據按比例縮放於 [0, 1] 區間中，且不改變其原本分佈。
+</p>
+
+<div id="org03fe55f" class="figure">
+<p><img src="images/normalized.png" alt="normalized.png" width="500" />
+</p>
+<p><span class="figure-number">Figure 4: </span>資料正規化</p>
+</div>
+
+<p>
+正規化有兩種常用的方法，可以將不同規模的特徵轉化為相同的規模：常態化(normalization)和標準化(standardization)：
+</p>
+</div>
+<div id="outline-container-org8278a3a" class="outline-3">
+<h3 id="org8278a3a"><span class="section-number-3">3.1.</span> 常態化</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+將特徵值縮化為 0~1 間，這是「最小最大縮放」(min-max scaling)的一個特例，某一特徵值的常態化做法如下：
+\[x_{norm}^i = \frac{x^i-x_{min}}{x_{max}-x_{min}}\]
+若以 scikit-learn 套件來完成實作，其程式碼如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">from sklearn.preprocessing import MinMaxScaler
+<span style="color: #dcaeea;">mms</span> = MinMaxScaler()
+<span style="color: #dcaeea;">X_train_norm</span> = mms.fit_transform(X_train)
+<span style="color: #dcaeea;">X_test_norm</span> = mms.fit_transform(X_test)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org23b4b47" class="outline-3">
+<h3 id="org23b4b47"><span class="section-number-3">3.2.</span> 標準化</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+雖說常態化簡單實用，但對許多機器學習演算法來說(特別是梯度下降法的最佳化)，標準化則更為實際，我們可令標準化後的特徵值其平均數為 0、標準差為 1，這樣一來，特徵值會滿足常態分佈，進而使演算法對於離群值不那麼敏感。標準化的公式如下：
+\[x_{std}^i = \frac{x^i-\mu_x}{\sigma_x}\]
+若以 scikit-learn 套件來完成實作，其程式碼如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> sklearn.preprocessing <span style="color: #51afef;">import</span> StandardScaler
+<span style="color: #dcaeea;">stdsc</span> = StandardScaler()
+<span style="color: #dcaeea;">X_train_std</span> = stdsc.fit_transform(X_train)
+<span style="color: #dcaeea;">X_test_std</span> = stdsc.transform(X_test)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6d192d0" class="outline-3">
+<h3 id="org6d192d0"><span class="section-number-3">3.3.</span> DEMO</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">x_train</span> = x_train.reshape(<span style="color: #da8548; font-weight: bold;">60000</span>, <span style="color: #da8548; font-weight: bold;">784</span>)
+<span style="color: #dcaeea;">x_test</span> = x_test.reshape(<span style="color: #da8548; font-weight: bold;">10000</span>, <span style="color: #da8548; font-weight: bold;">784</span>)
+<span style="color: #dcaeea;">x_train</span> = x_train.astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #dcaeea;">x_test</span> = x_test.astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #dcaeea;">x_train</span> /= <span style="color: #da8548; font-weight: bold;">255</span>
+<span style="color: #dcaeea;">x_test</span> /= <span style="color: #da8548; font-weight: bold;">255</span>
+
+
+<span style="color: #dcaeea;">y_TrainOneHot</span> = np_utils.to_categorical(y_Train)
+<span style="color: #dcaeea;">y_TestOneHot</span> = np_utils.to_categorical(y_Test)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf9c793d" class="outline-2">
+<h2 id="orgf9c793d"><span class="section-number-2">4.</span> 選擇模型 (Choosing a model)</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+當數據都進行整理後，接下來就是要選擇訓練用的模型，像是決策樹、LSTM、RNN等等都是機器學習中常使用的訓練模型，其中目前較常拿來訓練股市的是「LSTM」，中文叫做長短期記憶，是屬於深度學習中的一個模型。
+</p>
+</div>
+
+<div id="outline-container-orgf69a8db" class="outline-3">
+<h3 id="orgf69a8db"><span class="section-number-3">4.1.</span> 語法</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+<a href="https://keras.io/api/models/model_training_apis/">Keras API reference / Models API / Model training APIs </a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1a6985a" class="outline-3">
+<h3 id="org1a6985a"><span class="section-number-3">4.2.</span> DEMO</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-org254a42b" class="outline-4">
+<h4 id="org254a42b"><span class="section-number-4">4.2.1.</span> LSTM</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">model</span> = Sequential()
+model.add(LSTM(<span style="color: #da8548; font-weight: bold;">128</span>,
+               input_shape=(x_train.shape[<span style="color: #da8548; font-weight: bold;">1</span>:]),
+               activation=<span style="color: #98be65;">'relu'</span>,
+               return_sequences=<span style="color: #a9a1e1;">True</span>))
+model.add(Dropout(<span style="color: #da8548; font-weight: bold;">0.2</span>))
+model.add(LSTM(<span style="color: #da8548; font-weight: bold;">128</span>, activation=<span style="color: #98be65;">'relu'</span>))
+model.add(Dropout(<span style="color: #da8548; font-weight: bold;">0.1</span>))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">32</span>, activation=<span style="color: #98be65;">'relu'</span>))
+model.add(Dropout(<span style="color: #da8548; font-weight: bold;">0.2</span>))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">10</span>, activation=<span style="color: #98be65;">'softmax'</span>))
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org783459b" class="outline-4">
+<h4 id="org783459b"><span class="section-number-4">4.2.2.</span> CNN</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">model</span> = Sequential()
+model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">128</span>,
+                input_dim=<span style="color: #da8548; font-weight: bold;">784</span>,
+                kernel_initializer=<span style="color: #98be65;">'normal'</span>,
+                activation=<span style="color: #98be65;">'relu'</span>))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">64</span>, activation=<span style="color: #98be65;">'relu'</span>)
+model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">10</span>,
+                kernel_initializer=<span style="color: #98be65;">'normal'</span>,
+                activation=<span style="color: #98be65;">'softmax'</span>))
+
+
+</pre>
+</div>
+
+<div id="org8314669" class="figure">
+<p><img src="images/MNIST-CNN.png" alt="MNIST-CNN.png" width="500" />
+</p>
+<p><span class="figure-number">Figure 5: </span>MNIST-NeuralNet</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf24e8ca" class="outline-2">
+<h2 id="orgf24e8ca"><span class="section-number-2">5.</span> 訓練機器 (Training)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+選擇好訓練模型後，再來要將訓練集資料丟進去模型中做訓練，每層要放多少神經元、要跑幾層等等都會影響模型訓練出來的結果，這部分只能靠經驗跟不斷嘗試去學習，或是上網多爬文看別人怎麼撰寫訓練模型
+</p>
+
+<p>
+在真正訓練前應該再設定好模型的loss function, optimizer。
+</p>
+</div>
+<div id="outline-container-orge0bb042" class="outline-3">
+<h3 id="orge0bb042"><span class="section-number-3">5.1.</span> 語法</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<a href="https://keras.io/api/models/model_training_apis/">Keras API reference / Models API / Model training APIs </a>
+</p>
+</div>
+</div>
+<div id="outline-container-org3791f9e" class="outline-3">
+<h3 id="org3791f9e"><span class="section-number-3">5.2.</span> DEMO</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-org792a3da" class="outline-4">
+<h4 id="org792a3da"><span class="section-number-4">5.2.1.</span> LSTM</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">ptimizer, loss function</span>
+model.<span style="color: #c678dd;">compile</span>(optimizer=Adam(lr=<span style="color: #da8548; font-weight: bold;">0.001</span>),
+              loss=<span style="color: #98be65;">'categorical_crossentropy'</span>,
+              metrics=[<span style="color: #98be65;">'accuracy'</span>])
+
+model.fit(x_train, y_train,
+          epochs=<span style="color: #da8548; font-weight: bold;">3</span>,
+          validation_data=(x_test, y_test))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgff5e1f8" class="outline-4">
+<h4 id="orgff5e1f8"><span class="section-number-4">5.2.2.</span> CNN</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">optimizer, loss function</span>
+model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'categorical_crossentropy'</span>,
+              optimizer=<span style="color: #98be65;">'adam'</span>, metrics=[<span style="color: #98be65;">'accuracy'</span>])
+
+model.fit(x=x_Train,
+          y=y_TrainOneHot,
+          validation_split=<span style="color: #da8548; font-weight: bold;">0.2</span>,
+          epochs=<span style="color: #da8548; font-weight: bold;">5</span>, batch_size=<span style="color: #da8548; font-weight: bold;">30</span>, verbose=<span style="color: #da8548; font-weight: bold;">2</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdbf7e26" class="outline-2">
+<h2 id="orgdbf7e26"><span class="section-number-2">6.</span> 評估分析 (Evaluation)</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+當模型訓練完成後，接下來就是判斷該模型是否有過度擬合(overfitting)，這裡就是帶入測試集的資料進行評估，也可以嘗試利用交叉驗證的方式進行模型的擬合性判斷，以及利用RESM、MSE等統計計算來判斷模型的準確度
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">scores</span> = model.evaluate(x_Train, y_TestOneHot)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7448833" class="outline-2">
+<h2 id="org7448833"><span class="section-number-2">7.</span> 調整參數 (Hyperparameter tuning)</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+到這大致上模型已經完成了50%，最後的一步就是進行參數的微調，我們也稱為「超參數 (Hyperparamters)」，讓整個模型更加的精準，但也不能過度的調整，因為會造成overfitting的結果，這個取捨就只能依照無窮盡的反覆迭帶去尋找了，這部分也是相對較耗時間的地方
+</p>
+</div>
+<div id="outline-container-orgfcefc53" class="outline-3">
+<h3 id="orgfcefc53"><span class="section-number-3">7.1.</span> model參數</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>調整model架構: <a href="https://medium.com/%E9%9B%9E%E9%9B%9E%E8%88%87%E5%85%94%E5%85%94%E7%9A%84%E5%B7%A5%E7%A8%8B%E4%B8%96%E7%95%8C/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-ml-note-cnn%E6%BC%94%E5%8C%96%E5%8F%B2-alexnet-vgg-inception-resnet-keras-coding-668f74879306">[機器學習 ML NOTE] CNN演化史(AlexNet、VGG、Inception、ResNet)+Keras Coding</a></li>
+<li>loss function: <a href="https://keras.io/api/losses/">https://keras.io/api/losses/</a></li>
+<li>optimizers: <a href="https://keras.io/api/optimizers/">https://keras.io/api/optimizers/</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3aaaff0" class="outline-3">
+<h3 id="org3aaaff0"><span class="section-number-3">7.2.</span> Hyperparameters</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>batch size：一次迭代放入進行訓練或測試的影像數量。</li>
+<li>epoch：一種單位，所有影像皆被計算過1次後即為1 epoch</li>
+<li><a href="http://elmer-storage.blogspot.com/2018/06/cnn-hyperparamters.html">CNN筆記 - 超參數 (Hyperparamters) </a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ebbb7c" class="outline-2">
+<h2 id="org7ebbb7c"><span class="section-number-2">8.</span> 預測推論 (Prediction)</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+到此，模型已經正式完成，但對於全新沒影響過的數據則是一個未知數，由於在上方訓練模型中，我們不論是訓練集或是測試集都是被模型所影響過的，如果過度擬合，那麼未來丟入新的資料就很可能無法那麼精準，這部分就只能不斷丟入新資料來推論我們模型的預測能力是否有泛化
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">prediction</span> = model.predict_classes(x_Test4D_normalize)
+<span style="color: #c678dd;">print</span>(prediction[:<span style="color: #da8548; font-weight: bold;">10</span>])
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8a12b1e" class="outline-2">
+<h2 id="org8a12b1e"><span class="section-number-2">9.</span> DEMO 1: Regression</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-org9ef0118" class="outline-3">
+<h3 id="org9ef0118"><span class="section-number-3">9.1.</span> 產生數據</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+
+<span style="color: #dcaeea;">x</span> = np.random.uniform(<span style="color: #da8548; font-weight: bold;">0.0</span>, <span style="color: #da8548; font-weight: bold;">3</span>, (<span style="color: #da8548; font-weight: bold;">2000</span>))
+<span style="color: #dcaeea;">y</span> = <span style="color: #da8548; font-weight: bold;">78</span> + <span style="color: #da8548; font-weight: bold;">7.8</span>*x + np.random.normal(<span style="color: #da8548; font-weight: bold;">0.0</span>, <span style="color: #da8548; font-weight: bold;">3</span>, <span style="color: #c678dd;">len</span>(x))
+
+plt.scatter(x, y)
+
+<span style="color: #dcaeea;">x_Train</span> = x[:<span style="color: #da8548; font-weight: bold;">1500</span>]
+<span style="color: #dcaeea;">x_Test</span> = x[<span style="color: #da8548; font-weight: bold;">1500</span>:]
+<span style="color: #dcaeea;">y_Train</span> = y[:<span style="color: #da8548; font-weight: bold;">1500</span>]
+<span style="color: #dcaeea;">y_Test</span> = y[<span style="color: #da8548; font-weight: bold;">1500</span>:]
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3e6de7c" class="outline-3">
+<h3 id="org3e6de7c"><span class="section-number-3">9.2.</span> 建立model</h3>
+<div class="outline-text-3" id="text-9-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> keras.models <span style="color: #51afef;">import</span> Sequential
+<span style="color: #51afef;">from</span> keras.layers <span style="color: #51afef;">import</span> Dense
+<span style="color: #51afef;">from</span> keras.layers <span style="color: #51afef;">import</span> Dropout
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">A simple regression model</span>
+<span style="color: #dcaeea;">model</span> = Sequential()
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">4</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dropout(<span style="color: #da8548; font-weight: bold;">0.5</span>))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">8</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dropout(<span style="color: #da8548; font-weight: bold;">0.5</span>))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">1</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'mse'</span>, optimizer=<span style="color: #98be65;">'rmsprop'</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org18ecd0c" class="outline-3">
+<h3 id="org18ecd0c"><span class="section-number-3">9.3.</span> 訓練model</h3>
+<div class="outline-text-3" id="text-9-3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">The fit() method - trains the model</span>
+<span style="color: #dcaeea;">train_history</span> = model.fit(x=x_Train, y=y_Train,
+                          validation_split=<span style="color: #da8548; font-weight: bold;">0.2</span>,
+                          epochs=<span style="color: #da8548; font-weight: bold;">1000</span>, batch_size=<span style="color: #da8548; font-weight: bold;">200</span>,
+                          verbose=<span style="color: #da8548; font-weight: bold;">0</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb640c06" class="outline-3">
+<h3 id="orgb640c06"><span class="section-number-3">9.4.</span> 查看訓練過程</h3>
+<div class="outline-text-3" id="text-9-4">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #c678dd;">print</span>(train_history.history)
+<span style="color: #c678dd;">print</span>(train_history.history.keys())
+
+<span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+plt.title(<span style="color: #98be65;">'Train History'</span>)
+plt.ylabel(<span style="color: #98be65;">'loss'</span>)
+plt.xlabel(<span style="color: #98be65;">'Epoch'</span>)
+plt.plot(train_history.history[<span style="color: #98be65;">'loss'</span>])
+plt.plot(train_history.history[<span style="color: #98be65;">'val_loss'</span>])
+plt.show()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1764497" class="outline-3">
+<h3 id="org1764497"><span class="section-number-3">9.5.</span> 評估model</h3>
+<div class="outline-text-3" id="text-9-5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">The evaluate() method - gets the loss statistics</span>
+<span style="color: #dcaeea;">score</span> = model.evaluate(x_Test, y_Test, batch_size=<span style="color: #da8548; font-weight: bold;">200</span>)
+<span style="color: #c678dd;">print</span>(score)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgac7b2bc" class="outline-3">
+<h3 id="orgac7b2bc"><span class="section-number-3">9.6.</span> 預測結果</h3>
+<div class="outline-text-3" id="text-9-6">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">The predict() method - predict the outputs for the given inputs</span>
+model.predict(np.expand_dims(x_Test[:<span style="color: #da8548; font-weight: bold;">3</span>],<span style="color: #da8548; font-weight: bold;">1</span>))
+<span style="color: #c678dd;">print</span>(x_Test[:<span style="color: #da8548; font-weight: bold;">3</span>])
+<span style="color: #c678dd;">print</span>(y_Test[:<span style="color: #da8548; font-weight: bold;">3</span>])
+model.predict(x_Test[:<span style="color: #da8548; font-weight: bold;">3</span>])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b53254" class="outline-3">
+<h3 id="org2b53254"><span class="section-number-3">9.7.</span> 調整model/參數</h3>
+<div class="outline-text-3" id="text-9-7">
+</div>
+<div id="outline-container-org522b7ec" class="outline-4">
+<h4 id="org522b7ec"><span class="section-number-4">9.7.1.</span> model架構</h4>
+</div>
+<div id="outline-container-orgd4e5882" class="outline-4">
+<h4 id="orgd4e5882"><span class="section-number-4">9.7.2.</span> loss function</h4>
+</div>
+<div id="outline-container-orgaeac7e5" class="outline-4">
+<h4 id="orgaeac7e5"><span class="section-number-4">9.7.3.</span> optimizer</h4>
+</div>
+<div id="outline-container-orgdbc2729" class="outline-4">
+<h4 id="orgdbc2729"><span class="section-number-4">9.7.4.</span> hyper parameters</h4>
+</div>
+<div id="outline-container-orgdbbb53a" class="outline-4">
+<h4 id="orgdbbb53a"><span class="section-number-4">9.7.5.</span> #1</h4>
+<div class="outline-text-4" id="text-9-7-5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">A simple regression model</span>
+<span style="color: #dcaeea;">model</span> = Sequential()
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">4</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">8</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">4</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">1</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'mean_squared_error'</span>, optimizer=<span style="color: #98be65;">'rmsprop'</span>)
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">mean_squared_logarithmic_error</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">mean_absolute_percentage_error</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgceaba45" class="outline-4">
+<h4 id="orgceaba45"><span class="section-number-4">9.7.6.</span> #2</h4>
+<div class="outline-text-4" id="text-9-7-6">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">model</span> = Sequential()
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">4</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">8</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">16</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">32</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">16</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">4</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.add(Dense(<span style="color: #da8548; font-weight: bold;">1</span>, input_shape=(<span style="color: #da8548; font-weight: bold;">1</span>,)))
+model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'mse'</span>, optimizer=<span style="color: #98be65;">'rmsprop'</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94479a2" class="outline-2">
+<h2 id="org94479a2"><span class="section-number-2">10.</span> 練習: Regression</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-orgabc7941" class="outline-3">
+<h3 id="orgabc7941"><span class="section-number-3">10.1.</span> 數據</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Seed the random number generator for reproducibility</span>
+np.random.seed(<span style="color: #da8548; font-weight: bold;">0</span>)
+
+<span style="color: #dcaeea;">x_data</span> = np.linspace(-<span style="color: #da8548; font-weight: bold;">10</span>, <span style="color: #da8548; font-weight: bold;">10</span>, num=<span style="color: #da8548; font-weight: bold;">2000</span>)
+y_data = <span style="color: #da8548; font-weight: bold;">2.9</span> * np.sin(<span style="color: #da8548; font-weight: bold;">1.5</span> * x_data) + np.random.normal(size=<span style="color: #c678dd;">len</span>(x_data))
+
+plt.scatter(x_data, y_data)
+</pre>
+</div>
+
+<div id="org2adb15f" class="figure">
+<p><img src="images/random_curve.png" alt="random_curve.png" width="500" />
+</p>
+<p><span class="figure-number">Figure 6: </span>CNN練習</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Hi-MNIST" class="outline-2">
+<h2 id="Hi-MNIST"><span class="section-number-2">11.</span> DEMO 2: MNIST 資料集</h2>
+<div class="outline-text-2" id="text-Hi-MNIST">
+</div>
+<div id="outline-container-orgf4b3705" class="outline-3">
+<h3 id="orgf4b3705"><span class="section-number-3">11.1.</span> MNIST</h3>
+<div class="outline-text-3" id="text-11-1">
+<ul class="org-ul">
+<li>MNIST 是機器學習領域中相當著名的資料集，號稱機器學習領域的「Hello world.」，其重要性不言可喻。</li>
+<li>MNIST 資料集由 0~9 的數字影像構成(如圖<a href="#orgb9f7a1d">1</a>)，共計 60000 張訓練影像、10000 張測試影像。</li>
+<li>一般的 MMIST 資料集的用法為：使用訓練影像進行學習，再利用學習後的模型預測能否正確分類測試影像。</li>
+</ul>
+
+<p>
+準備資料是訓練模型的第一步，基礎資料可以是網上公開的資料集，也可以是自己的資料集。視覺、語音、語言等各種型別的資料在網上都能找到相應的資料集。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge5c01d8" class="outline-3">
+<h3 id="orge5c01d8"><span class="section-number-3">11.2.</span> 準備 MNIST 資料</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+MNIST 數據集來自美國國家標準與技術研究所, National Institute of Standards and Technology (NIST). 訓練集 (training set) 由來自 250 個不同人手寫的數字構成, 其中 50% 是高中學生, 50% 來自人口普查局 (the Census Bureau) 的工作人員. 測試集(test set) 也是同樣比例的手寫數字數據。MNIST 數據集可在 <a href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a> 獲取, 它包含了四個部分:
+</p>
+<ol class="org-ol">
+<li>Training set images: train-images-idx3-ubyte.gz (9.9 MB, 解壓後 47 MB, 包含 60,000 個樣本)</li>
+<li>Training set labels: train-labels-idx1-ubyte.gz (29 KB, 解壓後 60 KB, 包含 60,000 個標籤)</li>
+<li>Test set images: t10k-images-idx3-ubyte.gz (1.6 MB, 解壓後 7.8 MB, 包含 10,000 個樣本)</li>
+<li>Test set labels: t10k-labels-idx1-ubyte.gz (5KB, 解壓後 10 KB, 包含 10,000 個標籤)</li>
+</ol>
+</div>
+
+<div id="outline-container-orge9f53ee" class="outline-4">
+<h4 id="orge9f53ee"><span class="section-number-4">11.2.1.</span> load data</h4>
+<div class="outline-text-4" id="text-11-2-1">
+<p>
+MNIST 資料集是一個適合拿來當作 TensotFlow 的練習素材，在 Tensorflow 的現有套件中，也已經有內建好的 MNIST 資料集，我們只要在安裝好 TensorFlow 的 Python 環境中執行以下程式碼，即可將 MNIST 資料成功讀取進來。.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> tensorflow <span style="color: #51afef;">as</span> tf
+<span style="color: #dcaeea;">mnist</span> = tf.keras.datasets.mnist
+<span id="coderef-get-keras-mnist" class="coderef-off">(x_train, y_train), (<span style="color: #dcaeea;">x_test</span>, <span style="color: #dcaeea;">y_test</span>) = mnist.load_data() (get-keras-mnist)</span>
+</pre>
+</div>
+<p>
+在訓練模型之前，需要將樣本資料劃分為訓練集、測試集，有些情況下還會劃分為訓練集、測試集、驗證集。由上述程式第<a href="#coderef-get-keras-mnist" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-get-keras-mnist');" onmouseout="CodeHighlightOff(this, 'coderef-get-keras-mnist');">get-keras-mnist</a>行可知，下載後的 MNIST 資料分成訓練資料(training data)與測試資料(testing data)，其中 x 為圖片、y為所對應數字。
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> tensorflow <span style="color: #51afef;">as</span> tf
+<span style="color: #dcaeea;">mnist</span> = tf.keras.datasets.mnist
+(x_train, y_train), (<span style="color: #dcaeea;">x_test</span>, <span style="color: #dcaeea;">y_test</span>) = mnist.load_data()
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">=====================================</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21028;&#26039;&#36039;&#26009;&#24418;&#29376;</span>
+<span style="color: #c678dd;">print</span>(x_train.shape)
+<span style="color: #c678dd;">print</span>(x_test.shape)
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#31532;&#19968;&#20491;label&#30340;&#20839;&#23481;</span>
+<span style="color: #c678dd;">print</span>(y_train[<span style="color: #da8548; font-weight: bold;">0</span>])
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#39023;&#31034;&#24433;&#20687;&#20839;&#23481;</span>
+<span style="color: #51afef;">import</span> matplotlib.pylab <span style="color: #51afef;">as</span> plt
+<span style="color: #dcaeea;">img</span> = x_train[<span style="color: #da8548; font-weight: bold;">0</span>]
+plt.imshow(img)
+plt.savefig(<span style="color: #98be65;">"MNIST-Image.png"</span>)
+</pre>
+</div>
+<pre class="example">
+(60000, 28, 28)
+(10000, 28, 28)
+5
+</pre>
+
+
+<p>
+由上述程式輸出結果可以看到載入的 x 為大小為 28*28 的圖片共 60000 張，每一筆 MNIST 資料的照片(x)由 784 個 pixels 組成（28*28），照片內容如圖<a href="#org15c7408">7</a>，訓練集的標籤(y)則為其對應的數字(0～9)，此例為 5。
+</p>
+
+<div id="org15c7408" class="figure">
+<p><img src="images/MNIST-Image.png" alt="MNIST-Image.png" width="300" />
+</p>
+<p><span class="figure-number">Figure 7: </span>MNIST 影像示例</p>
+</div>
+
+<p>
+x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，矩陣裡每一項的資料則是代表每個 pixel 顏色深淺的數值，如下圖<a href="#org0097ad6">8</a>所示：
+</p>
+
+<div id="org0097ad6" class="figure">
+<p><img src="images/MNIST-Matrix.png" alt="MNIST-Matrix.png" width="400" />
+</p>
+<p><span class="figure-number">Figure 8: </span>MNIST 資料矩陣</p>
+</div>
+
+<p>
+載入的 y 為所對應的數字 0~9，在這我們要運用 keras 中的 np_under_utils.to_under_categorical 將 y 轉成 one-hot 的形式，將他轉為一個 10 維的 vector，例如：我們所拿到的資料為 y=3，經過 np_utils.to_categorical，會轉換為 y=[0,0,0,1,0,0,0,0,0,0]。這部份的轉換程式碼如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> keras.datasets <span style="color: #51afef;">import</span> mnist
+<span style="color: #51afef;">from</span> keras.utils <span style="color: #51afef;">import</span> np_utils
+<span style="color: #51afef;">import</span> tensorflow <span style="color: #51afef;">as</span> tf
+
+<span style="color: #dcaeea;">mnist</span> = tf.keras.datasets.mnist
+(x_train, y_train), (<span style="color: #dcaeea;">x_test</span>, <span style="color: #dcaeea;">y_test</span>) = mnist.load_data()
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">=====================================</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;&#22294;&#29255;&#36681;&#25563;&#28858;&#19968;&#20491;60000*784&#30340;&#21521;&#37327;&#65292;&#20006;&#19988;&#27161;&#28310;&#21270;</span>
+<span style="color: #dcaeea;">x_train</span> = x_train.reshape(<span style="color: #da8548; font-weight: bold;">60000</span>, <span style="color: #da8548; font-weight: bold;">784</span>).astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #dcaeea;">x_test</span> = x_test.reshape(<span style="color: #da8548; font-weight: bold;">10000</span>, <span style="color: #da8548; font-weight: bold;">784</span>).astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #dcaeea;">x_train</span> = x_train/<span style="color: #da8548; font-weight: bold;">255</span>
+<span style="color: #dcaeea;">x_test</span> = x_test/<span style="color: #da8548; font-weight: bold;">255</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;y&#36681;&#25563;&#25104;one-hot encoding</span>
+<span style="color: #dcaeea;">y_train</span> = np_utils.to_categorical(y_train, <span style="color: #da8548; font-weight: bold;">10</span>)
+<span style="color: #dcaeea;">y_test</span> = np_utils.to_categorical(y_test, <span style="color: #da8548; font-weight: bold;">10</span>)
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#22238;&#20659;&#34389;&#29702;&#23436;&#30340;&#36039;&#26009;</span>
+<span style="color: #c678dd;">print</span>(y_train[<span style="color: #da8548; font-weight: bold;">0</span>])
+
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+np.set_printoptions(precision=<span style="color: #da8548; font-weight: bold;">2</span>)
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">print(x_train[0])</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeec9451" class="outline-3">
+<h3 id="orgeec9451"><span class="section-number-3">11.3.</span> MNIST 的推論處理</h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+如圖<a href="#org8314669">5</a>所示，MNIST 的推論神經網路最前端的輸入層有 784 (\(28*28=784\))個神經元，最後的輸出端有 10 個神經元(\(0~9\)個數字)，至於中間的隠藏層有兩個，第 1 個隱藏層有 50 個神經元，第 2 層有 100 個。此處的 50、100 可以設定為任意數（如，也可以是 128、64）。
+</p>
+
+<div id="org1d679e7" class="figure">
+<p><img src="images/MNIST-CNN.png" alt="MNIST-CNN.png" width="500" />
+</p>
+<p><span class="figure-number">Figure 9: </span>MNIST-NeuralNet</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org30db80c" class="outline-3">
+<h3 id="org30db80c"><span class="section-number-3">11.4.</span> MNIST 資料集:以 DNN Sequential 模型為例</h3>
+<div class="outline-text-3" id="text-11-4">
+<p>
+此處以最簡單的 NN (Neural Network) 作為範例。以 Keras 的核心為模型，應用最常使用 Sequential 模型。藉由.add()我們可以一層一層的將神經網路疊起。在每一層之中我們只需要簡單的設定每層的大小(units)與激勵函數(activation function)。需要特別記得的是：第一層要記得寫輸入的向量大小、最後一層的 units 要等於輸出的向量大小。在這邊我們最後一層使用的激活函數(activation function)為 softmax。
+</p>
+</div>
+
+<div id="outline-container-orgcfbfd2b" class="outline-4">
+<h4 id="orgcfbfd2b"><span class="section-number-4">11.4.1.</span> Import Library</h4>
+<div class="outline-text-4" id="text-11-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> keras.datasets <span style="color: #51afef;">import</span> mnist
+<span style="color: #51afef;">from</span> keras.utils <span style="color: #51afef;">import</span> np_utils
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+np.random.seed(<span style="color: #da8548; font-weight: bold;">10</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org30b8e7b" class="outline-4">
+<h4 id="org30b8e7b"><span class="section-number-4">11.4.2.</span> 資料預處理</h4>
+<div class="outline-text-4" id="text-11-4-2">
+<div class="org-src-container">
+<pre class="src src-python">(x_Train, y_Train), (<span style="color: #dcaeea;">x_Test</span>, <span style="color: #dcaeea;">y_Test</span>) = mnist.load_data()
+<span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+
+<span style="color: #5B6268;">##</span><span style="color: #5B6268;">print(x_Train[1].shape)</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">print(x_Train[1])</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">plt.imshow(x_Train[1])</span>
+<span style="color: #5B6268;">##</span><span style="color: #5B6268;">y_Train[1]</span>
+
+<span style="color: #dcaeea;">x_Train</span>=x_Train.reshape(x_Train.shape[<span style="color: #da8548; font-weight: bold;">0</span>],<span style="color: #da8548; font-weight: bold;">28</span>,<span style="color: #da8548; font-weight: bold;">28</span>,<span style="color: #da8548; font-weight: bold;">1</span>).astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #dcaeea;">x_Test</span>=x_Test.reshape(x_Test.shape[<span style="color: #da8548; font-weight: bold;">0</span>],<span style="color: #da8548; font-weight: bold;">28</span>,<span style="color: #da8548; font-weight: bold;">28</span>,<span style="color: #da8548; font-weight: bold;">1</span>).astype(<span style="color: #98be65;">'float32'</span>)
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">x_Train4D[1].shape</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">print(x_Train4D[1])</span>
+
+<span style="color: #dcaeea;">x_Train</span> = x_Train / <span style="color: #da8548; font-weight: bold;">255</span>
+<span style="color: #dcaeea;">x_Test</span> = x_Test / <span style="color: #da8548; font-weight: bold;">255</span>
+
+<span style="color: #dcaeea;">y_Train</span> = np_utils.to_categorical(y_Train)
+<span style="color: #dcaeea;">y_Test</span> = np_utils.to_categorical(y_Test)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8560b94" class="outline-4">
+<h4 id="org8560b94"><span class="section-number-4">11.4.3.</span> 建立模型</h4>
+<div class="outline-text-4" id="text-11-4-3">
+<p>
+activation function的選擇: <a href="https://keras.io/api/layers/activations/">Keras API reference / Layers API / Layer activation functions </a>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">from</span> keras.models <span style="color: #51afef;">import</span> Sequential
+<span style="color: #51afef;">from</span> keras.layers <span style="color: #51afef;">import</span> Dense
+<span style="color: #51afef;">from</span> keras.layers <span style="color: #51afef;">import</span> Dropout
+
+<span style="color: #dcaeea;">model</span> = Sequential()
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#23559;&#27169;&#22411;&#30090;&#36215;</span>
+model.add(Dense(input_dim=<span style="color: #da8548; font-weight: bold;">28</span>*<span style="color: #da8548; font-weight: bold;">28</span>,units=<span style="color: #da8548; font-weight: bold;">128</span>,activation=<span style="color: #98be65;">'relu'</span>))
+model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">64</span>,activation=<span style="color: #98be65;">'relu'</span>))
+model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">10</span>,activation=<span style="color: #98be65;">'softmax'</span>))
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">model.summary()</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org33b53cc" class="outline-4">
+<h4 id="org33b53cc"><span class="section-number-4">11.4.4.</span> 訓練模型</h4>
+<div class="outline-text-4" id="text-11-4-4">
+<p>
+<a href="https://keras.io/api/models/model_training_apis/">Model training APIs</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-python">model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'categorical_crossentropy'</span>,
+              optimizer=<span style="color: #98be65;">'adam'</span>,metrics=[<span style="color: #98be65;">'accuracy'</span>])
+
+train_history=model.fit(x=x_Train,
+                        y=y_Train,validation_split=<span style="color: #da8548; font-weight: bold;">0.2</span>,
+                        epochs=<span style="color: #da8548; font-weight: bold;">6</span>, batch_size=<span style="color: #da8548; font-weight: bold;">300</span>,verbose=<span style="color: #da8548; font-weight: bold;">2</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc300fc4" class="outline-4">
+<h4 id="orgc300fc4"><span class="section-number-4">11.4.5.</span> 查看訓練過程</h4>
+<div class="outline-text-4" id="text-11-4-5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span style="color: #51afef;">def</span> <span style="color: #c678dd;">show_train_history</span>(train_acc,test_acc):
+    plt.plot(train_history.history[train_acc])
+    plt.plot(train_history.history[test_acc])
+    plt.title(<span style="color: #98be65;">'Train History'</span>)
+    plt.ylabel(<span style="color: #98be65;">'Accuracy'</span>)
+    plt.xlabel(<span style="color: #98be65;">'Epoch'</span>)
+    plt.legend([<span style="color: #98be65;">'train'</span>, <span style="color: #98be65;">'test'</span>], loc=<span style="color: #98be65;">'upper left'</span>)
+    plt.show()
+
+show_train_history(<span style="color: #98be65;">'accuracy'</span>,<span style="color: #98be65;">'val_accuracy'</span>)
+show_train_history(<span style="color: #98be65;">'loss'</span>,<span style="color: #98be65;">'val_loss'</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga9add18" class="outline-4">
+<h4 id="orga9add18"><span class="section-number-4">11.4.6.</span> 評估模型準確率</h4>
+<div class="outline-text-4" id="text-11-4-6">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">scores</span> = model.evaluate(x_Test , y_Test, batch_size = <span style="color: #da8548; font-weight: bold;">200</span>)
+scores[<span style="color: #da8548; font-weight: bold;">1</span>]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b98800" class="outline-4">
+<h4 id="org7b98800"><span class="section-number-4">11.4.7.</span> 實際預測結果</h4>
+<div class="outline-text-4" id="text-11-4-7">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #dcaeea;">prediction</span>=model.predict_classes(x_Test)
+prediction[:<span style="color: #da8548; font-weight: bold;">10</span>]
+
+<span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
+<span style="color: #51afef;">def</span> <span style="color: #c678dd;">plot_images_labels_prediction</span>(images,labels,prediction,idx,num=<span style="color: #da8548; font-weight: bold;">10</span>):
+    fig = plt.gcf()
+    fig.set_size_inches(<span style="color: #da8548; font-weight: bold;">12</span>, <span style="color: #da8548; font-weight: bold;">14</span>)
+    <span style="color: #51afef;">if</span> num&gt;<span style="color: #da8548; font-weight: bold;">25</span>: num=<span style="color: #da8548; font-weight: bold;">25</span>
+    <span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>, num):
+        ax=plt.subplot(<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">5</span>, <span style="color: #da8548; font-weight: bold;">1</span>+i)
+        ax.imshow(images[idx], cmap=<span style="color: #98be65;">'binary'</span>)
+
+        ax.set_title(<span style="color: #98be65;">"label="</span> +<span style="color: #c678dd;">str</span>(labels[idx])+
+                     <span style="color: #98be65;">",predict="</span>+<span style="color: #c678dd;">str</span>(prediction[idx])
+                     ,fontsize=<span style="color: #da8548; font-weight: bold;">10</span>)
+
+        ax.set_xticks([]);ax.set_yticks([])
+        idx+=<span style="color: #da8548; font-weight: bold;">1</span>
+    plt.show()
+plot_images_labels_prediction(x_Test,y_Test,prediction,idx=<span style="color: #da8548; font-weight: bold;">0</span>) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#35201;&#29992;&#21040;&#21407;&#22987;&#30340;&#20540;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9164662" class="outline-4">
+<h4 id="org9164662"><span class="section-number-4">11.4.8.</span> confusion matrix</h4>
+<div class="outline-text-4" id="text-11-4-8">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #51afef;">import</span> pandas <span style="color: #51afef;">as</span> pd
+pd.crosstab(y_Test,prediction,
+            rownames=[<span style="color: #98be65;">'label'</span>],colnames=[<span style="color: #98be65;">'predict'</span>])
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36617;&#20837;&#36039;&#26009;</span>
+<span style="color: #51afef;">from</span> keras.datasets <span style="color: #51afef;">import</span> mnist
+<span style="color: #51afef;">from</span> keras.utils <span style="color: #51afef;">import</span> np_utils
+
+<span style="color: #51afef;">def</span> <span style="color: #c678dd;">load_data</span>():
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36617;&#20837;minst&#30340;&#36039;&#26009;</span>
+    (x_train, y_train), (<span style="color: #dcaeea;">x_test</span>, <span style="color: #dcaeea;">y_test</span>) = mnist.load_data()
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;&#22294;&#29255;&#36681;&#25563;&#28858;&#19968;&#20491;60000*784&#30340;&#21521;&#37327;&#65292;&#20006;&#19988;&#27161;&#28310;&#21270;</span>
+    <span style="color: #dcaeea;">x_train</span> = x_train.reshape(x_train.shape[<span style="color: #da8548; font-weight: bold;">0</span>], <span style="color: #da8548; font-weight: bold;">28</span>*<span style="color: #da8548; font-weight: bold;">28</span>)
+    <span style="color: #dcaeea;">x_test</span> = x_test.reshape(x_test.shape[<span style="color: #da8548; font-weight: bold;">0</span>], <span style="color: #da8548; font-weight: bold;">28</span>*<span style="color: #da8548; font-weight: bold;">28</span>)
+    <span style="color: #dcaeea;">x_train</span> = x_train.astype(<span style="color: #98be65;">'float32'</span>)
+    <span style="color: #dcaeea;">x_test</span> = x_test.astype(<span style="color: #98be65;">'float32'</span>)
+    <span style="color: #dcaeea;">x_train</span> = x_train/<span style="color: #da8548; font-weight: bold;">255</span>
+    <span style="color: #dcaeea;">x_test</span> = x_test/<span style="color: #da8548; font-weight: bold;">255</span>
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23559;y&#36681;&#25563;&#25104;one-hot encoding</span>
+    <span style="color: #dcaeea;">y_train</span> = np_utils.to_categorical(y_train, <span style="color: #da8548; font-weight: bold;">10</span>)
+    <span style="color: #dcaeea;">y_test</span> = np_utils.to_categorical(y_test, <span style="color: #da8548; font-weight: bold;">10</span>)
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#22238;&#20659;&#34389;&#29702;&#23436;&#30340;&#36039;&#26009;</span>
+    <span style="color: #51afef;">return</span> (x_train, y_train), (x_test, y_test)
+
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+<span style="color: #51afef;">from</span> keras.models <span style="color: #51afef;">import</span> Sequential
+<span style="color: #51afef;">from</span> keras.layers.core <span style="color: #51afef;">import</span> Dense,Activation
+<span style="color: #51afef;">from</span> keras.optimizers <span style="color: #51afef;">import</span>  Adam
+
+<span style="color: #51afef;">def</span> <span style="color: #c678dd;">build_model</span>():<span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#24314;&#31435;&#27169;&#22411;</span>
+    <span style="color: #dcaeea;">model</span> = Sequential()
+    <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#23559;&#27169;&#22411;&#30090;&#36215;</span>
+    model.add(Dense(input_dim=<span style="color: #da8548; font-weight: bold;">28</span>*<span style="color: #da8548; font-weight: bold;">28</span>,units=<span style="color: #da8548; font-weight: bold;">128</span>,activation=<span style="color: #98be65;">'relu'</span>))
+    model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">64</span>,activation=<span style="color: #98be65;">'relu'</span>))
+    model.add(Dense(units=<span style="color: #da8548; font-weight: bold;">10</span>,activation=<span style="color: #98be65;">'softmax'</span>))
+    model.summary()
+    <span style="color: #51afef;">return</span> model
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#38283;&#22987;&#35347;&#32244;&#27169;&#22411;&#65292;&#27492;&#34389;&#20351;&#29992;&#20102;Adam&#20570;&#28858;&#25105;&#20497;&#30340;&#20778;&#21270;&#22120;&#65292;loss function&#36984;&#29992;&#20102;categorical_crossentropy&#12290;</span>
+(x_train,y_train),(<span style="color: #dcaeea;">x_test</span>,<span style="color: #dcaeea;">y_test</span>)=load_data()
+model = build_model()
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#38283;&#22987;&#35347;&#32244;&#27169;&#22411;</span>
+model.<span style="color: #c678dd;">compile</span>(loss=<span style="color: #98be65;">'categorical_crossentropy'</span>,optimizer=<span style="color: #98be65;">"adam"</span>,metrics=[<span style="color: #98be65;">'accuracy'</span>])
+model.fit(x_train,y_train,batch_size=<span style="color: #da8548; font-weight: bold;">100</span>,epochs=<span style="color: #da8548; font-weight: bold;">5</span>)
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#39023;&#31034;&#35347;&#32244;&#32080;&#26524;</span>
+score = model.evaluate(x_train,y_train)
+<span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'\nTrain Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
+score = model.evaluate(x_test,y_test)
+<span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'\nTest Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
+
+<span style="color: #5B6268;">### </span><span style="color: #5B6268;">&#36914;&#34892;&#38928;&#28204;</span>
+prediction = model.predict_classes(x_Test4D_normalize)
+<span style="color: #c678dd;">print</span>(prediction[:<span style="color: #da8548; font-weight: bold;">10</span>])
+plot_images_labels_prediction(<span style="color: #98be65;">"CNN_MNist"</span>, x_Test, y_Test, prediction, idx=<span style="color: #da8548; font-weight: bold;">0</span>)
+<span style="color: #51afef;">import</span> pandas <span style="color: #51afef;">as</span> pd
+p = pd.crosstab(y_Test, prediction, rownames=[<span style="color: #98be65;">'label'</span>], colnames=[<span style="color: #98be65;">'predict'</span>])
+<span style="color: #c678dd;">print</span>(p)
+
+</pre>
+</div>
+
+<pre class="example" id="orgd4a71b1">
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+dense_1 (Dense)              (None, 500)               392500
+_________________________________________________________________
+dense_2 (Dense)              (None, 500)               250500
+_________________________________________________________________
+dense_3 (Dense)              (None, 500)               250500
+_________________________________________________________________
+dense_4 (Dense)              (None, 10)                5010
+=================================================================
+Total params: 898,510
+Trainable params: 898,510
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/20
+
+  100/60000 [..............................] - ETA: 2:55 - loss: 2.2917 - acc: 0.1300
+  800/60000 [..............................] - ETA: 25s - loss: 1.6424 - ACM: 0.5362
+.......
+16300/60000 [=======&gt;......................] - ETA: 4s - loss: 0.3752 - acc: 0.8898
+17000/60000 [=======&gt;......................] - ETA: 4s - loss: 0.3681 - acc: 0.8916
+.......
+50600/60000 [========================&gt;.....] - ETA: 0s - loss: 0.2232 - acc: 0.9335
+51300/60000 [========================&gt;.....] - ETA: 0s - loss: 0.2220 - acc: 0.9338
+.......
+59700/60000 [============================&gt;.] - ETA: 0s - loss: 0.2078 - acc: 0.9377
+60000/60000 [==============================] - 5s 81us/step - loss: 0.2074 - acc: 0.9379
+Epoch 2/20
+
+  100/60000 [..............................] - ETA: 5s - loss: 0.0702 - acc: 0.9800
+......
+60000/60000 [==============================] - 5s 77us/step - loss: 0.0832 - acc: 0.9740
+Epoch 3/20
+......
+Epoch 29/20
+
+   32/60000 [..............................] - ETA: 1:10
+ 1440/60000 [..............................] - ETA: 3s
+......
+58496/60000 [============================&gt;.] - ETA: 0s
+60000/60000 [==============================] - 2s 34us/step
+
+Train Acc: 0.9981666666666666
+
+   32/10000 [..............................] - ETA: 0s
+ 1568/10000 [===&gt;..........................] - ETA: 0s
+ 3104/10000 [========&gt;.....................] - ETA: 0s
+ 4640/10000 [============&gt;.................] - ETA: 0s
+ 6176/10000 [=================&gt;............] - ETA: 0s
+ 7680/10000 [======================&gt;.......] - ETA: 0s
+ 9184/10000 [==========================&gt;...] - ETA: 0s
+10000/10000 [==============================] - 0s 33us/step
+
+Test Acc: 0.9823
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-HomeWork-2" class="outline-2">
+<h2 id="HomeWork-2"><span class="section-number-2">12.</span> 個人作業二</h2>
+<div class="outline-text-2" id="text-HomeWork-2">
+</div>
+<div id="outline-container-orgc077c3e" class="outline-3">
+<h3 id="orgc077c3e"><span class="section-number-3">12.1.</span> 背景</h3>
+<div class="outline-text-3" id="text-12-1">
+<p>
+某醫學研究中心針對旗下醫院800名疑似患有「無定向喪心病狂間歇性全身機能失調症」的患者做了一份病徵研究，針對以下這些可能病徵進行程度檢驗
+</p>
+<ol class="org-ol">
+<li>抑鬱</li>
+<li>癲癇</li>
+<li>精神分裂</li>
+<li>輕挑驕傲</li>
+<li>沒大沒小</li>
+<li>有犯罪傾向</li>
+<li>月經前緊張(男患者嚴重的話也有)</li>
+<li>有自殺傾向</li>
+</ol>
+<p>
+這800份資料可以<a href="https://letranger.github.io/downloads/qq.csv">點選這裡</a>下載，每筆資料有九個欄位，前八欄分別對應到上述八項病徵，最後一欄為0/1，代表病患是否患有該病。
+</p>
+
+<p>
+請你建立一個預測MODEL，以利該中心將來遇到類似病情的患者時只要先針對這些特徵值進行檢驗，即可了解該病例是否為此病患者，並即時予以適當治療。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ada9f5" class="outline-3">
+<h3 id="org2ada9f5"><span class="section-number-3">12.2.</span> 作業要求</h3>
+<div class="outline-text-3" id="text-12-2">
+<ul class="org-ul">
+<li>嗯，基本上就是自由心證，你能交多少就交多少，你想只交一張圖也行，你要從頭交待你在做什麼、每一個步驟有啥意義、一共測了幾種CASE、最後成果如何、你的心得&#x2026;.也行，看你的誠意啦-_-(這向來是最坑人的一句話)</li>
+<li>我是這樣覺得啦&#x2026;model隨便叠一叠，精確度至少也不應該低於 <b>0.8</b> 吧&#x2026;QQ</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4a522f3" class="outline-2">
+<h2 id="org4a522f3"><span class="section-number-2">13.</span> 小組作業三</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-org707d246" class="outline-3">
+<h3 id="org707d246"><span class="section-number-3">13.1.</span> Resources</h3>
+<div class="outline-text-3" id="text-13-1">
+</div>
+<div id="outline-container-org68699a8" class="outline-4">
+<h4 id="org68699a8"><span class="section-number-4">13.1.1.</span> 如何讀取自己的資料:  <a href="https://towardsdatascience.com/loading-custom-image-dataset-for-deep-learning-models-part-1-d64fa7aaeca6">Loading Custom Image Dataset for Deep Learning Models: Part 1</a></h4>
+</div>
+<div id="outline-container-org4abe98b" class="outline-4">
+<h4 id="org4abe98b"><span class="section-number-4">13.1.2.</span> Typical steps for loading custom dataset for Deep Learning Models</h4>
+<div class="outline-text-4" id="text-13-1-2">
+<ol class="org-ol">
+<li>Open the image file. The format of the file can be JPEG, PNG, BMP, etc.</li>
+<li>Resize the image to match the input size for the Input layer of the Deep Learning model.</li>
+<li>Convert the image pixels to float datatype.</li>
+<li>Normalize the image to have pixel values scaled down between 0 and 1 from 0 to 255.</li>
+<li>Image data for Deep Learning models should be either a numpy array or a tensor object.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org899b950" class="outline-4">
+<h4 id="org899b950"><span class="section-number-4">13.1.3.</span> Data augmentation</h4>
+<div class="outline-text-4" id="text-13-1-3">
+<ul class="org-ul">
+<li><a href="https://www.gushiciku.cn/pl/pL8p/zh-tw">Kaggle知識點：資料擴增方法</a></li>
+<li><a href="https://tw.leaderg.com/article/index?sn=11132">影像資料擴增 (Image Data Augmentation) 的原理與實作</a></li>
+<li><a href="https://iter01.com/465481.html">深度學習領域的資料增強</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://aifreeblog.herokuapp.com/posts/54/data_science_203/">資料的正規化(Normalization)及標準化(Standardization)</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-05 Tue 11:25</p>
+</div>
+</body>
+</html>

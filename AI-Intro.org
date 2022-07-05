@@ -136,7 +136,6 @@ AI是一個涵蓋面極廣的名詞，從1964年[[https://en.wikipedia.org/wiki/
 - 2013 年，Google 收購 Hinton 和他兩位學生創立的公司：DNNresearch
 - 2015 年，Microsoft 在 ILSVRC 以 3.5%的錯誤率奪冠，首次超過人類(5%)。
 以上參考: [[https://www.books.com.tw/products/0010821934][人工智慧在台灣]]
-
 ** AI Development 大事記
 *** IBM Deep Blue
 *** IBM Watson
@@ -150,7 +149,6 @@ AI是一個涵蓋面極廣的名詞，從1964年[[https://en.wikipedia.org/wiki/
 *** GAN: Generative Adversarial Network:
 **** 生成對抗網路
 **** generator 與 discrimator 二者透過相互競爭來改善
-
 ** AI 應用與影響
 *** Weak AI v.s. Strong AI
 - Strong AI: 能思考、有主觀意識，又稱 General AI, FUll AI

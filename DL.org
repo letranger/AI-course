@@ -30,6 +30,7 @@
 #+name: fig:python-deep-learning-1
 #+ATTR_LATEX: :width 400
 #+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 500
 [[file:images/img-191107113927.jpg]]
 
 圖[[fig:python-deep-learning-2]]進一步說明網路模型中每一層的作用，可以將每一層網路視為對影像的特殊運算，如此一層一層逐一精煉(purified)，最後得到結果。
@@ -39,6 +40,7 @@
 #+name: fig:python-deep-learning-2
 #+ATTR_LATEX: :width 400
 #+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 500
 [[file:images/img-1911071139277.jpg]]
 
 * 建構良好的訓練集：數據預處理
@@ -610,6 +612,7 @@ overfitting 的產生原因是模型過度遷就於訓練數據，導致面對�
 #+LABEL:fig: SBS-1
 #+name: fig:SBS-1
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 500
 [[file:images/04_08.png]]
 
 前述實作中，k\under{}features 參數(程式第[[(kFeatures)]]行)定義了我們希望演算法「最後要保留多少特徵」，在預設情況下，以 accuracy\under{}score(程式第[[(accuracyScore)]]行)來評估模型效能。在 fit 的 while 迴圈中([[(fitWhile)]]行)，由 itertools 模組的 combinations 方法所產生的特徵子集合會被評估並降維，直到只剩下所要的特徵個數。
@@ -695,6 +698,7 @@ overfitting 的產生原因是模型過度遷就於訓練數據，導致面對�
 #+LABEL:fig: 04_09
 #+name: fig:04_09
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 500
 [[file:images/04_09.png]]
 
 
@@ -710,6 +714,7 @@ overfitting 的產生原因是模型過度遷就於訓練數據，導致面對�
 #+LABEL:fig:python-deep-learning-3
 #+name: fig:python-deep-learning-3
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/img-191107115233.jpg]]
 
@@ -720,6 +725,7 @@ overfitting 的產生原因是模型過度遷就於訓練數據，導致面對�
 #+LABEL:fig:python-deep-learning-4
 #+name: fig:python-deep-learning-4
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/img-191107115304.jpg]]
 
@@ -729,6 +735,7 @@ overfitting 的產生原因是模型過度遷就於訓練數據，導致面對�
 #+LABEL:fig:python-deep-learning-5
 #+name: fig:python-deep-learning-5
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/img-1911071153041.jpg]]
 
@@ -786,6 +793,7 @@ Goodfellow 等人的研究顯示，對於各種具有不同型態神經元的實
 #+LABEL:fig: pca-1
 #+name: fig:pca-1
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: :width 600
 [[file:images/pca-1.png]]
 
 **** 投影(projection)
@@ -795,6 +803,7 @@ Goodfellow 等人的研究顯示，對於各種具有不同型態神經元的實
 #+CAPTION: PCA-2 [fn:31]
 #+LABEL:fig: pca-2
 #+name: fig:pca-2
+#+ATTR_HTML: :width 300
 #+ATTR_LATEX: :width 200
 [[file:images/pca-2.png]]
 
@@ -803,6 +812,7 @@ Goodfellow 等人的研究顯示，對於各種具有不同型態神經元的實
 #+CAPTION: PCA-3 [fn:31]
 #+LABEL:fig: pca-3
 #+name: fig:pca-3
+#+ATTR_HTML: :width 600
 #+ATTR_LATEX: :width 500
 [[file:images/pca-3.png]]
 
@@ -812,6 +822,7 @@ Goodfellow 等人的研究顯示，對於各種具有不同型態神經元的實
 #+LABEL:fig: pca-4
 #+name: fig:pca-4
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 300
 [[file:images/pca-4.png]]
 
 **** 變異量的計算
@@ -852,6 +863,8 @@ $v = \mathop{\arg\max}\limits_{x \in \mathcal{R}^d,\left\|v\right\|=1} {v^TCv}$
 #+LABEL:fig: pca-5
 #+name: fig:pca-5
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: :width 600
+
 [[file:images/pca-5.png]]
 
 PCA 投影完的資料為下圖，從下圖可知，PC1 的變異足以表示此筆資料資訊。
@@ -860,6 +873,8 @@ PCA 投影完的資料為下圖，從下圖可知，PC1 的變異足以表示此
 #+LABEL:fig: pca-6
 #+name: fig:pca-6
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 300
+
 [[file:images/pca-6.png]]
 
 此做法可以有效的減少維度數，但整體變異量並沒有減少太多，此例從兩個變成只有一個，但變異量卻可以保留(13.26/(13.26+1.23)= 91.51%)，兩維度的資料做 PCA，對資料進行降維比較沒有感覺，但講解圖例比較容易。
@@ -952,6 +967,7 @@ Eigenvalues
 #+LABEL:fig: 05_02
 #+name: fig:05_02
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 [[file:images/05_02.png]]
 
 雖然上圖的「解釋變異數」圖有點類似隨機森林評估特徵值重要性的結果，但二者最大的不同處在於 PCA 為一種非監督式方法，也就是說，關於類別標籤資訊是被忽略的。
@@ -963,7 +979,7 @@ Eigenvalues
 1. 用最前面的\(k\)個特徵向量建立「投影矩陣」(project matrix)\(W\)。
 1. 使用投影矩陣\(W\)，輸入值為\(d\)維數據集、輸出值為新的\(k\)維「特徵子空間」。
 
-#+BEGIN_SRC python -r -n :results output :exports both
+#+BEGIN_SRC python -r -n :results output :exports both :eval no
   import pandas as pd
   from sklearn.model_selection import train_test_split
   from sklearn.preprocessing import StandardScaler
@@ -1053,6 +1069,7 @@ Matrix W:
 #+LABEL:fig:05_03
 #+name: fig:05_03
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 [[file:images/05_03.png]]
 
 由圖[[fig:05_03]]中可看出，與第二個主成份(y 軸)相比，數據沿著第一主成份(x 軸)的分散程度更嚴重，而由此圖也可判斷，該數據應可以一個「線性分類器」進行有效分類。
@@ -1149,12 +1166,14 @@ PCA 類別是 scikit-learn 中許多轉換類別之一，首先使用訓練數�
 #+LABEL:fig:05_04
 #+name: fig:05_04
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 [[file:images/05_04.png]]
 
 #+CAPTION: PCA 測試數據
 #+LABEL:fig:05_05
 #+name: fig:05_05
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 [[file:images/05_05.png]]
 ** 利用線性判別分析(LDA)做監督式數據壓縮
 
@@ -1163,15 +1182,15 @@ LDA 的全稱是 Linear Discriminant Analysis（線性判別分析），是一�
 從主觀的理解上，主成分分析到底是什麼？它其實是對數據在高維空間下的一個投影轉換，通過一定的投影規則將原來從一個角度看到的多個維度映射成較少的維度。到底什麼是映射，下面的圖就可以很好地解釋這個問題——正常角度看是兩個半橢圓形分佈的數據集，但經過旋轉（映射）之後是兩條線性分佈數據集。[fn:7]
 
 #+ATTR_LATEX: :environment longtable :align |p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|
-|--------------------+--------------------+--------------------+--------------------|
-[[file:[[file:| images/lda-rot-1.jpg]] | images/lda-rot-2.jpg]] | [[file:[[file:images/lda-rot-3.jpg]] | images/lda-rot-4.jpg]] |
-|--------------------+--------------------+--------------------+--------------------|
-|                  1 |                  2 |                  3 |                  4 |
-|--------------------+--------------------+--------------------+--------------------|
-[[file:[[file:| images/lda-rot-5.jpg]] | images/lda-rot-6.jpg]] | [[file:[[file:images/lda-rot-7.jpg]] | images/lda-rot-8.jpg]] |
-|--------------------+--------------------+--------------------+--------------------|
-|                  5 |                  6 |                  7 |                  8 |
-|--------------------+--------------------+--------------------+--------------------|
+|---------------------------+---------------------------+---------------------------+---------------------------|
+| file:images/lda-rot-1.jpg | [[file:images/lda-rot-2.jpg]] | [[file:images/lda-rot-3.jpg]] | [[file:images/lda-rot-4.jpg]] |
+|---------------------------+---------------------------+---------------------------+---------------------------|
+|                         1 |                         2 |                         3 |                         4 |
+|---------------------------+---------------------------+---------------------------+---------------------------|
+| [[file:images/lda-rot-5.jpg]] | [[file:images/lda-rot-6.jpg]] | [[file:images/lda-rot-7.jpg]] | [[file:images/lda-rot-8.jpg]] |
+|---------------------------+---------------------------+---------------------------+---------------------------|
+|                         5 |                         6 |                         7 |                         8 |
+|---------------------------+---------------------------+---------------------------+---------------------------|
 
 LDA 與 PCA 都是常用的降維方法，二者的區別在於[fn:7]：
 - 出發思想不同。PCA 主要是從特徵的協方差角度，去找到比較好的投影方式，即選擇樣本點投影具有最大方差的方向（ 在信號處理中認為信號具有較大的方差，噪聲有較小的方差，信噪比就是信號與噪聲的方差比，越大越好。）；而 LDA 則更多的是考慮了分類標籤信息，尋求投影后不同類別之間數據點距離更大化以及同一類別數據點距離最小化，即選擇分類性能最好的方向。
@@ -1206,14 +1225,16 @@ LDA 與 PCA 都是常用的降維方法，二者的區別在於[fn:7]：
 - blur = [[1./9, 1./9, 1./9], [1./9, 1./9, 1./9], [1./9, 1./9, 1./9]]
 #+CAPTION: 模糊過濾器
 #+name: fig:blurFilter
-#+ATTR_LATEX: :width 200
-#+ATTR_ORG: :width 200
+#+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
+#+ATTR_ORG: :width 300
 [[file:images/blur-filter.png]]
 - edges = [[1, 1, 1], [1, -8, 1], [1, 1, 1]]
 #+CAPTION: 邊緣強調過濾器
 #+name: fig:edgesFilter
-#+ATTR_LATEX: :width 200
-#+ATTR_ORG: :width 200
+#+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
+#+ATTR_ORG: :width 400
 [[file:images/edges-filter.png]]
 圖[[fig:blurFilter]]為一 3*3 的模楜強過濾器產生的效果，圖[[fig:edgesFilter]]則為邊緣強週器的效果。過濾器可以改變圖形，並顯示可用於「圖形偵測」和「圖形分類」的特徵。例如，為了對數字進行分類，內部的顏色並不重要，此時，邊緣強調過濾器就有助於辨識數字的一般形狀，進而提升數字識別效能。
 
@@ -3357,6 +3378,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:Cat-Dog-Data-Augmentation-Acc
 #+name: fig:Cat-Dog-Data-Augmentation-Acc
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/CatsDogsDataAugmentation-acc.png]]
 
@@ -3364,6 +3386,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:Cat-Dog-Data-Augmentation-Loss
 #+name: fig:Cat-Dog-Data-Augmentation-Loss
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/CatsDogsDataAugmentation-loss.png]]
 
@@ -3374,6 +3397,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:Cat-Dog-Data-Augmentation-Acc-colab
 #+name: fig:Cat-Dog-Data-Augmentation-Acc-colab
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/Cat-Dog-Data-Augmentation-Acc-colab.png]]
 
@@ -3381,6 +3405,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:Cat-Dog-Data-Augmentation-Loss-colab
 #+name: fig:Cat-Dog-Data-Augmentation-Loss-colab
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/Cat-Dog-Data-Augmentation-loss-colab.png]]
 
@@ -3404,6 +3429,7 @@ Feature extraction 是使用 pretrained network 學習到的表示法，以這�
 #+LABEL:fig:ConvolutionalBaseChangeDense
 #+name: fig:ConvolutionalBaseChangeDense
 #+ATTR_LATEX: :width 360
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 360
 [[file:images/img-191126103936.jpg]]
 
@@ -3711,6 +3737,7 @@ Epoch 30/30
 #+LABEL:fig:Pretrained-VGG16-1-Acc
 #+name: fig:Pretrained-VGG16-1-Acc
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/Pretrained-VGG16-1-acc.png]]
 
@@ -3718,6 +3745,7 @@ Epoch 30/30
 #+LABEL:fig:Pretrained-VGG16-1-loss
 #+name: fig:Pretrained-VGG16-1-loss
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/Pretrained-VGG16-1-loss.png]]
 
@@ -3909,6 +3937,7 @@ Epoch 1/30
 #+LABEL:fig:Cat-Dog-Data-AugmentationPretrained-Acc
 #+name: fig:Cat-Dog-Data-AugmentationPretrained-Acc
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/CatsDogsDataAugmentationPretrained-acc.png]]
 
@@ -3916,6 +3945,7 @@ Epoch 1/30
 #+LABEL:fig:Cat-Dog-Data-AugmentationPretrained-Loss
 #+name: fig:Cat-Dog-Data-AugmentationPretrained-Loss
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/CatsDogsDataAugmentationPretrained-loss.png]]
 
@@ -4217,6 +4247,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:VGG16-Fine-Tune-Acc
 #+name: fig:VGG16-Fine-Tune-Acc
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/FineTune-acc-1.png]]
 
@@ -4224,6 +4255,7 @@ Found 1000 images belonging to 2 classes.
 #+LABEL:fig:VGG16-Fine-Tune Loss
 #+name: fig:VGG16-Fine-Tune-Loss
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/FineTune-loss-1.png]]
 
@@ -4350,6 +4382,7 @@ Tensor("max_pooling2d_4/MaxPool:0", shape=(?, 7, 7, 128), dtype=float32)
 #+LABEL:fig:origin_cat
 #+name: fig:origin_cat
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/origin.cat.png]]
 
@@ -4359,6 +4392,7 @@ Tensor("max_pooling2d_4/MaxPool:0", shape=(?, 7, 7, 128), dtype=float32)
 #+LABEL:fig:origin_channel_4
 #+name: fig:origin_channel_4
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/origin_channel_4_map.png]]
 
@@ -4368,6 +4402,7 @@ Tensor("max_pooling2d_4/MaxPool:0", shape=(?, 7, 7, 128), dtype=float32)
 #+LABEL:fig:origin_channel_7
 #+name: fig:origin_channel_7
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: width 400
 #+ATTR_ORG: :width 300
 [[file:images/origin_channel_7_map.png]]
 
@@ -4488,27 +4523,34 @@ _________________________________________________________________
 #+LABEL:fig:conv2d_1.png
 #+name: fig:conv2d_1.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 500
 #+ATTR_ORG: :width 500
 [[file:images/conv2d_1.png]]
+
 
 #+CAPTION: max_pooling2d_1.png
 #+LABEL:fig:max_pooling2d_1.png
 #+name: fig:max_pooling2d_1.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 500
 #+ATTR_ORG: :width 500
 [[file:images/max_pooling2d_1.png]]
+
 
 #+CAPTION: conv2d_2.png
 #+LABEL:fig:conv2d_2.png
 #+name: fig:conv2d_2.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 500
 #+ATTR_ORG: :width 500
 [[file:images/conv2d_2.png]]
+
 
 #+CAPTION: max_pooling2d_2.png
 #+LABEL:fig:max_pooling2d_2.png
 #+name: fig:max_pooling2d_2.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 600
 #+ATTR_ORG: :width 500
 [[file:images/max_pooling2d_2.png]]
 
@@ -4516,6 +4558,7 @@ _________________________________________________________________
 #+LABEL:fig:conv2d_3.png
 #+name: fig:conv2d_3.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 600
 #+ATTR_ORG: :width 500
 [[file:images/conv2d_3.png]]
 
@@ -4523,6 +4566,7 @@ _________________________________________________________________
 #+LABEL:fig:max_pooling2d_3.png
 #+name: fig:max_pooling2d_3.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 600
 #+ATTR_ORG: :width 500
 [[file:images/max_pooling2d_3.png]]
 
@@ -4530,6 +4574,7 @@ _________________________________________________________________
 #+LABEL:fig:conv2d_4.png
 #+name: fig:conv2d_4.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 600
 #+ATTR_ORG: :width 500
 [[file:images/conv2d_4.png]]
 
@@ -4537,6 +4582,7 @@ _________________________________________________________________
 #+LABEL:fig:max_pooling2d_4.png
 #+name: fig:max_pooling2d_4.png
 #+ATTR_LATEX: :width 500
+#+ATTR_HTML: width 600
 #+ATTR_ORG: :width 500
 [[file:images/max_pooling2d_4.png]]
 
@@ -4664,6 +4710,7 @@ block3\under{}conv1 層中的過濾器 0 似乎對波爾卡圓點圖案有回應
 #+LABEL:fig:block1_conv1_pattern
 #+name: fig:block1_conv1_pattern
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/block1_conv1_pattern.png]]
 
@@ -4671,6 +4718,7 @@ block3\under{}conv1 層中的過濾器 0 似乎對波爾卡圓點圖案有回應
 #+LABEL:fig:block2_conv1_pattern
 #+name: fig:block2_conv1_pattern
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/block1_conv2_pattern.png]]
 
@@ -4678,6 +4726,7 @@ block3\under{}conv1 層中的過濾器 0 似乎對波爾卡圓點圖案有回應
 #+LABEL:fig:block3_conv1_pattern
 #+name: fig:block3_conv1_pattern
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/block3_conv1_pattern.png]]
 
@@ -4685,6 +4734,7 @@ block3\under{}conv1 層中的過濾器 0 似乎對波爾卡圓點圖案有回應
 #+LABEL:fig:block4_conv1_pattern
 #+name: fig:block4_conv1_pattern
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/block4_conv1_pattern.png]]
 
@@ -4781,6 +4831,7 @@ CMA(class activation map)可以用來理解影像中的哪些部份會讓 convne
 #+LABEL:fig:heapmapOfClassActivation
 #+name: fig:heapmapOfClassActivation
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/heapmapOfClassActivation.png]]
 
@@ -4788,6 +4839,7 @@ CMA(class activation map)可以用來理解影像中的哪些部份會讓 convne
 #+LABEL:fig:heapmapOfClassActivationCombination
 #+name: fig:heapmapOfClassActivationCombination
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 [[file:images/elephant_cam-1.jpg]]
 
@@ -5432,6 +5484,7 @@ accuracy 0.9767000079154968
 #+LABEL:fig:Keras-MNist-Train-1
 #+name: fig:Keras-MNist-Train-1
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 #+RESULTS:
 [[file:images/Keras-MNist-Train-1.png]]
@@ -5445,6 +5498,7 @@ accuracy 0.9767000079154968
 #+LABEL:fig:Keras-MNist-Train-2
 #+name: fig:Keras-MNist-Train-2
 #+ATTR_LATEX: :width 300
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 300
 #+RESULTS:
 [[file:images/Keras-MNist-Train-2.png]]
@@ -5494,6 +5548,7 @@ accuracy 0.9767000079154968
 #+LABEL:fig:Keras-MNist-Train-3
 #+name: fig:Keras-Mnist-Train-3
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 #+RESULTS:
 [[file:images/Keras-MNist-Train-3.png]]
@@ -5603,6 +5658,7 @@ accuracy 0.9767000079154968
 #+LABEL:fig:Keras-MNist-Train-4
 #+name: fig:Keras-Mnist-Train-4
 #+ATTR_LATEX: :width 50
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 50
 [[file:images/Keras-MNist-Train-4.png]]
 
@@ -5715,12 +5771,14 @@ accuracy 0.9760000109672546
 #+LABEL:fig:Keras-MNist-Train-5
 #+name: fig:Keras-Mnist-Train-5
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-5.png]]
 #+CAPTION: Keras Mnist Model 訓練#2: loss information
 #+LABEL:fig:Keras-MNist-Train-6
 #+name: fig:Keras-Mnist-Train-6
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-6.png]]
 
@@ -5851,12 +5909,14 @@ accuracy= 0.9815000295639038
 #+LABEL:fig:Keras-MNist-Train-7
 #+name: fig:Keras-MNist-Train-7
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-7.png]]
 #+CAPTION: Keras Mnist Model 訓練#3: loss information
 #+LABEL:fig:Keras-MNist-Train-8
 #+name: fig:Keras-Mnist-Train-8
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-8.png]]
 
@@ -6000,12 +6060,14 @@ accuracy= 0.9793999791145325
 #+LABEL:fig:Keras-MNist-Train-9
 #+name: fig:Keras-MNist-Train-9
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-9.png]]
 #+CAPTION: Keras Mnist Model 訓練#3: loss information
 #+LABEL:fig:Keras-MNist-Train-a
 #+name: fig:Keras-MNist-Train-a
 #+ATTR_LATEX: :width 400
+#+ATTR_HTML: :width 400
 #+ATTR_ORG: :width 400
 [[file:images/Keras-MNist-Train-a.png]]
 
