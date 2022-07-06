@@ -6,8 +6,8 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+latex:\newpage
 這是為[[http://www.tnfsh.tn.edu.tw/][TNFSH]]的[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=20][AI入門]]選修課程隨便編的講義，這門課假設你已修過[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=25][Python入門]]的選修課程或是已自學基本的Python，內容持續編修中，編者不保證內容正確性，服用前請保持對一切內容懷疑的精神...
-- [[file:~/Dropbox/AI/AI-Introduction.org][AI簡介]]
-- [[file:~/Dropbox/AI/MachineLearning.org][機器學習]]
+- [[file:AI-Intro.org][AI簡介]]
+- [[file:ML.org][機器學習]]
 - [[file:SL.org][監督式學習]]
 - [[file:UL.org][非監督式學習]]
 - [[file:CNN.org][Say Hi to CNN]]
