@@ -3694,6 +3694,7 @@ Test Acc: 0.9823
 
 #+latex:\newpage
 
+
 * 名詞解釋
 本節資料來源: [[https://kknews.cc/zh-tw/tech/b4zkbom.html][主流的深度學習模型有哪些？]]
 - perceptron: 單一神經元，可視為一層的neural network
