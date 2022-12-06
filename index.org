@@ -1,15 +1,20 @@
+:PROPERTIES:
+:ID:       1fea5669-8f26-4f35-a204-db764f649471
+:END:
 #+TITLE: AI for TNFSH: 從入門到入土
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI
 #+OPTIONS: toc:0 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+latex:\newpage
+
 這是為[[http://www.tnfsh.tn.edu.tw/][TNFSH]]的[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=20][AI入門]]選修課程隨便編的講義，這門課假設你已修過[[https://moodle.tnfsh.tn.edu.tw/course/view.php?id=25][Python入門]]的選修課程或是已自學基本的Python，內容持續編修中，編者不保證內容正確性，服用前請保持對一切內容懷疑的精神...
 - [[file:AI-Intro.org][AI簡介]]
 - [[file:ML.org][機器學習]]
 - [[file:SL.org][監督式學習]]
 - [[file:UL.org][非監督式學習]]
+- [[file:NN.org][神經網路]]  
 - [[file:CNN.org][Say Hi to CNN]]
 - [[file:RL.org][強化學習]]
 - [[file:DL.org][深度學習]]
@@ -36,3 +41,5 @@
 - https://github.com/ckiplab/ckipnlp
 - https://github.com/zake7749/Gossiping-Chinese-Corpus/tree/master/data
 
+* Page Infos
+#+INCLUDE: "../css/footer.html" export html

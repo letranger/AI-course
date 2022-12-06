@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-10 Fri 00:47 -->
+<!-- 2022-11-22 Tue 21:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AI for TNFSH: 從入門到入土</title>
-<meta name="author" content="Yung-Chin Yen" />
+<meta name="author" content="Yung Chin, Yen" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -193,12 +193,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/readtheorg.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/muse.css" />
 </head>
 <body>
 <div id="content" class="content">
@@ -207,35 +202,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge277b0d">1. 決定專題類型</a>
+<li><a href="#org725d3cd">1. 決定專題類型</a>
 <ul>
-<li><a href="#orge38b7bb">1.1. 資料類型</a></li>
-<li><a href="#orgafdf0bb">1.2. 資料來源</a></li>
+<li><a href="#org44b80ab">1.1. 資料類型</a></li>
+<li><a href="#org5263614">1.2. 資料來源</a></li>
 </ul>
 </li>
-<li><a href="#orgcf1e182">2. 決定執行模式</a>
+<li><a href="#org82ca000">2. 決定執行模式</a>
 <ul>
-<li><a href="#org09a9699">2.1. Colab</a></li>
-<li><a href="#org4e4c7f2">2.2. 本機</a></li>
+<li><a href="#org8ac246d">2.1. Colab</a></li>
+<li><a href="#orge235fd5">2.2. 本機</a></li>
 </ul>
 </li>
-<li><a href="#orgf3405f6">3. 需繳交作業</a>
+<li><a href="#org82db881">3. 需繳交作業</a>
 <ul>
-<li><a href="#orgb1290d2">3.1. 專題報告全文</a></li>
-<li><a href="#org304f70f">3.2. 專題期末簡報</a></li>
+<li><a href="#org1ce841b">3.1. 專題報告全文</a></li>
+<li><a href="#org051993c">3.2. 專題期末簡報</a></li>
 </ul>
 </li>
-<li><a href="#orgb4bddb3">4. 相關資源(此為舉例，請自行搜尋其他網路教材)</a></li>
+<li><a href="#org180e3b9">4. 相關資源(此為舉例，請自行搜尋其他網路教材)</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge277b0d" class="outline-2">
-<h2 id="orge277b0d"><span class="section-number-2">1.</span> 決定專題類型</h2>
+<div id="outline-container-org725d3cd" class="outline-2">
+<h2 id="org725d3cd"><span class="section-number-2">1.</span> 決定專題類型</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge38b7bb" class="outline-3">
-<h3 id="orge38b7bb"><span class="section-number-3">1.1.</span> 資料類型</h3>
+<div id="outline-container-org44b80ab" class="outline-3">
+<h3 id="org44b80ab"><span class="section-number-3">1.1.</span> 資料類型</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>圖形<br /></li>
@@ -245,20 +240,19 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgafdf0bb" class="outline-3">
-<h3 id="orgafdf0bb"><span class="section-number-3">1.2.</span> 資料來源</h3>
+<div id="outline-container-org5263614" class="outline-3">
+<h3 id="org5263614"><span class="section-number-3">1.2.</span> 資料來源</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org1eecb3c" class="outline-4">
-<h4 id="org1eecb3c"><span class="section-number-4">1.2.1.</span> 網路現成訓練集(X)</h4>
+<ol class="org-ol">
+<li><a id="org939888e"></a>網路現成訓練集(X)<br />
 <div class="outline-text-4" id="text-1-2-1">
 <ul class="org-ul">
 <li>使用現成資料集分數較低，除非你的實驗設計很有研究價值<br /></li>
 </ul>
 </div>
-</div>
-<div id="outline-container-org63b4207" class="outline-4">
-<h4 id="org63b4207"><span class="section-number-4">1.2.2.</span> 自行搜集</h4>
+</li>
+<li><a id="org6ebd1a6"></a>自行搜集<br />
 <div class="outline-text-4" id="text-1-2-2">
 <ul class="org-ul">
 <li>寫爬蟲程式到各站抓取<br /></li>
@@ -266,16 +260,17 @@
 <li>通常無法搜集到足夠數量，需要進行資料擴增<br /></li>
 </ul>
 </div>
-</div>
+</li>
+</ol>
 </div>
 </div>
 
-<div id="outline-container-orgcf1e182" class="outline-2">
-<h2 id="orgcf1e182"><span class="section-number-2">2.</span> 決定執行模式</h2>
+<div id="outline-container-org82ca000" class="outline-2">
+<h2 id="org82ca000"><span class="section-number-2">2.</span> 決定執行模式</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org09a9699" class="outline-3">
-<h3 id="org09a9699"><span class="section-number-3">2.1.</span> Colab</h3>
+<div id="outline-container-org8ac246d" class="outline-3">
+<h3 id="org8ac246d"><span class="section-number-3">2.1.</span> Colab</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>優點: 支援GPU/TPU，訓練速度快，方便小組合作<br /></li>
@@ -283,8 +278,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4e4c7f2" class="outline-3">
-<h3 id="org4e4c7f2"><span class="section-number-3">2.2.</span> 本機</h3>
+<div id="outline-container-orge235fd5" class="outline-3">
+<h3 id="orge235fd5"><span class="section-number-3">2.2.</span> 本機</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>優點: 資料檔案存取方便<br /></li>
@@ -294,12 +289,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgf3405f6" class="outline-2">
-<h2 id="orgf3405f6"><span class="section-number-2">3.</span> 需繳交作業</h2>
+<div id="outline-container-org82db881" class="outline-2">
+<h2 id="org82db881"><span class="section-number-2">3.</span> 需繳交作業</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgb1290d2" class="outline-3">
-<h3 id="orgb1290d2"><span class="section-number-3">3.1.</span> 專題報告全文</h3>
+<div id="outline-container-org1ce841b" class="outline-3">
+<h3 id="org1ce841b"><span class="section-number-3">3.1.</span> 專題報告全文</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>格式: 文書處理軟體(word, pages, google document)轉PDF<br /></li>
@@ -315,8 +310,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org304f70f" class="outline-3">
-<h3 id="org304f70f"><span class="section-number-3">3.2.</span> 專題期末簡報</h3>
+<div id="outline-container-org051993c" class="outline-3">
+<h3 id="org051993c"><span class="section-number-3">3.2.</span> 專題期末簡報</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>格式: 簡報軟體轉PDF<br /></li>
@@ -326,8 +321,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb4bddb3" class="outline-2">
-<h2 id="orgb4bddb3"><span class="section-number-2">4.</span> 相關資源(此為舉例，請自行搜尋其他網路教材)</h2>
+<div id="outline-container-org180e3b9" class="outline-2">
+<h2 id="org180e3b9"><span class="section-number-2">4.</span> 相關資源(此為舉例，請自行搜尋其他網路教材)</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><a href="https://letranger.github.io/DeepLearning/HiCNN.html">Say Hi to CNN</a><br /></li>
@@ -340,8 +335,8 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung-Chin Yen</p>
-<p class="date">Created: 2022-06-10 Fri 00:47</p>
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2022-11-22 Tue 21:28</p>
 </div>
 </body>
 </html>

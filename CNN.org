@@ -4,9 +4,12 @@
 #+INCLUDE: ../pdf.org
 #+OPTIONS: toc:2 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+
+* Read this 
+- [[https://www.youtube.com/watch?v=D641Ucd_xuw][从“卷积”、到“图像卷积操作”、再到“卷积神经网络”，“卷积”意义的3次改变]]
 
 * 神經網路解題步驟
 使用神經網路解決問題可大致分為兩個步驟：「學習」與「推論」。
@@ -1458,6 +1461,9 @@ Test Acc: 0.9823
 
 * Next Subject :noexport:
 Kaggle: https://www.kaggle.com/ryanholbrook/overfitting-and-underfitting
+
+* Page Infos
+#+INCLUDE: "../css/footer.html" export html
 
 * Footnotes
 [fn:2] [[https://blog.yeshuanova.com/2018/10/dataset-iris/][ 機器學習資料集 - Iris dataset ]]

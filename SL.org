@@ -1,9 +1,12 @@
+:PROPERTIES:
+:ID:       924a12f9-da13-4afa-b518-d26c4e3e9103
+:END:
 #+TITLE: 監督式學習(Supervised Learning)
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI, Machine Learning, SVM, RBM
 #+OPTIONS: toc:2 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+latex:\newpage
 
 * 簡介
@@ -2880,30 +2883,39 @@ Original image
 [[file:images/DBN-Original-9.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-9.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-8.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-8.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-7.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-7.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-6.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-6.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-5.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-5.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-4.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-4.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-3.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-3.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-2.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-2.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-1.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-1.png]]
+#+ATTR_HTML: :width 300
 [[file:images/DBN-Original-0.png]]
 #+ATTR_HTML: :width 300
 [[file:images/DBN-RBMGenerated-0.png]]
@@ -3451,8 +3463,10 @@ LightGBM Gradient Boosting Log Loss:  0.15520095263526515
 DBN-Based Solution Accuracy:  0.9561
 #+end_example
 
-* Footnotes
+* Page Infos
+#+INCLUDE: "../css/footer.html" export html
 
+* Footnotes
 [fn:1] Hands-On Machine Learning with Scikit-Learn: Aurelien Geron
 
 [fn:2] [[https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53][Decision Trees Explained With a Practical Example]]

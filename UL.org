@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       d6f25029-1564-4533-a57e-dcf891e38c62
+:END:
 #+TITLE: 非監督式學習
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI

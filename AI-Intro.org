@@ -1,9 +1,12 @@
+:PROPERTIES:
+:ID:       2df41f8a-38d5-44f5-8775-624aea317233
+:END:
 #+TITLE: AI Introduction
 #+INCLUDE: ../pdf.org
 #+TAGS: AI
 #+OPTIONS: toc:2 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
 
@@ -915,6 +918,9 @@ int main() {
 
 #+RESULTS:
 : TEST
+
+* Page Infos
+#+INCLUDE: "../css/footer.html" export html
 
 * Footnotes
 

@@ -1,6 +1,7 @@
 #+TITLE: AI for TNFSH: 從入門到入土
 # -*- org-export-babel-evaluate: nil -*-
-#+INCLUDE: ../purpleweb.org
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
+#+INCLUDE: ../pdf.org
 #+OPTIONS: ^:nil
 #+OPTIONS: toc:2
 #+EXCLUDE_TAGS: noexport

@@ -6,6 +6,9 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 
 * 機器學習
+** 機器學習簡介影片
+[[https://www.youtube.com/watch?v=OXNC_sefxi4][机器学习简介（机器学习从零到一第一集)]]
+[[https://www.youtube.com/watch?v=ifj5bAzrzMw][机器学习中的基本计算机视觉概念（机器学习从零到一第二集）]]
 ** 簡介
 - 機器學習是[[file:AI-Introduction.org][人工智慧]]的一個分支。[[file:AI-Introduction.org][人工智慧]]的研究歷史有著一條從以「推理」為重點，到以「知識」為重點，再到以 「學習」為重點的自然、清晰的脈絡。
 - 機器學習是實現[[file:AI-Introduction.org][人工智慧]]的一個途徑，即以機器學習為手段解決[[file:AI-Introduction.org][人工智慧]]中的問題。
@@ -26,6 +29,8 @@
 #+ATTR_HTML: :width 600
 #+RESULTS:
 [[file:images/DifferentLearningTypes.png]]
+** 何謂機器學習[李宏毅]
+機器學習就是從一組function中找出一個最合適的function的過程。
 
 * 機器學習概念釐清
 ** Machine Learning v.s. Statistics
@@ -227,6 +232,14 @@ Neuron
 #+latex:\newpage
 
 * 機器學習的類型
+#+CAPTION: Caption
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/2022-10-03_09-26-40.png]]
+
 ** 監督式學習(Supervised learning)
 - 目前九成以上的機器學習應用均屬此類
 - 監督式學習指在訓練過程中直接告訴機器答案，也就是將資料進行標註(label)，例如，在 1000 張訓練集照片中標註「貓/狗」。

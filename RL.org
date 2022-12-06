@@ -12,6 +12,10 @@
 :CUSTOM_ID: AI-RL
 :END:
 
+DEMO:
+- [[https://www.youtube.com/watch?v=AJ1TR28KNqY][“影分身之术”！训练50亿次的AI能有多智能]]
+- [[https://www.youtube.com/watch?v=Z6fjTZAtziQ][讓人工智慧玩捉迷藏，最後居然發展出連人類都想不到的策略!? | 一探啾竟 第80集 | 啾啾鞋]]
+
 使用代理人(agent)來對環境進行觀察、選擇與執行行動，藉由因行動獲取來自環境的回應（可能是rewards或penalties，奬勵或懲罰），然後自行學習最佳策略（policy），最後隨著時間取得最多的奬勵[fn:1]。
 
 典型的增強式學習是用來訓練機器人走路，DeepMind的AlphaGo也是應用增強式學習打敗柯潔（與柯潔比賽時AlphaGo關閉了學習機制，只應用之前已學習過的policy）。

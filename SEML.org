@@ -1,0 +1,29 @@
+#+TITLE: 半監督式學習(Semisupervised learning)
+# -*- org-export-babel-evaluate: nil -*-
+#+INCLUDE: ../purpleweb.org
+#+OPTIONS: ^:nil
+#+OPTIONS: toc:2
+#+EXCLUDE_TAGS: noexport
+
+#+latex:\newpage
+
+* 半監督式學習(Semisupervised learning)
+幫資料加上label太過浪費人力(時間與成本)，更常見的情況是手上有部份有label的資料，有一大堆沒有label的資料，如何 *有效利用* 這些有label的資料，用來幫那些沒label的資料 *自動生成label* 。
+
+如圖[[fig:sem-1]]，三角形與正方形為少數有label的資料，可以利用這些已有label的資料當錨，用來定位那些沒資料的。
+
+常見的實務應用如Google Photos，當家人的照片都上傳後，可以自動辨識出照片1、5、 11都有同一人A、而照片2、5、7都有另一人B。接下來我們只要告訴系統這A與B是誰，為他們建立label，接下來系統就能為每個人指出名字，以利搜尋。
+
+GMail也有類似的操作，由使用者手動將某些mail標示為垃圾郵件，接下來系統只要找出系統中所有與這些mail同一群者即可將之自動標示為垃圾郵件。
+#+CAPTION: 半監督式學習示意
+#+LABEL:fig:sem-1
+#+name: fig:sem-1
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/2022-04-30_11-37-09.jpg]]
+
+多數半監督式學習都結合了監督式學習與監督式學習，如深度信念網路（deep belief network, DBN）就是用了許多互相堆叠的無監督組件（ /restricted Boltzmann machines/, RBMs）所組成，RBMs以無監督式循序訓練，之後再以監督式學習來微調整個系統。
+* Footnotes
+
+[fn:1] Hands-On Machine Learning with Scikit-Learn: Aurelien Geron
