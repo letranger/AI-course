@@ -1,12 +1,15 @@
 #+TITLE: Say Hi to CNN
 # -*- org-export-babel-evaluate: nil -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+TAGS: AI
 #+INCLUDE: ../pdf.org
-#+OPTIONS: toc:2 ^:nil num:5
+#+OPTIONS: toc:2     ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/CNN.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/CNN.html.svg"/></a>
+#+end_export
 
 * Read this 
 - [[https://www.youtube.com/watch?v=D641Ucd_xuw][从“卷积”、到“图像卷积操作”、再到“卷积神经网络”，“卷积”意义的3次改变]]

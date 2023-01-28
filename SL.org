@@ -8,6 +8,9 @@
 #+PROPERTY: header-args :eval never-export
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/SL.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/SL.html.svg"/></a>
+#+end_export
 
 * 簡介
 監督式學習獲得的結果可以是數值、也可以是類別，以結果分類，我們可以將監督式學分大致分為兩類：迴歸(結果為數值)與為分類(結果為類別)。
@@ -3462,9 +3465,6 @@ Validation Log Loss:  0.15520095263526515
 LightGBM Gradient Boosting Log Loss:  0.15520095263526515
 DBN-Based Solution Accuracy:  0.9561
 #+end_example
-
-* Page Infos
-#+INCLUDE: "../css/footer.html" export html
 
 * Footnotes
 [fn:1] Hands-On Machine Learning with Scikit-Learn: Aurelien Geron

@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-07-03 Sun 17:15 -->
+<!-- 2023-01-28 Sat 17:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GAN</title>
-<meta name="author" content="Yung-Chin Yen" />
+<meta name="author" content="Yung Chin, Yen" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -193,7 +193,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<link rel="stylesheet" type="text/css" href="../css/muse.css" />
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -223,152 +223,153 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb994cc3">1. 生成模型</a>
+<li><a href="#org53b401a">1. 生成模型</a>
 <ul>
-<li><a href="#org2b022bf">1.1. 生成模型與鑑別模型</a></li>
-<li><a href="#org5b7469d">1.2. 生成模型的框架: 兩維度的生成模型遊戲</a></li>
+<li><a href="#org1df914f">1.1. 生成模型與鑑別模型</a></li>
+<li><a href="#orgec33bf7">1.2. 生成模型的框架: 兩維度的生成模型遊戲</a></li>
 </ul>
 </li>
-<li><a href="#orgf18f64c">2. Keras GAN</a></li>
-<li><a href="#org4f6f7c6">3. 應用領域</a></li>
-<li><a href="#orgc51e185">4. DCGANs</a></li>
-<li><a href="#orgeeb2c5e">5. DeepLearning 的 convolution 動畫</a></li>
-<li><a href="#org225454c">6. 比賽只有 CNN v.s. RNN</a></li>
-<li><a href="#orga45c7de">7. ideas</a></li>
+<li><a href="#orgad3b272">2. Keras GAN</a></li>
+<li><a href="#org8ba2071">3. 應用領域</a></li>
+<li><a href="#org1a5c787">4. DCGANs</a></li>
+<li><a href="#orgdb5eb53">5. DeepLearning 的 convolution 動畫</a></li>
+<li><a href="#org44e8304">6. 比賽只有 CNN v.s. RNN</a></li>
+<li><a href="#org7eb1b5e">7. ideas</a></li>
 </ul>
 </div>
 </div>
+<a href="https://hits.sh/letranger.github.io/AI-course/GPU.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/GPU.html.svg"/></a>
 
-<div id="outline-container-orgb994cc3" class="outline-2">
-<h2 id="orgb994cc3"><span class="section-number-2">1.</span> 生成模型</h2>
+<div id="outline-container-org53b401a" class="outline-2">
+<h2 id="org53b401a"><span class="section-number-2">1.</span> 生成模型</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>生成模型是以 <b>機率模型</b> 的方式來描述資料集的 <b>產生方式</b> 。對這個模型抽樣就可以生成新的資料。</li>
-<li>例如：建置一個包含了許多馬匹的影像資料庫，我們想建一個能生成 <b>未出現過的、逼真的馬</b> 的模型。</li>
-<li>首先需要一個有許多馬的資料集，裡面有許多實例(instance)，每個資枓點為一個觀察值(obwervation)</li>
-<li>每個觀察值都包含了許多特徵（對於圖片來說就是像素值），生成模型的目標就是建置個能生成多組新特徵的模型，讓這個新特徵看起來和原始資料很類似。</li>
-<li>生成模型必須是機率型(probabilistic)而非決定型(deterministic)，如果模型是將所有圖片的像素值取平均，則每次產生的結果就都會想同，這就不是生成，模型要包含一個隨機元素來影響其所生成的個別樣本。</li>
-<li>可以想像有一個未知的機率分配來決定為什麼有些影像比較容易在訓練集資料中找到，有些則否。我們的目標是建置一個模型去盡可能模仿這樣的機率分配，並從中抽樣來生成全新且具鑑別度的觀察值。</li>
-<li>很難當比賽題目，因為做出來的都是假的，不易評分</li>
+<li>生成模型是以 <b>機率模型</b> 的方式來描述資料集的 <b>產生方式</b> 。對這個模型抽樣就可以生成新的資料。<br /></li>
+<li>例如：建置一個包含了許多馬匹的影像資料庫，我們想建一個能生成 <b>未出現過的、逼真的馬</b> 的模型。<br /></li>
+<li>首先需要一個有許多馬的資料集，裡面有許多實例(instance)，每個資枓點為一個觀察值(obwervation)<br /></li>
+<li>每個觀察值都包含了許多特徵（對於圖片來說就是像素值），生成模型的目標就是建置個能生成多組新特徵的模型，讓這個新特徵看起來和原始資料很類似。<br /></li>
+<li>生成模型必須是機率型(probabilistic)而非決定型(deterministic)，如果模型是將所有圖片的像素值取平均，則每次產生的結果就都會想同，這就不是生成，模型要包含一個隨機元素來影響其所生成的個別樣本。<br /></li>
+<li>可以想像有一個未知的機率分配來決定為什麼有些影像比較容易在訓練集資料中找到，有些則否。我們的目標是建置一個模型去盡可能模仿這樣的機率分配，並從中抽樣來生成全新且具鑑別度的觀察值。<br /></li>
+<li>很難當比賽題目，因為做出來的都是假的，不易評分<br /></li>
 </ul>
 </div>
 
-<div id="outline-container-org2b022bf" class="outline-3">
-<h3 id="org2b022bf"><span class="section-number-3">1.1.</span> 生成模型與鑑別模型</h3>
+<div id="outline-container-org1df914f" class="outline-3">
+<h3 id="org1df914f"><span class="section-number-3">1.1.</span> 生成模型與鑑別模型</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-生成模型的訓練資料中有許多馬的照片，透過觀察所有照片的特徵值（像素），我們生成一個能描述這些特徵值的機率分配，並用這個機率分配來生成一張全新的圖片。生成模型通常是搭配無標籤資料集學會一個 <b>可將輸入映射到特定輸出的映射函數</b> 。
+生成模型的訓練資料中有許多馬的照片，透過觀察所有照片的特徵值（像素），我們生成一個能描述這些特徵值的機率分配，並用這個機率分配來生成一張全新的圖片。生成模型通常是搭配無標籤資料集學會一個 <b>可將輸入映射到特定輸出的映射函數</b> 。<br />
 </p>
 
 <p width="500">
-<img src="images/GAN-flow-1.jpg" alt="GAN-flow-1.jpg" width="500" />
-對鑑別模型來說，訓練資料中的每個觀察值（instance）都有對應的label（如，這張是否為梵谷的畫），如此這個模型就能學習如何鑑別這兩個群組，因此，我們可以將之視為監督式學習。
+<img src="images/GAN-flow-1.jpg" alt="GAN-flow-1.jpg" width="500" /><br />
+對鑑別模型來說，訓練資料中的每個觀察值（instance）都有對應的label（如，這張是否為梵谷的畫），如此這個模型就能學習如何鑑別這兩個群組，因此，我們可以將之視為監督式學習。<br />
 </p>
 
-<div id="org4a5ded4" class="figure">
-<p><img src="images/GAN-flow-1.jpg" alt="GAN-flow-1.jpg" width="500" />
+<div id="org6f8e3d1" class="figure">
+<p><img src="images/GAN-flow-1.jpg" alt="GAN-flow-1.jpg" width="500" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>鑑別模型處理流程</p>
 </div>
 
 <p>
-鑑別模型的估計值為 \(p(y|x)\)，即，觀察到 \(x\) 時其標籤為 \(y\) 的機率，鑑別模型會試著去估計出某個觀測值 \(x\) 屬於類別 \(y\) 的機率。
+鑑別模型的估計值為 \(p(y|x)\)，即，觀察到 \(x\) 時其標籤為 \(y\) 的機率，鑑別模型會試著去估計出某個觀測值 \(x\) 屬於類別 \(y\) 的機率。<br />
 </p>
 </div>
-<div id="outline-container-org4e92b15" class="outline-4">
-<h4 id="org4e92b15"><span class="section-number-4">1.1.1.</span> 生成模型的應用</h4>
+<ol class="org-ol">
+<li><a id="org9c97090"></a>生成模型的應用<br />
 <div class="outline-text-4" id="text-1-1-1">
 <ul class="org-ul">
-<li>NVIDIA的StyleGAN: 可以產生超逼真的人臉影像</li>
-<li>OpenAI的GPT-2語言模型: 指定一小段前言，完成一整段文字。</li>
+<li>NVIDIA的StyleGAN: 可以產生超逼真的人臉影像<br /></li>
+<li>OpenAI的GPT-2語言模型: 指定一小段前言，完成一整段文字。<br /></li>
 </ul>
 </div>
-</div>
-<div id="outline-container-org815220a" class="outline-4">
-<h4 id="org815220a"><span class="section-number-4">1.1.2.</span> 生成學習與強化學習</h4>
+</li>
+<li><a id="org9993869"></a>生成學習與強化學習<br />
 <div class="outline-text-4" id="text-1-1-2">
 <p>
-強化學習可以訓練一台機器在某個地形上行走，一般的作法是建立許多地形的電腦模擬環境，再訓練代理人(agent)去嚐試各種策略。如果能透過生成模型來模擬生成環境將會更有效率。
+強化學習可以訓練一台機器在某個地形上行走，一般的作法是建立許多地形的電腦模擬環境，再訓練代理人(agent)去嚐試各種策略。如果能透過生成模型來模擬生成環境將會更有效率。<br />
 </p>
 </div>
+</li>
+</ol>
 </div>
-</div>
-<div id="outline-container-org5b7469d" class="outline-3">
-<h3 id="org5b7469d"><span class="section-number-3">1.2.</span> 生成模型的框架: 兩維度的生成模型遊戲</h3>
+<div id="outline-container-orgec33bf7" class="outline-3">
+<h3 id="orgec33bf7"><span class="section-number-3">1.2.</span> 生成模型的框架: 兩維度的生成模型遊戲</h3>
 </div>
 </div>
 
-<div id="outline-container-orgf18f64c" class="outline-2">
-<h2 id="orgf18f64c"><span class="section-number-2">2.</span> Keras GAN</h2>
+<div id="outline-container-orgad3b272" class="outline-2">
+<h2 id="orgad3b272"><span class="section-number-2">2.</span> Keras GAN</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<a href="https://github.com/eriklindernoren/Keras-GAN">https://github.com/eriklindernoren/Keras-GAN</a>
+<a href="https://github.com/eriklindernoren/Keras-GAN">https://github.com/eriklindernoren/Keras-GAN</a><br />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4f6f7c6" class="outline-2">
-<h2 id="org4f6f7c6"><span class="section-number-2">3.</span> 應用領域</h2>
+<div id="outline-container-org8ba2071" class="outline-2">
+<h2 id="org8ba2071"><span class="section-number-2">3.</span> 應用領域</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
-<li>PairedCycleGAN</li>
-<li>TwinGAN</li>
-<li>Paired</li>
-<li>GigGANs</li>
-<li>Image-to-Text</li>
-<li>Text-to-Image</li>
-<li>繪圖</li>
-<li>書寫</li>
-<li>作曲</li>
-<li>遊戲</li>
+<li>PairedCycleGAN<br /></li>
+<li>TwinGAN<br /></li>
+<li>Paired<br /></li>
+<li>GigGANs<br /></li>
+<li>Image-to-Text<br /></li>
+<li>Text-to-Image<br /></li>
+<li>繪圖<br /></li>
+<li>書寫<br /></li>
+<li>作曲<br /></li>
+<li>遊戲<br /></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgc51e185" class="outline-2">
-<h2 id="orgc51e185"><span class="section-number-2">4.</span> DCGANs</h2>
+<div id="outline-container-org1a5c787" class="outline-2">
+<h2 id="org1a5c787"><span class="section-number-2">4.</span> DCGANs</h2>
 <div class="outline-text-2" id="text-4">
 <ol class="org-ol">
-<li>使用 strided convolutions 取代 pooling layers</li>
-<li>移除全連接層 fully</li>
+<li>使用 strided convolutions 取代 pooling layers<br /></li>
+<li>移除全連接層 fully<br /></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgeeb2c5e" class="outline-2">
-<h2 id="orgeeb2c5e"><span class="section-number-2">5.</span> DeepLearning 的 convolution 動畫</h2>
+<div id="outline-container-orgdb5eb53" class="outline-2">
+<h2 id="orgdb5eb53"><span class="section-number-2">5.</span> DeepLearning 的 convolution 動畫</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
-<li><a href="https://github.com/vdumoulin/conv_arithmetic">A technical report on convolution arithmetic in the context of deep learning</a></li>
+<li><a href="https://github.com/vdumoulin/conv_arithmetic">A technical report on convolution arithmetic in the context of deep learning</a><br /></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org225454c" class="outline-2">
-<h2 id="org225454c"><span class="section-number-2">6.</span> 比賽只有 CNN v.s. RNN</h2>
+<div id="outline-container-org44e8304" class="outline-2">
+<h2 id="org44e8304"><span class="section-number-2">6.</span> 比賽只有 CNN v.s. RNN</h2>
 </div>
 
-<div id="outline-container-orga45c7de" class="outline-2">
-<h2 id="orga45c7de"><span class="section-number-2">7.</span> ideas</h2>
+<div id="outline-container-org7eb1b5e" class="outline-2">
+<h2 id="org7eb1b5e"><span class="section-number-2">7.</span> ideas</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
-<li>文字 -&gt; POP</li>
-<li>有一種應用是將照片中的衣服移除，那，如何判別是真的沒穿衣服還是被 GAN 產生的</li>
-<li>ZARA：把衣服套在人身上</li>
-<li>如何 judge 一張圖是生成的還是真實的</li>
-<li>Pix2pix: 黑白照片轉彩色、畫輸廓轉照片(圖片)(Paired)、給照片轉 3D</li>
-<li>把同一張照片轉成各種畫家的畫風</li>
-<li>Explaining and Harnessing Adverssaral Examples: Goodfellow
-把一張圖片特意加上噪點，結果使的 AI 的判斷確認為其他圖
-後果：可能影響自駕車的安全&#x2026;..</li>
+<li>文字 -&gt; POP<br /></li>
+<li>有一種應用是將照片中的衣服移除，那，如何判別是真的沒穿衣服還是被 GAN 產生的<br /></li>
+<li>ZARA：把衣服套在人身上<br /></li>
+<li>如何 judge 一張圖是生成的還是真實的<br /></li>
+<li>Pix2pix: 黑白照片轉彩色、畫輸廓轉照片(圖片)(Paired)、給照片轉 3D<br /></li>
+<li>把同一張照片轉成各種畫家的畫風<br /></li>
+<li>Explaining and Harnessing Adverssaral Examples: Goodfellow<br />
+把一張圖片特意加上噪點，結果使的 AI 的判斷確認為其他圖<br />
+後果：可能影響自駕車的安全&#x2026;..<br /></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung-Chin Yen</p>
-<p class="date">Created: 2022-07-03 Sun 17:15</p>
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2023-01-28 Sat 17:10</p>
 </div>
 </body>
 </html>

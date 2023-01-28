@@ -1,11 +1,15 @@
 #+TITLE: 深度學習(Deep Learning)
 # -*- org-export-babel-evaluate: nil -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+TAGS: AI
-#+OPTIONS: toc:2 ^:nil num:5
+#+INCLUDE: ../pdf.org
+#+OPTIONS: toc:2     ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/DL.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/DL.html.svg"/></a>
+#+end_export
 
 * 深度學習
 神經網絡的基礎模型是感知機(Perceptron)，因此神經網絡也可以叫做多層感知機(Multi-layer Perceptron)，簡稱MLP。單層感知機叫做感知機，多層感知機(MLP)≈人工神經網絡(ANN)[fn:1]。

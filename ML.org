@@ -4,6 +4,9 @@
 #+OPTIONS: toc:2 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/ML.html/"><img aligh="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/ML.html.svg"/></a>
+#+end_export
 
 * 機器學習
 ** 機器學習簡介影片

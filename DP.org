@@ -1,11 +1,15 @@
 #+title: 資料預處理(Data Pre-processing)
 # -*- org-export-babel-evaluate: nil -*-
-#+TAGS: AI, preprocessing, pre-processing
-#+OPTIONS: toc:2 ^:nil num:5
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
+#+TAGS: AI
+#+INCLUDE: ../pdf.org
+#+OPTIONS: toc:2     ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/DP.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/DP.html.svg"/></a>
+#+end_export
 
 進行數運模式運算之前，需要進行的數據預處理工作大致可分為以下幾點：
 1. 數據遺漏值處理

@@ -9,6 +9,9 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/AI-Intro.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/AI-Intro.html.svg"/></a>
+#+end_export
 
 
 * 和AI聊聊天
@@ -918,9 +921,6 @@ int main() {
 
 #+RESULTS:
 : TEST
-
-* Page Infos
-#+INCLUDE: "../css/footer.html" export html
 
 * Footnotes
 

@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-07-03 Sun 17:10 -->
+<!-- 2023-01-28 Sat 17:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Mining</title>
-<meta name="author" content="Yung-Chin Yen" />
+<meta name="author" content="Yung Chin, Yen" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -193,7 +193,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<link rel="stylesheet" type="text/css" href="../css/muse.css" />
 </head>
 <body>
 <div id="content" class="content">
@@ -202,51 +202,51 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1627d2c">1. What is Data Mining</a></li>
-<li><a href="#org10ca91f">2. Why Data Mininng</a></li>
-<li><a href="#org066887e">3. 資料類型</a>
+<li><a href="#org8e4b3e2">1. What is Data Mining</a></li>
+<li><a href="#org81c634a">2. Why Data Mininng</a></li>
+<li><a href="#orgf69522f">3. 資料類型</a>
 <ul>
-<li><a href="#org0c3a232">3.1. Database-oriented data set</a></li>
-<li><a href="#orge758ab7">3.2. Advanced data set</a></li>
+<li><a href="#org27c0edb">3.1. Database-oriented data set</a></li>
+<li><a href="#orge44b915">3.2. Advanced data set</a></li>
 </ul>
 </li>
-<li><a href="#org84ba141">4. 背後會用到的技術</a></li>
-<li><a href="#org1e413e2">5. Data Mining Process</a>
+<li><a href="#org230531a">4. 背後會用到的技術</a></li>
+<li><a href="#org61fa824">5. Data Mining Process</a>
 <ul>
-<li><a href="#orgfee63d1">5.1. Preprocessing</a></li>
-<li><a href="#org877ad5e">5.2. Exploration</a></li>
-<li><a href="#org9937cf6">5.3. Data Mining</a></li>
-<li><a href="#org0e60d2a">5.4. Post processing</a></li>
+<li><a href="#orge658682">5.1. Preprocessing</a></li>
+<li><a href="#orgcf68483">5.2. Exploration</a></li>
+<li><a href="#orgb9205ef">5.3. Data Mining</a></li>
+<li><a href="#org9b3a923">5.4. Post processing</a></li>
 </ul>
 </li>
-<li><a href="#org0ce53b1">6. General Types of Data Mining</a>
+<li><a href="#orgf7976d0">6. General Types of Data Mining</a>
 <ul>
-<li><a href="#org2300eb5">6.1. Association rule mining</a></li>
-<li><a href="#org3708a14">6.2. Classification</a></li>
-<li><a href="#org538a102">6.3. Clustering</a></li>
+<li><a href="#orgb1d3310">6.1. Association rule mining</a></li>
+<li><a href="#orge5674a6">6.2. Classification</a></li>
+<li><a href="#org9f0406c">6.3. Clustering</a></li>
 </ul>
 </li>
-<li><a href="#org907f8ad">7. Association rule mining</a>
+<li><a href="#org26e6ced">7. Association rule mining</a>
 <ul>
-<li><a href="#org33eaf38">7.1. Mining implications between items</a></li>
-<li><a href="#org5cf53af">7.2. Frequent item sets</a></li>
-<li><a href="#orgfd4940c">7.3. Strong rules (同時符合 min_support, min_conf)</a></li>
-<li><a href="#org208cee9">7.4. 產生 Strong rules 用到的演算法: Apriori Algorithm</a></li>
+<li><a href="#orgd48ac5b">7.1. Mining implications between items</a></li>
+<li><a href="#org6ea2915">7.2. Frequent item sets</a></li>
+<li><a href="#org33c16bb">7.3. Strong rules (同時符合 min_support, min_conf)</a></li>
+<li><a href="#org34381e2">7.4. 產生 Strong rules 用到的演算法: Apriori Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org8303a18">8. Downward Closure Property</a></li>
-<li><a href="#org10a4d90">9. Sequential Pattern Mining</a>
+<li><a href="#orgf86bf8b">8. Downward Closure Property</a></li>
+<li><a href="#org9e505a3">9. Sequential Pattern Mining</a>
 <ul>
-<li><a href="#org9ead49c">9.1. Mining sequential implications between items</a></li>
+<li><a href="#org5817fa3">9.1. Mining sequential implications between items</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<a href="https://hits.sh/letranger.github.io/AI-course/DM.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/DM.html.svg"/></a>
 
-
-<div id="outline-container-org1627d2c" class="outline-2">
-<h2 id="org1627d2c"><span class="section-number-2">1.</span> What is Data Mining</h2>
+<div id="outline-container-org8e4b3e2" class="outline-2">
+<h2 id="org8e4b3e2"><span class="section-number-2">1.</span> What is Data Mining</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Discover knowledge from data, or, knowledge discovery from data (KDD).<br />
@@ -258,8 +258,8 @@ Extraction of interesting, non-trivial, implicit, previously unknown and potenti
 </div>
 </div>
 
-<div id="outline-container-org10ca91f" class="outline-2">
-<h2 id="org10ca91f"><span class="section-number-2">2.</span> Why Data Mininng</h2>
+<div id="outline-container-org81c634a" class="outline-2">
+<h2 id="org81c634a"><span class="section-number-2">2.</span> Why Data Mininng</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 雖然資料量大，取得容易，但是其中夾雜太多無關資料<br />
@@ -267,55 +267,55 @@ Extraction of interesting, non-trivial, implicit, previously unknown and potenti
 </div>
 </div>
 
-<div id="outline-container-org066887e" class="outline-2">
-<h2 id="org066887e"><span class="section-number-2">3.</span> 資料類型</h2>
+<div id="outline-container-orgf69522f" class="outline-2">
+<h2 id="orgf69522f"><span class="section-number-2">3.</span> 資料類型</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org0c3a232" class="outline-3">
-<h3 id="org0c3a232"><span class="section-number-3">3.1.</span> Database-oriented data set</h3>
+<div id="outline-container-org27c0edb" class="outline-3">
+<h3 id="org27c0edb"><span class="section-number-3">3.1.</span> Database-oriented data set</h3>
 </div>
-<div id="outline-container-orge758ab7" class="outline-3">
-<h3 id="orge758ab7"><span class="section-number-3">3.2.</span> Advanced data set</h3>
+<div id="outline-container-orge44b915" class="outline-3">
+<h3 id="orge44b915"><span class="section-number-3">3.2.</span> Advanced data set</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgba745dc"></a>Data streams<br />
+<li><a id="org14aff95"></a>Data streams<br />
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 持續產生的，如天氣、氣溫，所以要即時處理<br />
 </p>
 </div>
 </li>
-<li><a id="orgd215233"></a>Time-series data, sequence data, bio-sequences<br />
+<li><a id="org32e529c"></a>Time-series data, sequence data, bio-sequences<br />
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 有因果關係、順序關係、或生物資料(DNA)<br />
 </p>
 </div>
 </li>
-<li><a id="org654cc81"></a>Graphs, social networks and multi-linked data<br />
+<li><a id="orga5a9e21"></a>Graphs, social networks and multi-linked data<br />
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 graph(社群網路關係)<br />
 </p>
 </div>
 </li>
-<li><a id="org8a5ce8b"></a>Spatial data and spatiotemporal data<br />
+<li><a id="org9d6b8cf"></a>Spatial data and spatiotemporal data<br />
 <div class="outline-text-4" id="text-3-2-4">
 <p>
 GPS 軌跡記錄<br />
 </p>
 </div>
 </li>
-<li><a id="org318f867"></a>Multimedia database<br /></li>
-<li><a id="orgc59ac26"></a>Text<br /></li>
-<li><a id="orgc19c374"></a>The World-Wide Web<br /></li>
+<li><a id="orgc0ddbc6"></a>Multimedia database<br /></li>
+<li><a id="org6344b69"></a>Text<br /></li>
+<li><a id="org67e3a06"></a>The World-Wide Web<br /></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org84ba141" class="outline-2">
-<h2 id="org84ba141"><span class="section-number-2">4.</span> 背後會用到的技術</h2>
+<div id="outline-container-org230531a" class="outline-2">
+<h2 id="org230531a"><span class="section-number-2">4.</span> 背後會用到的技術</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Database<br /></li>
@@ -325,33 +325,33 @@ GPS 軌跡記錄<br />
 </div>
 </div>
 
-<div id="outline-container-org1e413e2" class="outline-2">
-<h2 id="org1e413e2"><span class="section-number-2">5.</span> Data Mining Process</h2>
+<div id="outline-container-org61fa824" class="outline-2">
+<h2 id="org61fa824"><span class="section-number-2">5.</span> Data Mining Process</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgfee63d1" class="outline-3">
-<h3 id="orgfee63d1"><span class="section-number-3">5.1.</span> Preprocessing</h3>
+<div id="outline-container-orge658682" class="outline-3">
+<h3 id="orge658682"><span class="section-number-3">5.1.</span> Preprocessing</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
 <ol class="org-ol">
-<li><a id="orga7fe770"></a>Data collection<br /></li>
-<li><a id="orgad65e0c"></a>Data cleaning<br /></li>
-<li><a id="org1cb9ec4"></a>Data integration<br /></li>
+<li><a id="orgd9a10e0"></a>Data collection<br /></li>
+<li><a id="org7f37b64"></a>Data cleaning<br /></li>
+<li><a id="org32eea7b"></a>Data integration<br /></li>
 </ol>
 </div>
-<div id="outline-container-org877ad5e" class="outline-3">
-<h3 id="org877ad5e"><span class="section-number-3">5.2.</span> Exploration</h3>
+<div id="outline-container-orgcf68483" class="outline-3">
+<h3 id="orgcf68483"><span class="section-number-3">5.2.</span> Exploration</h3>
 <div class="outline-text-3" id="text-5-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgd4e89c3"></a>Data warehousing<br />
+<li><a id="org4d82466"></a>Data warehousing<br />
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 決定使用哪一種儲存方式<br />
 </p>
 </div>
 </li>
-<li><a id="org092fd50"></a>Data selection<br />
+<li><a id="org7db4e13"></a>Data selection<br />
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 如：feature selection<br />
@@ -360,44 +360,44 @@ GPS 軌跡記錄<br />
 </li>
 </ol>
 </div>
-<div id="outline-container-org9937cf6" class="outline-3">
-<h3 id="org9937cf6"><span class="section-number-3">5.3.</span> Data Mining</h3>
+<div id="outline-container-orgb9205ef" class="outline-3">
+<h3 id="orgb9205ef"><span class="section-number-3">5.3.</span> Data Mining</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
 <ol class="org-ol">
-<li><a id="org05eea35"></a>Pattern evaluation<br />
+<li><a id="org349375c"></a>Pattern evaluation<br />
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 找到常常發生的現象<br />
 </p>
 </div>
 </li>
-<li><a id="orgd8fa6f3"></a>Knowledge discovery<br /></li>
+<li><a id="orgf2b07bc"></a>Knowledge discovery<br /></li>
 </ol>
 </div>
-<div id="outline-container-org0e60d2a" class="outline-3">
-<h3 id="org0e60d2a"><span class="section-number-3">5.4.</span> Post processing</h3>
+<div id="outline-container-org9b3a923" class="outline-3">
+<h3 id="org9b3a923"><span class="section-number-3">5.4.</span> Post processing</h3>
 <div class="outline-text-3" id="text-5-4">
 </div>
 <ol class="org-ol">
-<li><a id="org851e7cf"></a>Information presentation<br />
+<li><a id="orge8cedf0"></a>Information presentation<br />
 <div class="outline-text-4" id="text-5-4-1">
 <p>
 將所發掘的知識以簡單易懂的方式呈現出來，這點較少人留意，但最有助於後續決策，即，如 data visualization<br />
 </p>
 </div>
 </li>
-<li><a id="org587cb0c"></a>Decision making<br /></li>
+<li><a id="org9c15244"></a>Decision making<br /></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org0ce53b1" class="outline-2">
-<h2 id="org0ce53b1"><span class="section-number-2">6.</span> General Types of Data Mining</h2>
+<div id="outline-container-orgf7976d0" class="outline-2">
+<h2 id="orgf7976d0"><span class="section-number-2">6.</span> General Types of Data Mining</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org2300eb5" class="outline-3">
-<h3 id="org2300eb5"><span class="section-number-3">6.1.</span> Association rule mining</h3>
+<div id="outline-container-orgb1d3310" class="outline-3">
+<h3 id="orgb1d3310"><span class="section-number-3">6.1.</span> Association rule mining</h3>
 <div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li>a -&gt; b<br /></li>
@@ -406,8 +406,8 @@ GPS 軌跡記錄<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-org3708a14" class="outline-3">
-<h3 id="org3708a14"><span class="section-number-3">6.2.</span> Classification</h3>
+<div id="outline-container-orge5674a6" class="outline-3">
+<h3 id="orge5674a6"><span class="section-number-3">6.2.</span> Classification</h3>
 <div class="outline-text-3" id="text-6-2">
 <ul class="org-ul">
 <li>A:Y<br /></li>
@@ -420,8 +420,8 @@ GPS 軌跡記錄<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-org538a102" class="outline-3">
-<h3 id="org538a102"><span class="section-number-3">6.3.</span> Clustering</h3>
+<div id="outline-container-org9f0406c" class="outline-3">
+<h3 id="org9f0406c"><span class="section-number-3">6.3.</span> Clustering</h3>
 <div class="outline-text-3" id="text-6-3">
 <ul class="org-ul">
 <li>{AB}<br /></li>
@@ -432,16 +432,16 @@ GPS 軌跡記錄<br />
 </div>
 </div>
 
-<div id="outline-container-org907f8ad" class="outline-2">
-<h2 id="org907f8ad"><span class="section-number-2">7.</span> Association rule mining</h2>
+<div id="outline-container-org26e6ced" class="outline-2">
+<h2 id="org26e6ced"><span class="section-number-2">7.</span> Association rule mining</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>min_support = 2<br /></li>
 <li>min_conf = 2/3<br /></li>
 </ul>
 </div>
-<div id="outline-container-org33eaf38" class="outline-3">
-<h3 id="org33eaf38"><span class="section-number-3">7.1.</span> Mining implications between items</h3>
+<div id="outline-container-orgd48ac5b" class="outline-3">
+<h3 id="orgd48ac5b"><span class="section-number-3">7.1.</span> Mining implications between items</h3>
 <div class="outline-text-3" id="text-7-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -482,8 +482,8 @@ GPS 軌跡記錄<br />
 </div>
 </div>
 
-<div id="outline-container-org5cf53af" class="outline-3">
-<h3 id="org5cf53af"><span class="section-number-3">7.2.</span> Frequent item sets</h3>
+<div id="outline-container-org6ea2915" class="outline-3">
+<h3 id="org6ea2915"><span class="section-number-3">7.2.</span> Frequent item sets</h3>
 <div class="outline-text-3" id="text-7-2">
 <ul class="org-ul">
 <li>把所有元素的全部排列組合全部列出，每種可能都去計算次數，出現次數&gt;=min_support 才留下<br /></li>
@@ -494,8 +494,8 @@ GPS 軌跡記錄<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfd4940c" class="outline-3">
-<h3 id="orgfd4940c"><span class="section-number-3">7.3.</span> Strong rules (同時符合 min_support, min_conf)</h3>
+<div id="outline-container-org33c16bb" class="outline-3">
+<h3 id="org33c16bb"><span class="section-number-3">7.3.</span> Strong rules (同時符合 min_support, min_conf)</h3>
 <div class="outline-text-3" id="text-7-3">
 <ul class="org-ul">
 <li>{A,D} -&gt; B(2/3) : A,D 發生的狀況下，B也發生<br /></li>
@@ -506,13 +506,13 @@ GPS 軌跡記錄<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-org208cee9" class="outline-3">
-<h3 id="org208cee9"><span class="section-number-3">7.4.</span> 產生 Strong rules 用到的演算法: Apriori Algorithm</h3>
+<div id="outline-container-org34381e2" class="outline-3">
+<h3 id="org34381e2"><span class="section-number-3">7.4.</span> 產生 Strong rules 用到的演算法: Apriori Algorithm</h3>
 </div>
 </div>
 
-<div id="outline-container-org8303a18" class="outline-2">
-<h2 id="org8303a18"><span class="section-number-2">8.</span> Downward Closure Property</h2>
+<div id="outline-container-orgf86bf8b" class="outline-2">
+<h2 id="orgf86bf8b"><span class="section-number-2">8.</span> Downward Closure Property</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>Any subset of a frequent itemset must be frequent<br /></li>
@@ -521,12 +521,12 @@ GPS 軌跡記錄<br />
 </div>
 </div>
 
-<div id="outline-container-org10a4d90" class="outline-2">
-<h2 id="org10a4d90"><span class="section-number-2">9.</span> Sequential Pattern Mining</h2>
+<div id="outline-container-org9e505a3" class="outline-2">
+<h2 id="org9e505a3"><span class="section-number-2">9.</span> Sequential Pattern Mining</h2>
 <div class="outline-text-2" id="text-9">
 </div>
-<div id="outline-container-org9ead49c" class="outline-3">
-<h3 id="org9ead49c"><span class="section-number-3">9.1.</span> Mining sequential implications between items</h3>
+<div id="outline-container-org5817fa3" class="outline-3">
+<h3 id="org5817fa3"><span class="section-number-3">9.1.</span> Mining sequential implications between items</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 強調 item 的前後順序<br />
@@ -585,8 +585,8 @@ GPS 軌跡記錄<br />
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung-Chin Yen</p>
-<p class="date">Created: 2022-07-03 Sun 17:10</p>
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2023-01-28 Sat 17:08</p>
 </div>
 </body>
 </html>
