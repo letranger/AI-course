@@ -1,11 +1,14 @@
 #+TITLE: 增強式學習(Reinforcement Learning)
-# -*- org-export-babel-evaluate: nil -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+TAGS: AI
-#+OPTIONS: toc:2 ^:nil num:5
+#+INCLUDE: ../pdf.org
+#+OPTIONS: toc:2     ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/RL.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/RL.html.svg"/></a>
+#+end_export
 
 * 增強式學習
 :PROPERTIES:
