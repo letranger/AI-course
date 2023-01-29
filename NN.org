@@ -1,9 +1,10 @@
 #+title: 感知器與神經網路
-#+INCLUDE: ../pdf.org
+# -*- org-export-babel-evaluate: nil -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+TAGS: AI
-#+OPTIONS: toc:2 ^:nil num:5
+#+INCLUDE: ../pdf.org
+#+OPTIONS: toc:2     ^:nil num:5
 #+PROPERTY: header-args :eval never-export
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
 #+begin_export html
@@ -279,7 +280,7 @@ XOR問題的神經網路結構如下圖:
 #+ATTR_HTML: :width 500
 [[file:images/2021-05-24_16-15-02.jpg]]
 *** Solution #2
-當資料分布如同開頭的XOR(線性不可分的案例)，仍是不可解的，即使找個絕頂聰明的人仍無法以一條直線分割非線性的資料分布。因此我們會藉由多層感知器處理這個問題，也就是利用feature transform的概念，將原本線性不可分的輸入資料映射到線性可分的特徵平面上，特徵轉換的效果也就是造就深層網路效果能優異的原因[fn:7]。如下圖是原本不可分的XOR例子：
+當資料分布如同開頭的XOR(線性不可分的案例)，仍是不可解的，即使找個絕頂聰明的人仍無法以一條直線分割非線性的資料分布。因此我們會藉由多層感知器處理這個問題，也就是利用feature transform的概念，將原本線性不可分的輸入資料映射到線性可分的特徵平面上，特徵轉換的效果也就是造就深層網路效果能優異的原因[fn:1]。如下圖是原本不可分的XOR例子：
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 300
@@ -356,7 +357,7 @@ del y
 
 如果層數再多也可以稱為深度神經網路(deep neural network, DNN)，所以現在稱的DNN其實就是人工神經網路的MLP。有一說法是說因為MLP相關的神經網路在之前因為電腦限制所以performance一直都沒有很好的突破，所以相關研究沒有像SVM這麼的被接受，因此後來Deep learning的聲名大噪，MLP也換個較酷炫的名字(deep neural network)來反轉神經網路這個名稱的聲勢。
 
-多層感知機是一種前向傳遞類神經網路，至少包含三層結構(輸入層、隱藏層和輸出層)，並且利用到「倒傳遞」的技術達到學習(model learning)的監督式學習，以上是傳統的定義。現在深度學習的發展，其實MLP是深度神經網路(deep neural network, DNN)的一種special case，概念基本上一樣，DNN只是在學習過程中多了一些手法和層數會更多更深[fn:1]。
+多層感知機是一種前向傳遞類神經網路，至少包含三層結構(輸入層、隱藏層和輸出層)，並且利用到「倒傳遞」的技術達到學習(model learning)的監督式學習，以上是傳統的定義。現在深度學習的發展，其實MLP是深度神經網路(deep neural network, DNN)的一種special case，概念基本上一樣，DNN只是在學習過程中多了一些手法和層數會更多更深[fn:2]。
 
 本章參考來源:[[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E9%81%8B%E4%BD%9C%E6%96%B9%E5%BC%8F-f0e108e8b9af][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP)運作方式]]
 
@@ -377,8 +378,8 @@ del y
 #+ATTR_HTML: :width 400
 #+Results:
 [[file:images/Perceptron.jpg]]
-神經網絡是非常重要的一種機器學習機制，它是一種模仿人類大腦學習機制的一種方法。人類的大腦從外界接受刺激，並處理這些輸入（通過神經元處理），最終產生輸出[fn:2]。
-當任務變得複雜的時候，大腦會使用多個神經元來形成一個複雜的網絡，並在神經元之間傳遞信息，人工神經網絡就是模仿這種處理機制的一種算法。如下圖的網絡是一種由多個互聯的神經元組成的網絡[fn:2]。
+神經網絡是非常重要的一種機器學習機制，它是一種模仿人類大腦學習機制的一種方法。人類的大腦從外界接受刺激，並處理這些輸入（通過神經元處理），最終產生輸出[fn:3]。
+當任務變得複雜的時候，大腦會使用多個神經元來形成一個複雜的網絡，並在神經元之間傳遞信息，人工神經網絡就是模仿這種處理機制的一種算法。如下圖的網絡是一種由多個互聯的神經元組成的網絡[fn:3]。
 
 #+CAPTION: DEEP NEURAL NETWORK
 #+LABEL:fig:DNN
@@ -397,7 +398,7 @@ del y
   #+Results:
   [[file:images/ActivationFunction.jpg]]
 
-- 當輸出層的結果和我們期望的結果相差很大怎麼辦呢？在神經網絡中，我們可以基於這種錯誤來更新神經元的權重和偏移。這種處理方式被稱為後向傳播算法。一旦所有的數據經歷過這個處理，最終的權重和便宜就可以用來做預測了[fn:2][fn:3]。
+- 當輸出層的結果和我們期望的結果相差很大怎麼辦呢？在神經網絡中，我們可以基於這種錯誤來更新神經元的權重和偏移。這種處理方式被稱為後向傳播算法。一旦所有的數據經歷過這個處理，最終的權重和便宜就可以用來做預測了[fn:3][fn:4]。
   #+CAPTION: Neural Network
   #+LABEL:fig:Neural Network
   #+name: fig:Neural Network
@@ -483,12 +484,12 @@ y_1 = w_1^1x_1 + w_2^1x_2 \\
 y_2 = w_3^1x_1 + w_4^1x_2 \\
 \hat{y} = w_1^2y_1 + w_2^2y_2
 $$
-若將\(y_1\)與\(y_2\)代入\(\hat{y}\)，可以發現仍然是原始數據的線性組合，代表即使堆疊多層的感知器時，若沒有使用激活函數，本質上可以被單層感知器取代，如下[fn:6]：
+若將\(y_1\)與\(y_2\)代入\(\hat{y}\)，可以發現仍然是原始數據的線性組合，代表即使堆疊多層的感知器時，若沒有使用激活函數，本質上可以被單層感知器取代，如下[fn:5]：
 $$\hat{y} = w_1^2y_1 + w_2^2y_2  = (w_1^1w_1^2 + w_2^1x_2^2)x_1 + (w_3^1w_1^2 + w_4^1x_2^2)x_2$$
 
-激活函數最重要的功能在於引入神經網路非線性，因為若未加入激活函數，卷積層與全連接層只是單純的線性運算，只是將上層的數據經過線性地組合成下層數據而已，對於線性不可分的問題仍然是無解的[fn:7]。
+激活函數最重要的功能在於引入神經網路非線性，因為若未加入激活函數，卷積層與全連接層只是單純的線性運算，只是將上層的數據經過線性地組合成下層數據而已，對於線性不可分的問題仍然是無解的[fn:1]。
 
-舉個常見的例子，如果輸入的資料如下圖(這是互斥或閘XOR的例子)，圈圈與叉叉分別是兩種不同的類別，我們的目標就是利用一條直線將兩類別切開，但實際上根本無法利用一條直線切割開，因此需要對輸入資料做特徵轉換(feature transform)，將其從x1-x2特徵平面映射其他線性可分的特徵平面(可單純利用一條直線切分)[fn:7]。
+舉個常見的例子，如果輸入的資料如下圖(這是互斥或閘XOR的例子)，圈圈與叉叉分別是兩種不同的類別，我們的目標就是利用一條直線將兩類別切開，但實際上根本無法利用一條直線切割開，因此需要對輸入資料做特徵轉換(feature transform)，將其從x1-x2特徵平面映射其他線性可分的特徵平面(可單純利用一條直線切分)[fn:1]。
 
 ** Backprogation: 如何快速計算 w 與 b 的更新
 *** Godfather of Deep Learning
@@ -518,7 +519,7 @@ $$ \delta (z) = \frac{1}{1+e^{-x}} $$
 
 ** Activation Function
 Activation function是神經網絡中極其重要的概念。它們決定了某個神經元是否被activate，這個神經元接受到的信息是否是有用的，是否該留下或者是該拋棄。
-Activation function的形式如下[fn:2]：
+Activation function的形式如下[fn:3]：
 - 在神經元裡定義一些權重(weight)，經過計算之後，判斷結果是否超過一個閾值(threshold)，如果超過，神經元輸出為 1；反之，則輸出 0。
 - 如果不用Activation function，每一層output都是上層input的線性函數，無論神經網絡有多少層，輸出都是輸入的線性組合。
 - 加入非線性的function就能改變線性問題
@@ -692,7 +693,7 @@ digraph perceptron {
 - 神經網路中再多的線性perceptron叠加，仍為線性
 - 無法解決 *線性不可分* 的問題
 **** 線性可分 v.s. 線性不可分
-簡而言之，如果存在一個超平面完全分離H元素和M元素，那麼上面的表達式表示H和M是線性可分的[fn:4]。
+簡而言之，如果存在一個超平面完全分離H元素和M元素，那麼上面的表達式表示H和M是線性可分的[fn:6]。
 #+CAPTION: 線性和非線性分類
 #+LABEL:fig:linear-nonLinear
 #+name: fig:linear-nonLinear
@@ -703,7 +704,7 @@ digraph perceptron {
 
 在圖[[fig:linear-nonLinear]]中，A顯示了一個線性分類問題，B顯示了一個非線性的分類問題。在A中，我們的決策邊界是一個線性的，它將藍色的點和綠色的點完全分開。在這個場景中，可以實現幾個線性分類器。
 **** 低維映射至高維
-在SVM的解決方案中，可以透過一個非線性的映射將低維空間線性不可分的樣本轉換至高維空間，使其成為線性可分   [fn:5]，例如:
+在SVM的解決方案中，可以透過一個非線性的映射將低維空間線性不可分的樣本轉換至高維空間，使其成為線性可分   [fn:7]，例如:
 #+CAPTION: Kernal function mapping
 #+LABEL:fig:SVM-KF
 #+name: fig:SVM-KF
@@ -1794,7 +1795,7 @@ print(Z1)
 : [0.57855079 0.66736228]
 
 ** Backward propagation
-反向傳遞的目的就是利用最後的目標函數(loss/cost function)來進行參數的更新，一般來說都是用誤差均方和(mean square error)當作目標函數。如果誤差值越大，代表參數學得不好，所以需要繼續學習，直到參數或是誤差值收斂[fn:47]。
+反向傳遞的目的就是利用最後的目標函數(loss/cost function)來進行參數的更新，一般來說都是用誤差均方和(mean square error)當作目標函數。如果誤差值越大，代表參數學得不好，所以需要繼續學習，直到參數或是誤差值收斂[fn:8]。
 回到圖[[fig:ThreeLayerNT]]
 \(x^{(i)}\)為第i筆輸入，其輸出值為
 $$ y^{(i)}=\begin{bmatrix}
@@ -2795,7 +2796,7 @@ digraph exam3 {
 
 卷積神經網路(CNN)由Yann LeCun(法國電腦科學家，2018年圖靈獎得主)所提出，此人在機器學習、計算機視覺、計算機神經科學等領域都有很多貢獻。
 
-CNN 也是模仿人類大腦的認知方式，譬如我們辨識一個圖像，會先注意到顏色鮮明的點、線、面，之後將它們構成一個個不同的形狀(眼睛、鼻子、嘴巴...)，這種抽象化的過程就是 CNN 演算法建立模型的方式。卷積層(Convolution Layer) 就是由點的比對轉成局部的比對，透過一塊塊的特徵研判，逐步堆疊綜合比對結果，就可以得到比較好的辨識結果，過程如下圖。[fn:12]
+CNN 也是模仿人類大腦的認知方式，譬如我們辨識一個圖像，會先注意到顏色鮮明的點、線、面，之後將它們構成一個個不同的形狀(眼睛、鼻子、嘴巴...)，這種抽象化的過程就是 CNN 演算法建立模型的方式。卷積層(Convolution Layer) 就是由點的比對轉成局部的比對，透過一塊塊的特徵研判，逐步堆疊綜合比對結果，就可以得到比較好的辨識結果，過程如下圖。[fn:9]
 
 #+CAPTION: CNN 概念
 #+name: fig:CNN-1
@@ -2803,11 +2804,11 @@ CNN 也是模仿人類大腦的認知方式，譬如我們辨識一個圖像，�
 #+ATTR_ORG: :width 500
 #+RESULTS:
 [[file:images/CNN-1.png]]
-資料來源：[fn:13]
+資料來源：[fn:10]
 
 ** CNN v.s. MLP
 
-CNN 與前章所述之 MLP 的主要差異可由下圖看出，即，CNN 在輪入層中多了卷積層與池化層，MLP 有兩個缺點[fn:14]：
+CNN 與前章所述之 MLP 的主要差異可由下圖看出，即，CNN 在輪入層中多了卷積層與池化層，MLP 有兩個缺點[fn:11]：
 1. 需要大量記憶體:在處理 256x256 大小的彩色圖片時，會需要用到 256 * 256 * 3 =196,608 個 Input Neuron，如果中間的隱藏層有 1000 個 Neuron，每個神經元需要一個浮點數的權重值 (8bytes)，那麼總共需要 196,608 * 1000 * 8 = 1.4648GBytes 的記憶體才夠。更何況這還只是個簡單的模型。
 2. 多層感知器只針對圖片中每個單一像素去作判斷，完全捨棄重要的影像特徵。人類在判斷所看到的物體時，會從不同部位的特徵先作個別判斷，例如當你看到一架飛機，會先從機翼、機鼻、機艙體等這些特徵，再跟記憶中的印象來判斷是否為一架飛機，甚至再進一步判斷為客機還是戰鬥機。但是多層感知器沒有利用這些特徵，所以在影像的判讀上準確率就沒有接下來要討論的 CNN 來得好。
 
@@ -2943,7 +2944,7 @@ CNN 所運算的 3D 張量稱為特徵映射圖(feature maps，簡稱特徵圖)�
 
 ** 池化層(Pooling Layer)
 
-卷積層之間通常會加一個池化層(Pooling Layer)，它是一個壓縮圖片並保留重要資訊的方法，取樣的方法一樣是採滑動視窗，但是通常取最大值(Max-Pooling)，而非加權總和，若滑動視窗大小設為 2，『滑動步長』(Stride) 也為 2，則資料量就降為原本的四分之一，但因為取最大值，它還是保留局部範圍比對的最大可能性。也就是說，池化後的資訊更專注於圖片中是否存在相符的特徵，而非圖片中『哪裡』存在這些特徵，幫助 CNN 判斷圖片中是否包含某項特徵，而不必關心特徵所在的位置，這樣圖像偏移，一樣可以辨識出來。其架構如圖[[fig:CNN-Pooling-1]]所示。[fn:13]
+卷積層之間通常會加一個池化層(Pooling Layer)，它是一個壓縮圖片並保留重要資訊的方法，取樣的方法一樣是採滑動視窗，但是通常取最大值(Max-Pooling)，而非加權總和，若滑動視窗大小設為 2，『滑動步長』(Stride) 也為 2，則資料量就降為原本的四分之一，但因為取最大值，它還是保留局部範圍比對的最大可能性。也就是說，池化後的資訊更專注於圖片中是否存在相符的特徵，而非圖片中『哪裡』存在這些特徵，幫助 CNN 判斷圖片中是否包含某項特徵，而不必關心特徵所在的位置，這樣圖像偏移，一樣可以辨識出來。其架構如圖[[fig:CNN-Pooling-1]]所示。[fn:10]
 #+CAPTION: CNN 之池化層
 #+LABEL:fig:CNN-Pooling-1
 #+name: fig:CNN-Pooling-1
@@ -2978,7 +2979,7 @@ CNN 所運算的 3D 張量稱為特徵映射圖(feature maps，簡稱特徵圖)�
   model_no_max_pool.add(layers.Conv2D(64, (3, 3), activation='relu'),)
 #+END_SRC
 
-上述設計的問題可以從以下兩個面向來看：[fn:15]
+上述設計的問題可以從以下兩個面向來看：[fn:12]
 
 - 不利於學習特徵的空間層次結構。當 strides=1，第二層的 3\times3 窗格要走過 5\times5 的區域才能包含第一層的 7\times7 區城，進而生成下一層的完整 3\times3 區域，依此類推，第三層的 3\times3 窗格也要走過 5\times5 的區域才能包含第二層的 5\times5 區域。也就是說，第三層的 3\times3 窗格實際上僅包含來自原始輸入的 7\times7 區城的資訊。相對於初始輸入，由卷積神經網路學習的高階 pattern 仍然進展很小，不足以學習分類數字。我們希望的是：最後一個卷積層的輸出特徵已經能提供有關輸入資料的總體訊息。
 - 最終特徵圖的每個樣本總係數為 22\times22\times64=3-976，這是相當巨大的 model，如果要將其展平以在頂部連接大小為 512 的 Dense 層，則該層將會有 1580 萬個參數，這對小 model 而言實在是太大，而且會導致 overfitting。
@@ -3825,25 +3826,26 @@ Test Acc: 0.9823
 
 * Footnotes
 
-[fn:7] [[http://elmer-storage.blogspot.com/2018/07/cnn-activation-function-feature.html][ CNN筆記 - 激活函數 (Activation Function)與特徵轉換 (Feature Transform) ]]
+[fn:1] [[http://elmer-storage.blogspot.com/2018/07/cnn-activation-function-feature.html][ CNN筆記 - 激活函數 (Activation Function)與特徵轉換 (Feature Transform) ]]
 
-[fn:1] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP) 含倒傳遞( Backward propagation)詳細推導]]
+[fn:2] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP) 含倒傳遞( Backward propagation)詳細推導]]
 
-[fn:2] [[https://kknews.cc/code/o8m4gpq.html][五分鐘理解深度學習中激活函數以及不同激活函數的使用場景]]
+[fn:3] [[https://kknews.cc/code/o8m4gpq.html][五分鐘理解深度學習中激活函數以及不同激活函數的使用場景]]
 
-[fn:3] [[https://towardsdatascience.com/what-the-hell-is-perceptron-626217814f53][What the Hell is Perceptron?]]
+[fn:4] [[https://towardsdatascience.com/what-the-hell-is-perceptron-626217814f53][What the Hell is Perceptron?]]
 
-[fn:4] [[https://kknews.cc/code/o8qaazo.html][機器學習：Python測試線性可分性的方法]]
+[fn:5] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E9%81%8B%E4%BD%9C%E6%96%B9%E5%BC%8F-f0e108e8b9af][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP)運作方式]]
 
-[fn:5] [[https://s-top.github.io/blog/2018-04-19-svm][Support Vector Machine（全面推导）]]
+[fn:6] [[https://kknews.cc/code/o8qaazo.html][機器學習：Python測試線性可分性的方法]]
 
-[fn:6] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E9%81%8B%E4%BD%9C%E6%96%B9%E5%BC%8F-f0e108e8b9af][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP)運作方式]]
+[fn:7] [[https://s-top.github.io/blog/2018-04-19-svm][Support Vector Machine（全面推导）]]
 
-[fn:12][[https://ithelp.ithome.com.tw/articles/10191820][Day 06：處理影像的利器 -- 卷積神經網路(Convolutional Neural Network) ]]
+[fn:8] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP) 含倒傳遞( Backward propagation)詳細推導]]
 
-[fn:13][[https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/][An Intuitive Explanation of Convolutional Neural Networks]]
+[fn:9][[https://ithelp.ithome.com.tw/articles/10191820][Day 06：處理影像的利器 -- 卷積神經網路(Convolutional Neural Network) ]]
 
-[fn:14][[https://medium.com/@syshen/%E5%85%A5%E9%96%80%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92-2-d694cad7d1e5][入門深度學習 — 2]]
+[fn:10][[https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/][An Intuitive Explanation of Convolutional Neural Networks]]
 
-[fn:15][[https://www.books.com.tw/products/0010822932][Deep learning 深度學習必讀：Keras 大神帶你用 Python 實作]]
-[fn:47] [[https://chih-sheng-huang821.medium.com/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41][機器學習- 神經網路(多層感知機 Multilayer perceptron, MLP) 含倒傳遞( Backward propagation)詳細推導]]
+[fn:11][[https://medium.com/@syshen/%E5%85%A5%E9%96%80%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92-2-d694cad7d1e5][入門深度學習 — 2]]
+
+[fn:12][[https://www.books.com.tw/products/0010822932][Deep learning 深度學習必讀：Keras 大神帶你用 Python 實作]]
