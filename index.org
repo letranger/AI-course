@@ -20,6 +20,8 @@
 - [[file:UL.org][非監督式學習]]
 - [[file:NN.org][神經網路]]  
 - [[file:CNN.org][Say Hi to CNN]]
+- [[https://letranger.github.io/AI/20221211165455-cnn%E5%AF%A6%E4%BD%9C.html][CNN實作]]
+- [[https://letranger.github.io/AI/20221216211703-%E7%95%B6ai%E9%81%87%E4%B8%8A%E8%82%A1%E7%A5%A8.html][當AI遇上股票]]
 - [[file:RL.org][強化學習]]
 - [[file:DL.org][深度學習]]
 - [[https://www.youtube.com/watch?v=PqsTbDxiyBs][Python 期末報告：用deep learning分類心電圖]]

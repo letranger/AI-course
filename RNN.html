@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-07-04 Mon 14:31 -->
+<!-- 2023-05-26 Fri 08:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RNN</title>
@@ -193,7 +193,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../css/white.css" />
+<link rel="stylesheet" type="text/css" href="../css/muse.css" />
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -223,25 +223,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf15a934">1. What is RNN</a></li>
-<li><a href="#orgc2377c6">2. RNN 原理</a></li>
-<li><a href="#orgd6ef533">3. 遞迴類神經網路(Recurrent Neural Networks, RNNs)</a></li>
-<li><a href="#org3bddd05">4. 三種 RNN</a></li>
-<li><a href="#orgbc2de22">5. 實作練習</a></li>
+<li><a href="#org69e1843">1. What is RNN</a></li>
+<li><a href="#orge9047f5">2. RNN 原理</a></li>
+<li><a href="#orgbfde6f5">3. 遞迴類神經網路(Recurrent Neural Networks, RNNs)</a></li>
+<li><a href="#org78793d9">4. 三種 RNN</a></li>
+<li><a href="#org9dd6dc0">5. 實作練習</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgf15a934" class="outline-2">
-<h2 id="orgf15a934"><span class="section-number-2">1.</span> What is RNN</h2>
+<div id="outline-container-org69e1843" class="outline-2">
+<h2 id="org69e1843"><span class="section-number-2">1.</span> What is RNN</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 言歸正傳，RNN 到底是個什麼玩意兒? 就讓我先從傳統的類神經網路切入吧。<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup><br />
 </p>
 
 <p>
-傳統上，我們假設神經網路的每個輸入是相互獨立的，意即對於輸入 \(I_i,I_j\) 而言，\(I_i\) 取什麼值，並不會影響 \(I_j\) 取什麼值，因為 \(I_i\) 與 \(I_j\) 一點關係也沒有。但這個假設有個很大的缺點，就是在處理序列 (Sequence) 時不太管用，因為序列內的元素長幼有序、先後有別，這種順序性導致了輸入間彼此相依。<br />
+傳統上，我們假設神經網路的每個輸入是相互獨立的，意即對於輸入 \(I_i \rightarrow I_j\) 而言，\(I_i\) 取什麼值，並不會影響 \(I_j\) 取什麼值，因為 \(I_i\) 與 \(I_j\) 一點關係也沒有。但這個假設有個很大的缺點，就是在處理序列 (Sequence) 時不太管用，因為序列內的元素長幼有序、先後有別，這種順序性導致了輸入間彼此相依。<br />
 </p>
 
 <p>
@@ -251,32 +251,26 @@
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="org-right" />
 
-<col  class="org-left" />
+<col  class="org-right" />
 
 <col  class="org-right" />
 
 <col  class="org-right" />
 </colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">9:00</th>
+<th scope="col" class="org-right">10:00</th>
+<th scope="col" class="org-right">11:00</th>
+<th scope="col" class="org-right">12:00</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="org-left">9：00</td>
-<td class="org-left">10：00</td>
-<td class="org-right">11:00</td>
-<td class="org-right">12:00</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-right">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">123</td>
-<td class="org-left">128</td>
+<td class="org-right">123</td>
+<td class="org-right">128</td>
 <td class="org-right">132</td>
 <td class="org-right">136</td>
 </tr>
@@ -293,21 +287,19 @@
 </div>
 </div>
 
-<div id="outline-container-orgc2377c6" class="outline-2">
-<h2 id="orgc2377c6"><span class="section-number-2">2.</span> RNN 原理</h2>
+<div id="outline-container-orge9047f5" class="outline-2">
+<h2 id="orge9047f5"><span class="section-number-2">2.</span> RNN 原理</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 為了能將「順序」這個信息融入神經網路，RNN 就這麼誕生了，它的式子並不複雜：<br />
 \(h_t=\sigma(W_hx_t+U_hh_{t−1}+b_h)\)<br />
+</p>
+
+<p>
 先理解一下每個符號的意思：<br />
 </p>
 <ul class="org-ul">
-<li>\(h_t\): RNN 在第 \(t\) 個時間點的輸出，如果對時間點這個字眼感到茫然，不妨理解為 RNN 讀到序列中第 \(t\)<br /></li>
-</ul>
-<p>
-個元素時的輸出吧<br />
-</p>
-<ul class="org-ul">
+<li>\(h_t\): RNN 在第 \(t\) 個時間點的輸出，如果對時間點這個字眼感到茫然，不妨理解為 RNN 讀到序列中第 \(t\) 個元素時的輸出吧<br /></li>
 <li>\(x_t\): RNN 在第 \(t\) 個時間點的輸入<br /></li>
 <li>\(h_{t−1}\): RNN 在第 \(t−1\) 個時間點的輸出<br /></li>
 <li>\(W_h, U_h, b_h\): 是 RNN 的參數，我們要微調的目標<br /></li>
@@ -315,8 +307,7 @@
 </ul>
 
 <p>
-你會發現 RNN 其實是兩個單層網路 \(W_hx_t\) 和 $U_hh_{t−1}$的串接，只是這兩個網路的用途不太一樣，<br />
-從物理意義上來看：<br />
+你會發現 RNN 其實是兩個單層網路 \(W_hx_t\) 和 \(U_hh_{t−1}\) 的串接，只是這兩個網路的用途不太一樣，從物理意義上來看：<br />
 </p>
 <ul class="org-ul">
 <li>\(W_h\) 是在控制當前時間點的輸入 \(x_t\) 如何影響當前時間點的輸出 \(h_t\)<br /></li>
@@ -328,7 +319,7 @@
 </p>
 <ul class="org-ul">
 <li>在第 \(k\) 個時間點時，我們有 \(h_{k−1}\) 保留了 \(x_1,x_2,…..,x_{k−1}\) 的資訊，佐以當前時間點的輸入 \(x_k\) 得出了 \(h_k\)<br /></li>
-<li>現在我們到了第 \(k+1\) 個時間點，有 \(h_k\) 保留了 \(x_1,x_2,…..,x_k\) 的資訊，佐以當前時間點的輸入 $x_{k+1} 得出 \(h_{t+1}\)<br /></li>
+<li>現在我們到了第 \(k+1\) 個時間點，有 \(h_k\) 保留了 \(x_1,x_2,…..,x_k\) 的資訊，佐以當前時間點的輸入 \(x_{k+1}\) 得出 \(h_{t+1}\)<br /></li>
 <li>如此反覆迭代，直到走至第 \(n\) 個時間點便結束。<br /></li>
 </ul>
 
@@ -339,8 +330,8 @@
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">x_inputs</span> = [...]
 <span class="linenr">2: </span><span style="color: #dcaeea;">hidden</span> = h0
 <span class="linenr">3: </span>
-<span class="linenr">4: </span><span style="color: #51afef;">for</span> x <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">x_inputs</span>:
-<span class="linenr">5: </span>    hidden = rnn(x, hidden)
+<span class="linenr">4: </span><span style="color: #51afef;">for</span> x <span style="color: #51afef;">in</span> x_inputs:
+<span class="linenr">5: </span>    <span style="color: #dcaeea;">hidden</span> = rnn(x, hidden)
 </pre>
 </div>
 
@@ -348,7 +339,7 @@
 我們也能把 RNN 的結構畫成一張圖，橫向的箭頭便是建構出順序的關鍵。<br />
 </p>
 
-<div id="org710cafa" class="figure">
+<div id="orgeea36e8" class="figure">
 <p><img src="images/RNN-1.jpg" alt="RNN-1.jpg" width="600" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>RNN 結構圖</p>
@@ -359,7 +350,7 @@
 </p>
 
 <p>
-假設我們給 RNN 餵進一個長度 \(N\) 的序列 \(x_1, x_2, ..., x_n\)，RNN 會吐出與長度等長的序列 \(y_ y_2, ..., y_n\)，但對於吐出的序列 \(y_1 ~ y_n\)，我們真的會用到所有的輸出嗎 ? 答案應該是不一定，對不同的應用，我們採用的輸出個數也會不同。<br />
+假設我們給 RNN 餵進一個長度 \(N\) 的序列 \(x_1, x_2, ..., x_n\)，RNN 會吐出與長度等長的序列 \(y_1, y_2, ..., y_n\)，但對於吐出的序列 \(y_1 ... y_n\)，我們真的會用到所有的輸出嗎 ? 答案應該是不一定，對不同的應用，我們採用的輸出個數也會不同。<br />
 </p>
 
 <p>
@@ -367,7 +358,7 @@
 </p>
 
 
-<div id="org39e9e6a" class="figure">
+<div id="org40d8ba4" class="figure">
 <p><img src="images/RNN-2.jpg" alt="RNN-2.jpg" /><br />
 </p>
 <p><span class="figure-number">Figure 2: </span>用 RNN 來標注一句話的詞性</p>
@@ -378,7 +369,7 @@
 </p>
 
 
-<div id="org9921de1" class="figure">
+<div id="org6660da6" class="figure">
 <p><img src="images/RNN-3.jpg" alt="RNN-3.jpg" /><br />
 </p>
 <p><span class="figure-number">Figure 3: </span>用 RNN 來分類一句話的情緒</p>
@@ -419,8 +410,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgd6ef533" class="outline-2">
-<h2 id="orgd6ef533"><span class="section-number-2">3.</span> 遞迴類神經網路(Recurrent Neural Networks, RNNs)</h2>
+<div id="outline-container-orgbfde6f5" class="outline-2">
+<h2 id="orgbfde6f5"><span class="section-number-2">3.</span> 遞迴類神經網路(Recurrent Neural Networks, RNNs)</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 RNN 能夠處理「任意個數的輸入序列」，所以十分適合用在「語言塑模」或「語音辨識」。理論上，RNN 可以用來處理任何問題，因為已被證明具有「圖靈完備性」(Turing-Complete)。以遞迴關係的函數表示 RNN 可將其視為 \(S_t=f(S_{t-1},X_t)\)，這裡的\(S_t\)表示第\(t\)步的狀態，它是由函數\(f\)對上一步(\(t-1\))的狀態(即\(S_{t-1}\))與這一步的輸入\(X_t\)所計算出來的結果，這裡的函數\(f\)可以是任何可微分的函數，如\(S_t=tang(S_{t-1}*W+X_t*U)\)。<br />
@@ -428,10 +419,10 @@ RNN 能夠處理「任意個數的輸入序列」，所以十分適合用在「�
 </p>
 
 <p>
-語言塑模的目標是計算「字的序列」的機率，這在「語音辨識」、OCR、「機器翻譯」、「拼字校正」上都非常重要。以「字」為基準的「語言模型」是由「字的序列」來定義機率分佈，給定一個長度為\(m\)的字序列，它會為整個字序列給定一個機率\(P(w_1,...,w_m)\)，其「聯合機率」(joint probability)可以由公式\eqref{org39f5fc3}中的連鎖規則(chain rule)計算出來：<br />
+語言塑模的目標是計算「字的序列」的機率，這在「語音辨識」、OCR、「機器翻譯」、「拼字校正」上都非常重要。以「字」為基準的「語言模型」是由「字的序列」來定義機率分佈，給定一個長度為\(m\)的字序列，它會為整個字序列給定一個機率\(P(w_1,...,w_m)\)，其「聯合機率」(joint probability)可以由公式\eqref{org9c5eb2a}中的連鎖規則(chain rule)計算出來：<br />
 </p>
 \begin{equation}
-\label{org39f5fc3}
+\label{org9c5eb2a}
 P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 \end{equation}
 
@@ -451,8 +442,8 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div>
 </div>
 
-<div id="outline-container-org3bddd05" class="outline-2">
-<h2 id="org3bddd05"><span class="section-number-2">4.</span> 三種 RNN</h2>
+<div id="outline-container-org78793d9" class="outline-2">
+<h2 id="org78793d9"><span class="section-number-2">4.</span> 三種 RNN</h2>
 <div class="outline-text-2" id="text-4">
 <ol class="org-ol">
 <li>Simple RNN<br /></li>
@@ -462,8 +453,8 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div>
 </div>
 
-<div id="outline-container-orgbc2de22" class="outline-2">
-<h2 id="orgbc2de22"><span class="section-number-2">5.</span> 實作練習</h2>
+<div id="outline-container-org9dd6dc0" class="outline-2">
+<h2 id="org9dd6dc0"><span class="section-number-2">5.</span> 實作練習</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb">Time series forecasting</a><br />
@@ -483,7 +474,7 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Yung-Chin Yen</p>
-<p class="date">Created: 2022-07-04 Mon 14:31</p>
+<p class="date">Created: 2023-05-26 Fri 08:35</p>
 </div>
 </body>
 </html>
