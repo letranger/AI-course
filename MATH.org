@@ -1,4 +1,5 @@
 #+TITLE: 數學基礎：從微分與偏微分到梯度(gradient)
+#+SUBTITLE: TNFSH AI教材 / 顏永進
 #+AUTHOR: 顏永進
 #+INCLUDE: ../pdf.org
 #+TAGS: AI, math

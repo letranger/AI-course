@@ -1,4 +1,9 @@
 #+title: Edge Comupting
+#+SUBTITLE: TNFSH AI教材 / 顏永進
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/EC.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/EC.html.svg"/></a>
+#+end_export
+
 
 * OpenVINO
 OpenVINO 在電腦上安裝路徑會有兩種，其中使用者目錄每台電腦可能不同，請自行留意：
@@ -49,6 +54,9 @@ right-click the script and select Run with PowerShell
    把下載的open_model_zoo-releases-2022-1解壓縮到<SOURCE_DIR>，再更改檔名為open_model_zoo
 ** Open Model Zoo packages requirements
 *** Install the Packages
+:PROPERTIES:
+:ID:       864f8aed-58ce-49a9-88e6-b9ea9414de5c
+:END:
 1. 在prompt視窗切換目錄到openvino資料夾，輸入下列指令：
    cd open_model_zoo\demos
 2. 在prompt視窗安裝open_model_zoo底下各個專案有關相依套件，輸入下列指令：
@@ -133,6 +141,9 @@ Live Object Detection with OpenVINO
 *** 瀏覽操作須知
 Human Pose Estimation Python* Demo
 *** 切換目錄
+:PROPERTIES:
+:ID:       16a3942e-da6c-4e3c-930d-6313468165e3
+:END:
 cd <SOURCE_DIR>\open_model_zoo\demos\human_pose_estimation_demo\python
 *** 設定Openvino環境變數
 輸入指令：

@@ -1,4 +1,9 @@
 #+title: Resources
+#+SUBTITLE: TNFSH AI教材 / 顏永進
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/Resources.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/Resources.html.svg"/></a>
+#+end_export
+
 
 - [[https://sites.google.com/view/buzznote/p5/p56?authuser=0][BuzzNote]]
 -

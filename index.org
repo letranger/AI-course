@@ -2,6 +2,7 @@
 :ID:       1fea5669-8f26-4f35-a204-db764f649471
 :END:
 #+TITLE: AI for TNFSH: 從入門到入土
+#+SUBTITLE: TNFSH AI教材 / 顏永進
 #+AUTHOR: 顏永進
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI

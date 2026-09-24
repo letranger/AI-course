@@ -2,6 +2,7 @@
 :ID:       d6f25029-1564-4533-a57e-dcf891e38c62
 :END:
 #+TITLE: 非監督式學習
+#+SUBTITLE: TNFSH AI教材 / 顏永進
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI
 #+OPTIONS: toc:2 ^:nil num:5

@@ -1,1 +1,6 @@
 #+title: Transfer Learning
+#+SUBTITLE: TNFSH AI教材 / 顏永進
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/TransferLearning.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/TransferLearning.html.svg"/></a>
+#+end_export
+
