@@ -1,4 +1,5 @@
 #+title: RNN
+#+AUTHOR: 顏永進
 
 #+INCLUDE: ../pdf.org
 #+TAGS: AI
@@ -7,6 +8,10 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/muse.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/RNN.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/RNN.html.svg"/></a>
+#+end_export
+
 
 
 * What is RNN

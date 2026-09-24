@@ -2,6 +2,7 @@
 :ID:       924a12f9-da13-4afa-b518-d26c4e3e9103
 :END:
 #+TITLE: 監督式學習(Supervised Learning)
+#+AUTHOR: 顏永進
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI, Machine Learning, SVM, RBM
 #+OPTIONS: toc:2 ^:nil num:5

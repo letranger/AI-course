@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-12-09 Fri 13:43 -->
+<!-- 2024-02-07 Wed 17:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>監督式學習(Supervised Learning)</title>
-<meta name="author" content="Yung Chin, Yen" />
+<meta name="author" content="顏永進" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -194,27 +194,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../css/muse.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -223,114 +234,113 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4f4be8c">1. 簡介</a>
+<li><a href="#org595ca9b">1. 簡介</a>
 <ul>
-<li><a href="#orged6ceb2">1.1. 監督式學習的主要類型</a></li>
-<li><a href="#org9aba800">1.2. 特例</a></li>
+<li><a href="#org4a5aed7">1.1. 監督式學習的主要類型</a></li>
+<li><a href="#org3f8e384">1.2. 特例</a></li>
 </ul>
 </li>
-<li><a href="#org0cce455">2. 監督式學習演算法</a>
+<li><a href="#org77ab74a">2. 監督式學習演算法</a>
 <ul>
-<li><a href="#org6d9a09d">2.1. K-nearest neighbors (KNN)</a></li>
-<li><a href="#orga57a560">2.2. Methods based on tree(Decision tree and Random Forest)</a></li>
-<li><a href="#org7cd6f3b">2.3. Boosting</a></li>
-<li><a href="#org073594a">2.4. SVM(Support Vector Machines)</a></li>
-<li><a href="#org6284e15">2.5. 神經網路</a></li>
+<li><a href="#org5755d88">2.1. K-nearest neighbors (KNN)</a></li>
+<li><a href="#org601623c">2.2. Methods based on tree(Decision tree and Random Forest)</a></li>
+<li><a href="#orgdd3face">2.3. Boosting</a></li>
+<li><a href="#org4c789d0">2.4. SVM(Support Vector Machines)</a></li>
+<li><a href="#orgb29b390">2.5. 神經網路</a></li>
 </ul>
 </li>
-<li><a href="#org910e9fd">3. 迴歸原理</a>
+<li><a href="#orga83c6e3">3. 迴歸原理</a>
 <ul>
-<li><a href="#orgfca6bea">3.1. Step 1</a></li>
-<li><a href="#org95b5b54">3.2. Step 2: Goodness of Function</a></li>
-<li><a href="#org772fa25">3.3. 最短距離分類器</a></li>
-<li><a href="#org8921f34">3.4. 迴歸預測流程(以波士頓房價預測為例)</a></li>
+<li><a href="#org51c2cec">3.1. Step 1</a></li>
+<li><a href="#orgf01363e">3.2. Step 2: Goodness of Function</a></li>
+<li><a href="#org8e11694">3.3. 最短距離分類器</a></li>
+<li><a href="#org057c128">3.4. 迴歸預測流程(以波士頓房價預測為例)</a></li>
 </ul>
 </li>
-<li><a href="#orgb4722b7">4. 如何挑選適合的模型</a>
+<li><a href="#orgbe2bc5f">4. 如何挑選適合的模型</a>
 <ul>
-<li><a href="#org02a814e">4.1. overfitting: a more complex model does not always lead to better performance of data training</a></li>
-<li><a href="#org93f5925">4.2. 如何預防 overfitting: collect more data</a></li>
+<li><a href="#org8eb3afe">4.1. overfitting: a more complex model does not always lead to better performance of data training</a></li>
+<li><a href="#org1a9c67f">4.2. 如何預防 overfitting: collect more data</a></li>
 </ul>
 </li>
 <li><a href="#IRIS-KNN">5. 分類實作: IRIS(KNN、DecisionTree)</a>
 <ul>
-<li><a href="#orgb2e99db">5.1. 鳶尾花分類問題</a></li>
-<li><a href="#org73fb20d">5.2. KNN實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="iris">iris</span>&#xa0;<span class="KNN">KNN</span>&#xa0;<span class="sklearn">sklearn</span></span></a></li>
-<li><a href="#org86ba012">5.3. 決策樹實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DecisionTree">DecisionTree</span>&#xa0;<span class="sklearn">sklearn</span></span></a></li>
-<li><a href="#org36f0e00">5.4. bank-loan</a></li>
+<li><a href="#orgc4194a7">5.1. 鳶尾花分類問題</a></li>
+<li><a href="#org37afb54">5.2. KNN實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="iris">iris</span>&#xa0;<span class="KNN">KNN</span>&#xa0;<span class="sklearn">sklearn</span></span></a></li>
+<li><a href="#org665d4be">5.3. 決策樹實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DecisionTree">DecisionTree</span>&#xa0;<span class="sklearn">sklearn</span></span></a></li>
+<li><a href="#org99c0be5">5.4. bank-loan</a></li>
 </ul>
 </li>
-<li><a href="#org4a4a006">6. 分類實作: MNIST(二元分類與多元分類)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="sklearn">sklearn</span>&#xa0;<span class="DSG">DSG</span>&#xa0;<span class="SVM">SVM</span></span></a>
+<li><a href="#org98f194b">6. 分類實作: MNIST(二元分類與多元分類)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="sklearn">sklearn</span>&#xa0;<span class="DSG">DSG</span>&#xa0;<span class="SVM">SVM</span></span></a>
 <ul>
-<li><a href="#org62232e8">6.1. MNIST 資料集</a></li>
-<li><a href="#org59653fc">6.2. 準備 MNIST 資料</a></li>
-<li><a href="#org13b018a">6.3. 查看MNIST內容</a></li>
-<li><a href="#org1aa6c56">6.4. 訓練二元分類器</a></li>
-<li><a href="#org16d45ab">6.5. 多類別分類器</a></li>
-<li><a href="#org69f90ec">6.6. 多標籤分類</a></li>
+<li><a href="#org97f30cd">6.1. MNIST 資料集</a></li>
+<li><a href="#org2f2223f">6.2. 準備 MNIST 資料</a></li>
+<li><a href="#org57cb64b">6.3. 查看MNIST內容</a></li>
+<li><a href="#orgc91e1d9">6.4. 訓練二元分類器</a></li>
+<li><a href="#org46ead7e">6.5. 多類別分類器</a></li>
+<li><a href="#org43d0432">6.6. 多標籤分類</a></li>
 </ul>
 </li>
-<li><a href="#orgcc01047">7. 分類實作: MNIST(CNN)</a>
+<li><a href="#orgb965bd6">7. 分類實作: MNIST(CNN)</a>
 <ul>
-<li><a href="#orgd791e75">7.1. 準備 MNIST 資料</a></li>
-<li><a href="#org29c11ba">7.2. MNIST 的推論處理</a></li>
-<li><a href="#orga351d08">7.3. Python 與神經網路運算的批次處理</a></li>
-<li><a href="#org0070ace">7.4. MNIST 資料集:以 DNN Sequential 模型為例&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CNN">CNN</span></span></a></li>
-<li><a href="#org9ae07c5">7.5. 其他MNIST教學檔</a></li>
+<li><a href="#org00b3dfb">7.1. 準備 MNIST 資料</a></li>
+<li><a href="#orgaf5ef03">7.2. MNIST 的推論處理</a></li>
+<li><a href="#org673b9ab">7.3. Python 與神經網路運算的批次處理</a></li>
+<li><a href="#org6fef9ad">7.4. MNIST 資料集:以 DNN Sequential 模型為例&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CNN">CNN</span></span></a></li>
+<li><a href="#orgcbc3b12">7.5. 其他MNIST教學檔</a></li>
 </ul>
 </li>
-<li><a href="#org302a8c1">8. 推薦系統: 受限波爾茲曼機 on MovieLens</a>
+<li><a href="#org46dbea1">8. 推薦系統: 受限波爾茲曼機 on MovieLens</a>
 <ul>
-<li><a href="#orgddc2630">8.1. 資料準備</a></li>
-<li><a href="#org4b019ef">8.2. 定義loss function</a></li>
-<li><a href="#org3cb4699">8.3. 矩陣分解</a></li>
-<li><a href="#org90e2a80">8.4. 使用RBMs的協同過濾</a></li>
-<li><a href="#org86b4658">8.5. RBM神經網路架構</a></li>
-<li><a href="#orgc5dac1c">8.6. 重建RBM元件</a></li>
-<li><a href="#orga83f685">8.7. 訓練</a></li>
+<li><a href="#org73d9087">8.1. 資料準備</a></li>
+<li><a href="#org37874db">8.2. 定義loss function</a></li>
+<li><a href="#orga076858">8.3. 矩陣分解</a></li>
+<li><a href="#org50acaef">8.4. 使用RBMs的協同過濾</a></li>
+<li><a href="#org9f0b1f4">8.5. RBM神經網路架構</a></li>
+<li><a href="#org23b8bab">8.6. 重建RBM元件</a></li>
+<li><a href="#org26575de">8.7. 訓練</a></li>
 </ul>
 </li>
-<li><a href="#orgb75a86b">9. 深度信念網路(DBNs)</a>
+<li><a href="#org90a18ce">9. 深度信念網路(DBNs)</a>
 <ul>
-<li><a href="#org9cae8f0">9.1. MNIST分類</a></li>
-<li><a href="#org69a6f34">9.2. Restricted Boltzmann Machines (RBMs)</a></li>
-<li><a href="#orge8815ee">9.3. 為DBN訓練三個RBMs</a></li>
-<li><a href="#org1b31894">9.4. 查看RBM誤差</a></li>
-<li><a href="#orgf1f601f">9.5. 檢視特徵偵測器</a></li>
-<li><a href="#org742a850">9.6. 查看RBM生成的影像</a></li>
-<li><a href="#org5fe086f">9.7. 完整的DBN</a></li>
-<li><a href="#org5624c7b">9.8. 訓練DBN</a></li>
-<li><a href="#org84b80a0">9.9. 看錯誤</a></li>
-<li><a href="#orgb0c033c">9.10. 生成影像以建構更好的影像分類器</a></li>
-<li><a href="#org867e5bb">9.11. 使用DBN來產生新的影像10次</a></li>
-<li><a href="#org02226ae">9.12. 使用LightGBM建構影像分類器</a></li>
+<li><a href="#orgdf85044">9.1. MNIST分類</a></li>
+<li><a href="#org6f530c2">9.2. Restricted Boltzmann Machines (RBMs)</a></li>
+<li><a href="#org3dad7e7">9.3. 為DBN訓練三個RBMs</a></li>
+<li><a href="#org1a4eb98">9.4. 查看RBM誤差</a></li>
+<li><a href="#org6f9f51b">9.5. 檢視特徵偵測器</a></li>
+<li><a href="#org446e7dc">9.6. 查看RBM生成的影像</a></li>
+<li><a href="#orgfb7afdf">9.7. 完整的DBN</a></li>
+<li><a href="#org8a2bfa1">9.8. 訓練DBN</a></li>
+<li><a href="#org161e31b">9.9. 看錯誤</a></li>
+<li><a href="#orgdea2000">9.10. 生成影像以建構更好的影像分類器</a></li>
+<li><a href="#orgafa48a4">9.11. 使用DBN來產生新的影像10次</a></li>
+<li><a href="#orga2cc223">9.12. 使用LightGBM建構影像分類器</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <a href="https://hits.sh/letranger.github.io/AI-course/SL.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/SL.html.svg"/></a>
-
-<div id="outline-container-org4f4be8c" class="outline-2">
-<h2 id="org4f4be8c"><span class="section-number-2">1.</span> 簡介</h2>
+<div id="outline-container-org595ca9b" class="outline-2">
+<h2 id="org595ca9b"><span class="section-number-2">1.</span> 簡介</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 監督式學習獲得的結果可以是數值、也可以是類別，以結果分類，我們可以將監督式學分大致分為兩類：迴歸(結果為數值)與為分類(結果為類別)。
 </p>
 </div>
-<div id="outline-container-orged6ceb2" class="outline-3">
-<h3 id="orged6ceb2"><span class="section-number-3">1.1.</span> 監督式學習的主要類型</h3>
+<div id="outline-container-org4a5aed7" class="outline-3">
+<h3 id="org4a5aed7"><span class="section-number-3">1.1.</span> 監督式學習的主要類型</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-orgd51a9bc" class="outline-4">
-<h4 id="orgd51a9bc"><span class="section-number-4">1.1.1.</span> 分類(Cliasification)</h4>
+<div id="outline-container-org82771c9" class="outline-4">
+<h4 id="org82771c9"><span class="section-number-4">1.1.1.</span> 分類(Cliasification)</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 分類問題也稱為離散(discrete)預測問題，因為每個分類都是一個離散群組。In supervised learning, the training set you feed to the algorithm includes the desired solutions, called labels<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
 </p>
 
 
-<div id="org902f30c" class="figure">
+<div id="org274b291" class="figure">
 <p><img src="images/2022-04-30_10-38-58.jpg" alt="2022-04-30_10-38-58.jpg" width="500" />
 </p>
 <p><span class="figure-number">Figure 1: </span>典型的監督式學習：垃圾郵件分類</p>
@@ -349,9 +359,8 @@
 </p>
 </div>
 </div>
-
-<div id="outline-container-org9c49943" class="outline-4">
-<h4 id="org9c49943"><span class="section-number-4">1.1.2.</span> 迴歸(Regression)</h4>
+<div id="outline-container-org75be6ed" class="outline-4">
+<h4 id="org75be6ed"><span class="section-number-4">1.1.2.</span> 迴歸(Regression)</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 另一種監督式學習為回歸（regression），即，根據一組預測特徵（predictor，如里程數、車齡、品牌）來預測目標數值（如二手車車價）<sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，這個目標數值也是label。
@@ -386,9 +395,8 @@
 </div>
 </div>
 </div>
-
-<div id="outline-container-org9aba800" class="outline-3">
-<h3 id="org9aba800"><span class="section-number-3">1.2.</span> 特例</h3>
+<div id="outline-container-org3f8e384" class="outline-3">
+<h3 id="org3f8e384"><span class="section-number-3">1.2.</span> 特例</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 監督式學習主要包括分類和回歸，但也包括以下奇特的例子：
@@ -414,13 +422,12 @@
 </div>
 </div>
 </div>
-
-<div id="outline-container-org0cce455" class="outline-2">
-<h2 id="org0cce455"><span class="section-number-2">2.</span> 監督式學習演算法</h2>
+<div id="outline-container-org77ab74a" class="outline-2">
+<h2 id="org77ab74a"><span class="section-number-2">2.</span> 監督式學習演算法</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org6d9a09d" class="outline-3">
-<h3 id="org6d9a09d"><span class="section-number-3">2.1.</span> K-nearest neighbors (KNN)</h3>
+<div id="outline-container-org5755d88" class="outline-3">
+<h3 id="org5755d88"><span class="section-number-3">2.1.</span> K-nearest neighbors (KNN)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 KNN藉由找出與新資料點最相近的 <i>k</i> 個已具有label的資料點，讓這些資料點投票決定新資料點的label。
@@ -432,22 +439,22 @@ KNN藉由找出與新資料點最相近的 <i>k</i> 個已具有label的資料�
 </ul>
 </div>
 </div>
-<div id="outline-container-orga57a560" class="outline-3">
-<h3 id="orga57a560"><span class="section-number-3">2.2.</span> Methods based on tree(Decision tree and Random Forest)</h3>
+<div id="outline-container-org601623c" class="outline-3">
+<h3 id="org601623c"><span class="section-number-3">2.2.</span> Methods based on tree(Decision tree and Random Forest)</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org30a217b" class="outline-4">
-<h4 id="org30a217b"><span class="section-number-4">2.2.1.</span> Single decision tree: 遍歷所有訓練資枓來建立規則，但容易過度擬合</h4>
+<div id="outline-container-org173fb77" class="outline-4">
+<h4 id="org173fb77"><span class="section-number-4">2.2.1.</span> Single decision tree: 遍歷所有訓練資枓來建立規則，但容易過度擬合</h4>
 </div>
-<div id="outline-container-org0df9a28" class="outline-4">
-<h4 id="org0df9a28"><span class="section-number-4">2.2.2.</span> Bagging: 將上述tree加入bootstrap aggregation(如bagging)，即，使用多次隨機實例採樣(multiple random samples of instances)，並為每次採樣建立一棵decision tree，並對每個資料實例進行預測，預測方式為透過平均每棵樹的預測結果，藉由這種方式可以解決decision tree容易過度擬合的問題。</h4>
+<div id="outline-container-org181c9fc" class="outline-4">
+<h4 id="org181c9fc"><span class="section-number-4">2.2.2.</span> Bagging: 將上述tree加入bootstrap aggregation(如bagging)，即，使用多次隨機實例採樣(multiple random samples of instances)，並為每次採樣建立一棵decision tree，並對每個資料實例進行預測，預測方式為透過平均每棵樹的預測結果，藉由這種方式可以解決decision tree容易過度擬合的問題。</h4>
 </div>
-<div id="outline-container-orgba5045e" class="outline-4">
-<h4 id="orgba5045e"><span class="section-number-4">2.2.3.</span> Random forest: 除了將資料實例進行採樣，也對每棵decision tree的分支條件中 <b>待預測label</b> 進䈩隨機採樣，而非使用所有的待預測label。透過這種方式，random forest可以建立出彼此相關性更低的decision，進而改善過度擬合與泛化誤差。</h4>
+<div id="outline-container-org0133770" class="outline-4">
+<h4 id="org0133770"><span class="section-number-4">2.2.3.</span> Random forest: 除了將資料實例進行採樣，也對每棵decision tree的分支條件中 <b>待預測label</b> 進䈩隨機採樣，而非使用所有的待預測label。透過這種方式，random forest可以建立出彼此相關性更低的decision，進而改善過度擬合與泛化誤差。</h4>
 </div>
 </div>
-<div id="outline-container-org7cd6f3b" class="outline-3">
-<h3 id="org7cd6f3b"><span class="section-number-3">2.3.</span> Boosting</h3>
+<div id="outline-container-orgdd3face" class="outline-3">
+<h3 id="orgdd3face"><span class="section-number-3">2.3.</span> Boosting</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 同樣是建立許多樹，但是它 <b>依多建立每棵decision tree</b> , 利用前一棵decision所習得的資訊來改善下一棵decision tree的預測結果。是所有tree-based solution中表現最好的方式，也是許多machine learning比賽的常勝軍。
@@ -458,25 +465,24 @@ KNN藉由找出與新資料點最相近的 <i>k</i> 個已具有label的資料�
 </ul>
 </div>
 </div>
-<div id="outline-container-org073594a" class="outline-3">
-<h3 id="org073594a"><span class="section-number-3">2.4.</span> SVM(Support Vector Machines)</h3>
+<div id="outline-container-org4c789d0" class="outline-3">
+<h3 id="org4c789d0"><span class="section-number-3">2.4.</span> SVM(Support Vector Machines)</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 使用演算法和已知的label在空間中建構超平面來分類資料
 </p>
 </div>
 </div>
-<div id="outline-container-org6284e15" class="outline-3">
-<h3 id="org6284e15"><span class="section-number-3">2.5.</span> 神經網路</h3>
+<div id="outline-container-orgb29b390" class="outline-3">
+<h3 id="orgb29b390"><span class="section-number-3">2.5.</span> 神經網路</h3>
 </div>
 </div>
-
-<div id="outline-container-org910e9fd" class="outline-2">
-<h2 id="org910e9fd"><span class="section-number-2">3.</span> 迴歸原理</h2>
+<div id="outline-container-orga83c6e3" class="outline-2">
+<h2 id="orga83c6e3"><span class="section-number-2">3.</span> 迴歸原理</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgfca6bea" class="outline-3">
-<h3 id="orgfca6bea"><span class="section-number-3">3.1.</span> Step 1</h3>
+<div id="outline-container-org51c2cec" class="outline-3">
+<h3 id="org51c2cec"><span class="section-number-3">3.1.</span> Step 1</h3>
 <div class="outline-text-3" id="text-3-1">
 <ol class="org-ol">
 <li>Model: \(y = w*x+b\)</li>
@@ -484,8 +490,8 @@ KNN藉由找出與新資料點最相近的 <i>k</i> 個已具有label的資料�
 </ol>
 </div>
 </div>
-<div id="outline-container-org95b5b54" class="outline-3">
-<h3 id="org95b5b54"><span class="section-number-3">3.2.</span> Step 2: Goodness of Function</h3>
+<div id="outline-container-orgf01363e" class="outline-3">
+<h3 id="orgf01363e"><span class="section-number-3">3.2.</span> Step 2: Goodness of Function</h3>
 <div class="outline-text-3" id="text-3-2">
 <ol class="org-ol">
 <li>Training Data</li>
@@ -498,8 +504,8 @@ input: a function / output: how bad it is</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org772fa25" class="outline-3">
-<h3 id="org772fa25"><span class="section-number-3">3.3.</span> 最短距離分類器</h3>
+<div id="outline-container-org8e11694" class="outline-3">
+<h3 id="org8e11694"><span class="section-number-3">3.3.</span> 最短距離分類器</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #51afef;">import</span> math
@@ -513,15 +519,15 @@ input: a function / output: how bad it is</li>
 <span style="color: #51afef;">def</span> <span style="color: #c678dd;">Average</span>(lst):
     <span style="color: #dcaeea;">avgx</span> = <span style="color: #da8548; font-weight: bold;">0</span>
     <span style="color: #dcaeea;">avgy</span> = <span style="color: #da8548; font-weight: bold;">0</span>
-    <span style="color: #51afef;">for</span> (x, y) <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">lst</span>:
-        avgx += x
+    <span style="color: #51afef;">for</span> (x, y) <span style="color: #51afef;">in</span> lst:
+        <span style="color: #dcaeea;">avgx</span> += x
         <span style="color: #dcaeea;">avgy</span> += y
     <span style="color: #51afef;">return</span> avgx/<span style="color: #c678dd;">len</span>(lst), avgy/<span style="color: #c678dd;">len</span>(lst)
 
 <span style="color: #51afef;">def</span> <span style="color: #c678dd;">ed</span>(lst, x, y):
     <span style="color: #dcaeea;">dist</span> = <span style="color: #da8548; font-weight: bold;">0</span>
-    <span style="color: #51afef;">for</span> (lx, ly) <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">lst</span>:
-        dist += (x - lx)*(x - lx) + (y - ly)*(y - ly)
+    <span style="color: #51afef;">for</span> (lx, ly) <span style="color: #51afef;">in</span> lst:
+        <span style="color: #dcaeea;">dist</span> += (x - lx)*(x - lx) + (y - ly)*(y - ly)
     <span style="color: #51afef;">return</span> math.sqrt(dist)
 
 <span style="color: #dcaeea;">groupA</span> = [[<span style="color: #da8548; font-weight: bold;">4</span>, <span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">8</span>] ,[<span style="color: #da8548; font-weight: bold;">5.8</span>,<span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">6</span>] ,[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">5</span>] ,[<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">7</span>] ,[<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">4</span>] ,[<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">5</span>]]
@@ -554,8 +560,8 @@ B
 </pre>
 </div>
 </div>
-<div id="outline-container-org8921f34" class="outline-3">
-<h3 id="org8921f34"><span class="section-number-3">3.4.</span> 迴歸預測流程(以波士頓房價預測為例)</h3>
+<div id="outline-container-org057c128" class="outline-3">
+<h3 id="org057c128"><span class="section-number-3">3.4.</span> 迴歸預測流程(以波士頓房價預測為例)</h3>
 <div class="outline-text-3" id="text-3-4">
 <ol class="org-ol">
 <li>Import the required module</li>
@@ -573,19 +579,17 @@ B
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb4722b7" class="outline-2">
-<h2 id="orgb4722b7"><span class="section-number-2">4.</span> 如何挑選適合的模型</h2>
+<div id="outline-container-orgbe2bc5f" class="outline-2">
+<h2 id="orgbe2bc5f"><span class="section-number-2">4.</span> 如何挑選適合的模型</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org02a814e" class="outline-3">
-<h3 id="org02a814e"><span class="section-number-3">4.1.</span> overfitting: a more complex model does not always lead to better performance of data training</h3>
+<div id="outline-container-org8eb3afe" class="outline-3">
+<h3 id="org8eb3afe"><span class="section-number-3">4.1.</span> overfitting: a more complex model does not always lead to better performance of data training</h3>
 </div>
-<div id="outline-container-org93f5925" class="outline-3">
-<h3 id="org93f5925"><span class="section-number-3">4.2.</span> 如何預防 overfitting: collect more data</h3>
+<div id="outline-container-org1a9c67f" class="outline-3">
+<h3 id="org1a9c67f"><span class="section-number-3">4.2.</span> 如何預防 overfitting: collect more data</h3>
 </div>
 </div>
-
 <div id="outline-container-IRIS-KNN" class="outline-2">
 <h2 id="IRIS-KNN"><span class="section-number-2">5.</span> 分類實作: IRIS(KNN、DecisionTree)</h2>
 <div class="outline-text-2" id="text-IRIS-KNN">
@@ -605,40 +609,40 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 <li>以多數決的方式指定類別標籤。</li>
 </ol>
 </div>
-<div id="outline-container-orgb2e99db" class="outline-3">
-<h3 id="orgb2e99db"><span class="section-number-3">5.1.</span> 鳶尾花分類問題</h3>
+<div id="outline-container-orgc4194a7" class="outline-3">
+<h3 id="orgc4194a7"><span class="section-number-3">5.1.</span> 鳶尾花分類問題</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-org1c976ab" class="outline-4">
-<h4 id="org1c976ab"><span class="section-number-4">5.1.1.</span> DataSet</h4>
+<div id="outline-container-org0d6be68" class="outline-4">
+<h4 id="org0d6be68"><span class="section-number-4">5.1.1.</span> DataSet</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 收集了3種鳶尾花的四個特徵，分別是花萼(sepal)長寬、花瓣(petal)長寬度，以及對應的鳶尾花種類。
 </p>
 
-<div id="orgeef9d51" class="figure">
+<div id="orgf80e5d1" class="figure">
 <p><img src="images/iris-1.png" alt="iris-1.png" width="400" />
 </p>
 <p><span class="figure-number">Figure 2: </span>鳶尾花的花萼與花瓣</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc39e8b8" class="outline-4">
-<h4 id="orgc39e8b8"><span class="section-number-4">5.1.2.</span> Mission</h4>
+<div id="outline-container-org89b7e7b" class="outline-4">
+<h4 id="org89b7e7b"><span class="section-number-4">5.1.2.</span> Mission</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <p>
 輸入花萼和花瓣數據後，推測所屬的鳶尾花類型。
 </p>
 
-<div id="orgfbcfbed" class="figure">
+<div id="orgab496f3" class="figure">
 <p><img src="images/iris-2.png" alt="iris-2.png" width="600" />
 </p>
 <p><span class="figure-number">Figure 3: </span>三種鳶尾花</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org58290bf" class="outline-4">
-<h4 id="org58290bf"><span class="section-number-4">5.1.3.</span> 實作</h4>
+<div id="outline-container-orgf830d2f" class="outline-4">
+<h4 id="orgf830d2f"><span class="section-number-4">5.1.3.</span> 實作</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <ol class="org-ol">
 <li><p>
@@ -728,7 +732,7 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21033;&#29992;fit&#26041;&#27861;&#65292;&#23565;X_train&#20013;&#27599;&#20491;&#29305;&#24501;&#20540;&#20272;&#24179;&#22343;&#25976;&#21644;&#27161;&#28310;&#24046;</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#28982;&#24460;&#23565;&#27599;&#20491;&#29305;&#24501;&#20540;&#36914;&#34892;&#27161;&#28310;&#21270;(train&#21644;test&#37117;&#35201;&#20570;)</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29305;&#24501;&#24037;&#31243;&#65306;&#27161;&#28310;&#21270;</span>
-transfer = StandardScaler()
+<span style="color: #dcaeea;">transfer</span> = StandardScaler()
 <span style="color: #dcaeea;">x_train</span> = transfer.fit_transform(x_train)
 <span style="color: #dcaeea;">x_test</span> = transfer.fit_transform(x_test)
 </pre>
@@ -746,19 +750,19 @@ estimator.fit(x_train, y_train)
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27169;&#22411;&#35413;&#20272;</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#19968;&#65306;&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;</span>
 <span style="color: #dcaeea;">y_predict</span> = estimator.predict(x_test)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'y_predict&#65306;\n'</span>, y_predict)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;:\n'</span>, y_test == y_predict)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'y_predict&#65306;</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, y_predict)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;:</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, y_test == y_predict)
 
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#20108;&#65306;&#35336;&#31639;&#28310;&#30906;&#29575;</span>
 <span style="color: #dcaeea;">score</span> = estimator.score(x_test, y_test)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;:\n'</span>, score)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;:</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, score)
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org2587c18" class="outline-4">
-<h4 id="org2587c18"><span class="section-number-4">5.1.4.</span> 作業</h4>
+<div id="outline-container-org44e65e6" class="outline-4">
+<h4 id="org44e65e6"><span class="section-number-4">5.1.4.</span> 作業</h4>
 <div class="outline-text-4" id="text-5-1-4">
 <p>
 修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。
@@ -766,8 +770,8 @@ estimator.fit(x_train, y_train)
 </div>
 </div>
 </div>
-<div id="outline-container-org73fb20d" class="outline-3">
-<h3 id="org73fb20d"><span class="section-number-3">5.2.</span> KNN實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="iris">iris</span>&#xa0;<span class="KNN">KNN</span>&#xa0;<span class="sklearn">sklearn</span></span></h3>
+<div id="outline-container-org37afb54" class="outline-3">
+<h3 id="org37afb54"><span class="section-number-3">5.2.</span> KNN實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="iris">iris</span>&#xa0;<span class="KNN">KNN</span>&#xa0;<span class="sklearn">sklearn</span></span></h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 K-NearestNeighbor分類算法是機器學習裡監督類學習中最簡單的方法之一,由Cover和Hart在1968年提出。kNN算法的核心思想是如果一個樣本在特徵空間中的k個最相鄰的樣本中的大多數屬於某一個類別，則該樣本也屬於這個類別，並具有這個類別上樣本的特性。
@@ -782,9 +786,8 @@ KNN為 lazy learner(惰性學習器)的典型例子，所謂惰性是指它不�
 <li>以多數決的方式指定類別標籤。</li>
 </ol>
 </div>
-
-<div id="outline-container-orge2fffdc" class="outline-4">
-<h4 id="orge2fffdc"><span class="section-number-4">5.2.1.</span> 實作</h4>
+<div id="outline-container-org8398ab3" class="outline-4">
+<h4 id="org8398ab3"><span class="section-number-4">5.2.1.</span> 實作</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <ol class="org-ol">
 <li><p>
@@ -874,7 +877,7 @@ Quick utility that wraps input validation and next(ShuffleSplit().split(X, y)) a
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#21033;&#29992;fit&#26041;&#27861;&#65292;&#23565;X_train&#20013;&#27599;&#20491;&#29305;&#24501;&#20540;&#20272;&#24179;&#22343;&#25976;&#21644;&#27161;&#28310;&#24046;</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#28982;&#24460;&#23565;&#27599;&#20491;&#29305;&#24501;&#20540;&#36914;&#34892;&#27161;&#28310;&#21270;(train&#21644;test&#37117;&#35201;&#20570;)</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29305;&#24501;&#24037;&#31243;&#65306;&#27161;&#28310;&#21270;</span>
-transfer = StandardScaler()
+<span style="color: #dcaeea;">transfer</span> = StandardScaler()
 <span style="color: #dcaeea;">x_train</span> = transfer.fit_transform(x_train)
 <span style="color: #dcaeea;">x_test</span> = transfer.fit_transform(x_test)
 </pre>
@@ -892,20 +895,19 @@ estimator.fit(x_train, y_train)
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#27169;&#22411;&#35413;&#20272;</span>
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#19968;&#65306;&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;</span>
 <span style="color: #dcaeea;">y_predict</span> = estimator.predict(x_test)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'y_predict&#65306;\n'</span>, y_predict)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;:\n'</span>, y_test == y_predict)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'y_predict&#65306;</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, y_predict)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#30452;&#25509;&#23565;&#27604;&#30495;&#23526;&#20540;&#21644;&#38928;&#28204;&#20540;:</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, y_test == y_predict)
 
 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#26041;&#27861;&#20108;&#65306;&#35336;&#31639;&#28310;&#30906;&#29575;</span>
 <span style="color: #dcaeea;">score</span> = estimator.score(x_test, y_test)
-<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;:\n'</span>, score)
+<span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;:</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">'</span>, score)
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org984b637" class="outline-4">
-<h4 id="org984b637"><span class="section-number-4">5.2.2.</span> TNFSH作業&#xa0;&#xa0;&#xa0;<span class="tag"><span class="TNFSH">TNFSH</span></span></h4>
+<div id="outline-container-orgd44f2b4" class="outline-4">
+<h4 id="orgd44f2b4"><span class="section-number-4">5.2.2.</span> TNFSH作業&#xa0;&#xa0;&#xa0;<span class="tag"><span class="TNFSH">TNFSH</span></span></h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 修改上述程式碼，以折線圖表示K值與KNN預測準確度間的關係。
@@ -913,21 +915,21 @@ estimator.fit(x_train, y_train)
 </div>
 </div>
 </div>
-<div id="outline-container-org86ba012" class="outline-3">
-<h3 id="org86ba012"><span class="section-number-3">5.3.</span> 決策樹實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DecisionTree">DecisionTree</span>&#xa0;<span class="sklearn">sklearn</span></span></h3>
+<div id="outline-container-org665d4be" class="outline-3">
+<h3 id="org665d4be"><span class="section-number-3">5.3.</span> 決策樹實作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DecisionTree">DecisionTree</span>&#xa0;<span class="sklearn">sklearn</span></span></h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 一棵複雜的決策樹
 </p>
 
-<div id="orgceff4f8" class="figure">
+<div id="org01df155" class="figure">
 <p><img src="images/SBQNWUA1dDtFsMHv.png" alt="SBQNWUA1dDtFsMHv.png" width="800" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Caption</p>
 </div>
 </div>
-<div id="outline-container-orgd60c532" class="outline-4">
-<h4 id="orgd60c532"><span class="section-number-4">5.3.1.</span> iris</h4>
+<div id="outline-container-orgeafcf5f" class="outline-4">
+<h4 id="orgeafcf5f"><span class="section-number-4">5.3.1.</span> iris</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> load_iris
@@ -964,7 +966,7 @@ estimator.fit(x_train, y_train)
 <span style="color: #51afef;">import</span> pydot
 <span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
 plt.clf()
-dot_data = tree.export_graphviz(classification_tree, out_file=<span style="color: #a9a1e1;">None</span>,
+<span style="color: #dcaeea;">dot_data</span> = tree.export_graphviz(classification_tree, out_file=<span style="color: #a9a1e1;">None</span>,
                      feature_names=iris.feature_names,
                      class_names=iris.target_names,
                      filled=<span style="color: #a9a1e1;">True</span>, rounded=<span style="color: #a9a1e1;">True</span>,
@@ -988,7 +990,7 @@ graph.render(<span style="color: #98be65;">'images/DecisionTree'</span>)
 
 
 
-<div id="org68aa745" class="figure">
+<div id="org10378d0" class="figure">
 <p><img src="images/DecisionTree.png" alt="DecisionTree.png" width="800" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Decision Tree</p>
@@ -996,8 +998,8 @@ graph.render(<span style="color: #98be65;">'images/DecisionTree'</span>)
 </div>
 </div>
 </div>
-<div id="outline-container-org36f0e00" class="outline-3">
-<h3 id="org36f0e00"><span class="section-number-3">5.4.</span> bank-loan<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
+<div id="outline-container-org99c0be5" class="outline-3">
+<h3 id="org99c0be5"><span class="section-number-3">5.4.</span> bank-loan<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></h3>
 <div class="outline-text-3" id="text-5-4">
 <ol class="org-ol">
 <li><p>
@@ -1130,8 +1132,8 @@ We almost got 80% percent accuracy. Which is a decent score for this type of pro
 </p></li>
 </ol>
 </div>
-<div id="outline-container-org67c4a03" class="outline-4">
-<h4 id="org67c4a03"><span class="section-number-4">5.4.1.</span> DEMO</h4>
+<div id="outline-container-org74d40fe" class="outline-4">
+<h4 id="org74d40fe"><span class="section-number-4">5.4.1.</span> DEMO</h4>
 <div class="outline-text-4" id="text-5-4-1">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -1198,7 +1200,7 @@ clf.score(X_test,y_test)
 </pre>
 
 
-<div id="orgc5607ae" class="figure">
+<div id="orgad6ef21" class="figure">
 <p><img src="images/DecisionTree2.png" alt="DecisionTree2.png" width="800" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Bank Load 2</p>
@@ -1207,30 +1209,29 @@ clf.score(X_test,y_test)
 </div>
 </div>
 </div>
-
-<div id="outline-container-org4a4a006" class="outline-2">
-<h2 id="org4a4a006"><span class="section-number-2">6.</span> 分類實作: MNIST(二元分類與多元分類)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="sklearn">sklearn</span>&#xa0;<span class="DSG">DSG</span>&#xa0;<span class="SVM">SVM</span></span></h2>
+<div id="outline-container-org98f194b" class="outline-2">
+<h2 id="org98f194b"><span class="section-number-2">6.</span> 分類實作: MNIST(二元分類與多元分類)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="sklearn">sklearn</span>&#xa0;<span class="DSG">DSG</span>&#xa0;<span class="SVM">SVM</span></span></h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org62232e8" class="outline-3">
-<h3 id="org62232e8"><span class="section-number-3">6.1.</span> MNIST 資料集</h3>
+<div id="outline-container-org97f30cd" class="outline-3">
+<h3 id="org97f30cd"><span class="section-number-3">6.1.</span> MNIST 資料集</h3>
 <div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li>MNIST 是機器學習領域中相當著名的資料集，因為太多研究者使用，故號稱機器學習領域的「Hello world.」，其重要性不言可喻。</li>
-<li>MNIST 資料集由 0~9 的數字影像構成(如圖<a href="#orgc3080b8">7</a>)，共計 70000 張訓練影像、10000 張測試影像。</li>
+<li>MNIST 資料集由 0~9 的數字影像構成(如圖<a href="#orga8fcfd8">7</a>)，共計 70000 張訓練影像、10000 張測試影像。</li>
 <li>由美國高中生和人口普查局員工手寫。</li>
 <li>一般的 MMIST 資料集的用法為：使用訓練影像進行學習，再利用學習後的模型預測能否正確分類測試影像。</li>
 </ul>
 
-<div id="orgc3080b8" class="figure">
+<div id="orga8fcfd8" class="figure">
 <p><img src="images/MNIST.jpg" alt="MNIST.jpg" width="400" />
 </p>
 <p><span class="figure-number">Figure 7: </span>MNIST 資料集內容範例</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org59653fc" class="outline-3">
-<h3 id="org59653fc"><span class="section-number-3">6.2.</span> 準備 MNIST 資料</h3>
+<div id="outline-container-org2f2223f" class="outline-3">
+<h3 id="org2f2223f"><span class="section-number-3">6.2.</span> 準備 MNIST 資料</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 MNIST 數據集來自美國國家標準與技術研究所, National Institute of Standards and Technology (NIST). 訓練集 (training set) 由來自 250 個不同人手寫的數字構成, 其中 50% 是高中學生, 50% 來自人口普查局 (the Census Bureau) 的工作人員. 測試集(test set) 也是同樣比例的手寫數字數據。MNIST 數據集可在 <a href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a> 獲取, 它包含了四個部分:
@@ -1242,8 +1243,8 @@ MNIST 數據集來自美國國家標準與技術研究所, National Institute of
 <li>Test set labels: t10k-labels-idx1-ubyte.gz (5KB, 解壓後 10 KB, 包含 10,000 個標籤)</li>
 </ol>
 </div>
-<div id="outline-container-orgcc9ff27" class="outline-4">
-<h4 id="orgcc9ff27"><span class="section-number-4">6.2.1.</span> 以Scikit-Learn下載</h4>
+<div id="outline-container-org4c2217b" class="outline-4">
+<h4 id="org4c2217b"><span class="section-number-4">6.2.1.</span> 以Scikit-Learn下載</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
@@ -1286,8 +1287,8 @@ dict_keys(['data', 'target', 'frame', 'categories', 'feature_names', 'target_nam
 </p>
 </div>
 </div>
-<div id="outline-container-org7c023e5" class="outline-4">
-<h4 id="org7c023e5"><span class="section-number-4">6.2.2.</span> 以tensorflow下載</h4>
+<div id="outline-container-org3407c43" class="outline-4">
+<h4 id="org3407c43"><span class="section-number-4">6.2.2.</span> 以tensorflow下載</h4>
 <div class="outline-text-4" id="text-6-2-2">
 <p>
 MNIST 資料集是一個適合拿來當作 TensotFlow 的練習素材，在 Tensorflow 的現有套件中，也已經有內建好的 MNIST 資料集，我們只要在安裝好 TensorFlow 的 Python 環境中執行以下程式碼，即可將 MNIST 資料成功讀取進來。.
@@ -1326,20 +1327,20 @@ MNIST 資料集是一個適合拿來當作 TensotFlow 的練習素材，在 Tens
 
 
 <p>
-由上述程式輸出結果可以看到載入的 x 為大小為 28*28 的圖片共 60000 張，每一筆 MNIST 資料的照片(x)由 784 個 pixels 組成（28*28），照片內容如圖<a href="#orge5d2867">19</a>，訓練集的標籤(y)則為其對應的數字(0～9)，此例為 5。
+由上述程式輸出結果可以看到載入的 x 為大小為 28*28 的圖片共 60000 張，每一筆 MNIST 資料的照片(x)由 784 個 pixels 組成（28*28），照片內容如圖<a href="#org7a89b0b">19</a>，訓練集的標籤(y)則為其對應的數字(0～9)，此例為 5。
 </p>
 
-<div id="org4f5cbf6" class="figure">
+<div id="org05b7510" class="figure">
 <p><img src="images/MNIST-Image.png" alt="MNIST-Image.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 8: </span>MNIST 影像示例</p>
 </div>
 
 <p>
-x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，矩陣裡每一項的資料則是代表每個 pixel 顏色深淺的數值，如下圖<a href="#org710decb">20</a>所示：
+x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，矩陣裡每一項的資料則是代表每個 pixel 顏色深淺的數值，如下圖<a href="#org0cf47df">20</a>所示：
 </p>
 
-<div id="org1a7ce6b" class="figure">
+<div id="org1205f2c" class="figure">
 <p><img src="images/MNIST-Matrix.png" alt="MNIST-Matrix.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 9: </span>MNIST 資料矩陣</p>
@@ -1380,12 +1381,12 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </div>
 </div>
 </div>
-<div id="outline-container-org13b018a" class="outline-3">
-<h3 id="org13b018a"><span class="section-number-3">6.3.</span> 查看MNIST內容</h3>
+<div id="outline-container-org57cb64b" class="outline-3">
+<h3 id="org57cb64b"><span class="section-number-3">6.3.</span> 查看MNIST內容</h3>
 <div class="outline-text-3" id="text-6-3">
 </div>
-<div id="outline-container-org567a50a" class="outline-4">
-<h4 id="org567a50a"><span class="section-number-4">6.3.1.</span> 先把bunch存起來</h4>
+<div id="outline-container-orgc2864c5" class="outline-4">
+<h4 id="orgc2864c5"><span class="section-number-4">6.3.1.</span> 先把bunch存起來</h4>
 <div class="outline-text-4" id="text-6-3-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
@@ -1402,8 +1403,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </pre>
 </div>
 </div>
-<div id="outline-container-org4766f0a" class="outline-4">
-<h4 id="org4766f0a"><span class="section-number-4">6.3.2.</span> 再讀回pkl</h4>
+<div id="outline-container-orgee34cd3" class="outline-4">
+<h4 id="orgee34cd3"><span class="section-number-4">6.3.2.</span> 再讀回pkl</h4>
 <div class="outline-text-4" id="text-6-3-2">
 <p>
 此時讀回mnist無header, index，適合分析
@@ -1411,8 +1412,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
 <span class="linenr"> 2: </span><span style="color: #51afef;">import</span> pickle
-<span class="linenr"> 3: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">bunch</span>:
-<span class="linenr"> 4: </span>    mnist = pickle.load(bunch)
+<span class="linenr"> 3: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> bunch:
+<span class="linenr"> 4: </span>    <span style="color: #dcaeea;">mnist</span> = pickle.load(bunch)
 <span class="linenr"> 5: </span>
 <span class="linenr"> 6: </span><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
 <span class="linenr"> 7: </span>
@@ -1437,7 +1438,7 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </pre>
 
 
-<div id="org89f0b7a" class="figure">
+<div id="org73847f6" class="figure">
 <p><img src="images/MNIST9527.png" alt="MNIST9527.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 10: </span>Caption</p>
@@ -1456,15 +1457,15 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </div>
 </div>
 </div>
-<div id="outline-container-org1aa6c56" class="outline-3">
-<h3 id="org1aa6c56"><span class="section-number-3">6.4.</span> 訓練二元分類器</h3>
+<div id="outline-container-orgc91e1d9" class="outline-3">
+<h3 id="orgc91e1d9"><span class="section-number-3">6.4.</span> 訓練二元分類器</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 先簡化分類工作: 每次辨識是否為某一數字(如2)
 </p>
 </div>
-<div id="outline-container-org1f59c59" class="outline-4">
-<h4 id="org1f59c59"><span class="section-number-4">6.4.1.</span> 先建立目標向量</h4>
+<div id="outline-container-orgf37cc6f" class="outline-4">
+<h4 id="orgf37cc6f"><span class="section-number-4">6.4.1.</span> 先建立目標向量</h4>
 <div class="outline-text-4" id="text-6-4-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">y_train_is2</span> = (y_train == <span style="color: #da8548; font-weight: bold;">2</span>)
@@ -1479,8 +1480,8 @@ Scikit-Learn的SDGClassifier可高效處理大量資料庫，也十分適合線�
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#35712;&#20837;data set</span>
 <span class="linenr"> 2: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
 <span class="linenr"> 3: </span><span style="color: #51afef;">import</span> pickle
-<span class="linenr"> 4: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">bunch</span>:
-<span class="linenr"> 5: </span>    mnist = pickle.load(bunch)
+<span class="linenr"> 4: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> bunch:
+<span class="linenr"> 5: </span>    <span style="color: #dcaeea;">mnist</span> = pickle.load(bunch)
 <span class="linenr"> 6: </span>
 <span class="linenr"> 7: </span><span style="color: #dcaeea;">X</span>, <span style="color: #dcaeea;">y</span> = mnist[<span style="color: #98be65;">"data"</span>], mnist[<span style="color: #98be65;">"target"</span>]
 <span class="linenr"> 8: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -1501,7 +1502,7 @@ Scikit-Learn的SDGClassifier可高效處理大量資料庫，也十分適合線�
 <span class="linenr">23: </span><span style="color: #c678dd;">print</span>(<span style="color: #c678dd;">type</span>([X[<span style="color: #da8548; font-weight: bold;">9527</span>]])) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">list</span>
 <span class="linenr">24: </span><span style="color: #dcaeea;">result</span> = sgd_clf.predict([X[<span style="color: #da8548; font-weight: bold;">9527</span>]]) <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#28858;&#20160;&#40636;&#21482;&#33021;&#19999;list&#36914;&#21435;?</span>
 <span class="linenr">25: </span><span style="color: #c678dd;">print</span>(result, <span style="color: #98be65;">'label: '</span>, y[<span style="color: #da8548; font-weight: bold;">9527</span>])
-<span class="linenr">26: </span>result = sgd_clf.predict([X[<span style="color: #da8548; font-weight: bold;">9528</span>]])
+<span class="linenr">26: </span><span style="color: #dcaeea;">result</span> = sgd_clf.predict([X[<span style="color: #da8548; font-weight: bold;">9528</span>]])
 <span class="linenr">27: </span><span style="color: #c678dd;">print</span>(result, <span style="color: #98be65;">'label: '</span>,y[<span style="color: #da8548; font-weight: bold;">9528</span>])
 <span class="linenr">28: </span>
 </pre>
@@ -1516,15 +1517,15 @@ Scikit-Learn的SDGClassifier可高效處理大量資料庫，也十分適合線�
 </pre>
 </div>
 </div>
-<div id="outline-container-org5ceef76" class="outline-4">
-<h4 id="org5ceef76"><span class="section-number-4">6.4.2.</span> 效能評估</h4>
+<div id="outline-container-orgb868ccc" class="outline-4">
+<h4 id="orgb868ccc"><span class="section-number-4">6.4.2.</span> 效能評估</h4>
 <div class="outline-text-4" id="text-6-4-2">
 </div>
 <ol class="org-ol">
-<li><a id="org91faa4a"></a>K-folder 交叉驗證: 把訓練集拆成K個fold<br />
+<li><a id="org8c48581"></a>K-folder 交叉驗證: 把訓練集拆成K個fold<br />
 <div class="outline-text-5" id="text-6-4-2-1">
 
-<div id="orge0a74bb" class="figure">
+<div id="org73b96b1" class="figure">
 <p><img src="images/20200312143156767.png" alt="20200312143156767.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 11: </span>Cross Validation</p>
@@ -1542,7 +1543,7 @@ Scikit-Learn的SDGClassifier可高效處理大量資料庫，也十分適合線�
 </pre>
 </div>
 </li>
-<li><a id="org8e57d75"></a>測試一下其他數字的效能<br />
+<li><a id="org73758bc"></a>測試一下其他數字的效能<br />
 <div class="outline-text-5" id="text-6-4-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#24314;&#31435;&#19968;&#20491;&#21028;&#26039;&#26159;&#21542;&#28858;&#25976;&#23383;7&#30340;&#30446;&#27161;&#20989;&#24335;</span>
@@ -1560,7 +1561,7 @@ Scikit-Learn的SDGClassifier可高效處理大量資料庫，也十分適合線�
 </pre>
 </div>
 </li>
-<li><a id="org43958a3"></a>混淆矩陣<br />
+<li><a id="org78d5965"></a>混淆矩陣<br />
 <div class="outline-text-5" id="text-6-4-2-3">
 <p>
 評估分類器的較佳工具為confusion matrx，其原理為查看類別A被判定為類別B的次數
@@ -1635,16 +1636,16 @@ cross_val_predict傳回對各個測試fold進行的預測，confusion matrix傳�
 結果表示：60000張圖片中有46293被model <b>正確預測</b> 為7、有112張被model <b>正確預測</b> 不是7。
 </p>
 
-<div id="org0ee217d" class="figure">
+<div id="org9f991b3" class="figure">
 <p><img src="images/2022-05-05_15-30-09.jpg" alt="2022-05-05_15-30-09.jpg" width="500" />
 </p>
 <p><span class="figure-number">Figure 12: </span>Caption</p>
 </div>
 </div>
 </li>
-<li><a id="orgd7055d0"></a>幾種不同的precision指標<br />
+<li><a id="org8dc4541"></a>幾種不同的precision指標<br />
 <ol class="org-ol">
-<li><a id="org492303f"></a>Precision<br />
+<li><a id="org56dc4d3"></a>Precision<br />
 <div class="outline-text-6" id="text-6-4-2-4-1">
 <p>
 \[precision=\frac{TP}{TP+FP}\]
@@ -1652,7 +1653,7 @@ cross_val_predict傳回對各個測試fold進行的預測，confusion matrix傳�
 </p>
 </div>
 </li>
-<li><a id="orgea0ee8f"></a>Recall<br />
+<li><a id="org0ab6ad1"></a>Recall<br />
 <div class="outline-text-6" id="text-6-4-2-4-2">
 <p>
 \[ recall=\frac{TP}{TP+FN} \]
@@ -1676,7 +1677,7 @@ Rescore Score: 0.8901835594573024
 </pre>
 </div>
 </li>
-<li><a id="org0bdf304"></a>Precision與Recall的取捨<br />
+<li><a id="orgb0c74d2"></a>Precision與Recall的取捨<br />
 <div class="outline-text-6" id="text-6-4-2-4-3">
 <ul class="org-ul">
 <li>兒童影片分類: 寧可錯殺(low recall)，希望能多找出兒童不宜的影片(高precision)，可以犧牲recall</li>
@@ -1687,7 +1688,7 @@ Rescore Score: 0.8901835594573024
 </ul>
 </div>
 </li>
-<li><a id="org51533d8"></a>\[F_1\]<br />
+<li><a id="org0f32129"></a>\[F_1\]<br />
 <div class="outline-text-6" id="text-6-4-2-4-4">
 <p>
 另一種整合precision與recall的評量標準
@@ -1707,13 +1708,13 @@ F1 score: 0.8582640812557709
 </li>
 </ol>
 </li>
-<li><a id="org6c4d0d1"></a>Precision, Recall, Threhold<br />
+<li><a id="org3036daf"></a>Precision, Recall, Threhold<br />
 <div class="outline-text-5" id="text-6-4-2-5">
 <p>
 Scikit-Learn以決策函數來為每個instance算分數，若分數大於某個threshold(閥值)，就設為positive，否則就為negative。
 </p>
 
-<div id="org407f9b0" class="figure">
+<div id="org99d5bd4" class="figure">
 <p><img src="images/2022-05-05_15-31-03.png" alt="2022-05-05_15-31-03.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 13: </span>Caption</p>
@@ -1799,7 +1800,7 @@ thresholds: [-69733.7356162  -69719.34570155 -69711.85512195 ...  56894.63040719
 
 <p width="500">
 <img src="images/precision_vs_recall_plot.png" alt="precision_vs_recall_plot.png" width="500" />
-若目標為90%的precision(如圖<a href="#org1594e04">14</a>)，其threshold大約在8000，若要求較精確的值，可以透過np.argmax()
+若目標為90%的precision(如圖<a href="#org359d36e">14</a>)，其threshold大約在8000，若要求較精確的值，可以透過np.argmax()
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">threshold_90_precision</span> = thresholds[np.argmax(precisions &gt;= <span style="color: #da8548; font-weight: bold;">0.90</span>)]
@@ -1824,7 +1825,7 @@ New recall score: 0.7059415911379657
 </p>
 </div>
 </li>
-<li><a id="orgd8ac863"></a>ROC曲線<br />
+<li><a id="orge727f4f"></a>ROC曲線<br />
 <div class="outline-text-5" id="text-6-4-2-6">
 <p>
 接收者業特徵(receiver operating characteristic, ROC)曲線也常和二元分類一起使用，主要是畫出true positive率(recall) v.s. false positive率。
@@ -1851,7 +1852,7 @@ New recall score: 0.7059415911379657
 </pre>
 </div>
 
-<div id="orgdad83ed" class="figure">
+<div id="org472ca95" class="figure">
 <p><img src="images/roc_curve_plot.png" alt="roc_curve_plot.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 14: </span>所有可能的threshold的false positive率與true positive率</p>
@@ -1862,7 +1863,7 @@ New recall score: 0.7059415911379657
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org6196191"></a>比較不同分類器的效能<br />
+<li><a id="orgdf17a3b"></a>比較不同分類器的效能<br />
 <div class="outline-text-6" id="text-6-4-2-6-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.ensemble <span style="color: #51afef;">import</span> RandomForestClassifier
@@ -1890,7 +1891,7 @@ New recall score: 0.7059415911379657
 </div>
 
 
-<div id="orgf32382b" class="figure">
+<div id="org8ceedf4" class="figure">
 <p><img src="images/roc_curve_comparison_plot.png" alt="roc_curve_comparison_plot.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 15: </span>隨機森林分類器 v.s. SGD分類器</p>
@@ -1902,16 +1903,16 @@ New recall score: 0.7059415911379657
 </ol>
 </div>
 </div>
-<div id="outline-container-org16d45ab" class="outline-3">
-<h3 id="org16d45ab"><span class="section-number-3">6.5.</span> 多類別分類器</h3>
+<div id="outline-container-org46ead7e" class="outline-3">
+<h3 id="org46ead7e"><span class="section-number-3">6.5.</span> 多類別分類器</h3>
 <div class="outline-text-3" id="text-6-5">
 <ul class="org-ul">
 <li>同時可以處理多類別與二元分類的分類器: SGD classifiers, Random Forest classifiers, and naive Bayes classifiers</li>
 <li>只能做二元分類: Logistic Regression or Support Vector Machine classifiers</li>
 </ul>
 </div>
-<div id="outline-container-org33370a6" class="outline-4">
-<h4 id="org33370a6"><span class="section-number-4">6.5.1.</span> SVM</h4>
+<div id="outline-container-orgf0dd33c" class="outline-4">
+<h4 id="orgf0dd33c"><span class="section-number-4">6.5.1.</span> SVM</h4>
 <div class="outline-text-4" id="text-6-5-1">
 <p>
 當然也可以拿二元類器(如SVM)來實作多類別分類，例如：
@@ -1922,8 +1923,8 @@ New recall score: 0.7059415911379657
 </ul>
 </div>
 </div>
-<div id="outline-container-org11705c4" class="outline-4">
-<h4 id="org11705c4"><span class="section-number-4">6.5.2.</span> OvO</h4>
+<div id="outline-container-org271de3c" class="outline-4">
+<h4 id="org271de3c"><span class="section-number-4">6.5.2.</span> OvO</h4>
 <div class="outline-text-4" id="text-6-5-2">
 <p>
 這段程式用訓練組(X_train)和目標類別(y_train) 來訓練45個SVM二元分類器，取得對於圖片的研判分數，選擇最後在互相競爭中勝出的類別。
@@ -1960,14 +1961,14 @@ SVM prediction: [2]
 </p>
 </div>
 </div>
-<div id="outline-container-org7096490" class="outline-4">
-<h4 id="org7096490"><span class="section-number-4">6.5.3.</span> OvR</h4>
+<div id="outline-container-org2b2b468" class="outline-4">
+<h4 id="org2b2b468"><span class="section-number-4">6.5.3.</span> OvR</h4>
 <div class="outline-text-4" id="text-6-5-3">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
 <span class="linenr"> 2: </span><span style="color: #51afef;">import</span> pickle
-<span class="linenr"> 3: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">bunch</span>:
-<span class="linenr"> 4: </span>    mnist = pickle.load(bunch)
+<span class="linenr"> 3: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> bunch:
+<span class="linenr"> 4: </span>    <span style="color: #dcaeea;">mnist</span> = pickle.load(bunch)
 <span class="linenr"> 5: </span>
 <span class="linenr"> 6: </span><span style="color: #dcaeea;">X</span>, <span style="color: #dcaeea;">y</span> = mnist[<span style="color: #98be65;">"data"</span>], mnist[<span style="color: #98be65;">"target"</span>]
 <span class="linenr"> 7: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -1996,8 +1997,8 @@ OvR prediction: [5]
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc2d0595" class="outline-4">
-<h4 id="orgc2d0595"><span class="section-number-4">6.5.4.</span> 誤差分析</h4>
+<div id="outline-container-org69cd94b" class="outline-4">
+<h4 id="org69cd94b"><span class="section-number-4">6.5.4.</span> 誤差分析</h4>
 <div class="outline-text-4" id="text-6-5-4">
 <p>
 匯入library
@@ -2061,8 +2062,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 <span class="linenr"> 2: </span><span style="color: #51afef;">import</span> matplotlib.pyplot <span style="color: #51afef;">as</span> plt
 <span class="linenr"> 3: </span><span style="color: #51afef;">from</span> sklearn.datasets <span style="color: #51afef;">import</span> fetch_openml
 <span class="linenr"> 4: </span><span style="color: #51afef;">import</span> pickle5 <span style="color: #51afef;">as</span> pickle
-<span class="linenr"> 5: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">bunch</span>:
-<span class="linenr"> 6: </span>    mnist = pickle.load(bunch)
+<span class="linenr"> 5: </span><span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'mnist.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> bunch:
+<span class="linenr"> 6: </span>    <span style="color: #dcaeea;">mnist</span> = pickle.load(bunch)
 <span class="linenr"> 7: </span>
 <span class="linenr"> 8: </span><span style="color: #dcaeea;">X</span>, <span style="color: #dcaeea;">y</span> = mnist[<span style="color: #98be65;">"data"</span>], mnist[<span style="color: #98be65;">"target"</span>]
 <span class="linenr"> 9: </span><span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
@@ -2103,7 +2104,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 </pre>
 </div>
 
-<pre class="example" id="org3cc0227">
+<pre class="example" id="org9183d94">
 /Users/letranger/opt/anaconda3/envs/python37/lib/python3.7/site-packages/sklearn/linear_model/_stochastic_gradient.py:700: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
   ConvergenceWarning,
 /Users/letranger/opt/anaconda3/envs/python37/lib/python3.7/site-packages/sklearn/linear_model/_stochastic_gradient.py:700: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
@@ -2129,7 +2130,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argument "tight_layout" which is no longer supported as of 3.3 and will become an error in 3.6
 </pre>
 
-<div id="orgd28c044" class="figure">
+<div id="org6b4e94c" class="figure">
 <p><img src="images/MNIST-confusion-matrix.png" alt="MNIST-confusion-matrix.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 16: </span>Caption</p>
@@ -2140,14 +2141,14 @@ __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argu
 將混淆矩陣的值除以每一類別的圖片數量，可以得到錯誤率,
 </p>
 
-<div id="org3aa32e7" class="figure">
+<div id="org1dba679" class="figure">
 <p><img src="images/confusion_matrix_errors_plot.png" alt="confusion_matrix_errors_plot.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 17: </span>Caption</p>
 </div>
 
 <p>
-圖<a href="#org3aa32e7">17</a>中的列代表真正的類型、行代表模型所預測出的類型。圖中的8這一直欄特別亮，代表有很多圖被錯誤的歸類為8；然而真正的8這一橫列並沒有特別亮，表示真正的8會被歸類為8。這個混淆矩陣並未對稱，可以看出很多的3和5常被搞混。
+圖<a href="#org1dba679">17</a>中的列代表真正的類型、行代表模型所預測出的類型。圖中的8這一直欄特別亮，代表有很多圖被錯誤的歸類為8；然而真正的8這一橫列並沒有特別亮，表示真正的8會被歸類為8。這個混淆矩陣並未對稱，可以看出很多的3和5常被搞混。
 </p>
 
 <p>
@@ -2166,17 +2167,17 @@ __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argu
 <span class="linenr"> 6: </span>    <span style="color: #dcaeea;">n_rows</span> = (<span style="color: #c678dd;">len</span>(instances) - <span style="color: #da8548; font-weight: bold;">1</span>) // images_per_row + <span style="color: #da8548; font-weight: bold;">1</span>
 <span class="linenr"> 7: </span>
 <span class="linenr"> 8: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Append empty images to fill the end of the grid, if needed:</span>
-<span class="linenr"> 9: </span>    n_empty = n_rows * images_per_row - <span style="color: #c678dd;">len</span>(instances)
+<span class="linenr"> 9: </span>    <span style="color: #dcaeea;">n_empty</span> = n_rows * images_per_row - <span style="color: #c678dd;">len</span>(instances)
 <span class="linenr">10: </span>    <span style="color: #dcaeea;">padded_instances</span> = np.concatenate([instances, np.zeros((n_empty, size * size))], axis=<span style="color: #da8548; font-weight: bold;">0</span>)
 <span class="linenr">11: </span>
 <span class="linenr">12: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Reshape the array so it's organized as a grid containing 28&#215;28 images:</span>
-<span class="linenr">13: </span>    image_grid = padded_instances.reshape((n_rows, images_per_row, size, size))
+<span class="linenr">13: </span>    <span style="color: #dcaeea;">image_grid</span> = padded_instances.reshape((n_rows, images_per_row, size, size))
 <span class="linenr">14: </span>
 <span class="linenr">15: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Combine axes 0 and 2 (vertical image grid axis, and vertical image axis),</span>
 <span class="linenr">16: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">and axes 1 and 3 (horizontal axes). We first need to move the axes that we</span>
 <span class="linenr">17: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">want to combine next to each other, using transpose(), and only then we</span>
 <span class="linenr">18: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">can reshape:</span>
-<span class="linenr">19: </span>    big_image = image_grid.transpose(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>).reshape(n_rows * size,
+<span class="linenr">19: </span>    <span style="color: #dcaeea;">big_image</span> = image_grid.transpose(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #da8548; font-weight: bold;">2</span>, <span style="color: #da8548; font-weight: bold;">1</span>, <span style="color: #da8548; font-weight: bold;">3</span>).reshape(n_rows * size,
 <span class="linenr">20: </span>                                                         images_per_row * size)
 <span class="linenr">21: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Now that we have a big image, we just need to show it:</span>
 <span class="linenr">22: </span>    plt.imshow(big_image, cmap = mpl.cm.binary, **options)
@@ -2200,10 +2201,10 @@ __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argu
 </div>
 
 <p>
-圖<a href="#org55f77cf">18</a>右上為真實類別為3但被預測為5的圖；左下為真實類別為5但被預測為3的圖。SGDClassifier為線性模型、其做法是幫每個像素設定各個類別的權重，當他看到新圖時，它只是把加權的像素強度總和起來，得到每個類別的分數。所以當3和5這兩個只有部份像素有差異的圖，SDGClassifier就很難分辨。
+圖<a href="#orgc359d4c">18</a>右上為真實類別為3但被預測為5的圖；左下為真實類別為5但被預測為3的圖。SGDClassifier為線性模型、其做法是幫每個像素設定各個類別的權重，當他看到新圖時，它只是把加權的像素強度總和起來，得到每個類別的分數。所以當3和5這兩個只有部份像素有差異的圖，SDGClassifier就很難分辨。
 </p>
 
-<div id="org55f77cf" class="figure">
+<div id="orgc359d4c" class="figure">
 <p><img src="images/error_analysis_digits_plot.png" alt="error_analysis_digits_plot.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 18: </span>Caption</p>
@@ -2211,8 +2212,8 @@ __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argu
 </div>
 </div>
 </div>
-<div id="outline-container-org69f90ec" class="outline-3">
-<h3 id="org69f90ec"><span class="section-number-3">6.6.</span> 多標籤分類</h3>
+<div id="outline-container-org43d0432" class="outline-3">
+<h3 id="org43d0432"><span class="section-number-3">6.6.</span> 多標籤分類</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 把MNIST改為多類別：「大於等於7」、「奇數」，以y_multilabel陣列儲存多類別標籤，以KNN進行分類
@@ -2255,16 +2256,15 @@ __main__:43: MatplotlibDeprecationWarning: savefig() got unexpected keyword argu
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgcc01047" class="outline-2">
-<h2 id="orgcc01047"><span class="section-number-2">7.</span> 分類實作: MNIST(CNN)</h2>
+<div id="outline-container-orgb965bd6" class="outline-2">
+<h2 id="orgb965bd6"><span class="section-number-2">7.</span> 分類實作: MNIST(CNN)</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 準備資料是訓練模型的第一步，基礎資料可以是網上公開的資料集，也可以是自己的資料集。視覺、語音、語言等各種型別的資料在網上都能找到相應的資料集。
 </p>
 </div>
-<div id="outline-container-orgd791e75" class="outline-3">
-<h3 id="orgd791e75"><span class="section-number-3">7.1.</span> 準備 MNIST 資料</h3>
+<div id="outline-container-org00b3dfb" class="outline-3">
+<h3 id="org00b3dfb"><span class="section-number-3">7.1.</span> 準備 MNIST 資料</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 MNIST 數據集來自美國國家標準與技術研究所, National Institute of Standards and Technology (NIST). 訓練集 (training set) 由來自 250 個不同人手寫的數字構成, 其中 50% 是高中學生, 50% 來自人口普查局 (the Census Bureau) 的工作人員. 測試集(test set) 也是同樣比例的手寫數字數據。MNIST 數據集可在 <a href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a> 獲取, 它包含了四個部分:
@@ -2314,20 +2314,20 @@ MNIST 資料集是一個適合拿來當作 TensotFlow 的練習素材，在 Tens
 
 
 <p>
-由上述程式輸出結果可以看到載入的 x 為大小為 28*28 的圖片共 60000 張，每一筆 MNIST 資料的照片(x)由 784 個 pixels 組成（28*28），照片內容如圖<a href="#orge5d2867">19</a>，訓練集的標籤(y)則為其對應的數字(0～9)，此例為 5。
+由上述程式輸出結果可以看到載入的 x 為大小為 28*28 的圖片共 60000 張，每一筆 MNIST 資料的照片(x)由 784 個 pixels 組成（28*28），照片內容如圖<a href="#org7a89b0b">19</a>，訓練集的標籤(y)則為其對應的數字(0～9)，此例為 5。
 </p>
 
-<div id="orge5d2867" class="figure">
+<div id="org7a89b0b" class="figure">
 <p><img src="images/MNIST-Image.png" alt="MNIST-Image.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 19: </span>MNIST 影像示例</p>
 </div>
 
 <p>
-x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，矩陣裡每一項的資料則是代表每個 pixel 顏色深淺的數值，如下圖<a href="#org710decb">20</a>所示：
+x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，矩陣裡每一項的資料則是代表每個 pixel 顏色深淺的數值，如下圖<a href="#org0cf47df">20</a>所示：
 </p>
 
-<div id="org710decb" class="figure">
+<div id="org0cf47df" class="figure">
 <p><img src="images/MNIST-Matrix.png" alt="MNIST-Matrix.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 20: </span>MNIST 資料矩陣</p>
@@ -2367,14 +2367,14 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </pre>
 </div>
 </div>
-<div id="outline-container-org29c11ba" class="outline-3">
-<h3 id="org29c11ba"><span class="section-number-3">7.2.</span> MNIST 的推論處理</h3>
+<div id="outline-container-orgaf5ef03" class="outline-3">
+<h3 id="orgaf5ef03"><span class="section-number-3">7.2.</span> MNIST 的推論處理</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
-如圖<a href="#org3591268">21</a>所示，MNIST 的推論神經網路最前端的輸入層有 784 (\(28*28=784\))個神經元，最後的輸出端有 10 個神經元(\(0~9\)個數字)，至於中間的隠藏層有兩個，第 1 個隱藏層有 50 個神經元，第 2 層有 100 個。此處的 50、100 可以設定為任意數（如，也可以是 128、64）。
+如圖<a href="#org8d82d49">21</a>所示，MNIST 的推論神經網路最前端的輸入層有 784 (\(28*28=784\))個神經元，最後的輸出端有 10 個神經元(\(0~9\)個數字)，至於中間的隠藏層有兩個，第 1 個隱藏層有 50 個神經元，第 2 層有 100 個。此處的 50、100 可以設定為任意數（如，也可以是 128、64）。
 </p>
 
-<div id="org3591268" class="figure">
+<div id="org8d82d49" class="figure">
 <p><img src="images/MNIST-CNN.png" alt="MNIST-CNN.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 21: </span>MNIST-NeuralNet</p>
@@ -2400,8 +2400,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 <span class="linenr">14: </span>    <span style="color: #51afef;">return</span> X_test.reshape(<span style="color: #da8548; font-weight: bold;">10000</span>, <span style="color: #da8548; font-weight: bold;">784</span>), y_test
 <span class="linenr">15: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">init_network</span>():
 <span class="linenr">16: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">https://github.com/Bingyy/deep-learning-from-scratch/blob/master/ch03/sample_weight.pkl</span>
-<span class="linenr">17: </span>    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'/Volumes/Vanessa/MNIST/data/mnist/sample_weight.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">f</span>:
-<span class="linenr">18: </span>      network = pickle.load(f)
+<span class="linenr">17: </span>    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'/Volumes/Vanessa/MNIST/data/mnist/sample_weight.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> f:
+<span class="linenr">18: </span>      <span style="color: #dcaeea;">network</span> = pickle.load(f)
 <span class="linenr">19: </span>      <span style="color: #51afef;">return</span> network
 <span class="linenr">20: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23384;&#20786;&#30340;&#26159;&#32178;&#32097;&#21443;&#25976;&#23383;&#20856;</span>
 <span class="linenr">21: </span>  <span style="color: #dcaeea;">network</span> = init_network()
@@ -2426,8 +2426,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 <span id="coderef-y-predict" class="coderef-off"><span class="linenr">40: </span>    <span style="color: #dcaeea;">y</span> = predict(network, X_test[i])</span>
 <span id="coderef-np-argmax" class="coderef-off"><span class="linenr">41: </span>    <span style="color: #dcaeea;">p</span> = np.argmax(y)</span>
 <span class="linenr">42: </span>    np.set_printoptions(precision=<span style="color: #da8548; font-weight: bold;">4</span>, suppress=<span style="color: #a9a1e1;">True</span>)
-<span class="linenr">43: </span>    <span style="color: #51afef;">if</span> p == <span style="color: #dcaeea;">y_test</span>[i]:
-<span class="linenr">44: </span>      accuracy_cnt += <span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">43: </span>    <span style="color: #51afef;">if</span> p == y_test[i]:
+<span class="linenr">44: </span>      <span style="color: #dcaeea;">accuracy_cnt</span> += <span style="color: #da8548; font-weight: bold;">1</span>
 <span class="linenr">45: </span>  <span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'&#28310;&#30906;&#29575;&#65306;'</span>, <span style="color: #c678dd;">str</span>(<span style="color: #c678dd;">float</span>(accuracy_cnt) / <span style="color: #c678dd;">len</span>(X_test)))
 </pre>
 </div>
@@ -2442,24 +2442,24 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </p>
 </div>
 </div>
-<div id="outline-container-orga351d08" class="outline-3">
-<h3 id="orga351d08"><span class="section-number-3">7.3.</span> Python 與神經網路運算的批次處理</h3>
+<div id="outline-container-org673b9ab" class="outline-3">
+<h3 id="org673b9ab"><span class="section-number-3">7.3.</span> Python 與神經網路運算的批次處理</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
-前節程式碼中最後以 for 迴圈來逐一處理預測結果與比較，輸入(X)為單一圖片，其處理程序如圖<a href="#orge3d31e1">22</a>所示：
+前節程式碼中最後以 for 迴圈來逐一處理預測結果與比較，輸入(X)為單一圖片，其處理程序如圖<a href="#org2e74e0e">22</a>所示：
 </p>
 
-<div id="orge3d31e1" class="figure">
+<div id="org2e74e0e" class="figure">
 <p><img src="images/MNIST-single.png" alt="MNIST-single.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 22: </span>MNIST-單一處理架構</p>
 </div>
 
 <p>
-事實上，在使用批次處理（如一次處理 100 張圖）反而能大幅縮短每張圖片的處理時間，因為多數處理數值運算的函式庫都會針對大型陣列運算進行最佳化，尤其是透過 GPU 來處理時更是如此，這時，傳送單張圖片反而成為效能瓶頸，以批次處理則可減輕匯流排頻寛負擔。若以每次處理 100 張為例，其處理程序則如圖<a href="#org9d9507a">23</a>所示。
+事實上，在使用批次處理（如一次處理 100 張圖）反而能大幅縮短每張圖片的處理時間，因為多數處理數值運算的函式庫都會針對大型陣列運算進行最佳化，尤其是透過 GPU 來處理時更是如此，這時，傳送單張圖片反而成為效能瓶頸，以批次處理則可減輕匯流排頻寛負擔。若以每次處理 100 張為例，其處理程序則如圖<a href="#orgae90295">23</a>所示。
 </p>
 
-<div id="org9d9507a" class="figure">
+<div id="orgae90295" class="figure">
 <p><img src="images/MNIST-batch.png" alt="MNIST-batch.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 23: </span>MNIST-批次處理架構</p>
@@ -2485,8 +2485,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 <span class="linenr">14: </span>    <span style="color: #51afef;">return</span> X_test.reshape(<span style="color: #da8548; font-weight: bold;">10000</span>, <span style="color: #da8548; font-weight: bold;">784</span>), y_test
 <span class="linenr">15: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">init_network</span>():
 <span class="linenr">16: </span>    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">https://github.com/Bingyy/deep-learning-from-scratch/blob/master/ch03/sample_weight.pkl</span>
-<span class="linenr">17: </span>    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'/Volumes/Vanessa/MNIST/sample_weight.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">f</span>:
-<span class="linenr">18: </span>      network = pickle.load(f)
+<span class="linenr">17: </span>    <span style="color: #51afef;">with</span> <span style="color: #c678dd;">open</span>(<span style="color: #98be65;">'/Volumes/Vanessa/MNIST/sample_weight.pkl'</span>, <span style="color: #98be65;">'rb'</span>) <span style="color: #51afef;">as</span> f:
+<span class="linenr">18: </span>      <span style="color: #dcaeea;">network</span> = pickle.load(f)
 <span class="linenr">19: </span>      <span style="color: #51afef;">return</span> network
 <span class="linenr">20: </span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#23384;&#20786;&#30340;&#26159;&#32178;&#32097;&#21443;&#25976;&#23383;&#20856;</span>
 <span class="linenr">21: </span>  <span style="color: #dcaeea;">network</span> = init_network()
@@ -2528,8 +2528,8 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 </p>
 </div>
 </div>
-<div id="outline-container-org0070ace" class="outline-3">
-<h3 id="org0070ace"><span class="section-number-3">7.4.</span> MNIST 資料集:以 DNN Sequential 模型為例&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CNN">CNN</span></span></h3>
+<div id="outline-container-org6fef9ad" class="outline-3">
+<h3 id="org6fef9ad"><span class="section-number-3">7.4.</span> MNIST 資料集:以 DNN Sequential 模型為例&#xa0;&#xa0;&#xa0;<span class="tag"><span class="CNN">CNN</span></span></h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 此處以最簡單的 DNN (deep neural network) 作為範例。以 Keras 的核心為模型，應用最常使用 Sequential 模型。藉由.add()我們可以一層一層的將神經網路疊起。在每一層之中我們只需要簡單的設定每層的大小(units)與激活函數(activation function)。需要特別記得的是：第一層要記得寫輸入的向量大小、最後一層的 units 要等於輸出的向量大小。在這邊我們最後一層使用的激活函數(activation function)為 softmax。
@@ -2579,13 +2579,13 @@ x 的影像資料為灰階影像，每個像素的數值介於 0~255 之間，�
 <span class="linenr">41: </span>  model.fit(x_train,y_train,batch_size=<span style="color: #da8548; font-weight: bold;">100</span>,epochs=<span style="color: #da8548; font-weight: bold;">20</span>)
 <span class="linenr">42: </span>  <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#39023;&#31034;&#35347;&#32244;&#32080;&#26524;</span>
 <span class="linenr">43: </span>  <span style="color: #dcaeea;">score</span> = model.evaluate(x_train,y_train)
-<span class="linenr">44: </span>  <span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'\nTrain Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
-<span class="linenr">45: </span>  score = model.evaluate(x_test,y_test)
-<span class="linenr">46: </span>  <span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'\nTest Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">44: </span>  <span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">Train Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">45: </span>  <span style="color: #dcaeea;">score</span> = model.evaluate(x_test,y_test)
+<span class="linenr">46: </span>  <span style="color: #c678dd;">print</span> (<span style="color: #98be65;">'</span><span style="color: #a9a1e1;">\n</span><span style="color: #98be65;">Test Acc:'</span>, score[<span style="color: #da8548; font-weight: bold;">1</span>])
 </pre>
 </div>
 
-<pre class="example" id="org347898c">
+<pre class="example" id="org8e7d37f">
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
 =================================================================
@@ -2644,8 +2644,8 @@ Test Acc: 0.9823
 </pre>
 </div>
 </div>
-<div id="outline-container-org9ae07c5" class="outline-3">
-<h3 id="org9ae07c5"><span class="section-number-3">7.5.</span> 其他MNIST教學檔</h3>
+<div id="outline-container-orgcbc3b12" class="outline-3">
+<h3 id="orgcbc3b12"><span class="section-number-3">7.5.</span> 其他MNIST教學檔</h3>
 <div class="outline-text-3" id="text-7-5">
 <ul class="org-ul">
 <li><a href="file:///Users/letranger/Dropbox/DeepLearning/HiCNN.html">HICNN-TNFSH-作業</a></li>
@@ -2654,20 +2654,19 @@ Test Acc: 0.9823
 </div>
 </div>
 </div>
-
-<div id="outline-container-org302a8c1" class="outline-2">
-<h2 id="org302a8c1"><span class="section-number-2">8.</span> 推薦系統: 受限波爾茲曼機 on MovieLens</h2>
+<div id="outline-container-org46dbea1" class="outline-2">
+<h2 id="org46dbea1"><span class="section-number-2">8.</span> 推薦系統: 受限波爾茲曼機 on MovieLens</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 MovieLens 是一個推薦系統和虛擬社區網站，於1997年建立。其主要功能為應用協同過濾技術和用戶對電影的喜好，向用戶推薦電影。該網站是GroupLens研究所旗下一個項目，該研究所隸屬於美國明尼蘇達大學雙城分校計算機科學與工程系。MovieLens 20M資料集包含20,000,263筆關於27,278部電影的評價，評價者共138,493人。
 </p>
 </div>
-<div id="outline-container-orgddc2630" class="outline-3">
-<h3 id="orgddc2630"><span class="section-number-3">8.1.</span> 資料準備</h3>
+<div id="outline-container-org73d9087" class="outline-3">
+<h3 id="org73d9087"><span class="section-number-3">8.1.</span> 資料準備</h3>
 <div class="outline-text-3" id="text-8-1">
 </div>
-<div id="outline-container-org4810451" class="outline-4">
-<h4 id="org4810451"><span class="section-number-4">8.1.1.</span> Setup</h4>
+<div id="outline-container-orgf5fca7d" class="outline-4">
+<h4 id="orgf5fca7d"><span class="section-number-4">8.1.1.</span> Setup</h4>
 <div class="outline-text-4" id="text-8-1-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #83898d;">'''Main'''</span>
@@ -2711,8 +2710,8 @@ MovieLens 是一個推薦系統和虛擬社區網站，於1997年建立。其主
 </div>
 </div>
 </div>
-<div id="outline-container-org6f5afd8" class="outline-4">
-<h4 id="org6f5afd8"><span class="section-number-4">8.1.2.</span> Check library version</h4>
+<div id="outline-container-orgb53a27f" class="outline-4">
+<h4 id="orgb53a27f"><span class="section-number-4">8.1.2.</span> Check library version</h4>
 <div class="outline-text-4" id="text-8-1-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #51afef;">import</span> sys, sklearn
@@ -2731,9 +2730,8 @@ numpy      1.19.5
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org4f1f96f" class="outline-4">
-<h4 id="org4f1f96f"><span class="section-number-4">8.1.3.</span> Download and unzip the Data</h4>
+<div id="outline-container-org4fe21df" class="outline-4">
+<h4 id="org4fe21df"><span class="section-number-4">8.1.3.</span> Download and unzip the Data</h4>
 <div class="outline-text-4" id="text-8-1-3">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Download and read into Pandas DataFrame</span>
@@ -2748,8 +2746,8 @@ numpy      1.19.5
 </div>
 </div>
 </div>
-<div id="outline-container-orgb6640a6" class="outline-4">
-<h4 id="orgb6640a6"><span class="section-number-4">8.1.4.</span> Load data</h4>
+<div id="outline-container-org1ed1205" class="outline-4">
+<h4 id="org1ed1205"><span class="section-number-4">8.1.4.</span> Load data</h4>
 <div class="outline-text-4" id="text-8-1-4">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">ratingDF</span> = pd.read_csv(<span style="color: #98be65;">"./dataset/ml-20m/ratings.csv"</span>)
@@ -2757,7 +2755,7 @@ numpy      1.19.5
 </pre>
 </div>
 
-<pre class="example" id="org450ac19">
+<pre class="example" id="orga4e2bec">
           userId  movieId  rating   timestamp
 0              1        2     3.5  1112486027
 1              1       29     3.5  1112484676
@@ -2775,9 +2773,8 @@ numpy      1.19.5
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org998c304" class="outline-4">
-<h4 id="org998c304"><span class="section-number-4">8.1.5.</span> 轉換資料</h4>
+<div id="outline-container-orgd8b8c6f" class="outline-4">
+<h4 id="orgd8b8c6f"><span class="section-number-4">8.1.5.</span> 轉換資料</h4>
 <div class="outline-text-4" id="text-8-1-5">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Convert fields into appropriate data types</span>
@@ -2807,9 +2804,8 @@ numpy      1.19.5
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orgdcba263" class="outline-4">
-<h4 id="orgdcba263"><span class="section-number-4">8.1.6.</span> 確認使用者、評價數量</h4>
+<div id="outline-container-orgf12c16d" class="outline-4">
+<h4 id="orgf12c16d"><span class="section-number-4">8.1.6.</span> 確認使用者、評價數量</h4>
 <div class="outline-text-4" id="text-8-1-6">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Calculate summary statistics on full dataset</span>
@@ -2833,10 +2829,8 @@ Average number of ratings per user: 144.4
 </pre>
 </div>
 </div>
-
-
-<div id="outline-container-orgad7c97b" class="outline-4">
-<h4 id="orgad7c97b"><span class="section-number-4">8.1.7.</span> 只取前1000筆記錄</h4>
+<div id="outline-container-orgb7b8771" class="outline-4">
+<h4 id="orgb7b8771"><span class="section-number-4">8.1.7.</span> 只取前1000筆記錄</h4>
 <div class="outline-text-4" id="text-8-1-7">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Reduce size of dataset by taking top 1000 movies</span>
@@ -2878,9 +2872,8 @@ dtype: int64
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orgb7da263" class="outline-4">
-<h4 id="orgb7da263"><span class="section-number-4">8.1.8.</span> 針對已縮減的資料集重建index(movieID, userID)</h4>
+<div id="outline-container-org5d4f912" class="outline-4">
+<h4 id="org5d4f912"><span class="section-number-4">8.1.8.</span> 針對已縮減的資料集重建index(movieID, userID)</h4>
 <div class="outline-text-4" id="text-8-1-8">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Reindex movie ID</span>
@@ -2904,7 +2897,7 @@ dtype: int64
 </pre>
 </div>
 
-<pre class="example" id="org5d5bfba">
+<pre class="example" id="orgbada988">
    originalMovieId  newMovieId
 0               50           1
 1              163           2
@@ -2924,10 +2917,8 @@ dtype: int64
 </pre>
 </div>
 </div>
-
-
-<div id="outline-container-orgc7d0b60" class="outline-4">
-<h4 id="orgc7d0b60"><span class="section-number-4">8.1.9.</span> 計算縮減資料庫大小</h4>
+<div id="outline-container-org65fc5d6" class="outline-4">
+<h4 id="org65fc5d6"><span class="section-number-4">8.1.9.</span> 計算縮減資料庫大小</h4>
 <div class="outline-text-4" id="text-8-1-9">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Calculate summary statistics on reduced dataset</span>
@@ -2951,9 +2942,8 @@ Average number of ratings per user: 90.2
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orgb766322" class="outline-4">
-<h4 id="orgb766322"><span class="section-number-4">8.1.10.</span> 產生訓練集、測試集和驗證集</h4>
+<div id="outline-container-orgade5673" class="outline-4">
+<h4 id="orgade5673"><span class="section-number-4">8.1.10.</span> 產生訓練集、測試集和驗證集</h4>
 <div class="outline-text-4" id="text-8-1-10">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Split into validation and test, such that each is 5% of the dataset</span>
@@ -2981,8 +2971,8 @@ Size of test set: 4511
 </div>
 </div>
 </div>
-<div id="outline-container-org4b019ef" class="outline-3">
-<h3 id="org4b019ef"><span class="section-number-3">8.2.</span> 定義loss function</h3>
+<div id="outline-container-org37874db" class="outline-3">
+<h3 id="org37874db"><span class="section-number-3">8.2.</span> 定義loss function</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 先建一個 \(m\times n\) 的矩陣，\(m\) 為使用者、\(n\) 為電影。此為稀疏矩陣，因為一位使用者不會對所有電影評價。
@@ -3008,8 +2998,8 @@ Size of test set: 4511
 使用MSE評估預測值與實際值間的均方差，故需要兩個大小為 <i>[n,1]</i> 的矩陣，一個放實際評價、一個放預估評價
 </p>
 </div>
-<div id="outline-container-org55226de" class="outline-4">
-<h4 id="org55226de"><span class="section-number-4">8.2.1.</span> 先將稀疏矩陣展開</h4>
+<div id="outline-container-org7106d79" class="outline-4">
+<h4 id="org7106d79"><span class="section-number-4">8.2.1.</span> 先將稀疏矩陣展開</h4>
 <div class="outline-text-4" id="text-8-2-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Flatten the sprace matrix with the rations for the validation set. This will be the vector of actual ratings</span>
@@ -3018,9 +3008,8 @@ Size of test set: 4511
 </div>
 </div>
 </div>
-
-<div id="outline-container-org871694b" class="outline-4">
-<h4 id="org871694b"><span class="section-number-4">8.2.2.</span> 以電影平均評價(3.5)做為驗證集的評價預測，計算MSE，得到基準值1.06</h4>
+<div id="outline-container-orga753140" class="outline-4">
+<h4 id="orga753140"><span class="section-number-4">8.2.2.</span> 以電影平均評價(3.5)做為驗證集的評價預測，計算MSE，得到基準值1.06</h4>
 <div class="outline-text-4" id="text-8-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">pred_valid</span> = np.zeros((<span style="color: #c678dd;">len</span>(X_valid),<span style="color: #da8548; font-weight: bold;">1</span>))
@@ -3035,9 +3024,8 @@ Mean squared error using naive prediction: 1.06
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org2d10723" class="outline-4">
-<h4 id="org2d10723"><span class="section-number-4">8.2.3.</span> 以使用者對所有其他影片的平均評價來預測一部未評價的電影評價</h4>
+<div id="outline-container-org154af49" class="outline-4">
+<h4 id="org154af49"><span class="section-number-4">8.2.3.</span> 以使用者對所有其他影片的平均評價來預測一部未評價的電影評價</h4>
 <div class="outline-text-4" id="text-8-2-3">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #dcaeea;">ratings_valid_pred</span> = np.zeros((n_users, n_movies))
@@ -3062,8 +3050,8 @@ MSE改善至0.9
 </p>
 </div>
 </div>
-<div id="outline-container-org9b11c23" class="outline-4">
-<h4 id="org9b11c23"><span class="section-number-4">8.2.4.</span> 以所有其他使用者對於某電影的評價來預估某使用者的評價</h4>
+<div id="outline-container-orgb72d63a" class="outline-4">
+<h4 id="orgb72d63a"><span class="section-number-4">8.2.4.</span> 以所有其他使用者對於某電影的評價來預估某使用者的評價</h4>
 <div class="outline-text-4" id="text-8-2-4">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #dcaeea;">ratings_valid_pred</span> = np.zeros((n_users, n_movies)).T
@@ -3085,8 +3073,8 @@ Mean squared error using movie average: 0.914
 </div>
 </div>
 </div>
-<div id="outline-container-org3cb4699" class="outline-3">
-<h3 id="org3cb4699"><span class="section-number-3">8.3.</span> 矩陣分解</h3>
+<div id="outline-container-orga076858" class="outline-3">
+<h3 id="orga076858"><span class="section-number-3">8.3.</span> 矩陣分解</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 矩陣分解(Matrix Factorization)為目前最成功且最受歡迎的協同過濾演算法之一，它將使用者-物品矩陣分解成兩個較低維度矩陣的乘積，使用者與物品各自在較低維的潛在空間內被表示。
@@ -3100,8 +3088,8 @@ Mean squared error using movie average: 0.914
 潛在因子（latent factor）k的數量決定了模型的容量，k越高模型容量越大，但當k過高則易出現過擬合現象。
 </p>
 </div>
-<div id="outline-container-orgaf54691" class="outline-4">
-<h4 id="orgaf54691"><span class="section-number-4">8.3.1.</span> 單個潛在因子</h4>
+<div id="outline-container-orgf0cd333" class="outline-4">
+<h4 id="orgf0cd333"><span class="section-number-4">8.3.1.</span> 單個潛在因子</h4>
 <div class="outline-text-4" id="text-8-3-1">
 <p>
 從最簡單的形式（只有一個潛在因子）開始，使用Keras進行矩陣分解
@@ -3146,15 +3134,15 @@ Minimum MSE: 0.796
 </p>
 
 
-<div id="orgcb8be68" class="figure">
+<div id="org9137181" class="figure">
 <p><img src="images/ML-1LF.png" alt="ML-1LF.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 24: </span>Caption</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb94b11f" class="outline-4">
-<h4 id="orgb94b11f"><span class="section-number-4">8.3.2.</span> 三個潛在因子</h4>
+<div id="outline-container-org0943788" class="outline-4">
+<h4 id="org0943788"><span class="section-number-4">8.3.2.</span> 三個潛在因子</h4>
 <div class="outline-text-4" id="text-8-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span>plt.clf()
@@ -3187,7 +3175,7 @@ Minimum MSE: 0.796
 <span class="linenr">28: </span>pd.Series(history.history[<span style="color: #98be65;">'val_loss'</span>][<span style="color: #da8548; font-weight: bold;">10</span>:]).plot(logy=<span style="color: #a9a1e1;">False</span>)
 <span class="linenr">29: </span>plt.xlabel(<span style="color: #98be65;">"Epoch"</span>)
 <span class="linenr">30: </span>plt.ylabel(<span style="color: #98be65;">"Validation Error"</span>)
-<span class="linenr">31: </span><span style="color: #c678dd;">print</span>(f<span style="color: #98be65;">"\n\nMinimum MSE: </span>{<span style="color: #c678dd;">round</span>(<span style="color: #c678dd;">min</span>(history.history['val_loss']),3)}<span style="color: #98be65;">"</span>)
+<span class="linenr">31: </span><span style="color: #c678dd;">print</span>(f<span style="color: #98be65;">"</span><span style="color: #a9a1e1;">\n\n</span><span style="color: #98be65;">Minimum MSE: </span>{<span style="color: #c678dd;">round</span>(<span style="color: #c678dd;">min</span>(history.history['val_loss']),3)}<span style="color: #98be65;">"</span>)
 <span class="linenr">32: </span>plt.savefig(<span style="color: #98be65;">'images/ML-3LF.png'</span>, dpi=<span style="color: #da8548; font-weight: bold;">300</span>)
 </pre>
 </div>
@@ -3195,15 +3183,15 @@ Minimum MSE: 0.796
 Minimum MSE: 0.76
 </p>
 
-<div id="orgff4374a" class="figure">
+<div id="orgfc181c8" class="figure">
 <p><img src="images/ML-3LF.png" alt="ML-3LF.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 25: </span>Caption</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org4f3dc67" class="outline-4">
-<h4 id="org4f3dc67"><span class="section-number-4">8.3.3.</span> 五個潛在因子</h4>
+<div id="outline-container-orgbc4e246" class="outline-4">
+<h4 id="orgbc4e246"><span class="section-number-4">8.3.3.</span> 五個潛在因子</h4>
 <div class="outline-text-4" id="text-8-3-3">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span>plt.clf()
@@ -3236,7 +3224,7 @@ Minimum MSE: 0.76
 <span class="linenr">28: </span>pd.Series(history.history[<span style="color: #98be65;">'val_loss'</span>][<span style="color: #da8548; font-weight: bold;">10</span>:]).plot(logy=<span style="color: #a9a1e1;">False</span>)
 <span class="linenr">29: </span>plt.xlabel(<span style="color: #98be65;">"Epoch"</span>)
 <span class="linenr">30: </span>plt.ylabel(<span style="color: #98be65;">"Validation Error"</span>)
-<span class="linenr">31: </span><span style="color: #c678dd;">print</span>(f<span style="color: #98be65;">"\n\nMinimum MSE: </span>{<span style="color: #c678dd;">round</span>(<span style="color: #c678dd;">min</span>(history.history['val_loss']),3)}<span style="color: #98be65;">"</span>)
+<span class="linenr">31: </span><span style="color: #c678dd;">print</span>(f<span style="color: #98be65;">"</span><span style="color: #a9a1e1;">\n\n</span><span style="color: #98be65;">Minimum MSE: </span>{<span style="color: #c678dd;">round</span>(<span style="color: #c678dd;">min</span>(history.history['val_loss']),3)}<span style="color: #98be65;">"</span>)
 <span class="linenr">32: </span>plt.savefig(<span style="color: #98be65;">'images/ML-5LF.png'</span>, dpi=<span style="color: #da8548; font-weight: bold;">300</span>)
 </pre>
 </div>
@@ -3250,8 +3238,8 @@ Minimum MSE: 0.749
 </div>
 </div>
 </div>
-<div id="outline-container-org90e2a80" class="outline-3">
-<h3 id="org90e2a80"><span class="section-number-3">8.4.</span> 使用RBMs的協同過濾</h3>
+<div id="outline-container-org50acaef" class="outline-3">
+<h3 id="org50acaef"><span class="section-number-3">8.4.</span> 使用RBMs的協同過濾</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 受限玻爾茲曼機（RBM，Restricted Boltzmann machine）由多倫多大學的 Geoff Hinton 等人提出，它是一種可以用於降維、分類、回歸、協同過濾、特徵學習以及主題建模的算法。
@@ -3286,8 +3274,8 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 </p>
 </div>
 </div>
-<div id="outline-container-org86b4658" class="outline-3">
-<h3 id="org86b4658"><span class="section-number-3">8.5.</span> RBM神經網路架構</h3>
+<div id="outline-container-org9f0b1f4" class="outline-3">
+<h3 id="org9f0b1f4"><span class="section-number-3">8.5.</span> RBM神經網路架構</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 參考網路教學&#x2026;.這裡寫的太抽象(這本書竟然想用文字來把它說完，太不負責任)
@@ -3303,8 +3291,8 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc5dac1c" class="outline-3">
-<h3 id="orgc5dac1c"><span class="section-number-3">8.6.</span> 重建RBM元件</h3>
+<div id="outline-container-org23b8bab" class="outline-3">
+<h3 id="org23b8bab"><span class="section-number-3">8.6.</span> 重建RBM元件</h3>
 <div class="outline-text-3" id="text-8-6">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Make code compatible with v1 of TF</span>
@@ -3337,7 +3325,7 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 <span class="linenr">28: </span>
 <span class="linenr">29: </span>    <span style="color: #51afef;">def</span> <span style="color: #c678dd;">train</span>(<span style="color: #51afef;">self</span>, X):
 <span class="linenr">30: </span>        <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#20197;tensorflow&#24314;&#31435;&#19977;&#20491;placeholder: &#27402;&#37325;&#30697;&#38499;&#12289;&#38577;&#34255;&#23652;&#30340;&#20559;&#24046;&#20540;&#21521;&#37327;&#12289;&#21487;&#35222;&#23652;&#30340;&#20559;&#24046;&#20540;&#21521;&#37327;</span>
-<span class="linenr">31: </span>        _w = tf.compat.v1.placeholder(tf.float32, [<span style="color: #51afef;">self</span>._input_size, <span style="color: #51afef;">self</span>._output_size])
+<span class="linenr">31: </span>        <span style="color: #dcaeea;">_w</span> = tf.compat.v1.placeholder(tf.float32, [<span style="color: #51afef;">self</span>._input_size, <span style="color: #51afef;">self</span>._output_size])
 <span class="linenr">32: </span>        <span style="color: #dcaeea;">_hb</span> = tf.compat.v1.placeholder(tf.float32, [<span style="color: #51afef;">self</span>._output_size])
 <span class="linenr">33: </span>        <span style="color: #dcaeea;">_vb</span> = tf.compat.v1.placeholder(tf.float32, [<span style="color: #51afef;">self</span>._input_size])
 <span class="linenr">34: </span>
@@ -3366,7 +3354,7 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 <span class="linenr">57: </span>
 <span class="linenr">58: </span>        <span style="color: #dcaeea;">error_list</span> = []
 <span class="linenr">59: </span>        <span style="color: #5B6268;">#</span><span style="color: #5B6268;">&#21021;&#22987;&#21270;TensorFlow&#24037;&#20316;&#38542;&#27573;</span>
-<span class="linenr">60: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">sess</span>:
+<span class="linenr">60: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> sess:
 <span class="linenr">61: </span>            <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#25209;&#27425;&#23559;&#36039;&#26009;&#20659;&#20837;&#36914;&#34892;&#35347;&#32244;</span>
 <span class="linenr">62: </span>            sess.run(tf.compat.v1.global_variables_initializer())
 <span class="linenr">63: </span>
@@ -3374,14 +3362,14 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 <span class="linenr">65: </span>                <span style="color: #51afef;">for</span> start, end <span style="color: #51afef;">in</span> <span style="color: #c678dd;">zip</span>(<span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #c678dd;">len</span>(X), \
 <span class="linenr">66: </span>                        <span style="color: #51afef;">self</span>.batchsize),<span style="color: #c678dd;">range</span>(<span style="color: #51afef;">self</span>.batchsize,<span style="color: #c678dd;">len</span>(X), \
 <span class="linenr">67: </span>                                              <span style="color: #51afef;">self</span>.batchsize)):
-<span class="linenr">68: </span>                    batch = X[<span style="color: #dcaeea;">start</span>:end]
-<span class="linenr">69: </span>                    cur_w = sess.run(update_w, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr">68: </span>                    <span style="color: #dcaeea;">batch</span> = X[start:end]
+<span class="linenr">69: </span>                    <span style="color: #dcaeea;">cur_w</span> = sess.run(update_w, feed_dict={v0: batch, \
 <span class="linenr">70: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr">71: </span>                    cur_hb = sess.run(update_hb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr">71: </span>                    <span style="color: #dcaeea;">cur_hb</span> = sess.run(update_hb, feed_dict={v0: batch, \
 <span class="linenr">72: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr">73: </span>                    cur_vb = sess.run(update_vb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr">73: </span>                    <span style="color: #dcaeea;">cur_vb</span> = sess.run(update_vb, feed_dict={v0: batch, \
 <span class="linenr">74: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr">75: </span>                    prv_w = cur_w
+<span class="linenr">75: </span>                    <span style="color: #dcaeea;">prv_w</span> = cur_w
 <span class="linenr">76: </span>                    <span style="color: #dcaeea;">prv_hb</span> = cur_hb
 <span class="linenr">77: </span>                    <span style="color: #dcaeea;">prv_vb</span> = cur_vb
 <span class="linenr">78: </span>                <span style="color: #dcaeea;">error</span> = sess.run(err, feed_dict={v0: X, \
@@ -3409,8 +3397,8 @@ RBMs也被稱為對稱二分雙向圖，對稱是因為每個可視的節點都�
 </div>
 </div>
 </div>
-<div id="outline-container-orga83f685" class="outline-3">
-<h3 id="orga83f685"><span class="section-number-3">8.7.</span> 訓練</h3>
+<div id="outline-container-org26575de" class="outline-3">
+<h3 id="org26575de"><span class="section-number-3">8.7.</span> 訓練</h3>
 <div class="outline-text-3" id="text-8-7">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Convert inputX into float32</span>
@@ -3453,7 +3441,7 @@ Epoch: 999 reconstruction error: 1.072114
 Mean squared error using RBM prediction: 9.34
 </p>
 
-<div id="org5df533b" class="figure">
+<div id="org2fd5381" class="figure">
 <p><img src="images/ML-RBM.png" alt="ML-RBM.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 26: </span>Caption</p>
@@ -3461,21 +3449,20 @@ Mean squared error using RBM prediction: 9.34
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb75a86b" class="outline-2">
-<h2 id="orgb75a86b"><span class="section-number-2">9.</span> 深度信念網路(DBNs)</h2>
+<div id="outline-container-org90a18ce" class="outline-2">
+<h2 id="org90a18ce"><span class="section-number-2">9.</span> 深度信念網路(DBNs)</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 DBNs在2006年由Geoffrey Hinton在多倫多大學提出。RBMs只有兩層，DBNs由多個RBMs組成，一個RBMs的隱藏層是下一個RBMs的可視層。DBNs可以用來辨識、分群圖片、聲音、文字、影片。
 在DBN中，一次只有一層被訓練，從最前面緊鄰輸入層的隱藏層開始，建構第一個RBM，當第一個RBM被訓練完後，第一個RBM的隱藏層就會被當做下一個RBM的可視層，用來訓練第二個RBM的隱藏層。
 </p>
 </div>
-<div id="outline-container-org9cae8f0" class="outline-3">
-<h3 id="org9cae8f0"><span class="section-number-3">9.1.</span> MNIST分類</h3>
+<div id="outline-container-orgdf85044" class="outline-3">
+<h3 id="orgdf85044"><span class="section-number-3">9.1.</span> MNIST分類</h3>
 <div class="outline-text-3" id="text-9-1">
 </div>
-<div id="outline-container-org79b82f2" class="outline-4">
-<h4 id="org79b82f2"><span class="section-number-4">9.1.1.</span> 載入函式庫</h4>
+<div id="outline-container-org789ca02" class="outline-4">
+<h4 id="org789ca02"><span class="section-number-4">9.1.1.</span> 載入函式庫</h4>
 <div class="outline-text-4" id="text-9-1-1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #83898d;">'''Main'''</span>
@@ -3535,9 +3522,8 @@ numpy      1.21.5
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org2968d9e" class="outline-4">
-<h4 id="org2968d9e"><span class="section-number-4">9.1.2.</span> 資料準備</h4>
+<div id="outline-container-org53a32d7" class="outline-4">
+<h4 id="org53a32d7"><span class="section-number-4">9.1.2.</span> 資料準備</h4>
 <div class="outline-text-4" id="text-9-1-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Load the datasets</span>
@@ -3570,9 +3556,8 @@ Shape of y_test:  (10000,)
 </pre>
 </div>
 </div>
-
-<div id="outline-container-orge39302c" class="outline-4">
-<h4 id="orge39302c"><span class="section-number-4">9.1.3.</span> 建立資料集</h4>
+<div id="outline-container-org7c908e3" class="outline-4">
+<h4 id="org7c908e3"><span class="section-number-4">9.1.3.</span> 建立資料集</h4>
 <div class="outline-text-4" id="text-9-1-3">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Create Pandas DataFrames from the datasets</span>
@@ -3594,7 +3579,7 @@ Shape of y_test:  (10000,)
 </pre>
 </div>
 
-<pre class="example" id="org33265b2">
+<pre class="example" id="org5ca5952">
            0        1        2        3        4        5        6    ...           777           778           779      780      781      782      783
 count  50000.0  50000.0  50000.0  50000.0  50000.0  50000.0  50000.0  ...  50000.000000  50000.000000  50000.000000  50000.0  50000.0  50000.0  50000.0
 mean       0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0.000090      0.000071      0.000009      0.0      0.0      0.0      0.0
@@ -3609,10 +3594,8 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </pre>
 </div>
 </div>
-
-
-<div id="outline-container-orga032e8f" class="outline-4">
-<h4 id="orga032e8f"><span class="section-number-4">9.1.4.</span> View the digit image</h4>
+<div id="outline-container-org91bb62e" class="outline-4">
+<h4 id="org91bb62e"><span class="section-number-4">9.1.4.</span> View the digit image</h4>
 <div class="outline-text-4" id="text-9-1-4">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">view_digit</span>(X, y, example, fn):
@@ -3631,16 +3614,15 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </div>
 
 
-<div id="orgbcb3744" class="figure">
+<div id="org8a74d84" class="figure">
 <p><img src="images/firsttest.png" alt="firsttest.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 27: </span>Caption</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org2497540" class="outline-4">
-<h4 id="org2497540"><span class="section-number-4">9.1.5.</span> 將label以one-hot encoding編碼</h4>
+<div id="outline-container-org06e760b" class="outline-4">
+<h4 id="org06e760b"><span class="section-number-4">9.1.5.</span> 將label以one-hot encoding編碼</h4>
 <div class="outline-text-4" id="text-9-1-5">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">def</span> <span style="color: #c678dd;">one_hot</span>(series):
@@ -3667,7 +3649,7 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </pre>
 
 <p>
-圖<a href="#orgbcb3744">27</a>的label和相對應的one-hot encoding如下:
+圖<a href="#org8a74d84">27</a>的label和相對應的one-hot encoding如下:
 </p>
 <pre class="example">
 5
@@ -3676,9 +3658,8 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </div>
 </div>
 </div>
-
-<div id="outline-container-org69a6f34" class="outline-3">
-<h3 id="org69a6f34"><span class="section-number-3">9.2.</span> Restricted Boltzmann Machines (RBMs)</h3>
+<div id="outline-container-org6f530c2" class="outline-3">
+<h3 id="org6f530c2"><span class="section-number-3">9.2.</span> Restricted Boltzmann Machines (RBMs)</h3>
 <div class="outline-text-3" id="text-9-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">  1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Make code compatible with v1 of TF</span>
@@ -3739,21 +3720,21 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 <span class="linenr"> 56: </span>
 <span class="linenr"> 57: </span>        <span style="color: #dcaeea;">error_list</span> = []
 <span class="linenr"> 58: </span>        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#25209;&#27425;&#20659;&#20837;&#36039;&#26009;&#20006;&#38283;&#22987;&#35347;&#32244;</span>
-<span class="linenr"> 59: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">sess</span>:
+<span class="linenr"> 59: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> sess:
 <span class="linenr"> 60: </span>            sess.run(tf.compat.v1.global_variables_initializer())
 <span class="linenr"> 61: </span>
 <span class="linenr"> 62: </span>            <span style="color: #51afef;">for</span> epoch <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #51afef;">self</span>.epochs):
 <span class="linenr"> 63: </span>                <span style="color: #51afef;">for</span> start, end <span style="color: #51afef;">in</span> <span style="color: #c678dd;">zip</span>(<span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #c678dd;">len</span>(X), \
 <span class="linenr"> 64: </span>                        <span style="color: #51afef;">self</span>.batchsize),<span style="color: #c678dd;">range</span>(<span style="color: #51afef;">self</span>.batchsize,<span style="color: #c678dd;">len</span>(X), \
 <span class="linenr"> 65: </span>                                              <span style="color: #51afef;">self</span>.batchsize)):
-<span class="linenr"> 66: </span>                    batch = X[<span style="color: #dcaeea;">start</span>:end]
-<span class="linenr"> 67: </span>                    cur_w = sess.run(update_w, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr"> 66: </span>                    <span style="color: #dcaeea;">batch</span> = X[start:end]
+<span class="linenr"> 67: </span>                    <span style="color: #dcaeea;">cur_w</span> = sess.run(update_w, feed_dict={v0: batch, \
 <span class="linenr"> 68: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 69: </span>                    cur_hb = sess.run(update_hb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr"> 69: </span>                    <span style="color: #dcaeea;">cur_hb</span> = sess.run(update_hb, feed_dict={v0: batch, \
 <span class="linenr"> 70: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 71: </span>                    cur_vb = sess.run(update_vb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, \
+<span class="linenr"> 71: </span>                    <span style="color: #dcaeea;">cur_vb</span> = sess.run(update_vb, feed_dict={v0: batch, \
 <span class="linenr"> 72: </span>                                    _w: prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 73: </span>                    prv_w = cur_w
+<span class="linenr"> 73: </span>                    <span style="color: #dcaeea;">prv_w</span> = cur_w
 <span class="linenr"> 74: </span>                    <span style="color: #dcaeea;">prv_hb</span> = cur_hb
 <span class="linenr"> 75: </span>                    <span style="color: #dcaeea;">prv_vb</span> = cur_vb
 <span class="linenr"> 76: </span>                <span style="color: #dcaeea;">error</span> = sess.run(err, feed_dict={v0: X, \
@@ -3804,8 +3785,8 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </div>
 </div>
 </div>
-<div id="outline-container-orge8815ee" class="outline-3">
-<h3 id="orge8815ee"><span class="section-number-3">9.3.</span> 為DBN訓練三個RBMs</h3>
+<div id="outline-container-org3dad7e7" class="outline-3">
+<h3 id="org3dad7e7"><span class="section-number-3">9.3.</span> 為DBN訓練三個RBMs</h3>
 <div class="outline-text-3" id="text-9-3">
 <ol class="org-ol">
 <li>先將訓練資料存成Numpy陣列</li>
@@ -3854,7 +3835,7 @@ max        0.0      0.0      0.0      0.0      0.0      0.0      0.0  ...      0
 </pre>
 </div>
 
-<pre class="example" id="org52965be">
+<pre class="example" id="org66f447b">
 RBM 1
 2022-05-14 23:52:49.162587: I tensorflow/core/platform/cpu_feature_guard.cc:145] This TensorFlow binary is optimized with Intel(R) MKL-DNN to use the following CPU instructions in performance critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
 To enable them in non-MKL-DNN operations, rebuild TensorFlow with the appropriate compiler flags.
@@ -3873,8 +3854,8 @@ Epoch: 99 reconstruction error: 0.017987
 </pre>
 </div>
 </div>
-<div id="outline-container-org1b31894" class="outline-3">
-<h3 id="org1b31894"><span class="section-number-3">9.4.</span> 查看RBM誤差</h3>
+<div id="outline-container-org1a4eb98" class="outline-3">
+<h3 id="org1a4eb98"><span class="section-number-3">9.4.</span> 查看RBM誤差</h3>
 <div class="outline-text-3" id="text-9-4">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Plot reconstruction errors</span>
@@ -3901,27 +3882,27 @@ RBM 3
 
 
 
-<div id="orgf26d550" class="figure">
+<div id="org739076f" class="figure">
 <p><img src="images/DBN-DMB-1.png" alt="DBN-DMB-1.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 28: </span>Caption</p>
 </div>
 
-<div id="org3cf58a5" class="figure">
+<div id="org96f7173" class="figure">
 <p><img src="images/DBN-DMB-2.png" alt="DBN-DMB-2.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 29: </span>Caption</p>
 </div>
 
-<div id="org79dbb98" class="figure">
+<div id="org0cb87fd" class="figure">
 <p><img src="images/DBN-DMB-3.png" alt="DBN-DMB-3.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 30: </span>Caption</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf1f601f" class="outline-3">
-<h3 id="orgf1f601f"><span class="section-number-3">9.5.</span> 檢視特徵偵測器</h3>
+<div id="outline-container-org6f9f51b" class="outline-3">
+<h3 id="org6f9f51b"><span class="section-number-3">9.5.</span> 檢視特徵偵測器</h3>
 <div class="outline-text-3" id="text-9-5">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Examine Feature Detectors</span>
@@ -3948,27 +3929,27 @@ None
 
 
 
-<div id="org94e2ae6" class="figure">
+<div id="org405deb6" class="figure">
 <p><img src="images/DBN-Detect-0.png" alt="DBN-Detect-0.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 31: </span>Caption</p>
 </div>
 
-<div id="org3ceaee7" class="figure">
+<div id="org0bb046b" class="figure">
 <p><img src="images/DBN-Detect-1.png" alt="DBN-Detect-1.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 32: </span>Caption</p>
 </div>
 
-<div id="orgc413090" class="figure">
+<div id="orgec7ad90" class="figure">
 <p><img src="images/DBN-Detect-2.png" alt="DBN-Detect-2.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 33: </span>Caption</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org742a850" class="outline-3">
-<h3 id="org742a850"><span class="section-number-3">9.6.</span> 查看RBM生成的影像</h3>
+<div id="outline-container-org446e7dc" class="outline-3">
+<h3 id="org446e7dc"><span class="section-number-3">9.6.</span> 查看RBM生成的影像</h3>
 <div class="outline-text-3" id="text-9-6">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">View generated images from the first RBM</span>
@@ -3993,7 +3974,7 @@ None
 </pre>
 </div>
 
-<pre class="example" id="orgf62b1f3">
+<pre class="example" id="org15c99bc">
 RBM 1
 Image generated by RBM
 Original image
@@ -4017,110 +3998,110 @@ Image generated by RBM
 Original image
 </pre>
 
-<div id="org8101ece" class="figure">
+<div id="org01d9d1d" class="figure">
 <p><img src="images/DBN-Original-9.png" alt="DBN-Original-9.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 34: </span>Caption</p>
 </div>
 
-<div id="orgb8d7115" class="figure">
+<div id="orga351b82" class="figure">
 <p><img src="images/DBN-RBMGenerated-9.png" alt="DBN-RBMGenerated-9.png" width="300" />
 </p>
 </div>
 
-<div id="org4c02686" class="figure">
+<div id="org5dc0859" class="figure">
 <p><img src="images/DBN-Original-8.png" alt="DBN-Original-8.png" width="300" />
 </p>
 </div>
 
-<div id="org214cd0f" class="figure">
+<div id="orgf7e77e3" class="figure">
 <p><img src="images/DBN-RBMGenerated-8.png" alt="DBN-RBMGenerated-8.png" width="300" />
 </p>
 </div>
 
-<div id="org0f149bf" class="figure">
+<div id="org8cb099b" class="figure">
 <p><img src="images/DBN-Original-7.png" alt="DBN-Original-7.png" width="300" />
 </p>
 </div>
 
-<div id="orgce74136" class="figure">
+<div id="orgf46cb02" class="figure">
 <p><img src="images/DBN-RBMGenerated-7.png" alt="DBN-RBMGenerated-7.png" width="300" />
 </p>
 </div>
 
-<div id="org537534f" class="figure">
+<div id="org5c78b9a" class="figure">
 <p><img src="images/DBN-Original-6.png" alt="DBN-Original-6.png" width="300" />
 </p>
 </div>
 
-<div id="orgb6c097c" class="figure">
+<div id="orgc8ed757" class="figure">
 <p><img src="images/DBN-RBMGenerated-6.png" alt="DBN-RBMGenerated-6.png" width="300" />
 </p>
 </div>
 
-<div id="orgc3746d4" class="figure">
+<div id="org61877ee" class="figure">
 <p><img src="images/DBN-Original-5.png" alt="DBN-Original-5.png" width="300" />
 </p>
 </div>
 
-<div id="orgaa245b9" class="figure">
+<div id="orgc196927" class="figure">
 <p><img src="images/DBN-RBMGenerated-5.png" alt="DBN-RBMGenerated-5.png" width="300" />
 </p>
 </div>
 
-<div id="org78b053e" class="figure">
+<div id="org30b4d11" class="figure">
 <p><img src="images/DBN-Original-4.png" alt="DBN-Original-4.png" width="300" />
 </p>
 </div>
 
-<div id="org5f9e1a5" class="figure">
+<div id="orgdf49c40" class="figure">
 <p><img src="images/DBN-RBMGenerated-4.png" alt="DBN-RBMGenerated-4.png" width="300" />
 </p>
 </div>
 
-<div id="org58f8e13" class="figure">
+<div id="org75fa29c" class="figure">
 <p><img src="images/DBN-Original-3.png" alt="DBN-Original-3.png" width="300" />
 </p>
 </div>
 
-<div id="org0304515" class="figure">
+<div id="org2fa6a25" class="figure">
 <p><img src="images/DBN-RBMGenerated-3.png" alt="DBN-RBMGenerated-3.png" width="300" />
 </p>
 </div>
 
-<div id="org44da1a2" class="figure">
+<div id="org8f3ec16" class="figure">
 <p><img src="images/DBN-Original-2.png" alt="DBN-Original-2.png" width="300" />
 </p>
 </div>
 
-<div id="org70647bb" class="figure">
+<div id="org0d06ba0" class="figure">
 <p><img src="images/DBN-RBMGenerated-2.png" alt="DBN-RBMGenerated-2.png" width="300" />
 </p>
 </div>
 
-<div id="org27abecc" class="figure">
+<div id="org0d7cc75" class="figure">
 <p><img src="images/DBN-Original-1.png" alt="DBN-Original-1.png" width="300" />
 </p>
 </div>
 
-<div id="org86b9bcc" class="figure">
+<div id="org7f1a187" class="figure">
 <p><img src="images/DBN-RBMGenerated-1.png" alt="DBN-RBMGenerated-1.png" width="300" />
 </p>
 </div>
 
-<div id="orgf12ca8c" class="figure">
+<div id="org8dcf9df" class="figure">
 <p><img src="images/DBN-Original-0.png" alt="DBN-Original-0.png" width="300" />
 </p>
 </div>
 
-<div id="org6946275" class="figure">
+<div id="orgfd16125" class="figure">
 <p><img src="images/DBN-RBMGenerated-0.png" alt="DBN-RBMGenerated-0.png" width="300" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5fe086f" class="outline-3">
-<h3 id="org5fe086f"><span class="section-number-3">9.7.</span> 完整的DBN</h3>
+<div id="outline-container-orgfb7afdf" class="outline-3">
+<h3 id="orgfb7afdf"><span class="section-number-3">9.7.</span> 完整的DBN</h3>
 <div class="outline-text-3" id="text-9-7">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">  1: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">DBN</span>(<span style="color: #c678dd;">object</span>):
@@ -4208,20 +4189,20 @@ Original image
 <span class="linenr"> 83: </span>        <span style="color: #dcaeea;">err</span> = tf.reduce_mean(tf.square(v0 - backward))
 <span class="linenr"> 84: </span>        <span style="color: #dcaeea;">error_list</span> = []
 <span class="linenr"> 85: </span>
-<span class="linenr"> 86: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> <span style="color: #dcaeea;">sess</span>:
+<span class="linenr"> 86: </span>        <span style="color: #51afef;">with</span> tf.compat.v1.Session() <span style="color: #51afef;">as</span> sess:
 <span class="linenr"> 87: </span>            sess.run(tf.compat.v1.global_variables_initializer())
 <span class="linenr"> 88: </span>
 <span class="linenr"> 89: </span>            <span style="color: #51afef;">for</span> epoch <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #51afef;">self</span>.epochs):
 <span class="linenr"> 90: </span>                <span style="color: #51afef;">for</span> start, end <span style="color: #51afef;">in</span> <span style="color: #c678dd;">zip</span>(<span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>, <span style="color: #c678dd;">len</span>(X), <span style="color: #51afef;">self</span>.batchsize), \
 <span class="linenr"> 91: </span>                        <span style="color: #c678dd;">range</span>(<span style="color: #51afef;">self</span>.batchsize,<span style="color: #c678dd;">len</span>(X), <span style="color: #51afef;">self</span>.batchsize)):
-<span class="linenr"> 92: </span>                    batch = X[<span style="color: #dcaeea;">start</span>:end]
-<span class="linenr"> 93: </span>                    cur_w = sess.run(update_w, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, _w: \
+<span class="linenr"> 92: </span>                    <span style="color: #dcaeea;">batch</span> = X[start:end]
+<span class="linenr"> 93: </span>                    <span style="color: #dcaeea;">cur_w</span> = sess.run(update_w, feed_dict={v0: batch, _w: \
 <span class="linenr"> 94: </span>                                        prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 95: </span>                    cur_hb = sess.run(update_hb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, _w: \
+<span class="linenr"> 95: </span>                    <span style="color: #dcaeea;">cur_hb</span> = sess.run(update_hb, feed_dict={v0: batch, _w: \
 <span class="linenr"> 96: </span>                                        prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 97: </span>                    cur_vb = sess.run(update_vb, feed_dict={<span style="color: #dcaeea;">v0</span>: batch, _w: \
+<span class="linenr"> 97: </span>                    <span style="color: #dcaeea;">cur_vb</span> = sess.run(update_vb, feed_dict={v0: batch, _w: \
 <span class="linenr"> 98: </span>                                        prv_w, _hb: prv_hb, _vb: prv_vb})
-<span class="linenr"> 99: </span>                    prv_w = cur_w
+<span class="linenr"> 99: </span>                    <span style="color: #dcaeea;">prv_w</span> = cur_w
 <span class="linenr">100: </span>                    <span style="color: #dcaeea;">prv_hb</span> = cur_hb
 <span class="linenr">101: </span>                    <span style="color: #dcaeea;">prv_vb</span> = cur_vb
 <span class="linenr">102: </span>                <span style="color: #dcaeea;">error</span> = sess.run(err, feed_dict={v0: X, _w: cur_w, _vb: \
@@ -4289,9 +4270,8 @@ Original image
 </div>
 </div>
 </div>
-
-<div id="outline-container-org5624c7b" class="outline-3">
-<h3 id="org5624c7b"><span class="section-number-3">9.8.</span> 訓練DBN</h3>
+<div id="outline-container-org8a2bfa1" class="outline-3">
+<h3 id="org8a2bfa1"><span class="section-number-3">9.8.</span> 訓練DBN</h3>
 <div class="outline-text-3" id="text-9-8">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Instantiate DBN Class</span>
@@ -4303,16 +4283,15 @@ Original image
 </pre>
 </div>
 
-<pre class="example" id="org3e7e7fd">
+<pre class="example" id="org1bf9d5f">
 Epoch: 0 reconstruction error: 0.088701
 ....
 Epoch: 49 reconstruction error: 0.060786
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org84b80a0" class="outline-3">
-<h3 id="org84b80a0"><span class="section-number-3">9.9.</span> 看錯誤</h3>
+<div id="outline-container-org161e31b" class="outline-3">
+<h3 id="org161e31b"><span class="section-number-3">9.9.</span> 看錯誤</h3>
 <div class="outline-text-3" id="text-9-9">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr">1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Plot reconstruction errors</span>
@@ -4332,22 +4311,21 @@ None
 </pre>
 
 
-<div id="orgca8050f" class="figure">
+<div id="orgfae4cdc" class="figure">
 <p><img src="images/DBN-learned-MINST.png" alt="DBN-learned-MINST.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 35: </span>Caption</p>
 </div>
 
-<div id="orgcd07bb0" class="figure">
+<div id="org61cfa3e" class="figure">
 <p><img src="images/DBN-learned-from-MNIST.png" alt="DBN-learned-from-MNIST.png" width="500" />
 </p>
 <p><span class="figure-number">Figure 36: </span>Caption</p>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb0c033c" class="outline-3">
-<h3 id="orgb0c033c"><span class="section-number-3">9.10.</span> 生成影像以建構更好的影像分類器</h3>
+<div id="outline-container-orgdea2000" class="outline-3">
+<h3 id="orgdea2000"><span class="section-number-3">9.10.</span> 生成影像以建構更好的影像分類器</h3>
 <div class="outline-text-3" id="text-9-10">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Generate images and store them</span>
@@ -4358,14 +4336,14 @@ None
 <span class="linenr"> 6: </span>    <span style="color: #51afef;">if</span> i==<span style="color: #da8548; font-weight: bold;">0</span>:
 <span class="linenr"> 7: </span>        <span style="color: #dcaeea;">generatedImages</span> = finalOutput_DBN
 <span class="linenr"> 8: </span>    <span style="color: #51afef;">else</span>:
-<span class="linenr"> 9: </span>        generatedImages = np.append(generatedImages, finalOutput_DBN, axis=<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr"> 9: </span>        <span style="color: #dcaeea;">generatedImages</span> = np.append(generatedImages, finalOutput_DBN, axis=<span style="color: #da8548; font-weight: bold;">0</span>)
 <span class="linenr">10: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Generate a vector of labels for the generated images</span>
 <span class="linenr">11: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#36941;&#27511;&#35347;&#32244;label y_train&#30340;&#21069;5000&#20491;label 20&#27425;&#65292;&#29992;&#20358;&#29986;&#29983;labels&#38499;&#21015;</span>
 <span class="linenr">12: </span><span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">20</span>):
 <span class="linenr">13: </span>    <span style="color: #51afef;">if</span> i==<span style="color: #da8548; font-weight: bold;">0</span>:
 <span class="linenr">14: </span>        <span style="color: #dcaeea;">labels</span> = y_train.loc[:<span style="color: #da8548; font-weight: bold;">4999</span>]
 <span class="linenr">15: </span>    <span style="color: #51afef;">else</span>:
-<span class="linenr">16: </span>        labels = np.append(labels,y_train.loc[:<span style="color: #da8548; font-weight: bold;">4999</span>])
+<span class="linenr">16: </span>        <span style="color: #dcaeea;">labels</span> = np.append(labels,y_train.loc[:<span style="color: #da8548; font-weight: bold;">4999</span>])
 <span class="linenr">17: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Generate images based on the validation set</span>
 <span class="linenr">18: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&#29986;&#29983;&#22522;&#26044;&#39511;&#35657;&#38598;&#30340;&#36664;&#20986;&#20540;(&#24433;&#20687;)</span>
 <span class="linenr">19: </span><span style="color: #dcaeea;">inputValidation</span> = np.array(X_validation)
@@ -4385,7 +4363,7 @@ None
 </pre>
 </div>
 
-<pre class="example" id="org8913e68">
+<pre class="example" id="org80e41fc">
 Run  0
 Run  1
 Run  2
@@ -4408,119 +4386,119 @@ Run  18
 Run  19
 </pre>
 
-<div id="orgfcef160" class="figure">
+<div id="orgc1a461d" class="figure">
 <p><img src="images/X0train-0.png" alt="X0train-0.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 37: </span>Run 1</p>
 </div>
 
-<div id="org2c463c3" class="figure">
+<div id="orgbe41030" class="figure">
 <p><img src="images/reconstructedX-0.png" alt="reconstructedX-0.png" width="300" />
 </p>
 </div>
 
-<div id="orgdc3e8e0" class="figure">
+<div id="org0a961dd" class="figure">
 <p><img src="images/X0train-1.png" alt="X0train-1.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 38: </span>Run 2</p>
 </div>
 
-<div id="org58804ea" class="figure">
+<div id="org877da44" class="figure">
 <p><img src="images/reconstructedX-1.png" alt="reconstructedX-1.png" width="300" />
 </p>
 </div>
 
-<div id="orgd866387" class="figure">
+<div id="org32ede93" class="figure">
 <p><img src="images/X0train-2.png" alt="X0train-2.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 39: </span>Run 3</p>
 </div>
 
-<div id="org31ee93b" class="figure">
+<div id="org1b6e45e" class="figure">
 <p><img src="images/reconstructedX-2.png" alt="reconstructedX-2.png" width="300" />
 </p>
 </div>
 
-<div id="orge598966" class="figure">
+<div id="org19dddfa" class="figure">
 <p><img src="images/X0train-3.png" alt="X0train-3.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 40: </span>Run 4</p>
 </div>
 
-<div id="org9460d5e" class="figure">
+<div id="org2a07217" class="figure">
 <p><img src="images/reconstructedX-3.png" alt="reconstructedX-3.png" width="300" />
 </p>
 </div>
 
-<div id="orgd7c62de" class="figure">
+<div id="org4ed2bf2" class="figure">
 <p><img src="images/X0train-4.png" alt="X0train-4.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 41: </span>Run 5</p>
 </div>
 
-<div id="org47a59c7" class="figure">
+<div id="org3ce002f" class="figure">
 <p><img src="images/reconstructedX-4.png" alt="reconstructedX-4.png" width="300" />
 </p>
 </div>
 
-<div id="org9ff3fa6" class="figure">
+<div id="org5361210" class="figure">
 <p><img src="images/X0train-5.png" alt="X0train-5.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 42: </span>Run 6</p>
 </div>
 
-<div id="org0602560" class="figure">
+<div id="orgf43d3d2" class="figure">
 <p><img src="images/reconstructedX-5.png" alt="reconstructedX-5.png" width="300" />
 </p>
 </div>
 
-<div id="org9d703fd" class="figure">
+<div id="orga15e201" class="figure">
 <p><img src="images/X0train-6.png" alt="X0train-6.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 43: </span>Run 7</p>
 </div>
 
-<div id="org455b2ff" class="figure">
+<div id="org9d520db" class="figure">
 <p><img src="images/reconstructedX-6.png" alt="reconstructedX-6.png" width="300" />
 </p>
 </div>
 
-<div id="org5c1d424" class="figure">
+<div id="orgd8e176c" class="figure">
 <p><img src="images/X0train-7.png" alt="X0train-7.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 44: </span>Run 8</p>
 </div>
 
-<div id="org646e848" class="figure">
+<div id="org2f77998" class="figure">
 <p><img src="images/reconstructedX-7.png" alt="reconstructedX-7.png" width="300" />
 </p>
 </div>
 
-<div id="orgcdf0d49" class="figure">
+<div id="org5bec1e1" class="figure">
 <p><img src="images/X0train-8.png" alt="X0train-8.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 45: </span>Run 9</p>
 </div>
 
-<div id="orgae4a0b3" class="figure">
+<div id="org7c7e2b3" class="figure">
 <p><img src="images/reconstructedX-8.png" alt="reconstructedX-8.png" width="300" />
 </p>
 </div>
 
-<div id="orgf86a93e" class="figure">
+<div id="org1c2d890" class="figure">
 <p><img src="images/X0train-9.png" alt="X0train-9.png" width="300" />
 </p>
 <p><span class="figure-number">Figure 46: </span>Run 10</p>
 </div>
 
-<div id="orgbf5cd12" class="figure">
+<div id="org7924ae8" class="figure">
 <p><img src="images/reconstructedX-9.png" alt="reconstructedX-9.png" width="300" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org867e5bb" class="outline-3">
-<h3 id="org867e5bb"><span class="section-number-3">9.11.</span> 使用DBN來產生新的影像10次</h3>
+<div id="outline-container-orgafa48a4" class="outline-3">
+<h3 id="orgafa48a4"><span class="section-number-3">9.11.</span> 使用DBN來產生新的影像10次</h3>
 <div class="outline-text-3" id="text-9-11">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Generate the several versions of the first digit</span>
@@ -4538,7 +4516,7 @@ Run  19
 </pre>
 </div>
 
-<pre class="example" id="org484db4d">
+<pre class="example" id="org2e81e05">
 Run  0
 Generated
 Run  1
@@ -4562,13 +4540,12 @@ Generated
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org02226ae" class="outline-3">
-<h3 id="org02226ae"><span class="section-number-3">9.12.</span> 使用LightGBM建構影像分類器</h3>
+<div id="outline-container-orga2cc223" class="outline-3">
+<h3 id="orga2cc223"><span class="section-number-3">9.12.</span> 使用LightGBM建構影像分類器</h3>
 <div class="outline-text-3" id="text-9-12">
 </div>
-<div id="outline-container-org8e10f8d" class="outline-4">
-<h4 id="org8e10f8d"><span class="section-number-4">9.12.1.</span> 僅使用監督式學習</h4>
+<div id="outline-container-orgb568095" class="outline-4">
+<h4 id="orgb568095"><span class="section-number-4">9.12.1.</span> 僅使用監督式學習</h4>
 <div class="outline-text-4" id="text-9-12-1">
 <p>
 這裡先用前3000張有label的MNIST影像建立分類器當對照組
@@ -4620,7 +4597,7 @@ Generated
 <span class="linenr">44: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Training Log Loss: '</span>, loglossTraining)
 <span class="linenr">45: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Validation Log Loss: '</span>, loglossValidation)
 <span class="linenr">46: </span>
-<span class="linenr">47: </span>loglossLightGBM = log_loss(y_validation, predictionsLightGBM)
+<span class="linenr">47: </span><span style="color: #dcaeea;">loglossLightGBM</span> = log_loss(y_validation, predictionsLightGBM)
 <span class="linenr">48: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'LightGBM Gradient Boosting Log Loss: '</span>, loglossLightGBM)
 <span class="linenr">49: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Supervised-only Accuracy</span>
 <span class="linenr">50: </span><span style="color: #dcaeea;">predictionsLightGBM_firm</span> = np.argmax(np.array(predictionsLightGBM), axis=<span style="color: #da8548; font-weight: bold;">1</span>)
@@ -4630,7 +4607,7 @@ Generated
 </pre>
 </div>
 
-<pre class="example" id="org7085ab9">
+<pre class="example" id="org2b15ba5">
 /Users/letranger/opt/anaconda3/envs/python37/lib/python3.7/site-packages/lightgbm/engine.py:181: UserWarning: 'early_stopping_rounds' argument is deprecated and will be removed in a future release of LightGBM. Pass 'early_stopping()' callback via 'callbacks' argument instead.
   _log_warning("'early_stopping_rounds' argument is deprecated and will be removed in a future release of LightGBM. "
 [1]	valid_0's multi_logloss: 1.8355
@@ -4647,9 +4624,8 @@ Supervised-Only Accuracy:  0.9446
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org2b9afce" class="outline-4">
-<h4 id="org2b9afce"><span class="section-number-4">9.12.2.</span> 監督式與非監督式學習並用</h4>
+<div id="outline-container-orge1dc4ab" class="outline-4">
+<h4 id="orge1dc4ab"><span class="section-number-4">9.12.2.</span> 監督式與非監督式學習並用</h4>
 <div class="outline-text-4" id="text-9-12-2">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Prepare DBN-based DataFrames for LightGBM use</span>
@@ -4684,7 +4660,7 @@ Supervised-Only Accuracy:  0.9446
 <span class="linenr">30: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Training Log Loss: '</span>, loglossTraining)
 <span class="linenr">31: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'Validation Log Loss: '</span>, loglossValidation)
 <span class="linenr">32: </span>
-<span class="linenr">33: </span>loglossDBN = log_loss(y_validation, predictionsDBN)
+<span class="linenr">33: </span><span style="color: #dcaeea;">loglossDBN</span> = log_loss(y_validation, predictionsDBN)
 <span class="linenr">34: </span><span style="color: #c678dd;">print</span>(<span style="color: #98be65;">'LightGBM Gradient Boosting Log Loss: '</span>, loglossDBN)
 <span class="linenr">35: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">DBN-Based Solution Accuracy</span>
 <span class="linenr">36: </span><span style="color: #dcaeea;">predictionsDBN_firm</span> = np.argmax(np.array(predictionsDBN), axis=<span style="color: #da8548; font-weight: bold;">1</span>)
@@ -4694,7 +4670,7 @@ Supervised-Only Accuracy:  0.9446
 </pre>
 </div>
 
-<pre class="example" id="org724a57e">
+<pre class="example" id="org70fc9db">
 /Users/letranger/opt/anaconda3/envs/python37/lib/python3.7/site-packages/lightgbm/engine.py:181: UserWarning: 'early_stopping_rounds' argument is deprecated and will be removed in a future release of LightGBM. Pass 'early_stopping()' callback via 'callbacks' argument instead.
   _log_warning("'early_stopping_rounds' argument is deprecated and will be removed in a future release of LightGBM. "
 [1]	valid_0's multi_logloss: 1.66314
@@ -4733,8 +4709,8 @@ Hands-On Machine Learning with Scikit-Learn: Aurelien Geron
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung Chin, Yen</p>
-<p class="date">Created: 2022-12-09 Fri 13:43</p>
+<p class="author">Author: 顏永進</p>
+<p class="date">Created: 2024-02-07 Wed 17:05</p>
 </div>
 </body>
 </html>

@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-05-26 Fri 08:35 -->
+<!-- 2023-10-31 Tue 12:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RNN</title>
-<meta name="author" content="Yung-Chin Yen" />
+<meta name="author" content="顏永進" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -223,18 +223,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org69e1843">1. What is RNN</a></li>
-<li><a href="#orge9047f5">2. RNN 原理</a></li>
-<li><a href="#orgbfde6f5">3. 遞迴類神經網路(Recurrent Neural Networks, RNNs)</a></li>
-<li><a href="#org78793d9">4. 三種 RNN</a></li>
-<li><a href="#org9dd6dc0">5. 實作練習</a></li>
+<li><a href="#orgfca2b04">1. What is RNN</a></li>
+<li><a href="#org9c47d45">2. RNN 原理</a></li>
+<li><a href="#orga4553c9">3. 遞迴類神經網路(Recurrent Neural Networks, RNNs)</a></li>
+<li><a href="#orga6daedb">4. 三種 RNN</a></li>
+<li><a href="#orgabbe1fc">5. 實作練習</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org69e1843" class="outline-2">
-<h2 id="org69e1843"><span class="section-number-2">1.</span> What is RNN</h2>
+<div id="outline-container-orgfca2b04" class="outline-2">
+<h2 id="orgfca2b04"><span class="section-number-2">1.</span> What is RNN</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 言歸正傳，RNN 到底是個什麼玩意兒? 就讓我先從傳統的類神經網路切入吧。<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup><br />
@@ -287,8 +287,8 @@
 </div>
 </div>
 
-<div id="outline-container-orge9047f5" class="outline-2">
-<h2 id="orge9047f5"><span class="section-number-2">2.</span> RNN 原理</h2>
+<div id="outline-container-org9c47d45" class="outline-2">
+<h2 id="org9c47d45"><span class="section-number-2">2.</span> RNN 原理</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 為了能將「順序」這個信息融入神經網路，RNN 就這麼誕生了，它的式子並不複雜：<br />
@@ -339,7 +339,7 @@
 我們也能把 RNN 的結構畫成一張圖，橫向的箭頭便是建構出順序的關鍵。<br />
 </p>
 
-<div id="orgeea36e8" class="figure">
+<div id="org904a267" class="figure">
 <p><img src="images/RNN-1.jpg" alt="RNN-1.jpg" width="600" /><br />
 </p>
 <p><span class="figure-number">Figure 1: </span>RNN 結構圖</p>
@@ -358,7 +358,7 @@
 </p>
 
 
-<div id="org40d8ba4" class="figure">
+<div id="orge17c463" class="figure">
 <p><img src="images/RNN-2.jpg" alt="RNN-2.jpg" /><br />
 </p>
 <p><span class="figure-number">Figure 2: </span>用 RNN 來標注一句話的詞性</p>
@@ -369,7 +369,7 @@
 </p>
 
 
-<div id="org6660da6" class="figure">
+<div id="orgd749077" class="figure">
 <p><img src="images/RNN-3.jpg" alt="RNN-3.jpg" /><br />
 </p>
 <p><span class="figure-number">Figure 3: </span>用 RNN 來分類一句話的情緒</p>
@@ -410,8 +410,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgbfde6f5" class="outline-2">
-<h2 id="orgbfde6f5"><span class="section-number-2">3.</span> 遞迴類神經網路(Recurrent Neural Networks, RNNs)</h2>
+<div id="outline-container-orga4553c9" class="outline-2">
+<h2 id="orga4553c9"><span class="section-number-2">3.</span> 遞迴類神經網路(Recurrent Neural Networks, RNNs)</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 RNN 能夠處理「任意個數的輸入序列」，所以十分適合用在「語言塑模」或「語音辨識」。理論上，RNN 可以用來處理任何問題，因為已被證明具有「圖靈完備性」(Turing-Complete)。以遞迴關係的函數表示 RNN 可將其視為 \(S_t=f(S_{t-1},X_t)\)，這裡的\(S_t\)表示第\(t\)步的狀態，它是由函數\(f\)對上一步(\(t-1\))的狀態(即\(S_{t-1}\))與這一步的輸入\(X_t\)所計算出來的結果，這裡的函數\(f\)可以是任何可微分的函數，如\(S_t=tang(S_{t-1}*W+X_t*U)\)。<br />
@@ -419,10 +419,10 @@ RNN 能夠處理「任意個數的輸入序列」，所以十分適合用在「�
 </p>
 
 <p>
-語言塑模的目標是計算「字的序列」的機率，這在「語音辨識」、OCR、「機器翻譯」、「拼字校正」上都非常重要。以「字」為基準的「語言模型」是由「字的序列」來定義機率分佈，給定一個長度為\(m\)的字序列，它會為整個字序列給定一個機率\(P(w_1,...,w_m)\)，其「聯合機率」(joint probability)可以由公式\eqref{org9c5eb2a}中的連鎖規則(chain rule)計算出來：<br />
+語言塑模的目標是計算「字的序列」的機率，這在「語音辨識」、OCR、「機器翻譯」、「拼字校正」上都非常重要。以「字」為基準的「語言模型」是由「字的序列」來定義機率分佈，給定一個長度為\(m\)的字序列，它會為整個字序列給定一個機率\(P(w_1,...,w_m)\)，其「聯合機率」(joint probability)可以由公式\eqref{orgcda2306}中的連鎖規則(chain rule)計算出來：<br />
 </p>
 \begin{equation}
-\label{org9c5eb2a}
+\label{orgcda2306}
 P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 \end{equation}
 
@@ -442,8 +442,8 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div>
 </div>
 
-<div id="outline-container-org78793d9" class="outline-2">
-<h2 id="org78793d9"><span class="section-number-2">4.</span> 三種 RNN</h2>
+<div id="outline-container-orga6daedb" class="outline-2">
+<h2 id="orga6daedb"><span class="section-number-2">4.</span> 三種 RNN</h2>
 <div class="outline-text-2" id="text-4">
 <ol class="org-ol">
 <li>Simple RNN<br /></li>
@@ -453,8 +453,8 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div>
 </div>
 
-<div id="outline-container-org9dd6dc0" class="outline-2">
-<h2 id="org9dd6dc0"><span class="section-number-2">5.</span> 實作練習</h2>
+<div id="outline-container-orgabbe1fc" class="outline-2">
+<h2 id="orgabbe1fc"><span class="section-number-2">5.</span> 實作練習</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/structured_data/time_series.ipynb">Time series forecasting</a><br />
@@ -473,8 +473,8 @@ P(w_1,...,w_m)=P(w_1)P(w_2|w_1)P(w3|w_2,w_1)...P(w_m|w_1,...,w_{m-1})
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung-Chin Yen</p>
-<p class="date">Created: 2023-05-26 Fri 08:35</p>
+<p class="author">Author: 顏永進</p>
+<p class="date">Created: 2023-10-31 Tue 12:49</p>
 </div>
 </body>
 </html>

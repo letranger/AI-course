@@ -1,4 +1,5 @@
 #+title: PyTorch
+#+AUTHOR: 顏永進
 #+INCLUDE: ../pdf.org
 #+TAGS: AI
 #+OPTIONS: toc:2 ^:nil num:5
@@ -6,6 +7,10 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/PT.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/PT.html.svg"/></a>
+#+end_export
+
 
 * 簡介
 PyTorch 為 Facebook 在 2017 年初開源的深度學習框架，其建立在 Torch 之上，且標榜 Python First ，為量身替 Python 語言所打造，使用起來就跟寫一般 Python 專案沒兩樣，也能和其他 Python 套件無痛整合。PyTorch 的優勢在於其概念相當直觀且語法簡潔優雅，因此視為新手入門的一個好選項；再來其輕量架構讓模型得以快速訓練且有效運用資源[fn:1]。

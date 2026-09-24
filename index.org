@@ -2,6 +2,7 @@
 :ID:       1fea5669-8f26-4f35-a204-db764f649471
 :END:
 #+TITLE: AI for TNFSH: 從入門到入土
+#+AUTHOR: 顏永進
 # -*- org-export-babel-evaluate: nil -*-
 #+TAGS: AI
 #+OPTIONS: toc:0 ^:nil num:5
@@ -21,14 +22,13 @@
 - [[file:NN.org][神經網路]]  
 - [[file:CNN.org][Say Hi to CNN]]
 - [[https://letranger.github.io/AI/20221211165455-cnn%E5%AF%A6%E4%BD%9C.html][CNN實作]]
-- [[https://letranger.github.io/AI/20221216211703-%E7%95%B6ai%E9%81%87%E4%B8%8A%E8%82%A1%E7%A5%A8.html][當AI遇上股票]]
 - [[file:RL.org][強化學習]]
 - [[file:DL.org][深度學習]]
 - [[https://www.youtube.com/watch?v=PqsTbDxiyBs][Python 期末報告：用deep learning分類心電圖]]
 - [[https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.21068&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false][Tinker With a Neural Network Right Here in Your Browser.]]
 - [[file:FinalProject.org][期末報告]]
 
-* Resources
+* Resources :noexport:
 - http://pclearn0915.blogspot.com/
 - https://docs.google.com/presentation/d/1s-gKtfANo2X7ytzW7FAkYR3_9QsVRNnrXLfXZwVWXRI/edit#slide=id.ge3eb5dba0d_0_0
 - https://docs.google.com/presentation/d/1s-gKtfANo2X7ytzW7FAkYR3_9QsVRNnrXLfXZwVWXRI/edit?usp=sharing
@@ -47,7 +47,7 @@
 - https://github.com/ckiplab/ckipnlp
 - https://github.com/zake7749/Gossiping-Chinese-Corpus/tree/master/data
 
-* 曾龍AI
+* 曾龍AI :noexport:AI:
 ** 2022/12/09
 - [[https://github.com/8wingflying/Sec4High2022][8wingflying/Sec4High2022]]
 - [[https://github.com/TaiwanHolyHigh/AI4H2022][TaiwanHolyHigh/AI4H2022]]

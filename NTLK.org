@@ -1,4 +1,5 @@
 #+TITLE: NLTK
+#+AUTHOR: 顏永進
 #+INCLUDE: ../pdf.org
 #+TAGS: AI
 #+OPTIONS: toc:2 ^:nil num:5
@@ -6,6 +7,10 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 #+EXCLUDE_TAGS: noexport
 #+latex:\newpage
+#+begin_export html
+<a href="https://hits.sh/letranger.github.io/AI-course/NTLK.html/"><img align="right" alt="Hits" src="https://hits.sh/letranger.github.io/AI-course/NTLK.html.svg"/></a>
+#+end_export
+
 
 * 英文自然語言處理的經典工具: NLTK
 ** NLTK 進行文本前處理的幾個流程項目：
